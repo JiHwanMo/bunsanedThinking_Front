@@ -1,0 +1,96 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+.container {
+  width: 400px;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.header-line {
+  width: 100%;
+  height: 1px;
+  background-color: #333;
+  margin-bottom: 10px;
+}
+
+.greeting {
+  font-size: 18px;
+  text-align: right;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.combo-box {
+  padding: 5px;
+  border: 1px solid #333;
+}
+
+#searchInput {
+  width: 50%;
+  padding: 5px;
+  border: 1px solid #333;
+  box-sizing: border-box;
+}
+
+#searchButton {
+  padding: 5px 10px;
+  border: none;
+  background-color: #333;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.table-container {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.table-container h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th, td {
+  border: 1px solid #333;
+  padding: 8px;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+table tr {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+table tr:hover {
+  background-color: #f0f0f0;
+}
+
+table tr.selected {
+  background-color: #add8e6;
+}
