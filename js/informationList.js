@@ -5,9 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 샘플 데이터
   const insuranceData = [
-    { name: "건강보험A", type: "건강보험", number: "001", ageGroup: "20대", premium: "30,000원" },
-    { name: "자동차보험B", type: "자동차보험", number: "002", ageGroup: "30대", premium: "50,000원" },
-    { name: "생명보험C", type: "생명보험", number: "003", ageGroup: "40대", premium: "70,000원" }
+    { name: "건강보험A", type: "건강보험", number: "001", ageGroup: "20대", premium: "30,000원", coverage: "상해 보장", conditions: "없음", term: "1년", disease: "고혈압" },
+    { name: "자동차보험B", type: "자동차보험", number: "002", ageGroup: "30대", premium: "50,000원", coverage: "사고 보장", conditions: "무사고 경력", term: "5년", disease: "없음" },
+    { name: "생명보험C", type: "생명보험", number: "003", ageGroup: "40대", premium: "70,000원", coverage: "생명 보장", conditions: "건강검진 필요", term: "10년", disease: "없음" }
   ];
 
   // 보험 데이터를 테이블에 렌더링하는 함수
@@ -25,13 +25,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 각 행에 클릭 이벤트 추가
       row.addEventListener("click", () => {
-        // 기존 선택된 행이 있으면 클래스 제거
         if (selectedRow) {
           selectedRow.classList.remove("selected");
         }
-        // 현재 클릭된 행을 선택 상태로 설정
         row.classList.add("selected");
-        selectedRow = row; // 선택된 행 업데이트
+        selectedRow = row;
+      });
+
+      // 더블 클릭 시 상세 페이지로 이동
+      row.addEventListener("dblclick", () => {
+        // 상세 정보를 세션에 저장
+        sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
+        window.location.href = "detail.html";
       });
 
       insuranceList.appendChild(row);
