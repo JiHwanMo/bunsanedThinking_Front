@@ -1,17 +1,22 @@
 // buttonManager/customer.js
-import { fetchData } from '../../../apiUtils/apiHandler/customer/customer.js';
+// import { fetchGetDatafetchData } from '../../../apiUtils/apiHandler/customer/customer.js';
+import { BUTTON } from '../../../../../config/constants.js';
 
-export const renderButtons = async () => {
+export const renderButtons = () => {
   const buttonContainer = document.getElementById("buttonContainer");
-  const data = await fetchData();
+  const buttonMessages = BUTTON.TASK.CUSTOMER;
 
-  data.forEach(item => {
+  // 객체의 각 항목을 순회하여 버튼 생성
+  Object.entries(buttonMessages).forEach(([key, name]) => {
     const button = document.createElement("div");
     button.className = "button-item";
-    button.textContent = item.name;
+    button.textContent = name; // 버튼에 표시할 텍스트 설정
+
     button.addEventListener("click", () => {
-      alert(`${item.name} 버튼 클릭됨`);
+      alert(`${name}`);
     });
-    buttonContainer.appendChild(button);
+
+    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
   });
 };
+
