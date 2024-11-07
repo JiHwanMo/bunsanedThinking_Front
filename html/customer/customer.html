@@ -15,7 +15,15 @@
   </div>
 </div>
 
-<script src="../../js/utils/uiUtils/buttonManager/customer/customer.js"></script>
-<script src="../../config/constants.js"></script>
+<script type="module">
+  import { renderGreeting } from '../../js/utils/uiUtils/positionManager/customer/customer.js';
+  import { renderButtons } from '../../js/utils/uiUtils/buttonManager/customer/customer.js';
+
+  // Greeting 메시지와 버튼 목록을 로드하여 표시
+  document.addEventListener("DOMContentLoaded", () => {
+    renderGreeting();  // Greeting 메시지 추가
+    renderButtons();   // 버튼 목록 추가
+  });
+</script>
 </body>
 </html>
