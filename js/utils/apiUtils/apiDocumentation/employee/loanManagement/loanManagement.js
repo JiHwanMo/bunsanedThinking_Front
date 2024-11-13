@@ -1,7 +1,10 @@
 import {
-  fetchAddCollateralProductHandler, fetchAddLoanProductHandler, fetchDeleteLoanProductHandler,
+  fetchAddCollateralProductHandler,
+  fetchAddLoanProductHandler,
+  fetchDeleteLoanProductHandler,
   fetchGetAllHandler,
-  fetchGetOutcomeHandler, fetchUpdateLoanProductHandler
+  fetchGetOutcomeHandler,
+  fetchUpdateLoanProductHandler
 } from '../../../apiHandler/employee/loanManagement/loanManagement.js';
 
 export const fetchGetAll = async () => {
