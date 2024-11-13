@@ -2,8 +2,28 @@ import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandle
 
 const defaultUrl = "http://localhost:8080/customer";
 
+export const fetchApplyEndorsementHandler = async (index, id) => {
+  return fetchPatchHandler(`${defaultUrl}/applyEndorsement?index=${index}&contractId=${id}`);
+};
+
+export const fetchInsuranceRevivalByIdHandler = async (id) => {
+  return fetchPatchHandler(`${defaultUrl}/applyInsuranceRevival?contractId=${id}`);
+};
+
+export const fetchApplyInsuranceTerminationHandler = async (id) => {
+  return fetchPatchHandler(`${defaultUrl}/applyInsuranceTermination?contractId=${id}`);
+};
+
+export const fetchApplyInsuranceRecontractHandler = async (id) => {
+  return fetchPatchHandler(`${defaultUrl}/applyInsuranceRecontract?contractId=${id}`);
+};
+
+export const fetchPayInsurancefeeHandler = async (depositDTO) => {
+  return fetchPostHandler(`${defaultUrl}/payInsurancefee`, depositDTO);
+};
+
 export const fetchGetCustomerByIdHandler = async (id) => {
-  return fetchGetHandler(`${defaultUrl}/getCustomerById?id=2003`);
+  return fetchGetHandler(`${defaultUrl}/getCustomerById?id=${id}`);
 };
 
 export const fetchGetAllInsuranceHandler = async () => {
@@ -14,111 +34,111 @@ export const fetchGetAllDiseaseInsuranceHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllDiseaseInsurance`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetAllInjuryInsuranceHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllInjuryInsurance`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetAllAutomobileInsuranceHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllAutomobileInsurance`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetInsuranceByProductIdHandler = async (id) => {
+  return fetchGetHandler(`${defaultUrl}/getInsuranceByProductId?id=${id}`);
+}
+
+export const fetchGetAllLoanHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllLoan`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetAllCollateralLoanHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllCollateralLoan`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetAllFixedDepositLoanHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllFixedDepositLoan`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetAllInsuranceContractLoanHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllInsuranceContractLoan`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getLoanByProductId`);
+export const fetchGetLoanByProductIdHandler = async (id) => {
+  return fetchGetHandler(`${defaultUrl}/getLoanByProductId?id=${id}`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetAllApprovedByCustomerHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllApprovedByCustomer`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllContractByCustomerId`);
+export const fetchGetAllContractByCustomerIdHandler = async (id) => {
+  return fetchGetHandler(`${defaultUrl}/getAllContractByCustomerId?id=${id}`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllContractByCustomerId`);
-}
-
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetAllAutomobileInsuranceContractHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllAutomobileInsuranceContract`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetAllInjuryInsuranceContractHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllInjuryInsuranceContract`);
 }
 
-export const fetchGetAllInsuranceHandler = async () => {
+export const fetchGetAllDiseaseInsuranceContractHandler = async () => {
   return fetchGetHandler(`${defaultUrl}/getAllDiseaseInsuranceContract`);
 }
 
-export const fetchGetAllInsuranceHandler = async (id) => {
+export const fetchGetAllContractByProductIdHandler = async (id) => {
   return fetchGetHandler(`${defaultUrl}/getAllContractByProductId?id=${id}`);
 }
 
-export const fetchGetAllInsuranceHandler = async (id) => {
+export const fetchGetContractByIdHandler = async (id) => {
   return fetchGetHandler(`${defaultUrl}/getContractById?id=${id}`);
 }
 
-export const fetchGetAllInsuranceHandler = async (id) => {
+export const fetchGetContractByOneAutomobileIdHandler = async (id) => {
   return fetchGetHandler(`${defaultUrl}/getContractByOneAutomobileId?id=${id}`);
 }
 
-export const fetchGetAllInsuranceHandler = async (id) => {
+export const fetchGetAllAccidentByCustomerIdHandler = async (id) => {
   return fetchGetHandler(`${defaultUrl}/getAllAccidentByCustomerId?id=${id}`);
 }
 
-export const fetchGetAllInsuranceHandler = async (id) => {
+export const fetchGetAccidentByIdHandler = async (id) => {
   return fetchGetHandler(`${defaultUrl}/getAccidentById?id=${id}`);
 }
 
-export const fetchGetAllInsuranceHandler = async (id) => {
+export const fetchGetAllComplaintsByCustomerIdHandler = async (id) => {
   return fetchGetHandler(`${defaultUrl}/getAllComplaintsByCustomerId?id=${id}`);
 }
 
-export const fetchGetAllInsuranceHandler = async (id) => {
+export const fetchGetComplaintByIdHandler = async (id) => {
   return fetchGetHandler(`${defaultUrl}/getComplaintById?id=${id}`);
 }
 
-export const fetchGetAllInsuranceHandler = async (signUpDTO) => {
-  fetchPostHandler(`${defaultUrl}/signUp`, signUpDTO);
+export const fetchSignUpHandler = async (signUpDTO) => {
+  return fetchPostHandler(`${defaultUrl}/signUp`, signUpDTO);
 }
 
-export const fetchGetAllInsuranceHandler = async (askInsuranceCounselDTO) => {
+export const fetchAskInsuranceCounselHandler = async (askInsuranceCounselDTO) => {
   return fetchPostHandler(`${defaultUrl}/askInsuranceCounsel`, askInsuranceCounselDTO);
 }
 
-export const fetchGetAllInsuranceHandler = async (buyInsuranceDTO) => {
+export const fetchBuyInsuranceHandler = async (buyInsuranceDTO) => {
   return fetchPostHandler(`${defaultUrl}/buyInsurance`, buyInsuranceDTO);
 }
 
-export const fetchGetAllInsuranceHandler = async (complainDTO) => {
+export const fetchComplainHandler = async (complainDTO) => {
   return fetchPostHandler(`${defaultUrl}/complain`, complainDTO);
 }
 
-export const fetchGetAllInsuranceHandler = async (loanDTO) => {
+export const fetchLoanHandler = async (loanDTO) => {
   return fetchPostHandler(`${defaultUrl}/loan`, loanDTO);
 }
 
-export const fetchGetAllInsuranceHandler = async (receiveInsuranceDTO) => {
+export const fetchReceiveInsuranceHandler = async (receiveInsuranceDTO) => {
   return fetchPostHandler(`${defaultUrl}/receiveInsurance`, receiveInsuranceDTO);
 }
 
-export const fetchGetAllInsuranceHandler = async (reportAccidentDTO) => {
+export const fetchReportAccidentHandler = async (reportAccidentDTO) => {
   return fetchPostHandler(`${defaultUrl}/reportAccident`, reportAccidentDTO);
 }
 
