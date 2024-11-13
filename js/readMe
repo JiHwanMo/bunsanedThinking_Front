@@ -1,9 +1,9 @@
 src/
 ├── utils/
 │   ├── apiUtils/
-│   │   ├── apiDocument.js       // API 명세 정리
-│   │   └── apiUtilHandler.js    // API 호출 메서드
+│   │   ├── apiDocument.js       // API 명세 정리-interface
+│   │   └── apiUtilHandler.js    // API 호출 메서드-implement
 │   ├── uiUtils/
-│   │   ├── positionManager.js   // 검색 버튼 및 테이블 위치 조정
+│   │   ├── messageManager.js   // 검색 버튼 및 테이블 위치 조정
 │   │   ├── tableRenderer.js     // API 데이터 가공 및 테이블 표시
 │   │   └── buttonManager.js     // 검색 버튼 클릭 이벤트 및 기타 버튼 핸들링
