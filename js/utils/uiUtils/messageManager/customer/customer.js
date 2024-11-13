@@ -1,5 +1,5 @@
 // positionManager/customer.js
-import { fetchGetCustomerName } from '../../../apiUtils/apiHandler/customer/customer.js';
+import { fetchGetCustomerName } from '../../../apiUtils/apiDocumentation/customer/customer.js';
 import { MESSAGES } from '../../../../../config/constants.js';
 
 export const renderGreeting = async () => {
@@ -9,7 +9,7 @@ export const renderGreeting = async () => {
   const greeting = document.createElement("div");
   greeting.className = "greeting";
 
-  greeting.textContent = `${getCustomer.id} ${greetingConstant} `;
+  greeting.textContent = `${getCustomer.name} ${greetingConstant} `;
 
   const headerLine = document.querySelector(".header-line");
   container.insertBefore(greeting, headerLine.nextSibling);
