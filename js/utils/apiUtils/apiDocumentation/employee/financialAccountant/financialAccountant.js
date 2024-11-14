@@ -10,12 +10,12 @@ import {
   fetchHandlePaymentHandler
 } from "../../../apiHandler/employee/financialAccountant/financialAccountant.js";
 
-export const fetchGetContract = async () => {
-  return await fetchGetContractHandler(1001);
+export const fetchGetContract = async (contractId) => {
+  return await fetchGetContractHandler(contractId); // 1001
 };
 
-export const fetchGetCustomer = async () => {
-  return await fetchGetCustomerHandler(2001);
+export const fetchGetCustomer = async (customerId) => {
+  return await fetchGetCustomerHandler(customerId); // 2001
 };
 
 export const fetchGetAllDepositDetail = async () => {
@@ -30,18 +30,19 @@ export const fetchGetAllUnprocessedPaymentDetail = async () => {
   return await fetchGetAllUnprocessedPaymentDetailHandler();
 };
 
-export const fetchGetPaymentDetail = async () => {
-  return await fetchGetPaymentDetailHandler(9002);
+export const fetchGetPaymentDetail = async (paymentDetailId) => {
+  return await fetchGetPaymentDetailHandler(paymentDetailId); // 9002
 };
 
 export const fetchGetAllPaymentDetail = async () => {
   return await fetchGetAllPaymentDetailHandler();
 };
 
-export const fetchGetDepositDetail = async () => {
-  return await fetchGetDepositDetailHandler(8101);
+export const fetchGetDepositDetail = async (depostDetailId) => {
+  return await fetchGetDepositDetailHandler(depostDetailId); // 8101
 };
 
-export const fetchHandlePayment = async () => {
-  return await fetchHandlePaymentHandler(9004, 60021);
+export const fetchHandlePayment = async (paymentDetailId, employeeId) => {
+  // 9004, 60021
+  return await fetchHandlePaymentHandler(paymentDetailId, employeeId);
 };
