@@ -3,97 +3,97 @@ import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandle
 const defaultUrl = "http://localhost:8080/employee/contractManagement";
 
 export const fetchRequestTerminationFeeHandler = async (tercontractId, customerId) => {
-  return fetchPatchHandler(`${defaultUrl}/requestTerminationFee?tercontractId=${tercontractId}&customerId=${customerId}`, {});
+  return await fetchPatchHandler(`${defaultUrl}/requestTerminationFee?tercontractId=${tercontractId}&customerId=${customerId}`, {});
 }
 
 export const fetchReviewEndorsementHandler = async (endorsementId, index) => {
-  return fetchPatchHandler(`${defaultUrl}/reviewEndorsement?endorsementId=${endorsementId}&index=${index}`, {});
+  return await fetchPatchHandler(`${defaultUrl}/reviewEndorsement?endorsementId=${endorsementId}&index=${index}`, {});
 }
 
 export const fetchReviewRecontractHandler = async (recontractId, index) => {
-  return fetchPatchHandler(`${defaultUrl}/reviewRecontract?recontractId=${recontractId}&index=${index}`, {});
+  return await fetchPatchHandler(`${defaultUrl}/reviewRecontract?recontractId=${recontractId}&index=${index}`, {});
 }
 
 export const fetchReviewRevivalHandler = async (revivalId, index) => {
-  return fetchPatchHandler(`${defaultUrl}/reviewRevival?revivalId=${revivalId}&index=${index}`, {});
+  return await fetchPatchHandler(`${defaultUrl}/reviewRevival?revivalId=${revivalId}&index=${index}`, {});
 }
 
 export const fetchGetAllDefaultContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllDefaultContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllDefaultContract`);
 }
 
 export const fetchGetCustomerByIdHandler = async (id) => {
-  return fetchGetHandler(`${defaultUrl}/getCustomerById?id=${id}`);
+  return await fetchGetHandler(`${defaultUrl}/getCustomerById?id=${id}`);
 }
 
 export const fetchGetContractByIdHandler = async (id) => {
-  return fetchGetHandler(`${defaultUrl}/getContractById?id=${id}`);
+  return await fetchGetHandler(`${defaultUrl}/getContractById?id=${id}`);
 }
 
 export const fetchGetTerminationByIdHandler = async (id) => {
-  return fetchGetHandler(`${defaultUrl}/getTerminationById?id=${id}`);
+  return await fetchGetHandler(`${defaultUrl}/getTerminationById?id=${id}`);
 }
 
 export const fetchGetAllTerminatingContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllTerminatingContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllTerminatingContract`);
 }
 
 export const fetchGetTerminatingContractByIdHandler = async (id) => {
-  return fetchGetHandler(`${defaultUrl}/getTerminatingContractById?id=${id}`);
+  return await fetchGetHandler(`${defaultUrl}/getTerminatingContractById?id=${id}`);
 }
 
 export const fetchGetAllUnprocessedTerminatingContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllUnprocessedTerminatingContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllUnprocessedTerminatingContract`);
 }
 
 export const fetchGetAllProcessedTerminatingContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllProcessedTerminatingContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllProcessedTerminatingContract`);
 }
 
 export const fetchGetAllEndorsementContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllEndorsementContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllEndorsementContract`);
 }
 
 export const fetchGetAllUnprocessedEndorsementContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllUnprocessedEndorsementContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllUnprocessedEndorsementContract`);
 }
 
 export const fetchGetAllProcessedEndorsementContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllProcessedEndorsementContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllProcessedEndorsementContract`);
 }
 
 export const fetchGetEndorsementByIdHandler = async (id) => {
-  return fetchGetHandler(`${defaultUrl}/getEndorsementById?id=${id}`);
+  return await fetchGetHandler(`${defaultUrl}/getEndorsementById?id=${id}`);
 }
 
 export const fetchGetAllReContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllReContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllReContract`);
 }
 
 export const fetchGetAllUnprocessedReContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllUnprocessedReContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllUnprocessedReContract`);
 }
 
 export const fetchGetAllProcessedReContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllProcessedReContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllProcessedReContract`);
 }
 
 export const fetchGetReContractByIdHandler = async (id) => {
-  return fetchGetHandler(`${defaultUrl}/getReContractById?id=${id}`);
+  return await fetchGetHandler(`${defaultUrl}/getReContractById?id=${id}`);
 }
 
 export const fetchGetAllRevivalContractHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllRevivalContract`);
+  return await fetchGetHandler(`${defaultUrl}/getAllRevivalContract`);
 }
 
 export const fetchGetRevivalByIdHandler = async (id) => {
-  return fetchGetHandler(`${defaultUrl}/getRevivalById?id=${id}`);
+  return await fetchGetHandler(`${defaultUrl}/getRevivalById?id=${id}`);
 }
 
 export const fetchGetAllUnprocessedRevivalHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllUnprocessedRevival`);
+  return await fetchGetHandler(`${defaultUrl}/getAllUnprocessedRevival`);
 }
 
 export const fetchGetAllProcessedRevivalHandler = async () => {
-  return fetchGetHandler(`${defaultUrl}/getAllProcessedRevival`);
+  return await fetchGetHandler(`${defaultUrl}/getAllProcessedRevival`);
 }
