@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandler } from '../../FetchHandler.js';
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchDeleteHandler } from '../../FetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/employee/administrative";
 
@@ -15,7 +15,7 @@ export const fetchGetOfficeSupplyHandler = async (id) => {
 };
 
 export const fetchUpdateOfficeSupplyHandler = async (updateOfficeSupplyDTO) => {
-  return await fetchPatchHandler(`${defaultUrl}/updateOfficeSupply`, updateOfficeSupplyDTO);
+  return await fetchPatchWithBody(`${defaultUrl}/updateOfficeSupply`, updateOfficeSupplyDTO);
 };
 
 export const fetchGetAllOfficeSuppliesHandler = async () => {

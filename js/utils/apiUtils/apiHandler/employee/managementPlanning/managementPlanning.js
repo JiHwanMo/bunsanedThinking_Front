@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandler } from '../../FetchHandler.js';
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchDeleteHandler } from '../../FetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/employee/managementPlanning";
 
@@ -15,5 +15,5 @@ export const fetchGetDepartmentHandler = async (id) => {
 };
 
 export const fetchUpdateDepartmentHandler = async (updateDepartmentDTO) => {
-  return await fetchPatchHandler(`${defaultUrl}/updateDepartment`, updateDepartmentDTO);
+  return await fetchPatchWithBody(`${defaultUrl}/updateDepartment`, updateDepartmentDTO);
 };

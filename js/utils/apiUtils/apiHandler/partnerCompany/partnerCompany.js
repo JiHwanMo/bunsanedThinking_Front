@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPatchHandler } from '../FetchHandler.js';
+import { fetchGetHandler, fetchPatchWithParams } from '../FetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/partnerCompany";
 
@@ -15,5 +15,5 @@ export const fetchGetReportHandler = async (id) => {
 };
 
 export const fetchSetDamageAssessmentMoneyHandler = async (accidentId, damageAssessmentMoney) => {
-  return await fetchPatchHandler(`${defaultUrl}/setDamageAssessmentMoney?accidentId=${accidentId}&damageAssessmentMoney=${damageAssessmentMoney}`);
+  return await fetchPatchWithParams(`${defaultUrl}/setDamageAssessmentMoney?accidentId=${accidentId}&damageAssessmentMoney=${damageAssessmentMoney}`);
 };
