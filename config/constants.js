@@ -1,8 +1,14 @@
 export const MESSAGES = {
-  GREETING: "님 안녕하세요.",
+  GREETING: "님 안녕하세요."
 };
 
 export const BUTTON = {
+  COMMON:{
+    OK:'확인',
+    CANCLE:'취소',
+    SEARCH:'검색'
+  }
+
   TASK: {
     CUSTOMER: {
       HOME: {
@@ -28,19 +34,13 @@ export const BUTTON = {
           APPLY_REINSURANCE: '재보험 신청'
         },
         APPLY_REINSURANCE:{
-          APPLY_INSURANCE: "보험 신청",
-          CANCLE: "취소"
+          APPLY_INSURANCE: "보험 신청"
         }
       }
     }
   }
 };
 
-// POP_UP과 COMBOBOX 주석은 유지
 // export const POP_UP = {};
-
 // export const COMBOBOX = {};
-
-export const COLUMN_NAME = {
-
-};
+// export const COLUMN_NAME = {};
