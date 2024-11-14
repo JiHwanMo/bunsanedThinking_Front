@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPatchHandler } from "../../FetchHandler.js"
+import { fetchGetHandler, fetchPatchWithParams } from "../../FetchHandler.js"
 
 const defaultURL = "http://localhost:8080/employee/financialAccountant";
 
@@ -35,5 +35,5 @@ export const fetchGetDepositDetailHandler = async (depositDetailId) => {
 };
 
 export const fetchHandlePaymentHandler = async (paymentDetailId, employeeId) => {
-  await fetchPatchHandler(`${defaultURL}/handlePayment?paymentDetailId=${paymentDetailId}&employeeId=${employeeId}`);
+  await fetchPatchWithParams(`${defaultURL}/handlePayment?paymentDetailId=${paymentDetailId}&employeeId=${employeeId}`);
 };

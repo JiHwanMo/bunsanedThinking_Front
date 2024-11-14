@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandler } from "../../FetchHandler.js"
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from "../../FetchHandler.js"
 
 const defaultURL = "http://localhost:8080/employee/humanResource";
 
@@ -23,7 +23,7 @@ export const fetchAddEmployeeHandler = async (addEmployeeDTO) => {
 };
 
 export const fetchUpdateEmployeeHandler = async (employeeId, index, input) => {
-  await fetchPatchHandler(`${defaultURL}/updateEmployee?employeeId=${employeeId}&index=${index}&input=${input}`);
+  await fetchPatchWithParams(`${defaultURL}/updateEmployee?employeeId=${employeeId}&index=${index}&input=${input}`);
 };
 
 export const fetchDeleteEmployeeHandler = async (employeeId) => {

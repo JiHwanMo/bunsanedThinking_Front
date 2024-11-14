@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPatchHandler } from "../../FetchHandler.js"
+import { fetchGetHandler, fetchPatchWithParams } from "../../FetchHandler.js"
 
 const defaultURL = "http://localhost:8080/employee/customerSupport";
 
@@ -55,9 +55,9 @@ export const fetchGetCustomerHandler = async (customerId) => {
 };
 
 export const fetchHandleAccidentHandler = async (accidentId, damageAssessmentCompanyId, roadsideAssistanceCompanyId) => {
-  return await fetchPatchHandler(`${defaultURL}/handleAccident?accidentId=${accidentId}&damageAssessmentCompanyId=${damageAssessmentCompanyId}&roadsideAssistanceCompanyId=${roadsideAssistanceCompanyId}`);
+  return await fetchPatchWithParams(`${defaultURL}/handleAccident?accidentId=${accidentId}&damageAssessmentCompanyId=${damageAssessmentCompanyId}&roadsideAssistanceCompanyId=${roadsideAssistanceCompanyId}`);
 };
 
 export const fetchHandleComplaintHandler = async (complaintId, result, employeeName) => {
-  return await fetchPatchHandler(`${defaultURL}/handleComplaint?complaintId=${complaintId}&result=${result}&employeeName=${employeeName}`);
+  return await fetchPatchWithParams(`${defaultURL}/handleComplaint?complaintId=${complaintId}&result=${result}&employeeName=${employeeName}`);
 };

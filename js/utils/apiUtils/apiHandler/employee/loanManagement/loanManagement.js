@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandler } from "../../FetchHandler.js"
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from "../../FetchHandler.js"
 
 const defaultURL = "http://localhost:8080/employee/loanManagement"
 
@@ -44,7 +44,7 @@ export const fetchRequestLoanHandler = async (contractId, money, paymentType, re
 };
 
 export const fetchUpdateLoanProductHandler = async (index, input, loanId) => {
-  await fetchPatchHandler(`${defaultURL}/updateLoanProduct?index=${index}&input=${input}&loanId=${loanId}`);
+  await fetchPatchWithParams(`${defaultURL}/updateLoanProduct?index=${index}&input=${input}&loanId=${loanId}`);
 };
 
 export const fetchDeleteLoanProductHandler = async (productId) => {

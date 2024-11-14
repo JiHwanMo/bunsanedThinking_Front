@@ -38,7 +38,7 @@ export const fetchPostHandler = async (url, bodyObj) => {
   return response.status;
 }
 
-export const fetchPatchHandler = async (url, bodyObj) => {
+export const fetchPatchWithBody = async (url, bodyObj) => {
   let response = null;
   try {
     response = await fetch(url, {
@@ -56,6 +56,26 @@ export const fetchPatchHandler = async (url, bodyObj) => {
   }
   return response.status;
 }
+
+export const fetchPatchWithParams = async (url) => {
+  let response = null;
+
+  try {
+    response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+  } catch (error) {
+    console.error("Error fetching PATCH with params:", error);
+  }
+  return response.status;
+};
 
 export const fetchDeleteHandler = async (url) => {
   let response = null;
