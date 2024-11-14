@@ -48,6 +48,6 @@ export const fetchSetDamageAssessmentMoney = async (accidentId, damageAssessment
   return await fetchSetDamageAssessmentMoneyHandler(accidentId, damageAssessmentMoney);
 }
 // (async () => {
-//   const data = await fetchSetDamageAssessmentMoney(4001, 200);
+//   const data = await fetchSetDamageAssessmentMoney(4001, 155);
 //   console.log(data);
 // })();

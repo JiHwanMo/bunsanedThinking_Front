@@ -37,7 +37,6 @@ export const fetchGetOfficeSupply = async (id) => {
 //   console.log(data);
 // })();
 
-
 export const fetchUpdateOfficeSupply = async (updateOfficeSupplyDTO) => {
   return await fetchUpdateOfficeSupplyHandler(updateOfficeSupplyDTO);
 }
