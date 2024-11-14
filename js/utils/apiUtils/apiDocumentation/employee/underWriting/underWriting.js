@@ -14,8 +14,8 @@ export const fetchApplyReinsurance = async () => {
   return await fetchApplyReinsuranceHandler();
 }
 
-export const fetchReviewAcquisition = async (id, result) => {
-  return await fetchReviewAcquisitionHandler(id, result);
+export const fetchReviewAcquisition = async (contractId, result) => {
+  return await fetchReviewAcquisitionHandler(contractId, result);
 }
 
 export const fetchGetCustomer = async (id) => {
