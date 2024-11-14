@@ -11,11 +11,11 @@ import {
 } from "../../../apiHandler/employee/financialAccountant/financialAccountant.js";
 
 export const fetchGetContract = async () => {
-  return await fetchGetContractHandler();
+  return await fetchGetContractHandler(1001);
 };
 
 export const fetchGetCustomer = async () => {
-  return await fetchGetCustomerHandler();
+  return await fetchGetCustomerHandler(2001);
 };
 
 export const fetchGetAllDepositDetail = async () => {
@@ -31,7 +31,7 @@ export const fetchGetAllUnprocessedPaymentDetail = async () => {
 };
 
 export const fetchGetPaymentDetail = async () => {
-  return await fetchGetPaymentDetailHandler();
+  return await fetchGetPaymentDetailHandler(9002);
 };
 
 export const fetchGetAllPaymentDetail = async () => {
@@ -39,9 +39,9 @@ export const fetchGetAllPaymentDetail = async () => {
 };
 
 export const fetchGetDepositDetail = async () => {
-  return await fetchGetDepositDetailHandler();
+  return await fetchGetDepositDetailHandler(8101);
 };
 
 export const fetchHandlePayment = async () => {
-  return await fetchHandlePaymentHandler();
+  return await fetchHandlePaymentHandler(9004, 60021);
 };

@@ -1,37 +1,39 @@
 import { fetchGetHandler, fetchPatchHandler } from "../../FetchHandler.js"
 
-export const fetchGetContractHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/financialAccountant/getContract?contractId=1001");
+const defaultURL = "http://localhost:8080/employee/financialAccountant";
+
+export const fetchGetContractHandler = async (contractId) => {
+  return await fetchGetHandler(`${defaultURL}/getContract?contractId=${contractId}`);
 };
 
-export const fetchGetCustomerHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/financialAccountant/getCustomer?customerId=2001");
+export const fetchGetCustomerHandler = async (customerId) => {
+  return await fetchGetHandler(`${defaultURL}/getCustomer?customerId=${customerId}`);
 };
 
 export const fetchGetAllDepositDetailHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/financialAccountant/getAllDepositDetail");
+  return await fetchGetHandler(`${defaultURL}/getAllDepositDetail`);
 };
 
 export const fetchGetAllCompletedPaymentDetailHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/financialAccountant/getAllCompletedPaymentDetail");
+  return await fetchGetHandler(`${defaultURL}/getAllCompletedPaymentDetail`);
 };
 
 export const fetchGetAllUnprocessedPaymentDetailHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/financialAccountant/getAllUnprocessedPaymentDetail");
+  return await fetchGetHandler(`${defaultURL}/getAllUnprocessedPaymentDetail`);
 };
 
-export const fetchGetPaymentDetailHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/financialAccountant/getPaymentDetail?paymentDetailId=9002");
+export const fetchGetPaymentDetailHandler = async (paymentDetailId) => {
+  return await fetchGetHandler(`${defaultURL}/getPaymentDetail?paymentDetailId=${paymentDetailId}`);
 };
 
 export const fetchGetAllPaymentDetailHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/financialAccountant/getAllPaymentDetail");
+  return await fetchGetHandler(`${defaultURL}/getAllPaymentDetail`);
 };
 
-export const fetchGetDepositDetailHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/financialAccountant/getDepositDetail?depositDetailId=8101");
+export const fetchGetDepositDetailHandler = async (depositDetailId) => {
+  return await fetchGetHandler(`${defaultURL}/getDepositDetail?depositDetailId=${depositDetailId}`);
 };
 
-export const fetchHandlePaymentHandler = async () => {
-  await fetchPatchHandler("http://localhost:8080/employee/financialAccountant/handlePayment?paymentDetailId=9004&employeeId=60018021");
+export const fetchHandlePaymentHandler = async (paymentDetailId, employeeId) => {
+  await fetchPatchHandler(`${defaultURL}/handlePayment?paymentDetailId=${paymentDetailId}&employeeId=${employeeId}`);
 };
