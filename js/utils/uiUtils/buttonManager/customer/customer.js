@@ -46,7 +46,7 @@ const productTaskMapper = {
   LOAN_LIST: loanList
 }
 
-export const initialButtons = (buttonMessages, buttonActionMapper) => {
+const initialButtons = (buttonMessages, buttonActionMapper) => {
   const buttonContainer = document.getElementById("buttonContainer");
 
   // 객체의 각 항목을 순회하여 버튼 생성
