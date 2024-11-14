@@ -7,6 +7,7 @@ import { fetchSetDamageAssessmentMoneyHandler } from '../../apiHandler/partnerCo
 export const fetchGetPartnerCompany = async (id) => {
   return await fetchGetPartnerCompanyHandler(id);
 }
+22
 // (async () => {
 //   const data = await fetchGetPartnerCompany(3001);
 //   console.log(data); // 받아온 데이터를 콘솔에 출력한다
