@@ -6,7 +6,10 @@ export const BUTTON = {
   COMMON:{
     OK:'확인',
     CANCLE:'취소',
-    SEARCH:'검색'
+    SEARCH:'검색',
+    POST: '등록',
+    UPDATE: '수정',
+    DELETE: '삭제'
   }
 
   TASK: {
