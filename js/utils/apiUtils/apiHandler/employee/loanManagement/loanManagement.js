@@ -1,50 +1,52 @@
 import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandler } from "../../FetchHandler.js"
 
+const defaultURL = "http://localhost:8080/employee/loanManagement"
+
 export const fetchGetAllHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/loanManagement/getAll"); // URL을 전달
+  return await fetchGetHandler(`${defaultURL}/getAll`);
 };
 
-export const fetchGetOutcomeHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/loanManagement/getOutcome?contractId=1001"); // URL을 전달
+export const fetchGetOutcomeHandler = async (contractId) => {
+  return await fetchGetHandler(`${defaultURL}/getOutcome?contractId=${contractId}`);
 };
 
-export const fetchAddCollateralProductHandler = async () => {
-  return await fetchPostHandler("http://localhost:8080/employee/loanManagement/addCollateralProduct",
+export const fetchAddCollateralProductHandler = async (loanType, name, interestRate, maximumMoney, minimumAsset, collateralType, minimumValue, monthlyIncome) => {
+  return await fetchPostHandler(`${defaultURL}/addCollateralProduct`,
     {
-      loanType: 0,
-      name: "Standard Loan",
-      interestRate: 5,
-      maximumMoney: 100000,
-      minimumAsset: 20000,
-      collateralType: 1,
-      minimumValue: 15000,
-      monthlyIncome: 300
+      loanType: loanType,
+      name: name,
+      interestRate: interestRate,
+      maximumMoney: maximumMoney,
+      minimumAsset: minimumAsset,
+      collateralType: collateralType,
+      minimumValue: minimumValue,
+      monthlyIncome: monthlyIncome
     }
   );
 };
 
-export const fetchAddLoanProductHandler = async () => {
-  return await fetchPostHandler("http://localhost:8080/employee/loanManagement/addLoanProduct",
+export const fetchAddLoanProductHandler = async (loanType, name, interestRate, maximumMoney, minimumAsset, parameter, monthlyIncome) => {
+  return await fetchPostHandler(`${defaultURL}/addLoanProduct`,
     {
-      loanType: 1,
-      name: "Standard Loan 2",
-      interestRate: 5,
-      maximumMoney: 100000,
-      minimumAsset: 20000,
-      parameter: 1,
-      monthlyIncome: 300
+      loanType: loanType,
+      name: name,
+      interestRate: interestRate,
+      maximumMoney: maximumMoney,
+      minimumAsset: minimumAsset,
+      parameter: parameter,
+      monthlyIncome: monthlyIncome
     }
   );
 };
 
-export const fetchRequestLoanHandler = async () => {
-  await fetchPostHandler("http://localhost:8080/employee/loanManagement/requestLoan?contractId=1004&money=1000&paymentType=1&result=true",)
+export const fetchRequestLoanHandler = async (contractId, money, paymentType, result) => {
+  await fetchPostHandler(`${defaultURL}/requestLoan?contractId=${contractId}&money=${money}&paymentType=${paymentType}&result=${result}`,)
 };
 
-export const fetchUpdateLoanProductHandler = async () => {
-  await fetchPatchHandler("http://localhost:8080/employee/loanManagement/updateLoanProduct?index=1&input=Test Loan&loanId=7002004");
+export const fetchUpdateLoanProductHandler = async (index, input, loanId) => {
+  await fetchPatchHandler(`${defaultURL}/updateLoanProduct?index=${index}&input=${input}&loanId=${loanId}`);
 };
 
-export const fetchDeleteLoanProductHandler = async () => {
-  await fetchDeleteHandler("http://localhost:8080/employee/loanManagement/deleteLoanProduct?id=7002004");
+export const fetchDeleteLoanProductHandler = async (productId) => {
+  await fetchDeleteHandler(`${defaultURL}/deleteLoanProduct?id=${productId}`);
 };

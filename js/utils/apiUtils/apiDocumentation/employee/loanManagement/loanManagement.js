@@ -13,25 +13,26 @@ export const fetchGetAll = async () => {
 };
 
 export const fetchGetOutcome = async () => {
-  return await fetchGetOutcomeHandler();
+  return await fetchGetOutcomeHandler(1001);
 };
 
 export const fetchAddCollateralProduct = async () => {
-  return await fetchAddCollateralProductHandler();
+  return await fetchAddCollateralProductHandler(0, "Standard Loan", 5, 100000, 20000, 1, 15000, 300);
 };
 
 export const fetchAddLoanProduct = async () => {
-  return await fetchAddLoanProductHandler();
+  return await fetchAddLoanProductHandler(1, "Standard Loan 2", 5, 100000, 20000, 1, 300);
 };
 
+
 export const fetchRequestLoan = async () => {
-  return await fetchRequestLoanHandler();
+  return await fetchRequestLoanHandler(1004, 1000, 1, true);
 };
 
 export const fetchUpdateLoanProduct = async () => {
-  return await fetchUpdateLoanProductHandler();
+  return await fetchUpdateLoanProductHandler(1, "Test Loan", 7002004);
 };
 
 export const fetchDeleteLoanProduct = async () => {
-  return await fetchDeleteLoanProductHandler();
+  return await fetchDeleteLoanProductHandler(7002004);
 };
