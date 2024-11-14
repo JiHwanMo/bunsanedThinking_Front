@@ -24,20 +24,20 @@ export const fetchGetAllRoadAssistanceCompany = async () => {
   return await fetchGetAllRoadAssistanceCompanyHandler();
 };
 
-export const fetchGetDamageAssessmentCompany = async () => {
-  return await fetchGetDamageAssessmentCompanyHandler(3001);
+export const fetchGetDamageAssessmentCompany = async (damageAssessmentCompanyId) => {
+  return await fetchGetDamageAssessmentCompanyHandler(damageAssessmentCompanyId); // 3001
 };
 
-export const fetchGetRoadAssistanceCompany = async () => {
-  return await fetchGetRoadAssistanceCompanyHandler(3002);
+export const fetchGetRoadAssistanceCompany = async (roadAssistanceCompanyId) => {
+  return await fetchGetRoadAssistanceCompanyHandler(roadAssistanceCompanyId); // 3002
 };
 
 export const fetchGetAllAccident = async () => {
   return await fetchGetAllAccidentHandler();
 };
 
-export const fetchGetAccident = async () => {
-  return await fetchGetAccidentHandler(4001);
+export const fetchGetAccident = async (accidentId) => {
+  return await fetchGetAccidentHandler(accidentId); // 4001
 };
 
 export const fetchGetAllCompletedAccident = async () => {
@@ -60,18 +60,20 @@ export const fetchGetAllProcessedComplaint = async () => {
   return await fetchGetAllProcessedComplaintHandler();
 };
 
-export const fetchGetComplaint = async () => {
-  return await fetchGetComplaintHandler(5101);
+export const fetchGetComplaint = async (complaintId) => {
+  return await fetchGetComplaintHandler(complaintId); // 5101
 };
 
-export const fetchGetCustomer = async () => {
-  return await fetchGetCustomerHandler(2001);
+export const fetchGetCustomer = async (customerId) => {
+  return await fetchGetCustomerHandler(customerId); // 2001
 };
 
-export const fetchHandleAccident = async () => {
-  return await fetchHandleAccidentHandler(4002, 3001, 3002);
+export const fetchHandleAccident = async (accidentId, damageAssessmentCompanyId, roadsideAssistanceId) => {
+  // 4002, 3001, 3002
+  return await fetchHandleAccidentHandler(accidentId, damageAssessmentCompanyId, roadsideAssistanceId);
 };
 
-export const fetchHandleComplaint = async () => {
-  return await fetchHandleComplaintHandler(5103, "ㄹㅇ ㅋㅋ", "김대현");
+export const fetchHandleComplaint = async (complaintId, result, employeeName) => {
+  // 5103, "ㄹㅇ ㅋㅋ", "김대현"
+  return await fetchHandleComplaintHandler(complaintId, result, employeeName);
 };
