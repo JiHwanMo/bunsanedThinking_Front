@@ -15,6 +15,7 @@ export const BUTTON = {
       INSURANCE_LIST: '보험 상품 리스트',
       LOAN_LIST: '대출 상품 리스트'
     }
+    
     // EMPLOYEE: {
     //
     // }
