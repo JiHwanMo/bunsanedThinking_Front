@@ -1,61 +1,63 @@
 import { fetchGetHandler, fetchPatchHandler } from "../../FetchHandler.js"
 
+const defaultURL = "http://localhost:8080/employee/customerSupport";
+
 export const fetchGetAllDamageAssessmentCompanyHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getAllDamageAssessmentCompany");
+  return await fetchGetHandler(`${defaultURL}/getAllDamageAssessmentCompany`);
 };
 
 export const fetchGetAllRoadAssistanceCompanyHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getAllRoadAssistanceCompany");
+  return await fetchGetHandler(`${defaultURL}/getAllRoadAssistanceCompany`);
 };
 
-export const fetchGetDamageAssessmentCompanyHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getDamageAssessmentCompany?damageAssessmentCompanyId=3001");
+export const fetchGetDamageAssessmentCompanyHandler = async (damageAssessmentCompanyId) => {
+  return await fetchGetHandler(`${defaultURL}/getDamageAssessmentCompany?damageAssessmentCompanyId=${damageAssessmentCompanyId}`);
 };
 
-export const fetchGetRoadAssistanceCompanyHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getRoadAssistanceCompany?roadAssistanceCompanyId=3002");
+export const fetchGetRoadAssistanceCompanyHandler = async (roadAssistanceCompanyId) => {
+  return await fetchGetHandler(`${defaultURL}/getRoadAssistanceCompany?roadAssistanceCompanyId=${roadAssistanceCompanyId}`);
 };
 
 export const fetchGetAllAccidentHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getAllAccident");
+  return await fetchGetHandler(`${defaultURL}/getAllAccident`);
 };
 
-export const fetchGetAccidentHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getAccident?accidentId=4001");
+export const fetchGetAccidentHandler = async (accidentId) => {
+  return await fetchGetHandler(`${defaultURL}/getAccident?accidentId=${accidentId}`);
 };
 
 export const fetchGetAllCompletedAccidentHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getAllCompletedAccident");
+  return await fetchGetHandler(`${defaultURL}/getAllCompletedAccident`);
 };
 
 export const fetchGetAllUnprocessedAccidentHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getAllUnprocessedAccident");
+  return await fetchGetHandler(`${defaultURL}/getAllUnprocessedAccident`);
 };
 
 export const fetchGetAllComplaintHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getAllComplaint");
+  return await fetchGetHandler(`${defaultURL}/getAllComplaint`);
 };
 
 export const fetchGetAllUnprocessedComplaintHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getAllUnprocessedComplaint");
+  return await fetchGetHandler(`${defaultURL}/getAllUnprocessedComplaint`);
 };
 
 export const fetchGetAllProcessedComplaintHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getAllProcessedComplaint");
+  return await fetchGetHandler(`${defaultURL}/getAllProcessedComplaint`);
 };
 
-export const fetchGetComplaintHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getComplaint?complaintId=5101");
+export const fetchGetComplaintHandler = async (complaintId) => {
+  return await fetchGetHandler(`${defaultURL}/getComplaint?complaintId=${complaintId}`);
 };
 
-export const fetchGetCustomerHandler = async () => {
-  return await fetchGetHandler("http://localhost:8080/employee/customerSupport/getCustomer?customerId=2001");
+export const fetchGetCustomerHandler = async (customerId) => {
+  return await fetchGetHandler(`${defaultURL}/getCustomer?customerId=${customerId}`);
 };
 
-export const fetchHandleAccidentHandler = async () => {
-  return await fetchPatchHandler("http://localhost:8080/employee/customerSupport/handleAccident?accidentId=4002&damageAssessmentCompanyId=3001&roadsideAssistanceCompanyId=3002");
+export const fetchHandleAccidentHandler = async (accidentId, damageAssessmentCompanyId, roadsideAssistanceCompanyId) => {
+  return await fetchPatchHandler(`${defaultURL}/handleAccident?accidentId=${accidentId}&damageAssessmentCompanyId=${damageAssessmentCompanyId}&roadsideAssistanceCompanyId=${roadsideAssistanceCompanyId}`);
 };
 
-export const fetchHandleComplaintHandler = async () => {
-  return await fetchPatchHandler("http://localhost:8080/employee/customerSupport/handleComplaint?complaintId=5103&result=ㄹㅇ ㅋㅋ&employeeName=김대현");
+export const fetchHandleComplaintHandler = async (complaintId, result, employeeName) => {
+  return await fetchPatchHandler(`${defaultURL}/handleComplaint?complaintId=${complaintId}&result=${result}&employeeName=${employeeName}`);
 };

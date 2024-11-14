@@ -25,11 +25,11 @@ export const fetchGetAllRoadAssistanceCompany = async () => {
 };
 
 export const fetchGetDamageAssessmentCompany = async () => {
-  return await fetchGetDamageAssessmentCompanyHandler();
+  return await fetchGetDamageAssessmentCompanyHandler(3001);
 };
 
 export const fetchGetRoadAssistanceCompany = async () => {
-  return await fetchGetRoadAssistanceCompanyHandler();
+  return await fetchGetRoadAssistanceCompanyHandler(3002);
 };
 
 export const fetchGetAllAccident = async () => {
@@ -37,7 +37,7 @@ export const fetchGetAllAccident = async () => {
 };
 
 export const fetchGetAccident = async () => {
-  return await fetchGetAccidentHandler();
+  return await fetchGetAccidentHandler(4001);
 };
 
 export const fetchGetAllCompletedAccident = async () => {
@@ -61,17 +61,17 @@ export const fetchGetAllProcessedComplaint = async () => {
 };
 
 export const fetchGetComplaint = async () => {
-  return await fetchGetComplaintHandler();
+  return await fetchGetComplaintHandler(5101);
 };
 
 export const fetchGetCustomer = async () => {
-  return await fetchGetCustomerHandler();
+  return await fetchGetCustomerHandler(2001);
 };
 
 export const fetchHandleAccident = async () => {
-  return await fetchHandleAccidentHandler();
+  return await fetchHandleAccidentHandler(4002, 3001, 3002);
 };
 
 export const fetchHandleComplaint = async () => {
-  return await fetchHandleComplaintHandler();
+  return await fetchHandleComplaintHandler(5103, "ㄹㅇ ㅋㅋ", "김대현");
 };
