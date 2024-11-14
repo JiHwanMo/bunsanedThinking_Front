@@ -1,6 +1,7 @@
 import {
   fetchAddCollateralProductHandler,
   fetchAddLoanProductHandler,
+  fetchRequestLoanHandler,
   fetchDeleteLoanProductHandler,
   fetchGetAllHandler,
   fetchGetOutcomeHandler,
