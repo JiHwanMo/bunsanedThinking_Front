@@ -1,21 +1,21 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandler } from '../FetchHandler.js';
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from '../FetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/customer";
 
 export const fetchApplyEndorsementHandler = async (index, id) => {
-  return await fetchPatchHandler(`${defaultUrl}/applyEndorsement?index=${index}&contractId=${id}`);
+  return await fetchPatchWithParams(`${defaultUrl}/applyEndorsement?index=${index}&contractId=${id}`);
 };
 
 export const fetchInsuranceRevivalByIdHandler = async (id) => {
-  return await fetchPatchHandler(`${defaultUrl}/applyInsuranceRevival?contractId=${id}`);
+  return await fetchPatchWithParams(`${defaultUrl}/applyInsuranceRevival?contractId=${id}`);
 };
 
 export const fetchApplyInsuranceTerminationHandler = async (id) => {
-  return await fetchPatchHandler(`${defaultUrl}/applyInsuranceTermination?contractId=${id}`);
+  return await fetchPatchWithParams(`${defaultUrl}/applyInsuranceTermination?contractId=${id}`);
 };
 
 export const fetchApplyInsuranceRecontractHandler = async (id) => {
-  return await fetchPatchHandler(`${defaultUrl}/applyInsuranceRecontract?contractId=${id}`);
+  return await fetchPatchWithParams(`${defaultUrl}/applyInsuranceRecontract?contractId=${id}`);
 };
 
 export const fetchPayInsurancefeeHandler = async (depositDTO) => {
@@ -113,6 +113,8 @@ export const fetchGetAllComplaintsByCustomerIdHandler = async (id) => {
 export const fetchGetComplaintByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getComplaintById?id=${id}`);
 }
+
+
 
 export const fetchSignUpHandler = async (signUpDTO) => {
   return await fetchPostHandler(`${defaultUrl}/signUp`, signUpDTO);

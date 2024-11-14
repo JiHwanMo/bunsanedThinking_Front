@@ -1,21 +1,21 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandler } from '../../FetchHandler.js';
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from '../../FetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/employee/contractManagement";
 
 export const fetchRequestTerminationFeeHandler = async (tercontractId, customerId) => {
-  return await fetchPatchHandler(`${defaultUrl}/requestTerminationFee?tercontractId=${tercontractId}&customerId=${customerId}`, {});
+  return await fetchPatchWithParams(`${defaultUrl}/requestTerminationFee?tercontractId=${tercontractId}&customerId=${customerId}`);
 }
 
 export const fetchReviewEndorsementHandler = async (endorsementId, index) => {
-  return await fetchPatchHandler(`${defaultUrl}/reviewEndorsement?endorsementId=${endorsementId}&index=${index}`, {});
+  return await fetchPatchWithParams(`${defaultUrl}/reviewEndorsement?endorsementId=${endorsementId}&index=${index}`);
 }
 
 export const fetchReviewRecontractHandler = async (recontractId, index) => {
-  return await fetchPatchHandler(`${defaultUrl}/reviewRecontract?recontractId=${recontractId}&index=${index}`, {});
+  return await fetchPatchWithParams(`${defaultUrl}/reviewRecontract?recontractId=${recontractId}&index=${index}`);
 }
 
 export const fetchReviewRevivalHandler = async (revivalId, index) => {
-  return await fetchPatchHandler(`${defaultUrl}/reviewRevival?revivalId=${revivalId}&index=${index}`, {});
+  return await fetchPatchWithParams(`${defaultUrl}/reviewRevival?revivalId=${revivalId}&index=${index}`);
 }
 
 export const fetchGetAllDefaultContractHandler = async () => {

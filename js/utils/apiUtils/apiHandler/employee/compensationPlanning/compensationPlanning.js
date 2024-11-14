@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandler } from '../../FetchHandler.js';
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchPatchWithParams, fetchDeleteHandler } from '../../FetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/employee/compensationPlanning";
 
@@ -7,7 +7,7 @@ export const fetchAddPartnerCompanyHandler = async (partnerCompanyDTO) => {
 }
 
 export const fetchEvaluatePartnerCompanyHandler = async (evaluate, partnerCompanyId) => {
-  return await fetchPatchHandler(`${defaultUrl}/evaluatePartnerCompany?evaluate=${evaluate}&partnerCompanyId=${partnerCompanyId}`, {});
+  return await fetchPatchWithParams(`${defaultUrl}/evaluatePartnerCompany?evaluate=${evaluate}&partnerCompanyId=${partnerCompanyId}`);
 }
 
 export const fetchGetPartnerCompanyHandler = async (id) => {
@@ -15,7 +15,7 @@ export const fetchGetPartnerCompanyHandler = async (id) => {
 }
 
 export const fetchUpdatePartnerCompanyHandler = async (partnerCompanyDTO) => {
-  return await fetchPatchHandler(`${defaultUrl}/updatePartnerCompany`, partnerCompanyDTO);
+  return await fetchPatchWithBody(`${defaultUrl}/updatePartnerCompany`, partnerCompanyDTO);
 }
 
 export const fetchDeletePartnerCompanyHandler = async (id) => {

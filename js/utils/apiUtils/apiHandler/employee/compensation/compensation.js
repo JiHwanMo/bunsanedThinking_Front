@@ -1,13 +1,13 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchHandler, fetchDeleteHandler } from '../../FetchHandler.js';
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchDeleteHandler } from '../../FetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/employee/compensation";
 
 export const fetchRequestCompensationHandler = async (requestCompensationDTO) => {
-  return await fetchPatchHandler(`${defaultUrl}/requestCompensation`, requestCompensationDTO);
+  return await fetchPatchWithBody(`${defaultUrl}/requestCompensation`, requestCompensationDTO);
 }
 
 export const fetchRequestInsuranceMoneyHandler = async (requestInsuranceMoneyDTO) => {
-  return await fetchPatchHandler(`${defaultUrl}/requestInsuranceMoney`, requestInsuranceMoneyDTO);
+  return await fetchPatchWithBody(`${defaultUrl}/requestInsuranceMoney`, requestInsuranceMoneyDTO);
 }
 
 export const fetchGetAllInsuranceMoneyHandler = async () => {
