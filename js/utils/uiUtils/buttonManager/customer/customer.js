@@ -13,15 +13,17 @@ const showProductListMenu = () => {
 }
 
 const managementContract = () => {
-  alert("기가입 보헙 목록스");
+  window.location.href = "../informationList.html";
+  // 이거 js 파일 기준이 아니라 실행중인 html 파일 기준으로 링크 지정해야 합니다.....!!
+  // 현재 js 파일 밖으로 벗어난다고 ../../../ 해서 들어가면 css가 지정이 안되요
 }
 
 const viewAccident = () => {
-  alert("사고 신고 목록스");
+  window.location.href = "../informationList.html";
 }
 
 const viewComplaint = () => {
-  alert("민원 목록스");
+  window.location.href = "../informationList.html";
 }
 
 const customerTaskMapper = {
@@ -32,11 +34,11 @@ const customerTaskMapper = {
 }
 
 const insuranceList = () => {
-  alert("보헙 상품 목록스")
+  window.location.href = "../informationList.html";
 }
 
 const loanList = () => {
-  alert("대출 상품 목록스")
+  window.location.href = "../informationList.html";
 }
 
 const productTaskMapper = {
@@ -53,10 +55,7 @@ export const initialButtons = (buttonMessages, buttonActionMapper) => {
     button.className = "button-item";
     button.textContent = name; // 버튼에 표시할 텍스트 설정
 
-    button.addEventListener("click", () => {
-      // alert(`${name}`);
-      buttonActionMapper[key]();
-    });
+    button.addEventListener("click", buttonActionMapper[key]);
     buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
   });
 }
