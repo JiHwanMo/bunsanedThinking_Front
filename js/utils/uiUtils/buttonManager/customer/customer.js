@@ -13,17 +13,17 @@ const showProductListMenu = () => {
 }
 
 const managementContract = () => {
-  window.location.href = "../informationList.html";
+  window.location.href = "informationList.html";
   // 이거 js 파일 기준이 아니라 실행중인 html 파일 기준으로 링크 지정해야 합니다.....!!
   // 현재 js 파일 밖으로 벗어난다고 ../../../ 해서 들어가면 css가 지정이 안되요
 }
 
 const viewAccident = () => {
-  window.location.href = "../informationList.html";
+  window.location.href = "informationList.html";
 }
 
 const viewComplaint = () => {
-  window.location.href = "../informationList.html";
+  window.location.href = "informationList.html";
 }
 
 const customerTaskMapper = {
@@ -34,11 +34,11 @@ const customerTaskMapper = {
 }
 
 const insuranceList = () => {
-  window.location.href = "../informationList.html";
+  window.location.href = "informationList.html";
 }
 
 const loanList = () => {
-  window.location.href = "../informationList.html";
+  window.location.href = "informationList.html";
 }
 
 const productTaskMapper = {
