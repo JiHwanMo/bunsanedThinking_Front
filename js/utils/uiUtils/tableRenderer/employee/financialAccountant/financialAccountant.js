@@ -33,7 +33,7 @@ const depositDetailRow = (depositDetail) => {
 
 const context = {
   VIEW_DEPOSIT_DETAIL: {
-    title : "입금 사항 조회",
+    title : "입금 정보 리스트",
     listFetch: fetchGetAllDepositDetail,
     rowGetter: depositDetailRow,
     columnList: [
@@ -44,7 +44,7 @@ const context = {
     ]
   },
   HANDLE_PAYMENT_DETAIL: {
-    title : "직원 정보 리스트",
+    title : "지급 사항 정보 리스트",
     listFetch: fetchGetAllPaymentDetail,
     rowGetter: paymentDetailRow,
     columnList: [
