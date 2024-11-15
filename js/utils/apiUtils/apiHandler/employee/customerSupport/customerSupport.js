@@ -61,3 +61,7 @@ export const fetchHandleAccidentHandler = async (accidentId, damageAssessmentCom
 export const fetchHandleComplaintHandler = async (complaintId, result, employeeName) => {
   return await fetchPatchWithParams(`${defaultURL}/handleComplaint?complaintId=${complaintId}&result=${result}&employeeName=${employeeName}`);
 };
+
+export const fetchGetEmployeeHandler = async (employeeId) => {
+  return await fetchGetHandler(`${defaultURL}/getEmployee?employeeId=${employeeId}`);
+}
