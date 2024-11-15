@@ -118,6 +118,7 @@ const context = {
 
 export const viewInformationListById = async (fetchType) => {
   sessionStorage.setItem("currentType", fetchType);
+
   const id = sessionStorage.getItem("id");
   // 아이디 파라미터로 받는게 아니랍니다
   const list = await context[fetchType].listFetch(id);
@@ -138,7 +139,7 @@ export const renderTable = () => {
   initialTable();
 }
 
-const setTitle = (title) => {
+const setTitle = () => {
   const currentContext = context[sessionStorage.getItem("currentType")];
   const contextTitle = document.getElementById("title");
   contextTitle.innerText = currentContext.title;

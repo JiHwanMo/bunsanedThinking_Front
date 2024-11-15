@@ -10,7 +10,7 @@ export const BUTTON = {
     POST: '등록',
     UPDATE: '수정',
     DELETE: '삭제'
-  }
+  },
 
   TASK: {
     CUSTOMER: {
@@ -18,14 +18,14 @@ export const BUTTON = {
         PRODUCT_LIST: '상품 리스트',
         MANAGEMENT_CONTRACT: '기가입 보험 관리',
         VIEW_ACCIDENT: '사고 신고',
-        VIEW_COMPLAINT: '민원 신청',
+        VIEW_COMPLAINT: '민원 신청'
       },
       PRODUCT_LIST: {
         INSURANCE_LIST: '보험 상품 리스트',
-        LOAN_LIST: '대출 상품 리스트',
+        LOAN_LIST: '대출 상품 리스트'
       },
       MANAGEMENT_CONTRACT: {
-        TERMINATION: '해지 신청',
+        TERMINATION: '해지 신청'
       },
     },
 
