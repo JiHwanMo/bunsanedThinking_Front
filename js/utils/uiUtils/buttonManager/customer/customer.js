@@ -1,29 +1,30 @@
 // buttonManager/customer.js
 // import { fetchGetDatafetchData } from '../../../apiUtils/apiHandler/customer/customer.js';
 import { BUTTON } from '../../../../../config/constants.js';
+import { viewInformationListById } from '../../tableRenderer/customer/customer.js';
+import { viewInformationListAll } from '../../tableRenderer/customer/customer.js';
+import { informationType } from '../../tableRenderer/customer/customer.js';
 
 export const renderButtons = () => {
-  initialButtons(BUTTON.TASK.CUSTOMER, customerTaskMapper);
+  initialButtons(BUTTON.TASK.CUSTOMER.HOME, customerTaskMapper);
 };
 
 const showProductListMenu = () => {
   const buttonContainer = document.getElementById("buttonContainer");
   while (buttonContainer.firstChild) buttonContainer.firstChild.remove();
-  initialButtons(BUTTON.TASK.PRODUCT_LIST, productTaskMapper);
+  initialButtons(BUTTON.TASK.CUSTOMER.PRODUCT_LIST, productTaskMapper);
 }
 
-const managementContract = () => {
-  window.location.href = "informationList.html";
-  // 이거 js 파일 기준이 아니라 실행중인 html 파일 기준으로 링크 지정해야 합니다.....!!
-  // 현재 js 파일 밖으로 벗어난다고 ../../../ 해서 들어가면 css가 지정이 안되요
+const managementContract = async () => {
+  viewInformationListById(informationType.MANAGEMENT_CONTRACT);
 }
 
-const viewAccident = () => {
-  window.location.href = "informationList.html";
+const viewAccident = async () => {
+  viewInformationListById(informationType.VIEW_ACCIDENT);
 }
 
-const viewComplaint = () => {
-  window.location.href = "informationList.html";
+const viewComplaint = async () => {
+  viewInformationListById(informationType.VIEW_COMPLAINT);
 }
 
 const customerTaskMapper = {
@@ -33,12 +34,12 @@ const customerTaskMapper = {
   VIEW_COMPLAINT: viewComplaint
 }
 
-const insuranceList = () => {
-  window.location.href = "informationList.html";
+const insuranceList = async () => {
+  viewInformationListAll(informationType.INSURANCE_LIST);
 }
 
-const loanList = () => {
-  window.location.href = "informationList.html";
+const loanList = async () => {
+  viewInformationListAll(informationType.LOAN_LIST);
 }
 
 const productTaskMapper = {
@@ -46,9 +47,8 @@ const productTaskMapper = {
   LOAN_LIST: loanList
 }
 
-export const initialButtons = (buttonMessages, buttonActionMapper) => {
+const initialButtons = (buttonMessages, buttonActionMapper) => {
   const buttonContainer = document.getElementById("buttonContainer");
-
   // 객체의 각 항목을 순회하여 버튼 생성
   Object.entries(buttonMessages).forEach(([key, name]) => {
     const button = document.createElement("div");
