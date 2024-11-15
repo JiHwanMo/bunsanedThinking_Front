@@ -1,6 +1,6 @@
 // buttonManager/customer.js
 // import { fetchGetDatafetchData } from '../../../apiUtils/apiHandler/customer/customer.js';
-import { BUTTON } from '../../../../../config/constants.js';
+import { BUTTON } from '../../../../../config/customer/customer.js';
 import { viewInformationListById } from '../../tableRenderer/customer/customer.js';
 import { viewInformationListAll } from '../../tableRenderer/customer/customer.js';
 import { informationType } from '../../tableRenderer/customer/customer.js';

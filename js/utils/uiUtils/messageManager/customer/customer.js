@@ -1,6 +1,6 @@
 // positionManager/customer.js
 import { fetchGetCustomerById } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { MESSAGES } from '../../../../../config/constants.js';
+import { MESSAGES } from '../../../../../config/common.js';
 
 export const renderGreeting = async () => {
   const container = document.querySelector(".container");
