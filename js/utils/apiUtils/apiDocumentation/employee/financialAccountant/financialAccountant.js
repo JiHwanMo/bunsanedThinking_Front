@@ -7,7 +7,8 @@ import {
   fetchGetPaymentDetailHandler,
   fetchGetAllPaymentDetailHandler,
   fetchGetDepositDetailHandler,
-  fetchHandlePaymentHandler
+  fetchHandlePaymentHandler,
+  fetchGetEmployeeHandler
 } from "../../../apiHandler/employee/financialAccountant/financialAccountant.js";
 
 export const fetchGetContract = async (contractId) => {
@@ -17,6 +18,10 @@ export const fetchGetContract = async (contractId) => {
 export const fetchGetCustomer = async (customerId) => {
   return await fetchGetCustomerHandler(customerId); // 2001
 };
+
+export const fetchGetEmployee = async (employeeId) => {
+  return await fetchGetEmployeeHandler(employeeId);
+}
 
 export const fetchGetAllDepositDetail = async () => {
   return await fetchGetAllDepositDetailHandler();
