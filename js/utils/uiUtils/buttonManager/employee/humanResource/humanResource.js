@@ -25,5 +25,5 @@ const managementEmployee = () => {
 }
 
 const humanResourceTaskMapper = {
-  MANAGEMENT_EMPLOYEE: managementEmployee,
+  MANAGEMENT_EMPLOYEE: managementEmployee
 }

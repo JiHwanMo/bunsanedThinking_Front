@@ -30,5 +30,5 @@ const viewDepositDetail = () => {
 
 const financialAccountantTaskMapper = {
   HANDLE_PAYMENT_DETAIL: handlePaymentDetail,
-  VIEW_DEPOSIT_DETAIL: viewDepositDetail,
+  VIEW_DEPOSIT_DETAIL: viewDepositDetail
 }
