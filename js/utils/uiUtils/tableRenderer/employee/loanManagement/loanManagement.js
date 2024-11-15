@@ -94,7 +94,7 @@ export const renderTable = () => {
 
 const initialTable = () => {
   setTitle();
-  setColoumn();
+  setColumn();
   setTableBody();
 }
 
@@ -104,14 +104,14 @@ const setTitle = () => {
   contextTitle.innerText = currentContext.title;
 }
 
-const setColoumn = () => {
+const setColumn = () => {
   const currentContext = context[sessionStorage.getItem("currentType")];
   const head = document.getElementById('tableHead');
   const columns = document.createElement('tr');
   currentContext.columnList.forEach(item => {
-    const oneColoumn = document.createElement('th');
-    oneColoumn.innerHTML = item;
-    columns.appendChild(oneColoumn);
+    const oneColumn = document.createElement('th');
+    oneColumn.innerHTML = item;
+    columns.appendChild(oneColumn);
   })
   head.appendChild(columns);
 }
