@@ -4,7 +4,8 @@ import { MESSAGES } from '../../../../../config/constants.js';
 
 export const renderGreeting = async () => {
   const container = document.querySelector(".container");
-  const getCustomer = await fetchGetCustomerById(2003);
+  const id = sessionStorage.getItem("id");
+  const getCustomer = await fetchGetCustomerById(id);
   const greetingConstant = MESSAGES.GREETING;
   const greeting = document.createElement("div");
   greeting.className = "greeting";
