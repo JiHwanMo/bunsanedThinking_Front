@@ -1,49 +1,144 @@
-export const MESSAGES = {
-  GREETING: "님 안녕하세요."
-};
-
 export const BUTTON = {
-  COMMON:{
-    OK:'확인',
-    CANCLE:'취소',
-    SEARCH:'검색',
-    POST: '등록',
-    UPDATE: '수정',
-    DELETE: '삭제'
-  },
-
   TASK: {
-    CUSTOMER: {
+    CONTRACT_MANAGEMENT: {
       HOME: {
-        PRODUCT_LIST: '상품 리스트',
-        MANAGEMENT_CONTRACT: '기가입 보험 관리',
-        VIEW_ACCIDENT: '사고 신고',
-        VIEW_COMPLAINT: '민원 신청'
-      },
-      PRODUCT_LIST: {
-        INSURANCE_LIST: '보험 상품 리스트',
-        LOAN_LIST: '대출 상품 리스트'
-      },
-      MANAGEMENT_CONTRACT: {
-        TERMINATION: '해지 신청'
-      },
-    },
-
-    EMPLOYEE: {
-      UNDERWRITING: {
-        HOME: {
-          REVIEW_ACQUISITION: '인수 심사',
-          APPLY_COPERATION: '공동 인수 신청',
-          APPLY_REINSURANCE: '재보험 신청'
-        },
-        APPLY_REINSURANCE:{
-          APPLY_INSURANCE: "보험 신청"
-        }
+        DEFAULT_CONTRACT: '분납/수금 처리',
+        RECONTRACT: '만기 계약 심사',
+        ENDORSEMENT: '배서 심사',
+        REVIVAL: '부활 심사',
+        TERMINATION: '제지급금 지급 요청'
       }
     }
   }
 };
 
 // export const POP_UP = {};
-// export const COMBOBOX = {};
-// export const COLUMN_NAME = {};
+export const COMBOBOX = {
+  DEFAULT_CONTRACT: {},
+  RECONTRACT: {
+    id: "recontractType",
+    optionTypes: [
+      {
+        value: "all",
+        label: "심사상태"
+      },
+      {
+        value: "completed",
+        label: "완료"
+      },
+      {
+        value: "unprocessed",
+        label: "미완료"
+      }
+    ]
+  },
+  ENDORSEMENT: {
+    id: "endorsementType",
+    optionTypes: [
+      {
+        value: "all",
+        label: "심사상태"
+      },
+      {
+        value: "completed",
+        label: "완료"
+      },
+      {
+        value: "unprocessed",
+        label: "미완료"
+      }
+    ]
+  },
+  REVIVAL: {
+    id: "revivalType",
+    optionTypes: [
+      {
+        value: "all",
+        label: "심사상태"
+      },
+      {
+        value: "completed",
+        label: "완료"
+      },
+      {
+        value: "unprocessed",
+        label: "미완료"
+      }
+    ]
+  },
+  TERMINATION: {
+    id: "terminationType",
+    optionTypes: [
+      {
+        value: "all",
+        label: "접수상태"
+      },
+      {
+        value: "completed",
+        label: "완료"
+      },
+      {
+        value: "unprocessed",
+        label: "미완료"
+      }
+    ]
+  }
+};
+export const TABLE_TITLE = {
+  DEFAULT_CONTRACT: "납부 대상 정보 리스트",
+  RECONTRACT: "만기 대상 정보 리스트",
+  ENDORSEMENT: "배서 신청 처리 정보 리스트",
+  REVIVAL: "부활 대상 정보 리스트",
+  TERMINATION: "해지 정보 리스트"
+};
+export const COLUMN_NAME = {
+  DEFAULT_CONTRACT: [
+    "이름",
+    "전화번호",
+    "성별",
+    "주민등록번호",
+    "주소",
+    "상품 번호",
+    "납부 날짜"
+  ],
+  RECONTRACT: [
+    "이름",
+    "전화번호",
+    "성별",
+    "주민등록번호",
+    "주소",
+    "상품 번호",
+    "만기 날짜",
+    "심사 상태"
+  ],
+  ENDORSEMENT: [
+    "이름",
+    "전화번호",
+    "성별",
+    "주민등록번호",
+    "주소",
+    "상품 번호",
+    "신청 날짜",
+    "심사 상태"
+  ],
+  REVIVAL: [
+    "이름",
+    "전화번호",
+    "성별",
+    "주민등록번호",
+    "주소",
+    "상품 번호",
+    "정지 날짜",
+    "심사 상태"
+  ],
+  TERMINATION: [
+    "이름",
+    "전화번호",
+    "성별",
+    "주민등록번호",
+    "주소",
+    "상품 번호",
+    "해지 날짜",
+    "접수 상태"
+  ]
+};

@@ -1,49 +1,72 @@
-export const MESSAGES = {
-  GREETING: "님 안녕하세요."
-};
-
 export const BUTTON = {
-  COMMON:{
-    OK:'확인',
-    CANCLE:'취소',
-    SEARCH:'검색',
-    POST: '등록',
-    UPDATE: '수정',
-    DELETE: '삭제'
-  },
-
   TASK: {
-    CUSTOMER: {
+    COMPENSATION: {
       HOME: {
-        PRODUCT_LIST: '상품 리스트',
-        MANAGEMENT_CONTRACT: '기가입 보험 관리',
-        VIEW_ACCIDENT: '사고 신고',
-        VIEW_COMPLAINT: '민원 신청'
+        REQUEST_COMPENSATION: '보상 지급 요청',
+        REQUEST_INSURANCE_MONEY: '보험금 지급 요청'
       },
-      PRODUCT_LIST: {
-        INSURANCE_LIST: '보험 상품 리스트',
-        LOAN_LIST: '대출 상품 리스트'
-      },
-      MANAGEMENT_CONTRACT: {
-        TERMINATION: '해지 신청'
-      },
-    },
-
-    EMPLOYEE: {
-      UNDERWRITING: {
-        HOME: {
-          REVIEW_ACQUISITION: '인수 심사',
-          APPLY_COPERATION: '공동 인수 신청',
-          APPLY_REINSURANCE: '재보험 신청'
-        },
-        APPLY_REINSURANCE:{
-          APPLY_INSURANCE: "보험 신청"
-        }
-      }
     }
   }
 };
 
 // export const POP_UP = {};
-// export const COMBOBOX = {};
-// export const COLUMN_NAME = {};
+export const COMBOBOX = {
+  REQUEST_COMPENSATION: {
+    id: "reportType",
+    optionTypes: [
+      {
+        value: "all",
+        label: "접수상태"
+      },
+      {
+        value: "completed",
+        label: "완료"
+      },
+      {
+        value: "unprocessed",
+        label: "미완료"
+      }
+    ]
+  },
+  REQUEST_INSURANCE_MONEY: {
+    id: "insuranceMoneyType",
+    optionTypes: [
+      {
+        value: "all",
+        label: "처리상태"
+      },
+      {
+        value: "completed",
+        label: "완료"
+      },
+      {
+        value: "unprocessed",
+        label: "미완료"
+      }
+    ]
+  }
+};
+export const TABLE_TITLE = {
+  REQUEST_COMPENSATION: "사고 정보 리스트",
+  REQUEST_INSURANCE_MONEY: "보험금 신청 정보 리스트"
+};
+export const COLUMN_NAME = {
+  REQUEST_COMPENSATION: [
+    "사고 번호",
+    "서비스 종류",
+    "사고 날짜",
+    "사고 시간",
+    "사고 위치",
+    "이름",
+    "전화번호",
+    "처리 상태",
+    "접수 상태"
+  ],
+  REQUEST_INSURANCE_MONEY: [
+    "신청 번호",
+    "계약 상품 종류",
+    "신청 날짜",
+    "고객 이름",
+    "처리 상태"
+  ]
+};
