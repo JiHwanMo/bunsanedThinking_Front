@@ -18,8 +18,8 @@ export const fetchInduceLoanProductHandler = async (induceInsuranceProductDTO) =
   return await fetchPostHandler(`${defaultUrl}/induceLoanProduct` ,induceInsuranceProductDTO);
 }
 
-export const fetchGetAllEmployeeHandler = async () => {
-  return await fetchGetHandler(`${defaultUrl}/getAllEmployee`);
+export const fetchGetAllSalesHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllSales`);
 }
 
 export const fetchGetEmployeeHandler = async (id) => {
@@ -38,8 +38,12 @@ export const fetchGetCounselHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getCounsel?id=${id}`);
 }
 
-export const fetchGetAllProductHandler = async () => {
-  return await fetchGetHandler(`${defaultUrl}/getAllProduct`);
+export const fetchGetAllInsuranceProductHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllInsuranceProduct`);
+}
+
+export const fetchGetAllLoanProductHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllLoanProduct`);
 }
 
 export const fetchAddDiseaseHistoryHandler = async (induceDiseaseHistoryDTO) => {

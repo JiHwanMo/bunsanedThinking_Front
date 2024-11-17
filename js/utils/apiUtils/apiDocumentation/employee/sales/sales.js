@@ -2,12 +2,12 @@ import { fetchEvaluateSalesPerformanceHandler } from '../../../apiHandler/employ
 import { fetchHandleInsuranceConsultationHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchInduceInsuranceProductHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchInduceLoanProductHandler } from '../../../apiHandler/employee/sales/sales.js';
-import { fetchGetAllEmployeeHandler } from '../../../apiHandler/employee/sales/sales.js';
+import { fetchGetAllSalesHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetEmployeeHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetSalesHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetAllCounselHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetCounselHandler } from '../../../apiHandler/employee/sales/sales.js';
-import { fetchGetAllProductHandler } from '../../../apiHandler/employee/sales/sales.js';
+import { fetchGetAllInsuranceProductHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchAddDiseaseHistoryHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchUpdateContractCountHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetAllDiseaseInsuranceHandler } from '../../../apiHandler/employee/sales/sales.js';
@@ -18,6 +18,7 @@ import { fetchGetAllFixedDepositLoanHandler } from '../../../apiHandler/employee
 import { fetchGetAllInsuranceContractLoanHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetSalesContractCountHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchSetContractCountHandler } from '../../../apiHandler/employee/sales/sales.js';
+import { fetchGetAllLoanProductHandler } from '../../../apiHandler/employee/sales/sales.js';
 
 export const fetchEvaluateSalesPerformance = async (evaluate, id) => {
   return await fetchEvaluateSalesPerformanceHandler(evaluate, id);
@@ -39,8 +40,8 @@ export const fetchGetAllEmployee = async () => {
   return await fetchGetAllEmployeeHandler();
 }
 
-export const fetchGetEmployee = async (id) => {
-  return await fetchGetEmployeeHandler(id);
+export const fetchGetAllSales = async (id) => {
+  return await fetchGetAllSalesHandler(id);
 }
 
 export const fetchGetSales = async (id) => {
@@ -55,8 +56,12 @@ export const fetchGetCounsel = async (id) => {
   return await fetchGetCounselHandler(id);
 }
 
-export const fetchGetAllProduct = async () => {
-  return await fetchGetAllProductHandler();
+export const fetchGetAllInsuranceProduct = async () => {
+  return await fetchGetAllInsuranceProductHandler();
+}
+
+export const fetchGetAllLoanProduct = async () => {
+  return await fetchGetAllLoanProductHandler();
 }
 
 export const fetchAddDiseaseHistory = async (induceDiseaseHistoryDTO) => {

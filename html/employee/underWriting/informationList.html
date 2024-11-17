@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information List</title>
+  <link rel="stylesheet" href="../../../css/informationList.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="header-line"></div>
+
+  <div class="search-container">
+    <select id="insuranceType" class="combo-box">
+      <option value="all">보험종류</option>
+      <option value="health">건강보험</option>
+      <option value="car">자동차보험</option>
+      <option value="life">생명보험</option>
+    </select>
+    <input type="text" id="searchInput" placeholder="검색어 입력">
+    <button id="searchButton">검색</button>
+  </div>
+
+  <div class="table-container">
+    <h3 id="title"></h3>
+    <table>
+      <thead id="tableHead">
+      </thead>
+      <tbody id="list">
+      <!-- JavaScript로 추가되는 레코드 -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script type="module">
+  import { renderGreeting } from '../../../js/utils/uiUtils/messageManager/employee/underWriting/underWriting.js';
+  import { renderTable } from '../../../js/utils/uiUtils/tableRenderer/employee/underWriting/underWriting.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderGreeting();
+    renderTable();
+  });
+</script>
+</body>
+</html>
