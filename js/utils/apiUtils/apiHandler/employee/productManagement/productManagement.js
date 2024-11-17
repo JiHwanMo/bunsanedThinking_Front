@@ -31,7 +31,7 @@ export const fetchUpdateInjuryInsuranceHandler = async (index, input, id) => {
 }
 
 export const fetchUpdateAutomobileInsuranceHandler = async (index, input, id, serviceTypeList) => {
-  return await fetchPatchWithParams(`${defaultUrl}/updateAutomobileInsurance?index=${index}&input=${input}&id=${id}`);
+  return await fetchPatchWithBody(`${defaultUrl}/updateAutomobileInsurance?index=${index}&input=${input}&id=${id}`, serviceTypeList);
 }
 
 export const fetchGetAllHandler = async () => {
