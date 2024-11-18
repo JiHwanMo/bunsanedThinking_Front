@@ -14,5 +14,8 @@ export const BUTTON = {
 };
 
 // export const POP_UP = {};
-// export const COMBOBOX = {};
+export const COMBOBOX = {
+  LOAN_TYPES: "대출 종류",
+  INSURANCE_TYPES: "보험 종류"
+};
 // export const COLUMN_NAME = {};

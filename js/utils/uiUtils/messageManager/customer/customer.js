@@ -1,4 +1,3 @@
-// positionManager/customer.js
 import { fetchGetCustomerById } from '../../../apiUtils/apiDocumentation/customer/customer.js';
 import { MESSAGES } from '../../../../../config/common.js';
 

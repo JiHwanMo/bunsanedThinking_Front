@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Information List</title>
-  <link rel="stylesheet" href="../../css/informationList.css">
+  <link rel="stylesheet" href="../../../css/informationList.css">
 </head>
 <body>
 
@@ -12,6 +12,14 @@
   <div class="header-line"></div>
 
   <div class="search-container">
+    <select id="insuranceType" class="combo-box">
+      <option value="all">보험종류</option>
+      <option value="health">건강보험</option>
+      <option value="car">자동차보험</option>
+      <option value="life">생명보험</option>
+    </select>
+    <input type="text" id="searchInput" placeholder="검색어 입력">
+    <button id="searchButton">검색</button>
   </div>
 
   <div class="table-container">
@@ -27,8 +35,8 @@
 </div>
 
 <script type="module">
-  import { renderGreeting } from '../../js/utils/uiUtils/messageManager/customer/customer.js';
-  import { renderTable } from '../../js/utils/uiUtils/tableRenderer/customer/customer.js';
+  import { renderGreeting } from '../../../js/utils/uiUtils/messageManager/employee/sales/sales.js';
+  import { renderTable } from '../../../js/utils/uiUtils/tableRenderer/employee/sales/sales.js';
 
   document.addEventListener("DOMContentLoaded", () => {
     renderGreeting();
