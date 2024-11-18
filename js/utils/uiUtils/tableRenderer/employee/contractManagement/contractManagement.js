@@ -17,27 +17,66 @@ export const informationType = {
 }
 // 행 만드는 로직은 서버를 수정해야해서 일단 보류
 const contractRow = (dto) => {
-  alert(dto.contractStatus);
-  return ``;
+  return `
+    <td>${dto.customerID} 이름</td>
+    <td>${dto.customerID} 폰번호</td>
+    <td>${dto.customerID} 성별</td>
+    <td>${dto.customerID} 주민번호</td>
+    <td>${dto.customerID} 주소</td>
+    <td>${dto.productId}</td>
+    <td>${dto.paymentDate} - 맞나유</td>
+  `;
 }
 
 const recontractRow = (dto) => {
-  alert(dto.recontractStatus);
-  return ``;
+  return `
+    <td>${dto.customerID} 이름</td>
+    <td>${dto.customerID} 폰번호</td>
+    <td>${dto.customerID} 성별</td>
+    <td>${dto.customerID} 주민번호</td>
+    <td>${dto.customerID} 주소</td>
+    <td>${dto.productId}</td>
+    <td>날?짜</td>
+    <td>${dto.recontractStatus}</td>
+  `;
 }
 
 const endorsementRow = (dto) => {
-  alert(dto.endorsementStatus);
-  return ``;
+  return `
+    <td>${dto.customerID} 이름</td>
+    <td>${dto.customerID} 폰번호</td>
+    <td>${dto.customerID} 성별</td>
+    <td>${dto.customerID} 주민번호</td>
+    <td>${dto.customerID} 주소</td>
+    <td>${dto.productId}</td>
+    <td>${dto.applyDate}</td>
+    <td>${dto.endorsementStatus}</td>
+  `;
 }
 const revivalRow = (dto) => {
-  alert(dto.revivalStatus);
-  return ``;
+  return `
+    <td>${dto.customerID} 이름</td>
+    <td>${dto.customerID} 폰번호</td>
+    <td>${dto.customerID} 성별</td>
+    <td>${dto.customerID} 주민번호</td>
+    <td>${dto.customerID} 주소</td>
+    <td>${dto.productId}</td>
+    <td>${dto.applyDate} - 맞나유</td>
+    <td>${dto.revivalStatus}</td>
+  `;
 }
 
 const terminationRow = (dto) => {
-  alert(dto.terminationFee);
-  return ``;
+  return `
+    <td>${dto.customerID} 이름</td>
+    <td>${dto.customerID} 폰번호</td>
+    <td>${dto.customerID} 성별</td>
+    <td>${dto.customerID} 주민번호</td>
+    <td>${dto.customerID} 주소</td>
+    <td>${dto.productId}</td>
+    <td>${dto.applyDate} - 맞나유</td>
+    <td>${dto.terminationStatus}</td>
+  `;
 }
 
 const context = {

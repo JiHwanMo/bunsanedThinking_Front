@@ -28,11 +28,27 @@ export const informationType = {
 //   전화번호(accident.customerPhoneNumber)
 // )
 const accidentRow = (dto) => {
-  return ``;
+  return `
+    <td>${dto.id}</td>
+    <td>${dto.accident.serviceType}</td>
+    <td>${dto.accident.date}</td>
+    <td>몰?루</td>
+    <td>${dto.accident.location}</td>
+    <td>${dto.accident.customerName}</td>
+    <td>${dto.accident.customerPhoneNumber}</td>
+    <td>${dto.accident.processStatus}</td>
+    <td>${dto.processStatus}</td>
+  `;
 }
 
 const insuranceMoneyRow = (dto) => {
-  return ``;
+  return `
+    <td>${dto.id}</td>
+    <td>${dto.contractID} - 계상</td>
+    <td>${dto.applyDate}</td>
+    <td>${dto.contractID} - 고이</td>
+    <td>${dto.processStatus}</td>
+  `;
 }
 
 const context = {

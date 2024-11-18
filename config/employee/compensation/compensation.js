@@ -45,11 +45,11 @@ export const COMBOBOX = {
       }
     ]
   }
-};
+}
 export const TABLE_TITLE = {
   REQUEST_COMPENSATION: "사고 정보 리스트",
   REQUEST_INSURANCE_MONEY: "보험금 신청 정보 리스트"
-};
+}
 export const COLUMN_NAME = {
   REQUEST_COMPENSATION: [
     "사고 번호",

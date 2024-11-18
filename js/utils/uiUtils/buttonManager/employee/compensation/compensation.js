@@ -4,7 +4,7 @@ import { informationType } from '../../../tableRenderer/employee/compensation/co
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.COMPENSATION.HOME, compensationTaskMapper);
-};
+}
 
 const viewRequestCompensation = () => {
   viewInformationList(informationType.REQUEST_COMPENSATION);
