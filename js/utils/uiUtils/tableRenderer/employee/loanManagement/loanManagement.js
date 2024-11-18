@@ -2,6 +2,8 @@ import {
   fetchGetAll,
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js"
 import { fetchGetAllLoanRequest } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js"
+import { setLoanRequestTableBody, setLoanRequestSearchBar } from "./loanRequest.js";
+import { setLoanTableBody, setLoanSearchBar } from "./managementLoan.js";
 
 export const informationType = {
   MANAGEMENT_LOAN_PRODUCT: "MANAGEMENT_LOAN_PRODUCT",
@@ -15,7 +17,6 @@ const loanRow = (loan) => {
     <td>${loan.id}</td>
     <td>${loan.interestRate}</td>
     <td>${loan.maximumMoney}</td>
-    <td></td>
   `;
 }
 
@@ -38,7 +39,6 @@ const loanRequestRow = (dto) => {
     <td>${dto.loan.interestRate}</td>
     <td>${dto.loan.maximumMoney}</td>
     <td>${dto.contract.contractStatus}</td>
-    <td></td>
   `;
 }
 
@@ -47,6 +47,8 @@ const context = {
     title : "대출 상품 정보 리스트",
     listFetch: fetchGetAll,
     rowGetter: loanRow,
+    tableSetter: setLoanTableBody,
+    searchBarSetter: setLoanSearchBar,
     columnList: [
       "대출 상품 이름",
       "대출 종류",
@@ -59,6 +61,8 @@ const context = {
     title : "보험 상품 정보 리스트",
     listFetch: fetchGetAllLoanRequest,
     rowGetter: loanRequestRow,
+    tableSetter: setLoanRequestTableBody,
+    searchBarSetter: setLoanRequestSearchBar,
     columnList: [
       "계약 번호",
       "고객 이름",
@@ -94,6 +98,7 @@ export const renderTable = () => {
 
 const initialTable = () => {
   setTitle();
+  setSearchBar();
   setColumn();
   setTableBody();
 }
@@ -116,29 +121,11 @@ const setColumn = () => {
   head.appendChild(columns);
 }
 
+const setSearchBar = () => {
+  context[sessionStorage.getItem("currentType")].searchBarSetter();
+}
+
 const setTableBody = () => {
-  const tableBody = document.getElementById('list');
   const type = sessionStorage.getItem("currentType");
-  const data = JSON.parse(sessionStorage.getItem("list"));
-  data.forEach(item => {
-    const row = document.createElement("tr");
-    row.innerHTML = context[type].rowGetter(item);
-    // 각 행에 클릭 이벤트 추가
-    row.addEventListener("click", () => {
-      if (selectedRow) {
-        selectedRow.classList.remove("selected");
-      }
-      row.classList.add("selected");
-      selectedRow = row;
-    });
-
-    // 더블 클릭 시 상세 페이지로 이동
-    row.addEventListener("dblclick", () => {
-      // 상세 정보를 세션에 저장
-      sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
-      window.location.href = "detail.html";
-    });
-
-    tableBody.appendChild(row);
-  });
+  context[type].tableSetter(context[type].rowGetter);
 }

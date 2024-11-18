@@ -12,5 +12,23 @@ export const BUTTON = {
 };
 
 // export const POP_UP = {};
-// export const COMBOBOX = {};
+export const COMBOBOX = {
+  LOAN_REQUEST: {
+    id: "processStatus",
+    optionTypes: [
+      {
+        value: "all",
+        label: "처리상태"
+      },
+      {
+        value: "completed",
+        label: "처리완료"
+      },
+      {
+        value: "unprocessed",
+        label: "미처리"
+      }
+    ]
+  }
+};
 // export const COLUMN_NAME = {};
