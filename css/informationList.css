@@ -9,7 +9,8 @@ body {
 }
 
 .container {
-  width: 400px;
+  width: 90%; /* 테이블 컨테이너의 너비를 화면의 90%로 확대 */
+  max-width: 1200px; /* 최대 너비 제한 */
   background-color: #ffffff;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -68,18 +69,21 @@ body {
 }
 
 table {
-  width: 100%;
+  width: 100%; /* 테이블이 컨테이너의 전체 너비를 사용 */
   border-collapse: collapse;
   text-align: center;
+  font-size: 14px; /* 글자 크기를 약간 줄임 */
 }
 
 th, td {
   border: 1px solid #333;
   padding: 8px;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 }
 
 th {
   background-color: #f0f0f0;
+  font-size: 14px; /* 헤더의 글자 크기를 약간 줄임 */
 }
 
 table tr {

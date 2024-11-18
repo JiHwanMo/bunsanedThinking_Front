@@ -165,8 +165,8 @@ export const fetchUpdateCustomerInformation = async (updateCustomerInformationDT
 export const fetchGetAllCustomerInformation = async () => {
   return await fetchGetAllCustomerInformationHandler();
 }
-// (async () => {
-//   const data = await fetchGetAllCustomerInformation();
-//   // console.log(data);
-//   console.log(JSON.stringify(data, null, 2)); // console.log(data); 를 했을 때 생략된걸 보고 싶을 때 사용
-// })();
+(async () => {
+  const data = await fetchGetAllCustomerInformation();
+  // console.log(data);
+  console.log(JSON.stringify(data, null, 2)); // console.log(data); 를 했을 때 생략된걸 보고 싶을 때 사용
+})();
