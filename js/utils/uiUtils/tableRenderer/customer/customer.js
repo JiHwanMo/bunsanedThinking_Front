@@ -1,5 +1,11 @@
 import { fetchGetAllInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllDiseaseInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllInjuryInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllAutomobileInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllCollateralLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllFixedDepositLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllInsuranceContractLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllContractByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllAccidentByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllComplaintsByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
@@ -74,30 +80,55 @@ const complaintRow = (dto) => {
 }
 
 const context = {
-  INSURANCE_LIST: {
-    isCombo: true,
-    listFetch: fetchGetAllInsurance,
-    rowGetter: insuranceRow
-  },
-  LOAN_LIST: {
-    isCombo: true,
-    listFetch: fetchGetAllLoan,
-    rowGetter: loanRow
-  },
   MANAGEMENT_CONTRACT: {
-    isCombo: true,
     listFetch: fetchGetAllContractByCustomerId,
-    rowGetter: contractRow
+    rowGetter: contractRow,
+    comboListFetch: {
+      all: () => {
+        return null;
+      },
+      disease: () => {
+        return null;
+      },
+      automobile: () => {
+        return null;
+      },
+      injury: () => {
+        return null;
+      }
+    }
+    // 콤보박스는 있는데 아이디 받는 부분이 뭔가 이상해서 일단 이렇게
   },
   VIEW_ACCIDENT: {
-    isCombo: false,
     listFetch: fetchGetAllAccidentByCustomerId,
-    rowGetter: accidentRow
+    rowGetter: accidentRow,
+    comboListFetch: {}
+    // 콤보박스가 없어서 비워둠
   },
   VIEW_COMPLAINT: {
-    isCombo: true,
     listFetch: fetchGetAllComplaintsByCustomerId,
-    rowGetter: complaintRow
+    rowGetter: complaintRow,
+    comboListFetch: {}
+  },
+  INSURANCE_LIST: {
+    listFetch: fetchGetAllInsurance,
+    rowGetter: insuranceRow,
+    comboListFetch: {
+      all: fetchGetAllInsurance,
+      disease: fetchGetAllDiseaseInsurance,
+      automobile: fetchGetAllAutomobileInsurance,
+      injury: fetchGetAllInjuryInsurance
+    }
+  },
+  LOAN_LIST: {
+    listFetch: fetchGetAllLoan,
+    rowGetter: loanRow,
+    comboListFetch: {
+      all: fetchGetAllLoan,
+      collateral: fetchGetAllCollateralLoan,
+      fixedDeposit: fetchGetAllFixedDepositLoan,
+      insuranceContract: fetchGetAllInsuranceContractLoan
+    }
   }
 }
 
@@ -113,7 +144,6 @@ export const viewInformationListById = async (fetchType) => {
   // 현재 js 파일 밖으로 벗어난다고 ../../../ 해서 들어가면 css가 지정이 안되요
 }
 export const viewInformationListAll = async (fetchType) => {
-  // const list = await fetchType();
   sessionStorage.setItem("currentType", fetchType);
   const list = await context[fetchType].listFetch();
   sessionStorage.setItem("list", JSON.stringify(list));
@@ -129,9 +159,19 @@ const setTitle = () => {
   const contextTitle = document.getElementById("title");
   contextTitle.innerText = title;
 }
+
+const setPost = () => {
+  const post = document.createElement("div");
+  post.id = "post";
+  post.className = "post-button";
+  post.textContent = BUTTON.COMMON.POST;
+  return post;
+}
+
 const setComboBox = () => {
   const select = document.createElement("select");
-  const boxContext = COMBOBOX[sessionStorage.getItem("currentType")];
+  const type = sessionStorage.getItem("currentType");
+  const boxContext = COMBOBOX[type];
   if (Object.keys(boxContext).length == 0) return null;
   select.id = boxContext.id;
   select.className = "comboBox";
@@ -143,17 +183,6 @@ const setComboBox = () => {
     select.appendChild(option);
   });
   return select;
-}
-
-const setPost = () => {
-  const post = document.createElement("div");
-  post.id = "post";
-  post.className = "post-button";
-  post.textContent = BUTTON.COMMON.POST;
-  post.addEventListener("click", () => {
-    alert("버튼 눌림 - POST");
-  });
-  return post;
 }
 
 const setInput = () => {
@@ -171,12 +200,26 @@ const setButton = () => {
   return button;
 }
 
+const initTableBySelect = async (id, type) => { // 추가
+  const select = document.getElementById(id);
+  const selectedOption = select.options[select.selectedIndex];
+  const list = await context[type].comboListFetch[selectedOption.value]();
+  if (list != null)  sessionStorage.setItem("list", JSON.stringify(list));
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  setTableBody();
+}
+
 const setSearchBar = () => {
   const container = document.querySelector(".search-container");
   const type = sessionStorage.getItem("currentType");
-
-  const select = context[type].isCombo ? setComboBox() : setPost();
-  if (select != null) container.appendChild(select);
+  const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
+  if (select != null) { // 추가
+    container.appendChild(select);
+    if (select.id == "post")
+      post.addEventListener("click", () => alert("버튼 눌림 - POST")); // 수정
+    else select.onchange = () => initTableBySelect(select.id, type); // 추가
+  }
   container.appendChild(setInput());
   container.appendChild(setButton());
 }

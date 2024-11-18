@@ -12,6 +12,7 @@ export const BUTTON = {
 // export const POP_UP = {};
 export const COMBOBOX = {
   REQUEST_COMPENSATION: {
+    isCombo: true,
     id: "reportType",
     optionTypes: [
       {
@@ -29,6 +30,7 @@ export const COMBOBOX = {
     ]
   },
   REQUEST_INSURANCE_MONEY: {
+    isCombo: true,
     id: "insuranceMoneyType",
     optionTypes: [
       {

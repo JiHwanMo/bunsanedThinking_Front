@@ -1,8 +1,16 @@
 import { fetchGetAllDefaultContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetAllUnprocessedReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetAllProcessedReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetAllUnprocessedEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetAllProcessedEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllRevivalContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetAllUnprocessedRevival } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetAllProcessedRevival } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetAllUnprocessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetAllProcessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { BUTTON } from '../../../../../../config/common.js';
 import { COMBOBOX } from '../../../../../../config/employee/contractManagement/contractManagement.js';
 import { TABLE_TITLE } from '../../../../../../config/employee/contractManagement/contractManagement.js';
@@ -82,23 +90,45 @@ const terminationRow = (dto) => {
 const context = {
   DEFAULT_CONTRACT: {
     listFetch: fetchGetAllDefaultContract,
-    rowGetter: contractRow
+    rowGetter: contractRow,
+    comboListFetch: {}
+    // 얜 없어서 비워둠
   },
   RECONTRACT: {
     listFetch: fetchGetAllReContract,
-    rowGetter: recontractRow
+    rowGetter: recontractRow,
+    comboListFetch: {
+      all: fetchGetAllReContract,
+      completed: fetchGetAllProcessedReContract,
+      unprocessed: fetchGetAllUnprocessedReContract
+    }
   },
   ENDORSEMENT: {
     listFetch: fetchGetAllEndorsementContract,
-    rowGetter: endorsementRow
+    rowGetter: endorsementRow,
+    comboListFetch: {
+      all: fetchGetAllEndorsementContract,
+      completed: fetchGetAllProcessedEndorsementContract,
+      unprocessed: fetchGetAllUnprocessedEndorsementContract
+    }
   },
   REVIVAL: {
     listFetch: fetchGetAllRevivalContract,
-    rowGetter: revivalRow
+    rowGetter: revivalRow,
+    comboListFetch: {
+      all: fetchGetAllRevivalContract,
+      completed: fetchGetAllProcessedRevival,
+      unprocessed: fetchGetAllUnprocessedRevival
+    }
   },
   TERMINATION: {
     listFetch: fetchGetAllTerminatingContract,
-    rowGetter: terminationRow
+    rowGetter: terminationRow,
+    comboListFetch: {
+      all: fetchGetAllTerminatingContract,
+      completed: fetchGetAllProcessedTerminatingContract,
+      unprocessed: fetchGetAllUnprocessedTerminatingContract
+    }
   }
 }
 
@@ -122,7 +152,6 @@ const setTitle = () => {
 const setComboBox = () => {
   const select = document.createElement("select");
   const boxContext = COMBOBOX[sessionStorage.getItem("currentType")];
-  if (Object.keys(boxContext).length == 0) return null;
   select.id = boxContext.id;
   select.className = "combo-Box";
   const optionTypes = boxContext.optionTypes;
@@ -150,12 +179,24 @@ const setButton = () => {
   return button;
 }
 
+const initTableBySelect = async (id, type) => { // 추가
+  const select = document.getElementById(id);
+  const selectedOption = select.options[select.selectedIndex];
+  const list = await context[type].comboListFetch[selectedOption.value]();
+  if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  setTableBody();
+}
+
 const setSearchBar = () => {
   const container = document.querySelector(".search-container");
   const type = sessionStorage.getItem("currentType");
-
-  const select = setComboBox();
-  if (select != null) container.appendChild(select);
+  if (COMBOBOX[type].isCombo) { // 수정
+    const select = setComboBox();
+    container.appendChild(select); // 수정
+    select.onchange = () => initTableBySelect(select.id, type); // 추가
+  }
   container.appendChild(setInput());
   container.appendChild(setButton());
 }
