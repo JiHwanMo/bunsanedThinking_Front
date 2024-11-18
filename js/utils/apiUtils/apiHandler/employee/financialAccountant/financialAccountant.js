@@ -10,6 +10,10 @@ export const fetchGetCustomerHandler = async (customerId) => {
   return await fetchGetHandler(`${defaultURL}/getCustomer?customerId=${customerId}`);
 };
 
+export const fetchGetEmployeeHandler = async (employeeId) => {
+  return await fetchGetHandler(`${defaultURL}/getEmployee?employeeId=${employeeId}`);
+}
+
 export const fetchGetAllDepositDetailHandler = async () => {
   return await fetchGetHandler(`${defaultURL}/getAllDepositDetail`);
 };

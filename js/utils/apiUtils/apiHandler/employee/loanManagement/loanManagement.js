@@ -6,9 +6,25 @@ export const fetchGetAllHandler = async () => {
   return await fetchGetHandler(`${defaultURL}/getAll`);
 };
 
+export const fetchGetLoanProductHandler = async (loanId) => {
+  return await fetchGetHandler(`${defaultURL}/getLoan?id=${loanId}`);
+}
+
 export const fetchGetOutcomeHandler = async (contractId) => {
   return await fetchGetHandler(`${defaultURL}/getOutcome?contractId=${contractId}`);
 };
+
+export const fetchGetAllLoanRequestHandler = async () => {
+  return await fetchGetHandler(`${defaultURL}/getAllLoanRequest`);
+}
+
+export const fetchGetLoanRequestHandler = async (contractId) => {
+  return await fetchGetHandler(`${defaultURL}/getLoanRequest?contractId=${contractId}`);
+}
+
+export const fetchGetEmployeeHandler = async (employeeId) => {
+  return await fetchGetHandler(`${defaultURL}/getEmployee?employeeId=${employeeId}`);
+}
 
 export const fetchAddCollateralProductHandler = async (loanType, name, interestRate, maximumMoney, minimumAsset, collateralType, minimumValue, monthlyIncome) => {
   return await fetchPostHandler(`${defaultURL}/addCollateralProduct`,
