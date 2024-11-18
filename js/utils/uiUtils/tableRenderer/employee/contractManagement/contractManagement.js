@@ -18,36 +18,36 @@ export const informationType = {
 // 행 만드는 로직은 서버를 수정해야해서 일단 보류
 const contractRow = (dto) => {
   return `
-    <td>${dto.customerID} 이름</td>
-    <td>${dto.customerID} 폰번호</td>
-    <td>${dto.customerID} 성별</td>
-    <td>${dto.customerID} 주민번호</td>
-    <td>${dto.customerID} 주소</td>
+    <td>${dto.customerInfoResponse.name}</td>
+    <td>${dto.customerInfoResponse.phoneNumber}</td>
+    <td>${dto.customerInfoResponse.gender}</td>
+    <td>${dto.customerInfoResponse.residentRegistrationNumber}</td>
+    <td>${dto.customerInfoResponse.address}</td>
     <td>${dto.productId}</td>
-    <td>${dto.paymentDate} - 맞나유</td>
+    <td>${dto.lastPaidDate}</td>
   `;
 }
 
 const recontractRow = (dto) => {
   return `
-    <td>${dto.customerID} 이름</td>
-    <td>${dto.customerID} 폰번호</td>
-    <td>${dto.customerID} 성별</td>
-    <td>${dto.customerID} 주민번호</td>
-    <td>${dto.customerID} 주소</td>
+    <td>${dto.customerInfoResponse.name}</td>
+    <td>${dto.customerInfoResponse.phoneNumber}</td>
+    <td>${dto.customerInfoResponse.gender}</td>
+    <td>${dto.customerInfoResponse.residentRegistrationNumber}</td>
+    <td>${dto.customerInfoResponse.address}</td>
     <td>${dto.productId}</td>
-    <td>날?짜</td>
-    <td>${dto.recontractStatus}</td>
+    <td>${dto.expirationDate}</td>
+    <td>${dto.reContractStatus}</td>
   `;
 }
 
 const endorsementRow = (dto) => {
   return `
-    <td>${dto.customerID} 이름</td>
-    <td>${dto.customerID} 폰번호</td>
-    <td>${dto.customerID} 성별</td>
-    <td>${dto.customerID} 주민번호</td>
-    <td>${dto.customerID} 주소</td>
+    <td>${dto.customerInfoResponse.name}</td>
+    <td>${dto.customerInfoResponse.phoneNumber}</td>
+    <td>${dto.customerInfoResponse.gender}</td>
+    <td>${dto.customerInfoResponse.residentRegistrationNumber}</td>
+    <td>${dto.customerInfoResponse.address}</td>
     <td>${dto.productId}</td>
     <td>${dto.applyDate}</td>
     <td>${dto.endorsementStatus}</td>
@@ -55,26 +55,26 @@ const endorsementRow = (dto) => {
 }
 const revivalRow = (dto) => {
   return `
-    <td>${dto.customerID} 이름</td>
-    <td>${dto.customerID} 폰번호</td>
-    <td>${dto.customerID} 성별</td>
-    <td>${dto.customerID} 주민번호</td>
-    <td>${dto.customerID} 주소</td>
+    <td>${dto.customerInfoResponse.name}</td>
+    <td>${dto.customerInfoResponse.phoneNumber}</td>
+    <td>${dto.customerInfoResponse.gender}</td>
+    <td>${dto.customerInfoResponse.residentRegistrationNumber}</td>
+    <td>${dto.customerInfoResponse.address}</td>
     <td>${dto.productId}</td>
-    <td>${dto.applyDate} - 맞나유</td>
+    <td>${dto.terminationDate}</td>
     <td>${dto.revivalStatus}</td>
   `;
 }
 
 const terminationRow = (dto) => {
   return `
-    <td>${dto.customerID} 이름</td>
-    <td>${dto.customerID} 폰번호</td>
-    <td>${dto.customerID} 성별</td>
-    <td>${dto.customerID} 주민번호</td>
-    <td>${dto.customerID} 주소</td>
+    <td>${dto.customerInfoResponse.name}</td>
+    <td>${dto.customerInfoResponse.phoneNumber}</td>
+    <td>${dto.customerInfoResponse.gender}</td>
+    <td>${dto.customerInfoResponse.residentRegistrationNumber}</td>
+    <td>${dto.customerInfoResponse.address}</td>
     <td>${dto.productId}</td>
-    <td>${dto.applyDate} - 맞나유</td>
+    <td>${dto.applyDate}</td>
     <td>${dto.terminationStatus}</td>
   `;
 }

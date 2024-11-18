@@ -24,11 +24,11 @@ export const COMBOBOX = {
       },
       {
         value: "completed",
-        label: "완료"
+        label: "처리완료"
       },
       {
         value: "unprocessed",
-        label: "미완료"
+        label: "미처리"
       }
     ]
   },
@@ -41,11 +41,11 @@ export const COMBOBOX = {
       },
       {
         value: "completed",
-        label: "완료"
+        label: "처리완료"
       },
       {
         value: "unprocessed",
-        label: "미완료"
+        label: "미처리"
       }
     ]
   },
@@ -58,11 +58,11 @@ export const COMBOBOX = {
       },
       {
         value: "completed",
-        label: "완료"
+        label: "처리완료"
       },
       {
         value: "unprocessed",
-        label: "미완료"
+        label: "미처리"
       }
     ]
   },
@@ -75,11 +75,11 @@ export const COMBOBOX = {
       },
       {
         value: "completed",
-        label: "완료"
+        label: "처리완료"
       },
       {
         value: "unprocessed",
-        label: "미완료"
+        label: "미처리"
       }
     ]
   }
