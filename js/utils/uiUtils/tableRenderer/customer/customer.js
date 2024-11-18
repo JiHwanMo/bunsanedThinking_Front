@@ -34,22 +34,20 @@ const loanRow = (dto) => {
     <td>${dto.id}</td>
     <td>${dto.interestRate}</td>
     <td>${dto.maximumMoney}</td>
-    <td>모르것심다</td>
   `;
 }
 
-// 앤 서버 수정해야 함
 const contractRow = (dto) => {
   return `
-    <td>${dto.productId} - 이름</td>
-    <td>${dto.productId} - 종류</td>
-    <td>${dto.productId}</td>
-    <td>연령?대</td>
-    <td>보험?료</td>
+    <td>${dto.name}</td>
+    <td>${dto.type}</td>
+    <td>${dto.insuranceId}</td>
+    <td>${dto.ageRange}</td>
+    <td>${dto.monthlyPremium}</td>
     <td>${dto.expirationDate}</td>
     <td>${dto.date}</td>
     <td>${dto.paymentDate}</td>
-    <td>${dto.contractStatus}</td>
+    <td>${dto.status}</td>
   `;
 }
 
@@ -66,13 +64,12 @@ const accidentRow = (dto) => {
 
 const complaintRow = (dto) => {
   return `
-    <td>${dto.complaintType}</td>
+    <td>${dto.type}</td>
     <td>${dto.id}</td>
     <td>${dto.title}</td>
     <td>${dto.postDate}</td>
-    <td>시?간</td>
     <td>${dto.processingDate}</td>
-    <td>${dto.processStatus}</td>
+    <td>${dto.status}</td>
   `;
 }
 

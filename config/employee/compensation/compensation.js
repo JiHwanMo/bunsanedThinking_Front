@@ -37,11 +37,11 @@ export const COMBOBOX = {
       },
       {
         value: "completed",
-        label: "완료"
+        label: "처리완료"
       },
       {
         value: "unprocessed",
-        label: "미완료"
+        label: "미처리"
       }
     ]
   }
@@ -55,12 +55,12 @@ export const COLUMN_NAME = {
     "사고 번호",
     "서비스 종류",
     "사고 날짜",
-    "사고 시간",
     "사고 위치",
     "이름",
     "전화번호",
     "처리 상태",
-    "접수 상태"
+    "접수 상태",
+    "손해 사정 금액"
   ],
   REQUEST_INSURANCE_MONEY: [
     "신청 번호",

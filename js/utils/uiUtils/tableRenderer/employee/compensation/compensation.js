@@ -12,11 +12,12 @@ export const informationType = {
 
 // 사고 정보 리스트 (
 //   신고처리 정보,
-//   접수 상태(accident.processStatus)
+//   처리 상태(processStatus),
+//   손해 사정 금액(damageAssessmentMoney)
 // ),
 // 신고처리 정보 (
 //   사고 신고 정보,
-//   처리 상태(processStatus)
+//   접수 상태(accident.processStatus)
 // ),
 // 사고 신고 정보 (
 //   사고 번호(accident.id),
@@ -30,24 +31,24 @@ export const informationType = {
 const accidentRow = (dto) => {
   return `
     <td>${dto.id}</td>
-    <td>${dto.accident.serviceType}</td>
-    <td>${dto.accident.date}</td>
-    <td>몰?루</td>
-    <td>${dto.accident.location}</td>
-    <td>${dto.accident.customerName}</td>
-    <td>${dto.accident.customerPhoneNumber}</td>
-    <td>${dto.accident.processStatus}</td>
+    <td>${dto.serviceType}</td>
+    <td>${dto.date}</td>
+    <td>${dto.location}</td>
+    <td>${dto.customerName}</td>
+    <td>${dto.customerPhoneNumber}</td>
+    <td>${dto.accidentProcessStatus}</td>
     <td>${dto.processStatus}</td>
+    <td>${dto.damageAssessmentMoney}</td>
   `;
 }
 
 const insuranceMoneyRow = (dto) => {
   return `
     <td>${dto.id}</td>
-    <td>${dto.contractID} - 계상</td>
-    <td>${dto.applyDate}</td>
-    <td>${dto.contractID} - 고이</td>
-    <td>${dto.processStatus}</td>
+    <td>${dto.productType}</td>
+    <td>${dto.date}</td>
+    <td>${dto.customerName}</td>
+    <td>${dto.status}</td>
   `;
 }
 
