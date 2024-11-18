@@ -57,12 +57,6 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
     button.textContent = name; // 버튼에 표시할 텍스트 설정
 
     button.addEventListener("click", buttonActionMapper[key]);
-
-    // buttonActionMapper[PRODUCT_LIST] -> showProductListMenu
-    // buttonActionMapper[MANAGEMENT_CONTRACT] -> managementContract
-    // buttonActionMapper[VIEW_ACCIDENT] -> viewAccident
-    // buttonActionMapper[VIEW_COMPLAINT] -> viewComplaint
-
     buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
   });
 }

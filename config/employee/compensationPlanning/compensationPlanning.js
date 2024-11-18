@@ -1,44 +1,9 @@
-export const MESSAGES = {
-  GREETING: "님 안녕하세요."
-};
-
 export const BUTTON = {
-  COMMON:{
-    OK:'확인',
-    CANCLE:'취소',
-    SEARCH:'검색',
-    POST: '등록',
-    UPDATE: '수정',
-    DELETE: '삭제'
-  },
-
   TASK: {
-    CUSTOMER: {
+    COMPENSATIONPLANNING: {
       HOME: {
-        PRODUCT_LIST: '상품 리스트',
-        MANAGEMENT_CONTRACT: '기가입 보험 관리',
-        VIEW_ACCIDENT: '사고 신고',
-        VIEW_COMPLAINT: '민원 신청'
-      },
-      PRODUCT_LIST: {
-        INSURANCE_LIST: '보험 상품 리스트',
-        LOAN_LIST: '대출 상품 리스트'
-      },
-      MANAGEMENT_CONTRACT: {
-        TERMINATION: '해지 신청'
-      },
-    },
-
-    EMPLOYEE: {
-      UNDERWRITING: {
-        HOME: {
-          REVIEW_ACQUISITION: '인수 심사',
-          APPLY_COPERATION: '공동 인수 신청',
-          APPLY_REINSURANCE: '재보험 신청'
-        },
-        APPLY_REINSURANCE:{
-          APPLY_INSURANCE: "보험 신청"
-        }
+        EVALUATE_PARTNERCOMPANY: '협력업체 평가',
+        MANAGEMENT_PARTNERCOMPANY: '협력업체 관리'
       }
     }
   }
@@ -46,4 +11,21 @@ export const BUTTON = {
 
 // export const POP_UP = {};
 // export const COMBOBOX = {};
-// export const COLUMN_NAME = {};
+export const TABLE_TITLE = {
+  EVALUATE_PARTNERCOMPANY: "협력업체 정보 리스트",
+  MANAGEMENT_PARTNERCOMPANY: "협력업체 정보 리스트"
+}
+export const COLUMN_NAME = {
+  EVALUATE_PARTNERCOMPANY: [
+    "협력업체 번호",
+    "협력업체 이름",
+    "협력업체 종류",
+    "협력업체 전화번호"
+  ],
+  MANAGEMENT_PARTNERCOMPANY: [
+    "협력업체 번호",
+    "협력업체 이름",
+    "협력업체 종류",
+    "협력업체 전화번호"
+  ]
+};
