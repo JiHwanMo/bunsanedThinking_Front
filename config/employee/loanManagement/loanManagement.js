@@ -1,3 +1,5 @@
+import {BUTTON as COMMON_BUTTON} from "../../../config/common.js"
+
 export const BUTTON = {
   TASK: {
     EMPLOYEE: {
@@ -5,6 +7,15 @@ export const BUTTON = {
         HOME: {
           MANAGEMENT_LOAN_PRODUCT: '대출 상품 관리',
           LOAN_REQUEST: '대출금 요청'
+        },
+        MANAGEMENT_LOAN_PRODUCT: {
+          EDIT: COMMON_BUTTON.COMMON.UPDATE,
+          DELETE: COMMON_BUTTON.COMMON.DELETE
+        },
+        LOAN_REQUEST: {
+          REQUEST: '요청',
+          DENIED: '거절',
+          CANCEL: COMMON_BUTTON.COMMON.CANCEL
         }
       }
     }
