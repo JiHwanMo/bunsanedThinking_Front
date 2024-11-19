@@ -1,5 +1,9 @@
 import { fetchGetAllReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
+import { fetchGetAllUnprocessedReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
+import { fetchGetAllCompletedReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import { fetchGetAllInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
+import { fetchGetAllUnprocessedInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
+import { fetchGetAllProcessedInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import { BUTTON } from '../../../../../../config/common.js';
 import { COMBOBOX } from '../../../../../../config/employee/compensation/compensation.js';
 import { TABLE_TITLE } from '../../../../../../config/employee/compensation/compensation.js';
@@ -55,11 +59,21 @@ const insuranceMoneyRow = (dto) => {
 const context = {
   REQUEST_COMPENSATION: {
     listFetch: fetchGetAllReport,
-    rowGetter: accidentRow
+    rowGetter: accidentRow,
+    comboListFetch: {
+      all: fetchGetAllReport,
+      completed: fetchGetAllCompletedReport,
+      unprocessed: fetchGetAllUnprocessedReport
+    }
   },
   REQUEST_INSURANCE_MONEY: {
     listFetch: fetchGetAllInsuranceMoney,
-    rowGetter: insuranceMoneyRow
+    rowGetter: insuranceMoneyRow,
+    comboListFetch: {
+      all: fetchGetAllInsuranceMoney,
+      completed: fetchGetAllProcessedInsuranceMoney,
+      unprocessed: fetchGetAllUnprocessedInsuranceMoney
+    }
   }
 }
 
@@ -83,7 +97,6 @@ const setTitle = () => {
 const setComboBox = () => {
   const select = document.createElement("select");
   const boxContext = COMBOBOX[sessionStorage.getItem("currentType")];
-  if (Object.keys(boxContext).length == 0) return null;
   select.id = boxContext.id;
   select.className = "combo-Box";
   const optionTypes = boxContext.optionTypes;
@@ -111,12 +124,25 @@ const setButton = () => {
   return button;
 }
 
+const initTableBySelect = async (id, type) => { // 추가
+  const select = document.getElementById(id);
+  const selectedOption = select.options[select.selectedIndex];
+  const list = await context[type].comboListFetch[selectedOption.value]();
+  if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  setTableBody();
+}
+
 const setSearchBar = () => {
   const container = document.querySelector(".search-container");
   const type = sessionStorage.getItem("currentType");
 
-  const select = setComboBox();
-  if (select != null) container.appendChild(select);
+  if (COMBOBOX[type].isCombo) { // 수정
+    const select = setComboBox();
+    container.appendChild(select); // 수정
+    select.onchange = () => initTableBySelect(select.id, type); // 추가
+  }
   container.appendChild(setInput());
   container.appendChild(setButton());
 }
