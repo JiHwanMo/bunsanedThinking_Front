@@ -14,9 +14,9 @@ const reviewAcquisitionRow = (dto) => {
     <td>${dto.age}</td>
     <td>${dto.gender}</td>
     <td>${dto.residentRegistrationNumber}</td>
+    <td>${dto.address}</td>
     <td>${dto.productId}</td>
     <td>${dto.contractStatus}</td>
-    <td></td>
   `;
 }
 
