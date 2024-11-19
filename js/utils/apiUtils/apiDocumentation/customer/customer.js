@@ -9,11 +9,13 @@ import { fetchGetAllDiseaseInsuranceHandler } from '../../apiHandler/customer/cu
 import { fetchGetAllInjuryInsuranceHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllAutomobileInsuranceHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetInsuranceByProductIdHandler } from '../../apiHandler/customer/customer.js';
+import { fetchGetInsuranceRowByProductIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllLoanHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllCollateralLoanHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllFixedDepositLoanHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllInsuranceContractLoanHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetLoanByProductIdHandler } from '../../apiHandler/customer/customer.js';
+import { fetchGetLoanRowByProductIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllApprovedByCustomerHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllContractByCustomerIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllAutomobileInsuranceContractHandler } from '../../apiHandler/customer/customer.js';
@@ -21,11 +23,14 @@ import { fetchGetAllInjuryInsuranceContractHandler } from '../../apiHandler/cust
 import { fetchGetAllDiseaseInsuranceContractHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllContractByProductIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetContractByIdHandler } from '../../apiHandler/customer/customer.js';
+import { fetchGetContractRowByIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetContractByOneAutomobileIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllAccidentByCustomerIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAccidentByIdHandler } from '../../apiHandler/customer/customer.js';
+import { fetchGetAccidentRowByIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetAllComplaintsByCustomerIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchGetComplaintByIdHandler } from '../../apiHandler/customer/customer.js';
+import { fetchGetComplaintRowByIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchSignUpHandler } from '../../apiHandler/customer/customer.js';
 import { fetchAskInsuranceCounselHandler } from '../../apiHandler/customer/customer.js';
 import { fetchBuyInsuranceHandler } from '../../apiHandler/customer/customer.js';
@@ -107,6 +112,10 @@ export const fetchGetInsuranceByProductId = async (id) => {
   return await fetchGetInsuranceByProductIdHandler(id);
 }
 
+export const fetchGetInsuranceRowByProductId = async (id) => {
+  return await fetchGetInsuranceRowByProductIdHandler(id);
+}
+
 export const fetchGetAllLoan = async () => {
   return await fetchGetAllLoanHandler();
 }
@@ -125,6 +134,10 @@ export const fetchGetAllInsuranceContractLoan = async () => {
 
 export const fetchGetLoanByProductId = async (id) => {
   return await fetchGetLoanByProductIdHandler(id);
+}
+
+export const fetchGetLoanRowByProductId = async (id) => {
+  return await fetchGetLoanRowByProductIdHandler(id);
 }
 
 export const fetchGetAllApprovedByCustomer = async () => {
@@ -155,6 +168,10 @@ export const fetchGetContractById = async (id) => {
   return await fetchGetContractByIdHandler(id);
 }
 
+export const fetchGetContractRowById = async (id) => {
+  return await fetchGetContractRowByIdHandler(id);
+}
+
 export const fetchGetContractByOneAutomobileId = async (id) => {
   // 이거 파라미터 고객아이디랍니닼ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ productId 아님 주의
   return await fetchGetContractByOneAutomobileIdHandler(id);
@@ -168,12 +185,20 @@ export const fetchGetAccidentById = async (id) => {
   return await fetchGetAccidentByIdHandler(id);
 }
 
+export const fetchGetAccidentRowById = async (id) => {
+  return await fetchGetAccidentRowByIdHandler(id);
+}
+
 export const fetchGetAllComplaintsByCustomerId = async (id) => {
   return await fetchGetAllComplaintsByCustomerIdHandler(id);
 }
 
 export const fetchGetComplaintById = async (id) => {
   return await fetchGetComplaintByIdHandler(id);
+}
+
+export const fetchGetComplaintRowById = async (id) => {
+  return await fetchGetComplaintRowByIdHandler(id);
 }
 
 export const fetchSignUp = async (signUpDTO) => {

@@ -1,14 +1,19 @@
 import { fetchGetAllInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetInsuranceRowByProductId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllDiseaseInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllInjuryInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllAutomobileInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetLoanRowByProductId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllCollateralLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllFixedDepositLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllInsuranceContractLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllContractByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetContractRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllAccidentByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAccidentRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllComplaintsByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetComplaintRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { timeStampFormatter } from '../../../../../js/utils/TimeStampFormatter.js';
 import { BUTTON } from '../../../../../config/common.js';
 import { COMBOBOX } from '../../../../../config/customer/customer.js';
@@ -82,6 +87,7 @@ const complaintRow = (dto) => {
 const context = {
   MANAGEMENT_CONTRACT: {
     listFetch: fetchGetAllContractByCustomerId,
+    listFetchById: fetchGetContractRowById,
     rowGetter: contractRow,
     comboListFetch: {
       all: () => {
@@ -101,17 +107,20 @@ const context = {
   },
   VIEW_ACCIDENT: {
     listFetch: fetchGetAllAccidentByCustomerId,
+    listFetchById: fetchGetAccidentRowById,
     rowGetter: accidentRow,
     comboListFetch: {}
     // 콤보박스가 없어서 비워둠
   },
   VIEW_COMPLAINT: {
     listFetch: fetchGetAllComplaintsByCustomerId,
+    listFetchById: fetchGetComplaintRowById,
     rowGetter: complaintRow,
     comboListFetch: {}
   },
   INSURANCE_LIST: {
     listFetch: fetchGetAllInsurance,
+    listFetchById: fetchGetInsuranceRowByProductId,
     rowGetter: insuranceRow,
     comboListFetch: {
       all: fetchGetAllInsurance,
@@ -122,6 +131,7 @@ const context = {
   },
   LOAN_LIST: {
     listFetch: fetchGetAllLoan,
+    listFetchById: fetchGetLoanRowByProductId,
     rowGetter: loanRow,
     comboListFetch: {
       all: fetchGetAllLoan,
@@ -172,7 +182,7 @@ const setComboBox = () => {
   const select = document.createElement("select");
   const type = sessionStorage.getItem("currentType");
   const boxContext = COMBOBOX[type];
-  if (Object.keys(boxContext).length == 0) return null;
+  if (!boxContext[isCombo]) return null;
   select.id = boxContext.id;
   select.className = "comboBox";
   const optionTypes = boxContext.optionTypes;
@@ -193,10 +203,28 @@ const setInput = () => {
   return input;
 }
 
+const initTableByInput = async (id, type) => { // 추가
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  if (id.length > 0) {
+    const item = await context[type].listFetchById(id);
+    setOneRow(item, type);
+  } else {
+    const list = await context[type].comboListFetch["all"]();
+    if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+    setTableBody();
+  }
+}
+
 const setButton = () => {
   const button = document.createElement("button");
   button.id = "searchButton";
   button.textContent = BUTTON.COMMON.SEARCH;
+  const type = sessionStorage.getItem("currentType");
+  button.addEventListener("click", () => {
+    const value = document.getElementById("searchInput").value;
+    initTableByInput(value, type);
+  })
   return button;
 }
 
@@ -223,7 +251,7 @@ const setSearchBar = () => {
   container.appendChild(setInput());
   container.appendChild(setButton());
 }
-const setColoumn = () => {
+const setColumn = () => {
   const columnList = COLUMN_NAME[sessionStorage.getItem("currentType")];
   const head = document.getElementById('tableHead');
   const columns = document.createElement('tr');
@@ -235,36 +263,39 @@ const setColoumn = () => {
   head.appendChild(columns);
 }
 
+const setOneRow = (item, type) => {
+  const tableBody = document.getElementById('list');
+  const row = document.createElement("tr");
+  row.innerHTML = context[type].rowGetter(item);
+  // 각 행에 클릭 이벤트 추가
+  // row.addEventListener("click", () => {
+  //   if (selectedRow) {
+  //     selectedRow.classList.remove("selected");
+  //   }
+  //   row.classList.add("selected");
+  //   selectedRow = row;
+  // });
+
+  // 더블 클릭 시 상세 페이지로 이동
+  // row.addEventListener("dblclick", () => {
+  //   // 상세 정보를 세션에 저장
+  //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
+  //   window.location.href = "detail.html";
+  // });
+
+  tableBody.appendChild(row);
+}
+
 const setTableBody = () => {
   const tableBody = document.getElementById('list');
   const type = sessionStorage.getItem("currentType");
   const data = JSON.parse(sessionStorage.getItem("list"));
-  data.forEach(item => {
-    const row = document.createElement("tr");
-    row.innerHTML = context[type].rowGetter(item);
-    // 각 행에 클릭 이벤트 추가
-    // row.addEventListener("click", () => {
-    //   if (selectedRow) {
-    //     selectedRow.classList.remove("selected");
-    //   }
-    //   row.classList.add("selected");
-    //   selectedRow = row;
-    // });
-
-    // 더블 클릭 시 상세 페이지로 이동
-    // row.addEventListener("dblclick", () => {
-    //   // 상세 정보를 세션에 저장
-    //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
-    //   window.location.href = "detail.html";
-    // });
-
-    tableBody.appendChild(row);
-  });
+  data.forEach(item => setOneRow(item, type));
 }
 
 const initialTable = () => {
   setTitle();
   setSearchBar();
-  setColoumn();
+  setColumn();
   setTableBody();
 }
