@@ -21,6 +21,7 @@ export const BUTTON = {
 // export const POP_UP = {};
 export const COMBOBOX = {
   MANAGEMENT_CONTRACT: {
+    isCombo: true,
     id: "insuranceType",
     optionTypes: [
       {
@@ -41,25 +42,14 @@ export const COMBOBOX = {
       }
     ]
   },
-  VIEW_ACCIDENT: {},
+  VIEW_ACCIDENT: {
+    isCombo: false
+  },
   VIEW_COMPLAINT: {
-    id: "complaintType",
-    optionTypes: [
-      {
-        value: "all",
-        label: "처리상태"
-      },
-      {
-        value: "completed",
-        label: "완료"
-      },
-      {
-        value: "unprocessed",
-        label: "미완료"
-      }
-    ]
+    isCombo: false
   },
   INSURANCE_LIST: {
+    isCombo: true,
     id: "insuranceType",
     optionTypes: [
       {
@@ -81,6 +71,7 @@ export const COMBOBOX = {
     ]
   },
   LOAN_LIST: {
+    isCombo: true,
     id: "loanType",
     optionTypes: [
       {

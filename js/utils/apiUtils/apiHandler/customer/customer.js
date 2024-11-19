@@ -46,6 +46,10 @@ export const fetchGetInsuranceByProductIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getInsuranceByProductId?id=${id}`);
 }
 
+export const fetchGetInsuranceRowByProductIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getInsuranceRowByProductId?id=${id}`);
+}
+
 export const fetchGetAllLoanHandler = async () => {
   return await fetchGetHandler(`${defaultUrl}/getAllLoan`);
 }
@@ -64,6 +68,10 @@ export const fetchGetAllInsuranceContractLoanHandler = async () => {
 
 export const fetchGetLoanByProductIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getLoanByProductId?id=${id}`);
+}
+
+export const fetchGetLoanRowByProductIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getLoanRowByProductId?id=${id}`);
 }
 
 export const fetchGetAllApprovedByCustomerHandler = async () => {
@@ -94,6 +102,10 @@ export const fetchGetContractByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getContractById?id=${id}`);
 }
 
+export const fetchGetContractRowByIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getContractRowById?id=${id}`);
+}
+
 export const fetchGetContractByOneAutomobileIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getContractByOneAutomobileId?id=${id}`);
 }
@@ -106,6 +118,10 @@ export const fetchGetAccidentByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getAccidentById?id=${id}`);
 }
 
+export const fetchGetAccidentRowByIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getAccidentRowById?id=${id}`);
+}
+
 export const fetchGetAllComplaintsByCustomerIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getAllComplaintsByCustomerId?id=${id}`);
 }
@@ -114,7 +130,9 @@ export const fetchGetComplaintByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getComplaintById?id=${id}`);
 }
 
-
+export const fetchGetComplaintRowByIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getComplaintRowById?id=${id}`);
+}
 
 export const fetchSignUpHandler = async (signUpDTO) => {
   return await fetchPostHandler(`${defaultUrl}/signUp`, signUpDTO);

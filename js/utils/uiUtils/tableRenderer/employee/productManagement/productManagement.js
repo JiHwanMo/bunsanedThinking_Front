@@ -11,7 +11,6 @@ const manageInsuranceProductRow = (dto) => {
     <td>${dto.id}</td>
     <td>${dto.ageRange}</td>
     <td>${dto.monthlyPremium}</td>
-    <td></td>
   `;
 }
 
@@ -19,7 +18,6 @@ const context = {
   MANAGE_INSURANCE_PRODUCT: {
     title : "보험 상품 정보 리스트",
     listFetch: fetchGetAll,
-    listCombineResourceFetch: null,
     rowGetter: manageInsuranceProductRow,
     columnList: [
       "보험 상품 이름",
@@ -33,37 +31,10 @@ const context = {
 
 export const viewInformationListAll = async (fetchType) => {
   sessionStorage.setItem("currentType", fetchType);
-
   let list = await context[fetchType].listFetch();
-
-  if (context[fetchType].listCombineResourceFetch != null) {
-    list = await listCombine(list, fetchType);
-  }
-
   sessionStorage.setItem("list", JSON.stringify(list));
-
   window.location.href = "informationList.html";
 };
-
-export const listCombine = async (list, fetchType) => {
-  if (context[fetchType].listCombineResourceFetch.length == 1) {
-    let combineResourceList = [];
-    for (const e of list) {
-      //이부분 추상화 추천 받습니다
-      const combineResource = await context[fetchType].listCombineResourceFetch(e.customerID);
-      //
-      combineResourceList.push(combineResource);
-    }
-    return list.map((item, index) => {
-      return { ...item, ...combineResourceList[index] };
-    });
-  } else {
-    const combineResourceList = await context[fetchType].listCombineFetch();
-    return list.map((item, index) => {
-      return { ...item, ...combineResourceList[index] };
-    });
-  }
-}
 
 export const renderTable = () => {
   initialTable();

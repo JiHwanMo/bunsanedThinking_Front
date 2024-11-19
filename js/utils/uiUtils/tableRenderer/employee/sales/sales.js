@@ -14,21 +14,18 @@ const evaluateSalesPerformanceRow = (dto) => {
     <td>${dto.name}</td>
     <td>${dto.position}</td>
     <td>${dto.contractCount}</td>
-    <td></td>
   `;
 }
 
 // 보험 상담 처리 정보 리스트(상담 고객 정보(고객 이름, 전화번호, 날짜, 성별), 상담 번호, 처리 상태)
 const handleInsuranceConsultationRow = (dto) => {
-  const formattedDate = timeStampFormatter(dto.counselDate);
   return `
     <td>${dto.name}</td>
     <td>${dto.phoneNumber}</td>
-    <td>${formattedDate}</td>
+    <td>${dto.counselDate}</td>
     <td>${dto.gender}</td>
     <td>${dto.id}</td>
     <td>${dto.processStatus}</td>
-    <td></td>
   `;
 }
 
@@ -39,7 +36,6 @@ const induceInsuranceProductRow = (dto) => {
     <td>${dto.id}</td>
     <td>${dto.ageRange}</td>
     <td>${dto.monthlyPremium}</td>
-    <td></td>
   `;
 }
 
@@ -50,7 +46,6 @@ const induceLoanProductRow = (dto) => {
     <td>${dto.id}</td>
     <td>${dto.interestRate}</td>
     <td>${dto.maximumMoney}</td>
-    <td></td>
   `;
 }
 
@@ -58,7 +53,6 @@ const context = {
   HANDLE_INSURANCE_CONSULTATION: {
     title : "보험 상담 처리 정보 리스트",
     listFetch: fetchGetAllCounsel,
-    listCombineResourceFetch: null,
     rowGetter: handleInsuranceConsultationRow,
     columnList: [
       "고객 이름",
@@ -72,7 +66,6 @@ const context = {
   EVALUATE_SALES_PERFORMANCE: {
     title : "영업 직원 정보 리스트",
     listFetch: fetchGetAllSales,
-    listCombineResourceFetch: null,
     rowGetter: evaluateSalesPerformanceRow,
     columnList: [
       "직원 정보",
@@ -84,7 +77,6 @@ const context = {
   INDUCE_INSURANCE_PRODUCT: {
     title : "보험 상품 정보 리스트",
     listFetch: fetchGetAllInsuranceProduct,
-    listCombineResourceFetch: null,
     rowGetter: induceInsuranceProductRow,
     columnList: [
       "보험 상품 이름",
@@ -97,52 +89,23 @@ const context = {
   INDUCE_LOAN_PRODUCT: {
     title : "대출 상품 정보 리스트",
     listFetch: fetchGetAllLoanProduct,
-    listCombineResourceFetch: null,
     rowGetter: induceLoanProductRow,
     columnList: [
       "대출 상품 이름",
       "대출 상품 종류",
       "대출 상품 번호",
       "이자율",
-      "대출가능 최대 금액",
-      "대출 상태"
+      "대출가능 최대 금액"
     ]
   }
 }
 
 export const viewInformationListAll = async (fetchType) => {
   sessionStorage.setItem("currentType", fetchType);
-
   let list = await context[fetchType].listFetch();
-
-  if (context[fetchType].listCombineResourceFetch != null) {
-    list = await listCombine(list, fetchType);
-  }
-
   sessionStorage.setItem("list", JSON.stringify(list));
-
   window.location.href = "informationList.html";
 };
-
-export const listCombine = async (list, fetchType) => {
-  if (context[fetchType].listCombineResourceFetch.length == 1) {
-    let combineResourceList = [];
-    for (const e of list) {
-      //이부분 추상화 추천 받습니다
-      const combineResource = await context[fetchType].listCombineResourceFetch(e.customerID);
-      //
-      combineResourceList.push(combineResource);
-    }
-    return list.map((item, index) => {
-      return { ...item, ...combineResourceList[index] };
-    });
-  } else {
-    const combineResourceList = await context[fetchType].listCombineFetch();
-    return list.map((item, index) => {
-      return { ...item, ...combineResourceList[index] };
-    });
-  }
-}
 
 export const renderTable = () => {
   initialTable();
