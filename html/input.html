@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>보험 상품 입력</title>
+  <link rel="stylesheet" href="../css/input.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="info-container">
+    <h3>보험 상품 입력</h3>
+
+    <!-- 보험 번호 및 보험 종류 표시 -->
+    <div class="form-group">
+      <label>보험 번호</label>
+      <p id="insuranceNumber">123456789</p> <!-- 예시 값 -->
+    </div>
+    <div class="form-group">
+      <label>보험 종류</label>
+      <p id="insuranceTypeText">생명보험</p> <!-- 예시 값 -->
+    </div>
+
+    <!-- 보험 상품 상세 정보 입력란 -->
+    <form id="insuranceInputForm">
+      <div class="form-group">
+        <label for="insuranceName">보험 상품 이름</label>
+        <input type="text" id="insuranceName" name="insuranceName" placeholder="보험 상품 이름을 입력하세요" required>
+      </div>
+      <div class="form-group">
+        <label for="ageRange">연령대</label>
+        <input type="text" id="ageRange" name="ageRange" placeholder="연령대를 입력하세요 (예: 20~30세)" required>
+      </div>
+      <div class="form-group">
+        <label for="coverage">보장 내용</label>
+        <textarea id="coverage" name="coverage" rows="4" placeholder="보장 내용을 입력하세요" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="monthlyPremium">월 보험료</label>
+        <input type="number" id="monthlyPremium" name="monthlyPremium" placeholder="월 보험료를 입력하세요" required>
+      </div>
+      <div class="form-group">
+        <label for="contractPeriod">계약 기간 (년)</label>
+        <input type="number" id="contractPeriod" name="contractPeriod" placeholder="계약 기간을 입력하세요" required>
+      </div>
+
+      <!-- 상해 보험 상품 상세 정보 입력란 -->
+      <div class="form-group">
+        <label for="injuryType">상해 종류</label>
+        <input type="text" id="injuryType" name="injuryType" placeholder="상해 종류를 입력하세요" required>
+      </div>
+      <div class="form-group">
+        <label for="surgeriesLimit">최대 수술 횟수</label>
+        <input type="number" id="surgeriesLimit" name="surgeriesLimit" placeholder="최대 수술 횟수를 입력하세요" required>
+      </div>
+    </form>
+  </div>
+
+  <!-- 버튼 컨테이너 -->
+  <div class="button-container">
+    <button id="saveButton" type="submit" form="insuranceInputForm">수정</button>
+    <button id="cancelButton" type="button">취소</button>
+  </div>
+</div>
+
+<script src="../js/input.js"></script>
+</body>
+</html>
