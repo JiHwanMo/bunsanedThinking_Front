@@ -22,7 +22,7 @@ export const BUTTON = {
 export const COMBOBOX = {
   MANAGEMENT_CONTRACT: {
     isCombo: true,
-    id: "insuranceType",
+    id: "contractType",
     optionTypes: [
       {
         value: "all",

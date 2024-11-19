@@ -89,6 +89,7 @@ const context = {
     listFetch: fetchGetAllContractByCustomerId,
     listFetchById: fetchGetContractRowById,
     rowGetter: contractRow,
+    needCustomerId: true,
     comboListFetch: {
       all: () => {
         return null;
@@ -109,19 +110,26 @@ const context = {
     listFetch: fetchGetAllAccidentByCustomerId,
     listFetchById: fetchGetAccidentRowById,
     rowGetter: accidentRow,
-    comboListFetch: {}
+    needCustomerId: true,
+    comboListFetch: {
+      all: fetchGetAllAccidentByCustomerId
+    }
     // 콤보박스가 없어서 비워둠
   },
   VIEW_COMPLAINT: {
     listFetch: fetchGetAllComplaintsByCustomerId,
     listFetchById: fetchGetComplaintRowById,
     rowGetter: complaintRow,
-    comboListFetch: {}
+    needCustomerId: true,
+    comboListFetch: {
+      all: fetchGetAllComplaintsByCustomerId
+    }
   },
   INSURANCE_LIST: {
     listFetch: fetchGetAllInsurance,
     listFetchById: fetchGetInsuranceRowByProductId,
     rowGetter: insuranceRow,
+    needCustomerId: false,
     comboListFetch: {
       all: fetchGetAllInsurance,
       disease: fetchGetAllDiseaseInsurance,
@@ -133,6 +141,7 @@ const context = {
     listFetch: fetchGetAllLoan,
     listFetchById: fetchGetLoanRowByProductId,
     rowGetter: loanRow,
+    needCustomerId: false,
     comboListFetch: {
       all: fetchGetAllLoan,
       collateral: fetchGetAllCollateralLoan,
@@ -182,7 +191,6 @@ const setComboBox = () => {
   const select = document.createElement("select");
   const type = sessionStorage.getItem("currentType");
   const boxContext = COMBOBOX[type];
-  console.log(JSON.stringify(boxContext));
   if (!boxContext.isCombo) return null;
   select.id = boxContext.id;
   select.className = "comboBox";
@@ -211,7 +219,9 @@ const initTableByInput = async (id, type) => { // 추가
     const item = await context[type].listFetchById(id);
     setOneRow(item, type);
   } else {
-    const list = await context[type].comboListFetch["all"]();
+    const list = context[type].needCustomerId ?
+      await context[type].comboListFetch["all"](sessionStorage.getItem("id")) :
+      await context[type].comboListFetch["all"]();
     if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
     setTableBody();
   }
@@ -225,6 +235,8 @@ const setButton = () => {
   button.addEventListener("click", () => {
     const value = document.getElementById("searchInput").value;
     initTableByInput(value, type);
+    const select = document.getElementById(COMBOBOX[type].id);
+    if (select != null) select.selectedIndex = 0;
   })
   return button;
 }
@@ -233,7 +245,9 @@ const initTableBySelect = async (id, type) => { // 추가
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
   const list = await context[type].comboListFetch[selectedOption.value]();
-  if (list != null)  sessionStorage.setItem("list", JSON.stringify(list));
+  if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+  const input = document.getElementById("searchInput");
+  if (input != null) input.value = "";
   const tableBody = document.getElementById('list');
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   setTableBody();
@@ -288,7 +302,6 @@ const setOneRow = (item, type) => {
 }
 
 const setTableBody = () => {
-  const tableBody = document.getElementById('list');
   const type = sessionStorage.getItem("currentType");
   const data = JSON.parse(sessionStorage.getItem("list"));
   data.forEach(item => setOneRow(item, type));
