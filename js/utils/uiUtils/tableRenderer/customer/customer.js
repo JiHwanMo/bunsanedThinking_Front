@@ -1,8 +1,19 @@
 import { fetchGetAllInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetInsuranceRowByProductId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllDiseaseInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllInjuryInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllAutomobileInsurance } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetLoanRowByProductId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllCollateralLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllFixedDepositLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllInsuranceContractLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllContractByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetContractRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllAccidentByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAccidentRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllComplaintsByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetComplaintRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { timeStampFormatter } from '../../../../../js/utils/TimeStampFormatter.js';
 import { BUTTON } from '../../../../../config/common.js';
 import { COMBOBOX } from '../../../../../config/customer/customer.js';
@@ -74,30 +85,60 @@ const complaintRow = (dto) => {
 }
 
 const context = {
-  INSURANCE_LIST: {
-    isCombo: true,
-    listFetch: fetchGetAllInsurance,
-    rowGetter: insuranceRow
-  },
-  LOAN_LIST: {
-    isCombo: true,
-    listFetch: fetchGetAllLoan,
-    rowGetter: loanRow
-  },
   MANAGEMENT_CONTRACT: {
-    isCombo: true,
     listFetch: fetchGetAllContractByCustomerId,
-    rowGetter: contractRow
+    listFetchById: fetchGetContractRowById,
+    rowGetter: contractRow,
+    comboListFetch: {
+      all: () => {
+        return null;
+      },
+      disease: () => {
+        return null;
+      },
+      automobile: () => {
+        return null;
+      },
+      injury: () => {
+        return null;
+      }
+    }
+    // 콤보박스는 있는데 아이디 받는 부분이 뭔가 이상해서 일단 이렇게
   },
   VIEW_ACCIDENT: {
-    isCombo: false,
     listFetch: fetchGetAllAccidentByCustomerId,
-    rowGetter: accidentRow
+    listFetchById: fetchGetAccidentRowById,
+    rowGetter: accidentRow,
+    comboListFetch: {}
+    // 콤보박스가 없어서 비워둠
   },
   VIEW_COMPLAINT: {
-    isCombo: true,
     listFetch: fetchGetAllComplaintsByCustomerId,
-    rowGetter: complaintRow
+    listFetchById: fetchGetComplaintRowById,
+    rowGetter: complaintRow,
+    comboListFetch: {}
+  },
+  INSURANCE_LIST: {
+    listFetch: fetchGetAllInsurance,
+    listFetchById: fetchGetInsuranceRowByProductId,
+    rowGetter: insuranceRow,
+    comboListFetch: {
+      all: fetchGetAllInsurance,
+      disease: fetchGetAllDiseaseInsurance,
+      automobile: fetchGetAllAutomobileInsurance,
+      injury: fetchGetAllInjuryInsurance
+    }
+  },
+  LOAN_LIST: {
+    listFetch: fetchGetAllLoan,
+    listFetchById: fetchGetLoanRowByProductId,
+    rowGetter: loanRow,
+    comboListFetch: {
+      all: fetchGetAllLoan,
+      collateral: fetchGetAllCollateralLoan,
+      fixedDeposit: fetchGetAllFixedDepositLoan,
+      insuranceContract: fetchGetAllInsuranceContractLoan
+    }
   }
 }
 
@@ -113,7 +154,6 @@ export const viewInformationListById = async (fetchType) => {
   // 현재 js 파일 밖으로 벗어난다고 ../../../ 해서 들어가면 css가 지정이 안되요
 }
 export const viewInformationListAll = async (fetchType) => {
-  // const list = await fetchType();
   sessionStorage.setItem("currentType", fetchType);
   const list = await context[fetchType].listFetch();
   sessionStorage.setItem("list", JSON.stringify(list));
@@ -129,10 +169,21 @@ const setTitle = () => {
   const contextTitle = document.getElementById("title");
   contextTitle.innerText = title;
 }
+
+const setPost = () => {
+  const post = document.createElement("div");
+  post.id = "post";
+  post.className = "post-button";
+  post.textContent = BUTTON.COMMON.POST;
+  return post;
+}
+
 const setComboBox = () => {
   const select = document.createElement("select");
-  const boxContext = COMBOBOX[sessionStorage.getItem("currentType")];
-  if (Object.keys(boxContext).length == 0) return null;
+  const type = sessionStorage.getItem("currentType");
+  const boxContext = COMBOBOX[type];
+  console.log(JSON.stringify(boxContext));
+  if (!boxContext.isCombo) return null;
   select.id = boxContext.id;
   select.className = "comboBox";
   const optionTypes = boxContext.optionTypes;
@@ -145,17 +196,6 @@ const setComboBox = () => {
   return select;
 }
 
-const setPost = () => {
-  const post = document.createElement("div");
-  post.id = "post";
-  post.className = "post-button";
-  post.textContent = BUTTON.COMMON.POST;
-  post.addEventListener("click", () => {
-    alert("버튼 눌림 - POST");
-  });
-  return post;
-}
-
 const setInput = () => {
   const input = document.createElement("input");
   input.type = "text";
@@ -164,23 +204,55 @@ const setInput = () => {
   return input;
 }
 
+const initTableByInput = async (id, type) => { // 추가
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  if (id.length > 0) {
+    const item = await context[type].listFetchById(id);
+    setOneRow(item, type);
+  } else {
+    const list = await context[type].comboListFetch["all"]();
+    if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+    setTableBody();
+  }
+}
+
 const setButton = () => {
   const button = document.createElement("button");
   button.id = "searchButton";
   button.textContent = BUTTON.COMMON.SEARCH;
+  const type = sessionStorage.getItem("currentType");
+  button.addEventListener("click", () => {
+    const value = document.getElementById("searchInput").value;
+    initTableByInput(value, type);
+  })
   return button;
+}
+
+const initTableBySelect = async (id, type) => { // 추가
+  const select = document.getElementById(id);
+  const selectedOption = select.options[select.selectedIndex];
+  const list = await context[type].comboListFetch[selectedOption.value]();
+  if (list != null)  sessionStorage.setItem("list", JSON.stringify(list));
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  setTableBody();
 }
 
 const setSearchBar = () => {
   const container = document.querySelector(".search-container");
   const type = sessionStorage.getItem("currentType");
-
-  const select = context[type].isCombo ? setComboBox() : setPost();
-  if (select != null) container.appendChild(select);
+  const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
+  if (select != null) { // 추가
+    container.appendChild(select);
+    if (select.id == "post")
+      post.addEventListener("click", () => alert("버튼 눌림 - POST")); // 수정
+    else select.onchange = () => initTableBySelect(select.id, type); // 추가
+  }
   container.appendChild(setInput());
   container.appendChild(setButton());
 }
-const setColoumn = () => {
+const setColumn = () => {
   const columnList = COLUMN_NAME[sessionStorage.getItem("currentType")];
   const head = document.getElementById('tableHead');
   const columns = document.createElement('tr');
@@ -192,36 +264,39 @@ const setColoumn = () => {
   head.appendChild(columns);
 }
 
+const setOneRow = (item, type) => {
+  const tableBody = document.getElementById('list');
+  const row = document.createElement("tr");
+  row.innerHTML = context[type].rowGetter(item);
+  // 각 행에 클릭 이벤트 추가
+  // row.addEventListener("click", () => {
+  //   if (selectedRow) {
+  //     selectedRow.classList.remove("selected");
+  //   }
+  //   row.classList.add("selected");
+  //   selectedRow = row;
+  // });
+
+  // 더블 클릭 시 상세 페이지로 이동
+  // row.addEventListener("dblclick", () => {
+  //   // 상세 정보를 세션에 저장
+  //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
+  //   window.location.href = "detail.html";
+  // });
+
+  tableBody.appendChild(row);
+}
+
 const setTableBody = () => {
   const tableBody = document.getElementById('list');
   const type = sessionStorage.getItem("currentType");
   const data = JSON.parse(sessionStorage.getItem("list"));
-  data.forEach(item => {
-    const row = document.createElement("tr");
-    row.innerHTML = context[type].rowGetter(item);
-    // 각 행에 클릭 이벤트 추가
-    // row.addEventListener("click", () => {
-    //   if (selectedRow) {
-    //     selectedRow.classList.remove("selected");
-    //   }
-    //   row.classList.add("selected");
-    //   selectedRow = row;
-    // });
-
-    // 더블 클릭 시 상세 페이지로 이동
-    // row.addEventListener("dblclick", () => {
-    //   // 상세 정보를 세션에 저장
-    //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
-    //   window.location.href = "detail.html";
-    // });
-
-    tableBody.appendChild(row);
-  });
+  data.forEach(item => setOneRow(item, type));
 }
 
 const initialTable = () => {
   setTitle();
   setSearchBar();
-  setColoumn();
+  setColumn();
   setTableBody();
 }

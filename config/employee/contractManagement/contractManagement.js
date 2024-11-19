@@ -14,8 +14,11 @@ export const BUTTON = {
 
 // export const POP_UP = {};
 export const COMBOBOX = {
-  DEFAULT_CONTRACT: {},
+  DEFAULT_CONTRACT: {
+    isCombo: false
+  },
   RECONTRACT: {
+    isCombo: true,
     id: "recontractType",
     optionTypes: [
       {
@@ -33,6 +36,7 @@ export const COMBOBOX = {
     ]
   },
   ENDORSEMENT: {
+    isCombo: true,
     id: "endorsementType",
     optionTypes: [
       {
@@ -50,6 +54,7 @@ export const COMBOBOX = {
     ]
   },
   REVIVAL: {
+    isCombo: true,
     id: "revivalType",
     optionTypes: [
       {
@@ -67,6 +72,7 @@ export const COMBOBOX = {
     ]
   },
   TERMINATION: {
+    isCombo: true,
     id: "terminationType",
     optionTypes: [
       {
