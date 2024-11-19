@@ -182,7 +182,8 @@ const setComboBox = () => {
   const select = document.createElement("select");
   const type = sessionStorage.getItem("currentType");
   const boxContext = COMBOBOX[type];
-  if (!boxContext[isCombo]) return null;
+  console.log(JSON.stringify(boxContext));
+  if (!boxContext.isCombo) return null;
   select.id = boxContext.id;
   select.className = "comboBox";
   const optionTypes = boxContext.optionTypes;
