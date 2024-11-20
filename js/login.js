@@ -16,7 +16,7 @@ const link = {
   MANAGEMENT_PLANNING: "./employee/managementPlanning/home.html",
   PRODUCT_MANAGEMENT: "./employee/productManagement/home.html",
   SALES: "./employee/sales/home.html",
-  UNDERWRITNG: "./employee/underWriting/home.html",
+  UNDERWRITING: "./employee/underWriting/home.html",
   PARTNERCOMPANY: "./partnerCompany/home.html",
 }
 
