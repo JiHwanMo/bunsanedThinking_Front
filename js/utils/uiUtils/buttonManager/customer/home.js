@@ -1,9 +1,9 @@
-// buttonManager/customer.js
-// import { fetchGetDatafetchData } from '../../../apiUtils/apiHandler/customer/customer.js';
+// buttonManager/informationList.js
+// import { fetchGetDatafetchData } from '../../../apiUtils/apiHandler/customer/informationList.js';
 import { BUTTON } from '../../../../../config/customer/customer.js';
-import { viewInformationListById } from '../../tableRenderer/customer/customer.js';
-import { viewInformationListAll } from '../../tableRenderer/customer/customer.js';
-import { informationType } from '../../tableRenderer/customer/customer.js';
+import { viewInformationListById } from '../../tableRenderer/customer/informationList.js';
+import { viewInformationListAll } from '../../tableRenderer/customer/informationList.js';
+import { informationType } from '../../tableRenderer/customer/informationList.js';
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.CUSTOMER.HOME, customerTaskMapper);

@@ -1,4 +1,4 @@
-// positionManager/customer.js
+// positionManager/informationList.js
 import { fetchGetEmployee } from '../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js';
 import { MESSAGES } from '../../../../../../config/common.js';
 

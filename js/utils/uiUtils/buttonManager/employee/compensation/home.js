@@ -1,6 +1,6 @@
 import { BUTTON } from '../../../../../../config/employee/compensation/compensation.js';
-import { viewInformationList } from '../../../tableRenderer/employee/compensation/compensation.js';
-import { informationType } from '../../../tableRenderer/employee/compensation/compensation.js';
+import { viewInformationList } from '../../../tableRenderer/employee/compensation/informationList.js';
+import { informationType } from '../../../tableRenderer/employee/compensation/informationList.js';
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.COMPENSATION.HOME, compensationTaskMapper);
