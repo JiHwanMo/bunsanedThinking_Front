@@ -1,6 +1,6 @@
 import { BUTTON } from '../../../../../../config/employee/contractManagement/contractManagement.js';
-import { viewInformationList } from '../../../tableRenderer/employee/contractManagement/contractManagement.js';
-import { informationType } from '../../../tableRenderer/employee/contractManagement/contractManagement.js';
+import { viewInformationList } from '../../../tableRenderer/employee/contractManagement/informationList.js';
+import { informationType } from '../../../tableRenderer/employee/contractManagement/informationList.js';
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.CONTRACT_MANAGEMENT.HOME, contractManagementTaskMapper);

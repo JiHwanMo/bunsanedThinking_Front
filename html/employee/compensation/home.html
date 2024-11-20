@@ -4,20 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-  <link rel="stylesheet" href="../../css/customer/customer.css">
+  <link rel="stylesheet" href="../../../css/employee/compensation/compensation.css">
 </head>
 <body>
 
 <div class="container">
-  <div class="header-line">
-  </div>
+  <div class="header-line"></div>
   <div class="button-container" id="buttonContainer">
   </div>
 </div>
 
 <script type="module">
-  import { renderGreeting } from '../../js/utils/uiUtils/messageManager/customer/customer.js';
-  import { renderButtons } from '../../js/utils/uiUtils/buttonManager/customer/customer.js';
+  import { renderGreeting } from '../../../js/utils/uiUtils/messageManager/employee/compensation/message.js';
+  import { renderButtons } from '../../../js/utils/uiUtils/buttonManager/employee/compensation/home.js';
 
   // Greeting 메시지와 버튼 목록을 로드하여 표시
   document.addEventListener("DOMContentLoaded", () => {

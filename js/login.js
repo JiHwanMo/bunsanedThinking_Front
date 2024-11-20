@@ -3,11 +3,11 @@ import { fetchloginEmployee } from './utils/apiUtils/apiDocumentation/authentica
 import { fetchloginPartnerCompany } from './utils/apiUtils/apiDocumentation/authentication.js';
 
 const link = {
-  CUSTOMER: "customer/customer.html",
+  CUSTOMER: "customer/home.html",
   ADMINISTRATIVE: "./employee/administrative/administrative.html",
-  COMPENSATION: "./employee/compensation/compensation.html",
-  COMPENSATION_PLANNING: "./employee/compensationPlanning/compensationPlanning.html",
-  CONTRACT_MANAGEMENT: "./employee/contractManagement/contractManagement.html",
+  COMPENSATION: "./employee/compensation/home.html",
+  COMPENSATION_PLANNING: "./employee/compensationPlanning/home.html",
+  CONTRACT_MANAGEMENT: "./employee/contractManagement/home.html",
   CUSTOMER_INFORMATION_MANAGEMENT: "./employee/customerInformationManagement/customerInformationManagement.html",
   CUSTOMER_SUPPORT: "./employee/customerSupport/customerSupport.html",
   FINANCIAL_ACCOUNTANT: "./employee/financialAccountant/financialAccountant.html",
