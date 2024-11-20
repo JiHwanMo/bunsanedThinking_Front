@@ -29,7 +29,7 @@ export const COMBOBOX = {
   },
   LOAN_REQUEST: {
     isCombo: true,
-    id: "processStatus",
+    id: "contractStatus",
     optionTypes: [
       {
         value: "all",

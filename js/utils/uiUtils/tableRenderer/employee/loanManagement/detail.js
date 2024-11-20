@@ -1,4 +1,8 @@
 import { BUTTON } from '../../../../../../config/employee/loanManagement/loanManagement.js';
+import {
+  fetchGetLoanProduct,
+  fetchGetLoanRequest
+} from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
 
 const loanDetail = (data) => {
   const detail = [
@@ -87,20 +91,24 @@ const surgeryHistory = (data) => {
 const context = {
   MANAGEMENT_LOAN_PRODUCT: {
     detailGetter: loanDetail,
+    fetchGetById: fetchGetLoanProduct,
     buttons: BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT.MANAGEMENT_LOAN_PRODUCT
   },
   LOAN_REQUEST: {
     detailGetter: loanRequestDetail,
+    fetchGetById: fetchGetLoanRequest,
     buttons: BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT.LOAN_REQUEST
   }
 }
 
-export const renderDetails = () => {
+export const renderDetails = async () => {
   // 세션에서 데이터 가져오기
-  const selectedData = JSON.parse(sessionStorage.getItem("selectedData"));
+  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
+  const type = sessionStorage.getItem("currentType");
 
   // 세션에 데이터가 있으면 렌더링
-  if (selectedData) {
+  if (selectedDataId) {
+    const selectedData = await context[type].fetchGetById(selectedDataId);
     renderDetailsTable(selectedData);
     renderButtons();
   }

@@ -1,7 +1,7 @@
 import {
   fetchGetAll, fetchGetLoanProduct, fetchGetLoanRequest,
+  fetchGetAllLoanRequest, fetchGetAllCompletedLoanRequest, fetchGetAllUnprocessedLoanRequest
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js"
-import { fetchGetAllLoanRequest } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js"
 import {COMBOBOX} from "../../../../../../config/employee/loanManagement/loanManagement.js";
 import {BUTTON} from "../../../../../../config/common.js";
 
@@ -42,12 +42,21 @@ const loanRequestRow = (dto) => {
   `;
 }
 
+const getLoanProductId = (data) => {
+  return data.id;
+}
+
+const getLoanRequestId = (data) => {
+  return data.contract.id;
+}
+
 const context = {
   MANAGEMENT_LOAN_PRODUCT: {
     title : "대출 상품 정보 리스트",
+    idGetter: getLoanProductId,
     listFetch: fetchGetAll,
     listFetchById: fetchGetLoanProduct,
-    comboListFetch: {},
+    comboListFetch: {all: fetchGetAll},
     rowGetter: loanRow,
     columnList: [
       "대출 상품 이름",
@@ -59,12 +68,13 @@ const context = {
   },
   LOAN_REQUEST: {
     title : "보험 상품 정보 리스트",
+    idGetter: getLoanRequestId,
     listFetch: fetchGetAllLoanRequest,
     listFetchById: fetchGetLoanRequest,
     comboListFetch: {
-      all: fetch,
-      completed: fetch,
-      unprocessed: fetch
+      all: fetchGetAllLoanRequest,
+      completed: fetchGetAllCompletedLoanRequest,
+      unprocessed: fetchGetAllUnprocessedLoanRequest
     },
     rowGetter: loanRequestRow,
     columnList: [
@@ -210,6 +220,9 @@ const setButton = () => {
 const initTableBySelect = async (id, type) => { // 추가
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
+  console.log(selectedOption.value + " " + type + " " + context[type].comboListFetch[selectedOption.value]);
+  const temp = await fetchGetAllCompletedLoanRequest();
+  console.log(temp);
   const list = await context[type].comboListFetch[selectedOption.value]();
   if (list != null)  sessionStorage.setItem("list", JSON.stringify(list));
   const tableBody = document.getElementById('list');
@@ -223,8 +236,8 @@ const setSearchBar = () => {
   const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
   if (select != null) { // 추가
     container.appendChild(select);
-    if (select.id == "post")
-      post.addEventListener("click", () => alert("버튼 눌림 - POST")); // 수정
+    if (select.id === "post")
+      select.addEventListener("click", () => alert("버튼 눌림 - POST")); // 수정
     else select.onchange = () => initTableBySelect(select.id, type); // 추가
   }
   container.appendChild(setInput());
@@ -238,6 +251,7 @@ const setTableBody = () => {
   data.forEach(item => {
     const row = document.createElement("tr");
     row.innerHTML = context[type].rowGetter(item);
+    let id = context[type].idGetter(item);
     // 각 행에 클릭 이벤트 추가
     row.addEventListener("click", () => {
       if (selectedRow) {
@@ -250,7 +264,7 @@ const setTableBody = () => {
     // 더블 클릭 시 상세 페이지로 이동
     row.addEventListener("dblclick", () => {
       // 상세 정보를 세션에 저장
-      sessionStorage.setItem("selectedData", JSON.stringify(item));
+      sessionStorage.setItem("selectedDataId", JSON.stringify(id));
       window.location.href = "detail.html";
     });
 
