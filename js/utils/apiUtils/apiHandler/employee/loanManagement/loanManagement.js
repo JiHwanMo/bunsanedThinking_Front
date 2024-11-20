@@ -7,7 +7,7 @@ export const fetchGetAllHandler = async () => {
 };
 
 export const fetchGetLoanProductHandler = async (loanId) => {
-  return await fetchGetHandler(`${defaultURL}/getLoan?id=${loanId}`);
+  return await fetchGetHandler(`${defaultURL}/getLoanProduct?id=${loanId}`);
 }
 
 export const fetchGetOutcomeHandler = async (contractId) => {
