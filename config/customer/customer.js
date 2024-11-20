@@ -102,6 +102,7 @@ export const TABLE_TITLE = {
 };
 export const COLUMN_NAME = {
   MANAGEMENT_CONTRACT: [
+    "계약 번호",
     "보험 상품 이름",
     "보험 종류",
     "보험 상품 번호",

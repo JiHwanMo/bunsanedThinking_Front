@@ -9,6 +9,9 @@ import { fetchGetAllCollateralLoan } from '../../../../../js/utils/apiUtils/apiD
 import { fetchGetAllFixedDepositLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllInsuranceContractLoan } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllContractByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllAutomobileContractByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllInjuryContractByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
+import { fetchGetAllDiseaseContractByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetContractRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllAccidentByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAccidentRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
@@ -50,6 +53,7 @@ const loanRow = (dto) => {
 
 const contractRow = (dto) => {
   return `
+    <td>${dto.id}</td>
     <td>${dto.name}</td>
     <td>${dto.type}</td>
     <td>${dto.insuranceId}</td>
@@ -91,18 +95,10 @@ const context = {
     rowGetter: contractRow,
     needCustomerId: true,
     comboListFetch: {
-      all: () => {
-        return null;
-      },
-      disease: () => {
-        return null;
-      },
-      automobile: () => {
-        return null;
-      },
-      injury: () => {
-        return null;
-      }
+      all: fetchGetAllContractByCustomerId,
+      disease: fetchGetAllDiseaseContractByCustomerId,
+      automobile: fetchGetAllAutomobileContractByCustomerId,
+      injury: fetchGetAllInjuryContractByCustomerId
     }
     // 콤보박스는 있는데 아이디 받는 부분이 뭔가 이상해서 일단 이렇게
   },
@@ -216,7 +212,9 @@ const initTableByInput = async (id, type) => { // 추가
   const tableBody = document.getElementById('list');
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   if (id.length > 0) {
-    const item = await context[type].listFetchById(id);
+    const item = context[type].needCustomerId ?
+      await context[type].listFetchById(id, sessionStorage.getItem("id")) :
+      await context[type].listFetchById(id)
     setOneRow(item, type);
   } else {
     const list = context[type].needCustomerId ?
@@ -244,7 +242,9 @@ const setButton = () => {
 const initTableBySelect = async (id, type) => { // 추가
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
-  const list = await context[type].comboListFetch[selectedOption.value]();
+  const list = context[type].needCustomerId ?
+    await context[type].comboListFetch[selectedOption.value](sessionStorage.getItem("id")) :
+    await context[type].comboListFetch[selectedOption.value]();
   if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
   const input = document.getElementById("searchInput");
   if (input != null) input.value = "";
