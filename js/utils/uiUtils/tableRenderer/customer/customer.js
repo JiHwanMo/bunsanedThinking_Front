@@ -17,7 +17,6 @@ import { fetchGetAllAccidentByCustomerId } from '../../../../../js/utils/apiUtil
 import { fetchGetAccidentRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetAllComplaintsByCustomerId } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
 import { fetchGetComplaintRowById } from '../../../../../js/utils/apiUtils/apiDocumentation/customer/customer.js';
-import { timeStampFormatter } from '../../../../../js/utils/TimeStampFormatter.js';
 import { BUTTON } from '../../../../../config/common.js';
 import { COMBOBOX } from '../../../../../config/customer/customer.js';
 import { TABLE_TITLE } from '../../../../../config/customer/customer.js';
