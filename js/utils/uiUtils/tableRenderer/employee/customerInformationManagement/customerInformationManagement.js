@@ -1,4 +1,8 @@
 import { fetchGetAllCustomerInformation } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
+import { BUTTON } from '../../../../../../config/common.js';
+import { COMBOBOX } from '../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js';
+import { TABLE_TITLE } from '../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js';
+import { COLUMN_NAME } from '../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js';
 
 const customerInformationRow = (dto) => {
   return `
@@ -20,18 +24,7 @@ const context = {
     title: "고객 정보 리스트",
     listFetch: fetchGetAllCustomerInformation,
     rowGetter: customerInformationRow,
-    columnList: [
-      "고객 이름",
-      "전화 번호",
-      "직업",
-      "나이",
-      "성별",
-      "주민등록번호",
-      "주소",
-      "은행명",
-      "계좌 번호",
-      "고객 번호"
-    ]
+    comboListFetch: {}
   }
 }
 
@@ -56,19 +49,81 @@ export const renderTable = () => {
 }
 
 const setTitle = () => {
-  const currentContext = context["CUSTOMERINFORMATION_LIST"];
+  const title = TABLE_TITLE["CUSTOMERINFORMATION_LIST"];
   const contextTitle = document.getElementById("title");
-  contextTitle.innerText = currentContext.title;
-}
+  contextTitle.innerText = title;
+};
+
+const setInput = () => {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.id = "searchInput";
+  input.placeholder = "검색어 입력";
+  return input;
+};
+
+const setComboBox = () => {
+  const boxContext = COMBOBOX["CUSTOMERINFORMATION_LIST"];
+  if (!boxContext.isCombo) return null;
+
+  const select = document.createElement("select");
+  select.id = boxContext.id;
+  select.className = "combo-box";
+
+  boxContext.optionTypes.forEach(optionType => {
+    const option = document.createElement("option");
+    option.value = optionType.value;
+    option.textContent = optionType.label;
+    select.appendChild(option);
+  });
+
+  select.onchange = async () => {
+    const selectedOption = select.options[select.selectedIndex].value;
+    const list = await context["CUSTOMERINFORMATION_LIST"].listFetch(selectedOption);
+    sessionStorage.setItem("list", JSON.stringify(list));
+    setTableBody();
+  };
+
+  return select;
+};
+
+
+const setPostButton = () => {
+  const button = document.createElement("button");
+  button.id = "postButton";
+  button.textContent = BUTTON.COMMON.POST;
+  button.addEventListener("click", () => {
+    alert("등록 버튼 클릭!");
+  });
+  return button;
+};
+
+const setSearchBar = () => {
+  const container = document.querySelector(".search-container");
+  const comboBox = setComboBox();
+  if (comboBox) {
+    container.appendChild(comboBox);
+  } else {
+    container.appendChild(setPostButton());
+  }
+
+  container.appendChild(setInput());
+
+  const button = document.createElement("button");
+  button.id = "searchButton";
+  button.textContent = BUTTON.COMMON.SEARCH;
+  container.appendChild(button);
+};
 
 const setColumn = () => {
-  const currentContext = context["CUSTOMERINFORMATION_LIST"];
+  const columnList = COLUMN_NAME["CUSTOMERINFORMATION_LIST"];
   const head = document.getElementById("tableHead");
   const columns = document.createElement("tr");
-  currentContext.columnList.forEach(item => {
-    const oneColumn = document.createElement("th");
-    oneColumn.innerHTML = item;
-    columns.appendChild(oneColumn);
+
+  columnList.forEach(item => {
+    const column = document.createElement("th");
+    column.innerHTML = item;
+    columns.appendChild(column);
   })
   head.appendChild(columns);
 }
@@ -76,11 +131,11 @@ const setColumn = () => {
 const setTableBody = () => {
   const tableBody = document.getElementById("list");
   tableBody.innerHTML= "";
-  const contextData = context["CUSTOMERINFORMATION_LIST"]; // 컨텍스트 데이터 캐싱
+
   const data = JSON.parse(sessionStorage.getItem("list")) || [];
   data.forEach(item => {
     const row = document.createElement("tr");
-    row.innerHTML = contextData.rowGetter(item);
+    row.innerHTML = context["CUSTOMERINFORMATION_LIST"].rowGetter(item);
 
     row.addEventListener("click", () => {
       if (window.selectedRow) {
@@ -101,8 +156,9 @@ const setTableBody = () => {
 
 const initialTable = () => {
   setTitle();
+  setSearchBar();
   setColumn();
   setTableBody();
-}
+};
 
 

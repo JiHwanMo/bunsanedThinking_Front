@@ -1,31 +1,8 @@
 import { fetchGetAllOfficeSupplies } from '../../../../../../js/utils/apiUtils/apiDocumentation/employee/administrative/administrative.js';
-
-// const officeSupplyRow = (dto) => {
-//   return `
-//     <td>${dto.id}</td>
-//     <td>${dto.inventory}</td>
-//     <td>${dto.name}</td>
-//     <td>${dto.totalInventory}</td>
-//     <td>${dto.description}</td>
-//     <td>${dto.departmentId}</td>
-//   `;
-// }
-//
-// const context = {
-//   OFFICESUPPLY_LIST: {
-//     title: "집기 비품 재고 정보 리스트",
-//     listFetch: fetchGetAllOfficeSupplies,
-//     rowGetter: officeSupplyRow,
-//     columnList: [
-//       "비품 번호",
-//       "현재 재고",
-//       "비품 이름",
-//       "총 재고",
-//       "설명",
-//       "부서 ID"
-//     ]
-//   }
-// }
+import { BUTTON } from '../../../../../../config/common.js';
+import { COMBOBOX } from '../../../../../../config/employee/administrative/administrative.js';
+import { TABLE_TITLE } from '../../../../../../config/employee/administrative/administrative.js';
+import { COLUMN_NAME } from '../../../../../../config/employee/administrative/administrative.js';
 
 const officeSupplyRow = (dto) => {
   return `
@@ -41,12 +18,7 @@ const context = {
     title: "집기 비품 재고 정보 리스트",
     listFetch: fetchGetAllOfficeSupplies,
     rowGetter: officeSupplyRow,
-    columnList: [
-      "비품 번호",
-      "비품 이름",
-      "현재 재고",
-      "총 재고"
-    ]
+    comboListFetch: {}
   }
 }
 
@@ -70,31 +42,95 @@ export const renderTable = () => {
 }
 
 const setTitle = () => {
-  const currentContext = context["OFFICESUPPLY_LIST"];
+  const title = TABLE_TITLE["OFFICESUPPLY_LIST"];
   const contextTitle = document.getElementById("title");
-  contextTitle.innerText = currentContext.title;
-}
+  contextTitle.innerText = title;
+};
+
+const setInput = () => {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.id = "searchInput";
+  input.placeholder = "검색어 입력";
+  return input;
+};
+
+
+const setComboBox = () => {
+  const boxContext = COMBOBOX["OFFICESUPPLY_LIST"];
+  if (!boxContext.isCombo) return null;
+
+  const select = document.createElement("select");
+  select.id = boxContext.id;
+  select.className = "combo-box";
+
+  boxContext.optionTypes.forEach(optionType => {
+    const option = document.createElement("option");
+    option.value = optionType.value;
+    option.textContent = optionType.label;
+    select.appendChild(option);
+  });
+
+  select.onchange = async () => {
+    const selectedOption = select.options[select.selectedIndex].value;
+    const list = await context["OFFICESUPPLY_LIST"].listFetch(selectedOption);
+    sessionStorage.setItem("list", JSON.stringify(list));
+    setTableBody();
+  };
+
+  return select;
+};
+
+const setPostButton = () => {
+  const button = document.createElement("button");
+  button.id = "postButton";
+  button.textContent = BUTTON.COMMON.POST;
+  button.addEventListener("click", () => {
+    alert("등록 버튼 클릭!");
+  });
+  return button;
+};
+
+const setSearchBar = () => {
+  const container = document.querySelector(".search-container");
+  const comboBox = setComboBox();
+  if (comboBox) {
+    container.appendChild(comboBox);
+  } else {
+    container.appendChild(setPostButton());
+  }
+
+  const input = setInput("searchInput", "검색어 입력");
+  container.appendChild(input);
+
+  const button = document.createElement("button");
+  button.id = "searchButton";
+  button.textContent = BUTTON.COMMON.SEARCH;
+  container.appendChild(button);
+};
 
 const setColumn = () => {
-  const currentContext = context["OFFICESUPPLY_LIST"];
+  const columnList = COLUMN_NAME["OFFICESUPPLY_LIST"];
   const head = document.getElementById("tableHead");
   const columns = document.createElement("tr");
-  currentContext.columnList.forEach(item => {
-    const oneColumn = document.createElement("th");
-    oneColumn.innerHTML = item;
-    columns.appendChild(oneColumn);
-  })
+
+  columnList.forEach(item => {
+    const column = document.createElement("th");
+    column.innerHTML = item;
+    columns.appendChild(column);
+  });
+
   head.appendChild(columns);
-}
+};
 
 const setTableBody = () => {
   const tableBody = document.getElementById("list");
   tableBody.innerHTML= "";
-  const contextData = context["OFFICESUPPLY_LIST"]; // 컨텍스트 데이터 캐싱
+
   const data = JSON.parse(sessionStorage.getItem("list")) || [];
   data.forEach(item => {
     const row = document.createElement("tr");
-    row.innerHTML = contextData.rowGetter(item);
+    row.innerHTML = context["OFFICESUPPLY_LIST"].rowGetter(item);
 
     row.addEventListener("click", () => {
       if (window.selectedRow) {
@@ -115,6 +151,7 @@ const setTableBody = () => {
 
 const initialTable = () => {
   setTitle();
+  setSearchBar();
   setColumn();
   setTableBody();
 }

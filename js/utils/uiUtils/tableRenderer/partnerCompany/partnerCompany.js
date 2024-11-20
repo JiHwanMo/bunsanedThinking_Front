@@ -1,8 +1,12 @@
 import { fetchGetAllReportByDamageAssessmentCompanyID } from '../../../../../js/utils/apiUtils/apiDocumentation/partnerCompany/partnerCompany.js';
+import { BUTTON } from '../../../../../config/common.js';
+import { COMBOBOX } from '../../../../../config/partnerCompany/partnerCompany.js';
+import { TABLE_TITLE } from '../../../../../config/partnerCompany/partnerCompany.js';
+import { COLUMN_NAME } from '../../../../../config/partnerCompany/partnerCompany.js';
 
 const reportRow = (dto) => {
   return `
-    <td>${dto.accident.id}</td> <!-- 사고 번호만 표시 -->
+    <td>${dto.accident.id}</td>
   `;
 }
 
@@ -11,9 +15,7 @@ const context = {
     title: "사고 번호 리스트",
     listFetch: fetchGetAllReportByDamageAssessmentCompanyID,
     rowGetter: reportRow,
-    columnList: [
-      "사고 번호"
-    ]
+    comboListFetch: {}
   }
 }
 
@@ -44,19 +46,70 @@ export const renderTable = () => {
 }
 
 const setTitle = () => {
-  const currentContext = context["REPORT_LIST"];
+  const title = TABLE_TITLE["REPORT_LIST"];
   const contextTitle = document.getElementById("title");
-  contextTitle.innerText = currentContext.title;
-}
+  contextTitle.innerText = title;
+};
+
+const setInput = () => {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.id = "searchInput";
+  input.placeholder = "검색어 입력";
+  return input;
+};
+
+const setComboBox = () => {
+  const boxContext = COMBOBOX["REPORT_LIST"];
+  if (!boxContext.isCombo) return null;
+
+  const select = document.createElement("select");
+  select.id = boxContext.id;
+  select.className = "combo-box";
+
+  boxContext.optionTypes.forEach(optionType => {
+    const option = document.createElement("option");
+    option.value = optionType.value;
+    option.textContent = optionType.label;
+    select.appendChild(option);
+  });
+
+  select.onchange = async () => {
+    const selectedOption = select.options[select.selectedIndex].value;
+    const list = await context["REPORT_LIST"].listFetch(selectedOption);
+    sessionStorage.setItem("list", JSON.stringify(list));
+    setTableBody();
+  };
+
+  return select;
+};
+
+const setPostButton = () => null;
+
+const setSearchBar = () => {
+  const container = document.querySelector(".search-container");
+  const comboBox = setComboBox();
+  if (comboBox) {
+    container.appendChild(comboBox);
+  }
+
+  container.appendChild(setInput());
+
+  const button = document.createElement("button");
+  button.id = "searchButton";
+  button.textContent = BUTTON.COMMON.SEARCH;
+  container.appendChild(button);
+};
 
 const setColumn = () => {
-  const currentContext = context["REPORT_LIST"];
+  const columnList = COLUMN_NAME["REPORT_LIST"];
   const head = document.getElementById("tableHead");
   const columns = document.createElement("tr");
-  currentContext.columnList.forEach(item => {
-    const oneColumn = document.createElement("th");
-    oneColumn.innerHTML = item;
-    columns.appendChild(oneColumn);
+
+  columnList.forEach(item => {
+    const column = document.createElement("th");
+    column.innerHTML = item;
+    columns.appendChild(column);
   })
   head.appendChild(columns);
 }
@@ -64,11 +117,11 @@ const setColumn = () => {
 const setTableBody = () => {
   const tableBody = document.getElementById("list");
   tableBody.innerHTML= "";
-  const contextData = context["REPORT_LIST"]; // 컨텍스트 데이터 캐싱
+
   const data = JSON.parse(sessionStorage.getItem("list")) || [];
   data.forEach(item => {
     const row = document.createElement("tr");
-    row.innerHTML = contextData.rowGetter(item);
+    row.innerHTML = context["REPORT_LIST"].rowGetter(item);
 
     row.addEventListener("click", () => {
       if (window.selectedRow) {
@@ -89,6 +142,7 @@ const setTableBody = () => {
 
 const initialTable = () => {
   setTitle();
+  setSearchBar();
   setColumn();
   setTableBody();
 }
