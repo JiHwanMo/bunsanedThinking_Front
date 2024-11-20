@@ -220,9 +220,6 @@ const setButton = () => {
 const initTableBySelect = async (id, type) => { // 추가
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
-  console.log(selectedOption.value + " " + type + " " + context[type].comboListFetch[selectedOption.value]);
-  const temp = await fetchGetAllCompletedLoanRequest();
-  console.log(temp);
   const list = await context[type].comboListFetch[selectedOption.value]();
   if (list != null)  sessionStorage.setItem("list", JSON.stringify(list));
   const tableBody = document.getElementById('list');
