@@ -31,10 +31,15 @@ const depositDetailRow = (depositDetail) => {
   `;
 }
 
+const getPaymentDetailId = (data) => {
+  return data.id;
+}
+
 const context = {
   VIEW_DEPOSIT_DETAIL: {
     title : "입금 정보 리스트",
     listFetch: fetchGetAllDepositDetail,
+    needDetail: false,
     rowGetter: depositDetailRow,
     columnList: [
       "입금자 이름",
@@ -46,6 +51,8 @@ const context = {
   HANDLE_PAYMENT_DETAIL: {
     title : "지급 사항 정보 리스트",
     listFetch: fetchGetAllPaymentDetail,
+    needDetail: true,
+    idGetter: getPaymentDetailId,
     rowGetter: paymentDetailRow,
     columnList: [
       "지급 번호",
@@ -111,11 +118,14 @@ const setTableBody = () => {
     });
 
     // 더블 클릭 시 상세 페이지로 이동
-    row.addEventListener("dblclick", () => {
-      // 상세 정보를 세션에 저장
-      sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
-      window.location.href = "detail.html";
-    });
+    if (context[type].needDetail) {
+      let id = context[type].idGetter(item);
+      row.addEventListener("dblclick", () => {
+        // 상세 정보를 세션에 저장
+        sessionStorage.setItem("selectedDataId", JSON.stringify(id));
+        window.location.href = "detail.html";
+      });
+    }
 
     tableBody.appendChild(row);
   });
