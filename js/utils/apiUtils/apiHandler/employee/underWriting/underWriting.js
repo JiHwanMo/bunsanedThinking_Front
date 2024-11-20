@@ -22,6 +22,10 @@ export const fetchGetContractHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getContract?id=${id}`);
 }
 
+export const fetchGetAllContractHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllContract`);
+}
+
 export const fetchGetAllNotRequestingInsuranceHandler = async () => {
   return await fetchGetHandler(`${defaultUrl}/getAllNotRequestingInsurance`);
 }

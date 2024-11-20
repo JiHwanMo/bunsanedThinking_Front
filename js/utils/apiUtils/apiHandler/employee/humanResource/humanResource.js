@@ -2,12 +2,12 @@ import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHan
 
 const defaultURL = "http://localhost:8080/employee/humanResource";
 
-export const fetchGetAllEmployeeHandler = async () => {
-  return await fetchGetHandler(`${defaultURL}/getAllEmployee`);
-};
-
 export const fetchGetAllDepartmentHandler = async () => {
   return await fetchGetHandler(`${defaultURL}/getAllDepartment`);
+};
+
+export const fetchGetAllEmployeeHandler = async () => {
+  return await fetchGetHandler(`${defaultURL}/getAllEmployee`);
 };
 
 export const fetchGetDepartmentHandler = async (departmentId) => {
@@ -29,3 +29,4 @@ export const fetchUpdateEmployeeHandler = async (employeeId, index, input) => {
 export const fetchDeleteEmployeeHandler = async (employeeId) => {
   await fetchDeleteHandler(`${defaultURL}/deleteEmployee?employeeId=${employeeId}`);
 };
+

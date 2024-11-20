@@ -34,6 +34,18 @@ export const fetchUpdateAutomobileInsuranceHandler = async (index, input, id, se
   return await fetchPatchWithBody(`${defaultUrl}/updateAutomobileInsurance?index=${index}&input=${input}&id=${id}`, serviceTypeList);
 }
 
-export const fetchGetAllHandler = async () => {
-  return await fetchGetHandler(`${defaultUrl}/getAll`);
+export const fetchGetAllInsuranceHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllInsurance`);
+}
+
+export const fetchGetAllInJuryHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllinJuryInsurance`);
+}
+
+export const fetchGetAllAutomobileInsuranceHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllAutomobileInsurance`);
+}
+
+export const fetchGetAllDiseaseInsuranceHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllDiseaseInsurance`);
 }

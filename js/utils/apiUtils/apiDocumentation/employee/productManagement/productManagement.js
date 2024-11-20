@@ -6,7 +6,7 @@ import { fetchDeleteInsuranceProductHandler } from '../../../apiHandler/employee
 import { fetchUpdateDiseaseInsuranceHandler } from '../../../apiHandler/employee/productManagement/productManagement.js';
 import { fetchUpdateInjuryInsuranceHandler } from '../../../apiHandler/employee/productManagement/productManagement.js';
 import { fetchUpdateAutomobileInsuranceHandler } from '../../../apiHandler/employee/productManagement/productManagement.js';
-import { fetchGetAllHandler } from '../../../apiHandler/employee/productManagement/productManagement.js';
+import { fetchGetAllInsuranceHandler, fetchGetAllAutomobileInsuranceHandler,fetchGetAllDiseaseInsuranceHandler, fetchGetAllInJuryHandler } from '../../../apiHandler/employee/productManagement/productManagement.js';
 
 
 export const fetchAddDiseaseInsurance = async (addDiseaseInsuranceDTO) => {
@@ -41,7 +41,19 @@ export const fetchUpdateAutomobileInsurance = async (index, input, id, serviceTy
   return await fetchUpdateAutomobileInsuranceHandler(index, input, id, serviceTypeList);
 }
 
-export const fetchGetAll = async () => {
-  return await fetchGetAllHandler();
+export const fetchGetAllInsurance = async () => {
+  return await fetchGetAllInsuranceHandler();
+}
+
+export const fetchGetAllInJury = async () => {
+  return await fetchGetAllInJuryHandler();
+}
+
+export const fetchGetAllAutomobileInsurance = async () => {
+  return await fetchGetAllAutomobileInsuranceHandler();
+}
+
+export const fetchGetAllDiseaseInsurance = async () => {
+  return await fetchGetAllDiseaseInsuranceHandler();
 }
 

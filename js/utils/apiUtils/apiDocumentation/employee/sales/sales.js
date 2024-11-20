@@ -1,9 +1,13 @@
-import { fetchEvaluateSalesPerformanceHandler } from '../../../apiHandler/employee/sales/sales.js';
+import {
+  fetchEvaluateSalesPerformanceHandler,
+  fetchGetAllCompletedCounselHandler,
+  fetchGetAllUnprocessedCounselHandler,
+  fetchGetInsuranceProductHandler, fetchGetLoanProductHandler,
+} from '../../../apiHandler/employee/sales/sales.js';
 import { fetchHandleInsuranceConsultationHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchInduceInsuranceProductHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchInduceLoanProductHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetAllSalesHandler } from '../../../apiHandler/employee/sales/sales.js';
-import { fetchGetEmployeeHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetSalesHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetAllCounselHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchGetCounselHandler } from '../../../apiHandler/employee/sales/sales.js';
@@ -36,10 +40,6 @@ export const fetchInduceLoanProduct = async (induceInsuranceProductDTO) => {
   return await fetchInduceLoanProductHandler(induceInsuranceProductDTO);
 }
 
-export const fetchGetAllEmployee = async () => {
-  return await fetchGetAllEmployeeHandler();
-}
-
 export const fetchGetAllSales = async (id) => {
   return await fetchGetAllSalesHandler(id);
 }
@@ -52,6 +52,14 @@ export const fetchGetAllCounsel = async () => {
   return await fetchGetAllCounselHandler();
 }
 
+export const fetchGetAllCompletedCounsel = async () => {
+  return await fetchGetAllCompletedCounselHandler();
+}
+
+export const fetchGetAllUnprocessedCounsel = async () => {
+  return await fetchGetAllUnprocessedCounselHandler();
+}
+
 export const fetchGetCounsel = async (id) => {
   return await fetchGetCounselHandler(id);
 }
@@ -60,8 +68,16 @@ export const fetchGetAllInsuranceProduct = async () => {
   return await fetchGetAllInsuranceProductHandler();
 }
 
+export const fetchGetInsuranceProduct = async (id) => {
+  return await fetchGetInsuranceProductHandler(id);
+}
+
 export const fetchGetAllLoanProduct = async () => {
   return await fetchGetAllLoanProductHandler();
+}
+
+export const fetchGetLoanProduct = async (id) => {
+  return await fetchGetLoanProductHandler(id);
 }
 
 export const fetchAddDiseaseHistory = async (induceDiseaseHistoryDTO) => {
