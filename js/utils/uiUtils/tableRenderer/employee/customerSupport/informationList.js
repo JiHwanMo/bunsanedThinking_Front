@@ -1,7 +1,15 @@
 import {
+  fetchGetAccident,
   fetchGetAllAccident,
-  fetchGetAllComplaint
+  fetchGetAllComplaint,
+  fetchGetAllCompletedAccident,
+  fetchGetAllProcessedComplaint, fetchGetAllUnprocessedAccident,
+  fetchGetAllUnprocessedComplaint,
+  fetchGetComplaint,
+  fetchGetAllProcessingAccident
 } from "../../../../apiUtils/apiDocumentation/employee/customerSupport/customerSupport.js"
+import {BUTTON} from "../../../../../../config/common.js";
+import {COMBOBOX} from "../../../../../../config/employee/customerSupport/customerSupport.js";
 
 export const informationType = {
   HANDLE_REPORT: "HANDLE_REPORT",
@@ -45,6 +53,13 @@ const context = {
   HANDLE_REPORT: {
     title : "신고 처리 정보 리스트",
     listFetch: fetchGetAllAccident,
+    listFetchById: fetchGetAccident,
+    comboListFetch: {
+      all: fetchGetAllAccident,
+      completed: fetchGetAllCompletedAccident,
+      unprocessed: fetchGetAllUnprocessedAccident,
+      processing: fetchGetAllProcessingAccident
+    },
     idGetter: getAccidentId,
     rowGetter: accidentRow,
     columnList: [
@@ -60,6 +75,12 @@ const context = {
   HANDLE_COMPLAINT: {
     title : "민원 처리 정보 리스트",
     listFetch: fetchGetAllComplaint,
+    listFetchById: fetchGetComplaint,
+    comboListFetch: {
+      all: fetchGetAllComplaint,
+      completed: fetchGetAllProcessedComplaint,
+      unprocessed: fetchGetAllUnprocessedComplaint
+    },
     idGetter: getComplaintId,
     rowGetter: complaintRow,
     columnList: [
@@ -89,6 +110,7 @@ export const renderTable = () => {
 
 const initialTable = () => {
   setTitle();
+  setSearchBar();
   setColumn();
   setTableBody();
 }
@@ -109,6 +131,113 @@ const setColumn = () => {
     columns.appendChild(oneColumn);
   })
   head.appendChild(columns);
+}
+
+const setPost = () => {
+  const post = document.createElement("div");
+  post.id = "post";
+  post.className = "post-button";
+  post.textContent = BUTTON.COMMON.POST;
+  return post;
+}
+
+const setComboBox = () => {
+  const select = document.createElement("select");
+  const type = sessionStorage.getItem("currentType");
+  const boxContext = COMBOBOX[type];
+  console.log(JSON.stringify(boxContext));
+  if (!boxContext.isCombo) return null;
+  select.id = boxContext.id;
+  select.className = "comboBox";
+  const optionTypes = boxContext.optionTypes;
+  optionTypes.forEach(optionType => {
+    const option = document.createElement("option");
+    option.value = optionType.value;
+    option.textContent = optionType.label;
+    select.appendChild(option);
+  });
+  return select;
+}
+
+const setInput = () => {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.id = "searchInput";
+  input.placeholder = "검색어 입력";
+  return input;
+}
+
+const initTableByInput = async (id, type) => { // 추가
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  if (id.length > 0) {
+    const item = await context[type].listFetchById(id);
+    setOneRow(item, type);
+  } else {
+    const list = await context[type].comboListFetch["all"]();
+    if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+    setTableBody();
+  }
+}
+
+const setOneRow = (item, type) => {
+  const tableBody = document.getElementById('list');
+  const row = document.createElement("tr");
+  let id = context[type].idGetter(item);
+  row.innerHTML = context[type].rowGetter(item);
+  // 각 행에 클릭 이벤트 추가
+  row.addEventListener("click", () => {
+    if (selectedRow) {
+      selectedRow.classList.remove("selected");
+    }
+    row.classList.add("selected");
+    selectedRow = row;
+  });
+
+  // 더블 클릭 시 상세 페이지로 이동
+  row.addEventListener("dblclick", () => {
+    // 상세 정보를 세션에 저장
+    sessionStorage.setItem("selectedDataId", JSON.stringify(id));
+    window.location.href = "detail.html";
+  });
+
+  tableBody.appendChild(row);
+}
+
+const setButton = () => {
+  const button = document.createElement("button");
+  button.id = "searchButton";
+  button.textContent = BUTTON.COMMON.SEARCH;
+  const type = sessionStorage.getItem("currentType");
+  button.addEventListener("click", () => {
+    const value = document.getElementById("searchInput").value;
+    initTableByInput(value, type);
+  })
+  return button;
+}
+
+const initTableBySelect = async (id, type) => { // 추가
+  const select = document.getElementById(id);
+  const selectedOption = select.options[select.selectedIndex];
+  const list = await context[type].comboListFetch[selectedOption.value]();
+  if (list != null)  sessionStorage.setItem("list", JSON.stringify(list));
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  setTableBody();
+}
+
+const setSearchBar = () => {
+  const container = document.querySelector(".search-container");
+  const type = sessionStorage.getItem("currentType");
+  const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
+  if (select != null) { // 추가
+    container.appendChild(select);
+    if (select.id === "post")
+      select.addEventListener("click", () => alert("버튼 눌림 - POST")); // 수정
+    else select.onchange = () => initTableBySelect(select.id, type); // 추가
+  }
+  container.appendChild(setInput());
+  container.appendChild(setButton());
 }
 
 const setTableBody = () => {

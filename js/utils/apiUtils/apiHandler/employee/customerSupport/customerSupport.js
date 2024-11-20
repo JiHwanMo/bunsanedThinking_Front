@@ -34,6 +34,10 @@ export const fetchGetAllUnprocessedAccidentHandler = async () => {
   return await fetchGetHandler(`${defaultURL}/getAllUnprocessedAccident`);
 };
 
+export const fetchGetAllProcessingAccidentHandler = async () => {
+  return await fetchGetHandler(`${defaultURL}/getAllProcessingAccident`);
+}
+
 export const fetchGetAllComplaintHandler = async () => {
   return await fetchGetHandler(`${defaultURL}/getAllComplaint`);
 };
