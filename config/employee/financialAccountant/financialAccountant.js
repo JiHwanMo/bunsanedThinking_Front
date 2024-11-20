@@ -36,6 +36,9 @@ export const COMBOBOX = {
         label: "미처리"
       }
     ]
+  },
+  VIEW_DEPOSIT_DETAIL: {
+    isCombo: false
   }
 };
 // export const COLUMN_NAME = {};
