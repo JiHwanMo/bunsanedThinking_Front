@@ -26,6 +26,10 @@ export const fetchGetInsuranceMoneyByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getInsuranceMoneyById?id=${id}`);
 }
 
+export const fetchGetInsuranceMoneyRowByIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getInsuranceMoneyRowById?id=${id}`);
+}
+
 export const fetchGetContractByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getContractById?id=${id}`);
 }
@@ -40,6 +44,10 @@ export const fetchGetAllReportHandler = async () => {
 
 export const fetchGetReportByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getReportById?id=${id}`);
+}
+
+export const fetchGetReportRowByIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getReportRowById?id=${id}`);
 }
 
 export const fetchGetAllUnprocessedReportHandler = async () => {

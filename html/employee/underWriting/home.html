@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../../../css/employee/underWriting/underWriting.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="header-line"></div>
+  <div class="button-container" id="buttonContainer">
+  </div>
+</div>
+
+<script type="module">
+  import { renderGreeting } from '../../../js/utils/uiUtils/messageManager/employee/underWriting/message.js';
+  import { renderButtons } from '../../../js/utils/uiUtils/buttonManager/employee/underWriting/home.js';
+
+  // Greeting 메시지와 버튼 목록을 로드하여 표시
+  document.addEventListener("DOMContentLoaded", () => {
+    sessionStorage.setItem('id', 2003);
+    renderGreeting();  // Greeting 메시지 추가
+    renderButtons();   // 버튼 목록 추가
+  });
+</script>
+</body>
+</html>
