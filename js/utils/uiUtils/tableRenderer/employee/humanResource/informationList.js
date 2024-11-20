@@ -17,9 +17,14 @@ const employeeRow = (employee) => {
   `;
 }
 
+const getEmployeeId = (data) => {
+  return data.id;
+}
+
 const context = {
   MANAGEMENT_EMPLOYEE: {
     title : "직원 정보 리스트",
+    idGetter: getEmployeeId,
     listFetch: fetchGetAllEmployee,
     rowGetter: employeeRow,
     columnList: [
@@ -73,6 +78,7 @@ const setTableBody = () => {
   const data = JSON.parse(sessionStorage.getItem("list"));
   data.forEach(item => {
     const row = document.createElement("tr");
+    let id = context[type].idGetter(item);
     row.innerHTML = context[type].rowGetter(item);
     // 각 행에 클릭 이벤트 추가
     row.addEventListener("click", () => {
@@ -86,7 +92,7 @@ const setTableBody = () => {
     // 더블 클릭 시 상세 페이지로 이동
     row.addEventListener("dblclick", () => {
       // 상세 정보를 세션에 저장
-      sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
+      sessionStorage.setItem("selectedDataId", JSON.stringify(id));
       window.location.href = "detail.html";
     });
 
