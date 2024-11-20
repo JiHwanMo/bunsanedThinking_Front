@@ -34,7 +34,7 @@ export const fetchGetPartnerCompanyById = async (id) => {
   return await fetchGetPartnerCompanyByIdHandler(id);
 }
 // (async () => {
-//   const data = await fetchGetPartnerCompany(3003);
+//   const data = await fetchGetPartnerCompany(3002);
 //   console.log(data); // 받아온 데이터를 콘솔에 출력
 // })();
 
