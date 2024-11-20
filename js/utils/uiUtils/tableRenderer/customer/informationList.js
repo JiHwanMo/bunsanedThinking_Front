@@ -148,14 +148,10 @@ const context = {
 
 export const viewInformationListById = async (fetchType) => {
   sessionStorage.setItem("currentType", fetchType);
-
   const id = sessionStorage.getItem("id");
-  // 아이디 파라미터로 받는게 아니랍니다
   const list = await context[fetchType].listFetch(id);
   sessionStorage.setItem("list", JSON.stringify(list));
   window.location.href = "informationList.html";
-  // 이거 js 파일 기준이 아니라 실행중인 html 파일 기준으로 링크 지정해야 합니다.....!!
-  // 현재 js 파일 밖으로 벗어난다고 ../../../ 해서 들어가면 css가 지정이 안되요
 }
 export const viewInformationListAll = async (fetchType) => {
   sessionStorage.setItem("currentType", fetchType);
@@ -258,13 +254,14 @@ const setSearchBar = () => {
   const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
   if (select != null) { // 추가
     container.appendChild(select);
-    if (select.id == "post")
+    if (select.id === "post")
       post.addEventListener("click", () => alert("버튼 눌림 - POST")); // 수정
     else select.onchange = () => initTableBySelect(select.id, type); // 추가
   }
   container.appendChild(setInput());
   container.appendChild(setButton());
 }
+
 const setColumn = () => {
   const columnList = COLUMN_NAME[sessionStorage.getItem("currentType")];
   const head = document.getElementById('tableHead');
@@ -282,20 +279,20 @@ const setOneRow = (item, type) => {
   const row = document.createElement("tr");
   row.innerHTML = context[type].rowGetter(item);
   // 각 행에 클릭 이벤트 추가
-  // row.addEventListener("click", () => {
-  //   if (selectedRow) {
-  //     selectedRow.classList.remove("selected");
-  //   }
-  //   row.classList.add("selected");
-  //   selectedRow = row;
-  // });
+  row.addEventListener("click", () => {
+    if (window.selectedRow) {
+      window.selectedRow.classList.remove("selected");
+    }
+    row.classList.add("selected");
+    window.selectedRow = row;
+  });
 
   // 더블 클릭 시 상세 페이지로 이동
-  // row.addEventListener("dblclick", () => {
-  //   // 상세 정보를 세션에 저장
-  //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
-  //   window.location.href = "detail.html";
-  // });
+  row.addEventListener("dblclick", () => {
+    // 상세 정보를 세션에 저장
+    sessionStorage.setItem("selectedDataId", item.id);
+    // window.location.href = "detail.html";
+  });
 
   tableBody.appendChild(row);
 }
