@@ -1,19 +1,19 @@
-import { BUTTON } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
-import { viewDepartmentListAll } from '../../../tableRenderer/employee/managementPlanning/managementPlanning.js';
+import { BUTTON } from '../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js';
+import { viewCustomerInformationListAll } from '../../../tableRenderer/employee/customerInformationManagement/informationList.js';
 
 export const renderButtons = () => {
   // BUTTON 정의에 따라 ADMINISTRATIVE.HOME 버튼들을 렌더링
-  initialButtons(BUTTON.TASK.EMPLOYEE.MANAGEMENTPLANNING.HOME, managementPlanningTaskMapper);
+  initialButtons(BUTTON.TASK.EMPLOYEE.CUSTOMERINFORMATIONMANAGEMENT.HOME, customerInformationManagementTaskMapper);
 };
 
 // 버튼 동작 정의
-const viewDepartment = async () => {
-  await viewDepartmentListAll(); // 데이터 가져오기 및 sessionStorage 저장
+const viewCustomerInformation = async () => {
+  await viewCustomerInformationListAll(); // 데이터 가져오기 및 sessionStorage 저장
 };
 
 // 버튼 동작 매핑 객체
-const managementPlanningTaskMapper = {
-  DEPARTMENT_LIST: viewDepartment // '집기 비품 재고 관리' 버튼과 함수 연결
+const customerInformationManagementTaskMapper = {
+  CUSTOMERINFORMATION_LIST: viewCustomerInformation // '집기 비품 재고 관리' 버튼과 함수 연결
 };
 
 // 버튼 생성 및 렌더링 함수
