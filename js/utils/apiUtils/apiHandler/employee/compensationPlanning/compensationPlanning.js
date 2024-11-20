@@ -10,8 +10,12 @@ export const fetchEvaluatePartnerCompanyHandler = async (evaluate, partnerCompan
   return await fetchPatchWithParams(`${defaultUrl}/evaluatePartnerCompany?evaluate=${evaluate}&partnerCompanyId=${partnerCompanyId}`);
 }
 
-export const fetchGetPartnerCompanyHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getPartnerCompany?id=${id}`);
+export const fetchGetPartnerCompanyByIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getPartnerCompanyById?id=${id}`);
+}
+
+export const fetchGetPartnerCompanyRowByIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getPartnerCompanyRowById?id=${id}`);
 }
 
 export const fetchUpdatePartnerCompanyHandler = async (partnerCompanyDTO) => {

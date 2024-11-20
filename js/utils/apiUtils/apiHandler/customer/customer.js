@@ -78,32 +78,32 @@ export const fetchGetAllApprovedByCustomerHandler = async () => {
   return await fetchGetHandler(`${defaultUrl}/getAllApprovedByCustomer`);
 }
 
-export const fetchGetAllContractByCustomerIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getAllContractByCustomerId?id=${id}`);
+export const fetchGetAllContractByCustomerIdHandler = async (customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getAllContractByCustomerId?customerId=${customerId}`);
 }
 
-export const fetchGetAllAutomobileInsuranceContractHandler = async () => {
-  return await fetchGetHandler(`${defaultUrl}/getAllAutomobileInsuranceContract`);
+export const fetchGetAllAutomobileContractByCustomerIdHandler = async (customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getAllAutomobileContractByCustomerId?customerId=${customerId}`);
 }
 
-export const fetchGetAllInjuryInsuranceContractHandler = async () => {
-  return await fetchGetHandler(`${defaultUrl}/getAllInjuryInsuranceContract`);
+export const fetchGetAllInjuryContractByCustomerIdHandler = async (customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getAllInjuryContractByCustomerId?customerId=${customerId}`);
 }
 
-export const fetchGetAllDiseaseInsuranceContractHandler = async () => {
-  return await fetchGetHandler(`${defaultUrl}/getAllDiseaseInsuranceContract`);
+export const fetchGetAllDiseaseContractByCustomerIdHandler = async (customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getAllDiseaseContractByCustomerId?customerId=${customerId}`);
 }
 
 export const fetchGetAllContractByProductIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getAllContractByProductId?id=${id}`);
 }
 
-export const fetchGetContractByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getContractById?id=${id}`);
+export const fetchGetContractByIdHandler = async (id, customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getContractById?id=${id}&customerId=${customerId}`);
 }
 
-export const fetchGetContractRowByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getContractRowById?id=${id}`);
+export const fetchGetContractRowByIdHandler = async (id, customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getContractRowById?id=${id}&customerId=${customerId}`);
 }
 
 export const fetchGetContractByOneAutomobileIdHandler = async (id) => {
@@ -114,24 +114,24 @@ export const fetchGetAllAccidentByCustomerIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getAllAccidentByCustomerId?id=${id}`);
 }
 
-export const fetchGetAccidentByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getAccidentById?id=${id}`);
+export const fetchGetAccidentByIdHandler = async (id, customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getAccidentById?id=${id}&customerId=${customerId}`);
 }
 
-export const fetchGetAccidentRowByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getAccidentRowById?id=${id}`);
+export const fetchGetAccidentRowByIdHandler = async (id, customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getAccidentRowById?id=${id}&customerId=${customerId}`);
 }
 
 export const fetchGetAllComplaintsByCustomerIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getAllComplaintsByCustomerId?id=${id}`);
 }
 
-export const fetchGetComplaintByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getComplaintById?id=${id}`);
+export const fetchGetComplaintByIdHandler = async (id, customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getComplaintById?id=${id}&customerId=${customerId}`);
 }
 
-export const fetchGetComplaintRowByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getComplaintRowById?id=${id}`);
+export const fetchGetComplaintRowByIdHandler = async (id, customerId) => {
+  return await fetchGetHandler(`${defaultUrl}/getComplaintRowById?id=${id}&customerId=${customerId}`);
 }
 
 export const fetchSignUpHandler = async (signUpDTO) => {
