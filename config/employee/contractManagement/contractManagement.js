@@ -99,6 +99,7 @@ export const TABLE_TITLE = {
 };
 export const COLUMN_NAME = {
   DEFAULT_CONTRACT: [
+    "계약번호",
     "이름",
     "전화번호",
     "성별",
@@ -108,6 +109,7 @@ export const COLUMN_NAME = {
     "납부 날짜"
   ],
   RECONTRACT: [
+    "계약번호",
     "이름",
     "전화번호",
     "성별",
@@ -118,6 +120,7 @@ export const COLUMN_NAME = {
     "심사 상태"
   ],
   ENDORSEMENT: [
+    "계약번호",
     "이름",
     "전화번호",
     "성별",
@@ -128,6 +131,7 @@ export const COLUMN_NAME = {
     "심사 상태"
   ],
   REVIVAL: [
+    "계약번호",
     "이름",
     "전화번호",
     "성별",
@@ -138,6 +142,7 @@ export const COLUMN_NAME = {
     "심사 상태"
   ],
   TERMINATION: [
+    "계약번호",
     "이름",
     "전화번호",
     "성별",

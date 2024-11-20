@@ -1,14 +1,19 @@
 import { fetchGetAllDefaultContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetContractRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetReContractRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllUnprocessedReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllProcessedReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetEndorsementRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllUnprocessedEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllProcessedEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllRevivalContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetRevivalRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllUnprocessedRevival } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllProcessedRevival } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetTerminationRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllUnprocessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllProcessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { BUTTON } from '../../../../../../config/common.js';
@@ -26,6 +31,7 @@ export const informationType = {
 // 행 만드는 로직은 서버를 수정해야해서 일단 보류
 const contractRow = (dto) => {
   return `
+    <td>${dto.id}</td>
     <td>${dto.customerInfoResponse.name}</td>
     <td>${dto.customerInfoResponse.phoneNumber}</td>
     <td>${dto.customerInfoResponse.gender}</td>
@@ -38,6 +44,7 @@ const contractRow = (dto) => {
 
 const recontractRow = (dto) => {
   return `
+    <td>${dto.id}</td>
     <td>${dto.customerInfoResponse.name}</td>
     <td>${dto.customerInfoResponse.phoneNumber}</td>
     <td>${dto.customerInfoResponse.gender}</td>
@@ -51,6 +58,7 @@ const recontractRow = (dto) => {
 
 const endorsementRow = (dto) => {
   return `
+    <td>${dto.id}</td>
     <td>${dto.customerInfoResponse.name}</td>
     <td>${dto.customerInfoResponse.phoneNumber}</td>
     <td>${dto.customerInfoResponse.gender}</td>
@@ -63,6 +71,7 @@ const endorsementRow = (dto) => {
 }
 const revivalRow = (dto) => {
   return `
+    <td>${dto.id}</td>
     <td>${dto.customerInfoResponse.name}</td>
     <td>${dto.customerInfoResponse.phoneNumber}</td>
     <td>${dto.customerInfoResponse.gender}</td>
@@ -76,6 +85,7 @@ const revivalRow = (dto) => {
 
 const terminationRow = (dto) => {
   return `
+    <td>${dto.id}</td>
     <td>${dto.customerInfoResponse.name}</td>
     <td>${dto.customerInfoResponse.phoneNumber}</td>
     <td>${dto.customerInfoResponse.gender}</td>
@@ -90,12 +100,16 @@ const terminationRow = (dto) => {
 const context = {
   DEFAULT_CONTRACT: {
     listFetch: fetchGetAllDefaultContract,
+    listFetchById: fetchGetContractRowById,
     rowGetter: contractRow,
-    comboListFetch: {}
+    comboListFetch: {
+      all: fetchGetAllDefaultContract
+    }
     // 얜 없어서 비워둠
   },
   RECONTRACT: {
     listFetch: fetchGetAllReContract,
+    listFetchById: fetchGetReContractRowById,
     rowGetter: recontractRow,
     comboListFetch: {
       all: fetchGetAllReContract,
@@ -105,6 +119,7 @@ const context = {
   },
   ENDORSEMENT: {
     listFetch: fetchGetAllEndorsementContract,
+    listFetchById: fetchGetEndorsementRowById,
     rowGetter: endorsementRow,
     comboListFetch: {
       all: fetchGetAllEndorsementContract,
@@ -114,6 +129,7 @@ const context = {
   },
   REVIVAL: {
     listFetch: fetchGetAllRevivalContract,
+    listFetchById: fetchGetRevivalRowById,
     rowGetter: revivalRow,
     comboListFetch: {
       all: fetchGetAllRevivalContract,
@@ -123,6 +139,7 @@ const context = {
   },
   TERMINATION: {
     listFetch: fetchGetAllTerminatingContract,
+    listFetchById: fetchGetTerminationRowById,
     rowGetter: terminationRow,
     comboListFetch: {
       all: fetchGetAllTerminatingContract,
@@ -172,10 +189,30 @@ const setInput = () => {
   return input;
 }
 
+const initTableByInput = async (id, type) => { // 추가
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  if (id.length > 0) {
+    const item = await context[type].listFetchById(id);
+    setOneRow(item, type);
+  } else {
+    const list = await context[type].comboListFetch["all"]();
+    if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+    setTableBody();
+  }
+}
+
 const setButton = () => {
   const button = document.createElement("button");
   button.id = "searchButton";
   button.textContent = BUTTON.COMMON.SEARCH;
+  const type = sessionStorage.getItem("currentType");
+  button.addEventListener("click", () => {
+    const value = document.getElementById("searchInput").value;
+    initTableByInput(value, type);
+    const select = document.getElementById(COMBOBOX[type].id);
+    if (select != null) select.selectedIndex = 0;
+  })
   return button;
 }
 
@@ -184,6 +221,8 @@ const initTableBySelect = async (id, type) => { // 추가
   const selectedOption = select.options[select.selectedIndex];
   const list = await context[type].comboListFetch[selectedOption.value]();
   if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+  const input = document.getElementById("searchInput");
+  if (input != null) input.value = "";
   const tableBody = document.getElementById('list');
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   setTableBody();
@@ -201,7 +240,7 @@ const setSearchBar = () => {
   container.appendChild(setButton());
 }
 
-const setColoumn = () => {
+const setColumn = () => {
   const columnList = COLUMN_NAME[sessionStorage.getItem("currentType")];
   const head = document.getElementById('tableHead');
   const columns = document.createElement('tr');
@@ -213,36 +252,38 @@ const setColoumn = () => {
   head.appendChild(columns);
 }
 
-const setTableBody = () => {
+const setOneRow = (item, type) => {
   const tableBody = document.getElementById('list');
+  const row = document.createElement("tr");
+  row.innerHTML = context[type].rowGetter(item);
+  // 각 행에 클릭 이벤트 추가
+  // row.addEventListener("click", () => {
+  //   if (selectedRow) {
+  //     selectedRow.classList.remove("selected");
+  //   }
+  //   row.classList.add("selected");
+  //   selectedRow = row;
+  // });
+
+  // 더블 클릭 시 상세 페이지로 이동
+  // row.addEventListener("dblclick", () => {
+  //   // 상세 정보를 세션에 저장
+  //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
+  //   window.location.href = "detail.html";
+  // });
+
+  tableBody.appendChild(row);
+}
+
+const setTableBody = () => {
   const type = sessionStorage.getItem("currentType");
   const data = JSON.parse(sessionStorage.getItem("list"));
-  data.forEach(item => {
-    const row = document.createElement("tr");
-    row.innerHTML = context[type].rowGetter(item);
-    // 각 행에 클릭 이벤트 추가
-    // row.addEventListener("click", () => {
-    //   if (selectedRow) {
-    //     selectedRow.classList.remove("selected");
-    //   }
-    //   row.classList.add("selected");
-    //   selectedRow = row;
-    // });
-
-    // 더블 클릭 시 상세 페이지로 이동
-    // row.addEventListener("dblclick", () => {
-    //   // 상세 정보를 세션에 저장
-    //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
-    //   window.location.href = "detail.html";
-    // });
-
-    tableBody.appendChild(row);
-  });
+  data.forEach(item => setOneRow(item, type));
 }
 
 const initialTable = () => {
   setTitle();
   setSearchBar();
-  setColoumn();
+  setColumn();
   setTableBody();
 }

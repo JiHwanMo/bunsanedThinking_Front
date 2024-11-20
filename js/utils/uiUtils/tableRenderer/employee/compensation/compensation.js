@@ -1,7 +1,9 @@
 import { fetchGetAllReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
+import { fetchGetReportRowById } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import { fetchGetAllUnprocessedReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import { fetchGetAllCompletedReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import { fetchGetAllInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
+import { fetchGetInsuranceMoneyRowById } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import { fetchGetAllUnprocessedInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import { fetchGetAllProcessedInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import { BUTTON } from '../../../../../../config/common.js';
@@ -59,6 +61,7 @@ const insuranceMoneyRow = (dto) => {
 const context = {
   REQUEST_COMPENSATION: {
     listFetch: fetchGetAllReport,
+    listFetchById: fetchGetReportRowById,
     rowGetter: accidentRow,
     comboListFetch: {
       all: fetchGetAllReport,
@@ -68,6 +71,7 @@ const context = {
   },
   REQUEST_INSURANCE_MONEY: {
     listFetch: fetchGetAllInsuranceMoney,
+    listFetchById: fetchGetInsuranceMoneyRowById,
     rowGetter: insuranceMoneyRow,
     comboListFetch: {
       all: fetchGetAllInsuranceMoney,
@@ -117,10 +121,30 @@ const setInput = () => {
   return input;
 }
 
+const initTableByInput = async (id, type) => { // 추가
+  const tableBody = document.getElementById('list');
+  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  if (id.length > 0) {
+    const item = await context[type].listFetchById(id);
+    setOneRow(item, type);
+  } else {
+    const list = await context[type].comboListFetch["all"]();
+    if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+    setTableBody();
+  }
+}
+
 const setButton = () => {
   const button = document.createElement("button");
   button.id = "searchButton";
   button.textContent = BUTTON.COMMON.SEARCH;
+  const type = sessionStorage.getItem("currentType");
+  button.addEventListener("click", () => {
+    const value = document.getElementById("searchInput").value;
+    initTableByInput(value, type);
+    const select = document.getElementById(COMBOBOX[type].id);
+    if (select != null) select.selectedIndex = 0;
+  })
   return button;
 }
 
@@ -129,6 +153,8 @@ const initTableBySelect = async (id, type) => { // 추가
   const selectedOption = select.options[select.selectedIndex];
   const list = await context[type].comboListFetch[selectedOption.value]();
   if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+  const input = document.getElementById("searchInput");
+  if (input != null) input.value = "";
   const tableBody = document.getElementById('list');
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   setTableBody();
@@ -137,7 +163,6 @@ const initTableBySelect = async (id, type) => { // 추가
 const setSearchBar = () => {
   const container = document.querySelector(".search-container");
   const type = sessionStorage.getItem("currentType");
-
   if (COMBOBOX[type].isCombo) { // 수정
     const select = setComboBox();
     container.appendChild(select); // 수정
@@ -147,7 +172,7 @@ const setSearchBar = () => {
   container.appendChild(setButton());
 }
 
-const setColoumn = () => {
+const setColumn = () => {
   const columnList = COLUMN_NAME[sessionStorage.getItem("currentType")];
   const head = document.getElementById('tableHead');
   const columns = document.createElement('tr');
@@ -159,36 +184,38 @@ const setColoumn = () => {
   head.appendChild(columns);
 }
 
-const setTableBody = () => {
+const setOneRow = (item, type) => {
   const tableBody = document.getElementById('list');
+  const row = document.createElement("tr");
+  row.innerHTML = context[type].rowGetter(item);
+  // 각 행에 클릭 이벤트 추가
+  // row.addEventListener("click", () => {
+  //   if (selectedRow) {
+  //     selectedRow.classList.remove("selected");
+  //   }
+  //   row.classList.add("selected");
+  //   selectedRow = row;
+  // });
+
+  // 더블 클릭 시 상세 페이지로 이동
+  // row.addEventListener("dblclick", () => {
+  //   // 상세 정보를 세션에 저장
+  //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
+  //   window.location.href = "detail.html";
+  // });
+
+  tableBody.appendChild(row);
+}
+
+const setTableBody = () => {
   const type = sessionStorage.getItem("currentType");
   const data = JSON.parse(sessionStorage.getItem("list"));
-  data.forEach(item => {
-    const row = document.createElement("tr");
-    row.innerHTML = context[type].rowGetter(item);
-    // 각 행에 클릭 이벤트 추가
-    // row.addEventListener("click", () => {
-    //   if (selectedRow) {
-    //     selectedRow.classList.remove("selected");
-    //   }
-    //   row.classList.add("selected");
-    //   selectedRow = row;
-    // });
-
-    // 더블 클릭 시 상세 페이지로 이동
-    // row.addEventListener("dblclick", () => {
-    //   // 상세 정보를 세션에 저장
-    //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
-    //   window.location.href = "detail.html";
-    // });
-
-    tableBody.appendChild(row);
-  });
+  data.forEach(item => setOneRow(item, type));
 }
 
 const initialTable = () => {
   setTitle();
   setSearchBar();
-  setColoumn();
+  setColumn();
   setTableBody();
 }
