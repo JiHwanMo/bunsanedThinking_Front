@@ -18,11 +18,10 @@ const complaintRow = (dto) => {
     <td>${dto.complaint.processStatus}</td>
     <td>${dto.customer.name}</td>
     <td>${dto.customer.phoneNumber}</td>
-    <td></td>
   `;
 }
 
-const reportRow = (accident) => {
+const accidentRow = (accident) => {
   return `
     <td>${accident.id}</td>
     <td>${accident.serviceType}</td>
@@ -31,15 +30,23 @@ const reportRow = (accident) => {
     <td>${accident.customerName}</td>
     <td>${accident.customerPhoneNumber}</td>
     <td>${accident.processStatus}</td>
-    <td></td>
   `;
+}
+
+const getAccidentId = (data) => {
+  return data.id;
+}
+
+const getComplaintId = (data) => {
+  return data.complaint.id;
 }
 
 const context = {
   HANDLE_REPORT: {
     title : "신고 처리 정보 리스트",
     listFetch: fetchGetAllAccident,
-    rowGetter: reportRow,
+    idGetter: getAccidentId,
+    rowGetter: accidentRow,
     columnList: [
       "사고 번호",
       "서비스 종류",
@@ -53,6 +60,7 @@ const context = {
   HANDLE_COMPLAINT: {
     title : "민원 처리 정보 리스트",
     listFetch: fetchGetAllComplaint,
+    idGetter: getComplaintId,
     rowGetter: complaintRow,
     columnList: [
       "민원 종류",
@@ -109,6 +117,7 @@ const setTableBody = () => {
   const data = JSON.parse(sessionStorage.getItem("list"));
   data.forEach(item => {
     const row = document.createElement("tr");
+    let id = context[type].idGetter(item);
     row.innerHTML = context[type].rowGetter(item);
     // 각 행에 클릭 이벤트 추가
     row.addEventListener("click", () => {
@@ -122,7 +131,7 @@ const setTableBody = () => {
     // 더블 클릭 시 상세 페이지로 이동
     row.addEventListener("dblclick", () => {
       // 상세 정보를 세션에 저장
-      sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
+      sessionStorage.setItem("selectedDataId", JSON.stringify(id));
       window.location.href = "detail.html";
     });
 

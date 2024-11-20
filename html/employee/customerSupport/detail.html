@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Information</title>
+  <link rel="stylesheet" href="../../../css/detail.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header-line"></div>
+
+  <div class="info-container">
+    <h3 id="title"></h3>
+    <table id="detailsTable">
+      <tbody>
+      <!-- JavaScript로 추가되는 레코드 -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="button-container" id="buttonContainer">
+  </div>
+</div>
+
+<script type="module">
+  import { renderDetails } from '../../../js/utils/uiUtils/tableRenderer/employee/customerSupport/detail.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderDetails();
+  });
+</script>
+</body>
+</html>
