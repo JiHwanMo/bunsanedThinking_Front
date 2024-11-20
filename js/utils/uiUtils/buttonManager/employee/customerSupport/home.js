@@ -1,6 +1,6 @@
 import { BUTTON } from '../../../../../../config/employee/customerSupport/customerSupport.js';
-import { viewInformationListAll } from '../../../tableRenderer/employee/customerSupport/customerSupport.js';
-import { informationType } from '../../../tableRenderer/employee/customerSupport/customerSupport.js';
+import { viewInformationListAll } from '../../../tableRenderer/employee/customerSupport/informationList.js';
+import { informationType } from '../../../tableRenderer/employee/customerSupport/informationList.js';
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.EMPLOYEE.CUSTOMER_SUPPORT.HOME, customerSupportTaskMapper);

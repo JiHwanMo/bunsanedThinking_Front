@@ -1,6 +1,6 @@
 import { BUTTON } from '../../../../../../config/employee/financialAccountant/financialAccountant.js';
-import { viewInformationListAll } from '../../../tableRenderer/employee/financialAccountant/financialAccountant.js';
-import { informationType } from '../../../tableRenderer/employee/financialAccountant/financialAccountant.js';
+import { viewInformationListAll } from '../../../tableRenderer/employee/financialAccountant/informationList.js';
+import { informationType } from '../../../tableRenderer/employee/financialAccountant/informationList.js';
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.EMPLOYEE.FINANCIAL_ACCOUNTANT.HOME, financialAccountantTaskMapper);
