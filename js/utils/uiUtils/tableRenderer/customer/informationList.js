@@ -93,6 +93,7 @@ const context = {
     listFetchById: fetchGetContractRowById,
     rowGetter: contractRow,
     needCustomerId: true,
+    needDetail: true,
     comboListFetch: {
       all: fetchGetAllContractByCustomerId,
       disease: fetchGetAllDiseaseContractByCustomerId,
@@ -106,6 +107,7 @@ const context = {
     listFetchById: fetchGetAccidentRowById,
     rowGetter: accidentRow,
     needCustomerId: true,
+    needDetail: false,
     comboListFetch: {
       all: fetchGetAllAccidentByCustomerId
     }
@@ -116,6 +118,7 @@ const context = {
     listFetchById: fetchGetComplaintRowById,
     rowGetter: complaintRow,
     needCustomerId: true,
+    needDetail: false,
     comboListFetch: {
       all: fetchGetAllComplaintsByCustomerId
     }
@@ -125,6 +128,7 @@ const context = {
     listFetchById: fetchGetInsuranceRowByProductId,
     rowGetter: insuranceRow,
     needCustomerId: false,
+    needDetail: true,
     comboListFetch: {
       all: fetchGetAllInsurance,
       disease: fetchGetAllDiseaseInsurance,
@@ -137,6 +141,7 @@ const context = {
     listFetchById: fetchGetLoanRowByProductId,
     rowGetter: loanRow,
     needCustomerId: false,
+    needDetail: true,
     comboListFetch: {
       all: fetchGetAllLoan,
       collateral: fetchGetAllCollateralLoan,
@@ -288,11 +293,13 @@ const setOneRow = (item, type) => {
   });
 
   // 더블 클릭 시 상세 페이지로 이동
-  row.addEventListener("dblclick", () => {
-    // 상세 정보를 세션에 저장
-    sessionStorage.setItem("selectedDataId", item.id);
-    // window.location.href = "detail.html";
-  });
+  if (context[type].needDetail) {
+    row.addEventListener("dblclick", () => {
+      // 상세 정보를 세션에 저장
+      sessionStorage.setItem("selectedDataId", item.id);
+      window.location.href = "detail.html";
+    });
+  }
 
   tableBody.appendChild(row);
 }
