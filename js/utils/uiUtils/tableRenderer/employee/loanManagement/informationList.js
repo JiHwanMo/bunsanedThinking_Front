@@ -185,6 +185,7 @@ const initTableByInput = async (id, type) => { // 추가
 const setOneRow = (item, type) => {
   const tableBody = document.getElementById('list');
   const row = document.createElement("tr");
+  let id = context[type].idGetter(item);
   row.innerHTML = context[type].rowGetter(item);
   // 각 행에 클릭 이벤트 추가
   row.addEventListener("click", () => {
@@ -198,7 +199,7 @@ const setOneRow = (item, type) => {
   // 더블 클릭 시 상세 페이지로 이동
   row.addEventListener("dblclick", () => {
     // 상세 정보를 세션에 저장
-    sessionStorage.setItem("selectedData", JSON.stringify(item));
+    sessionStorage.setItem("selectedDataId", JSON.stringify(id));
     window.location.href = "detail.html";
   });
 
