@@ -9,7 +9,7 @@ export const BUTTON = {
           LOAN_REQUEST: '대출금 요청'
         },
         MANAGEMENT_LOAN_PRODUCT: {
-          EDIT: COMMON_BUTTON.COMMON.UPDATE,
+          UPDATE: COMMON_BUTTON.COMMON.UPDATE,
           DELETE: COMMON_BUTTON.COMMON.DELETE
         },
         LOAN_REQUEST: {
@@ -24,7 +24,11 @@ export const BUTTON = {
 
 // export const POP_UP = {};
 export const COMBOBOX = {
+  MANAGEMENT_LOAN_PRODUCT: {
+    isCombo: false
+  },
   LOAN_REQUEST: {
+    isCombo: true,
     id: "processStatus",
     optionTypes: [
       {

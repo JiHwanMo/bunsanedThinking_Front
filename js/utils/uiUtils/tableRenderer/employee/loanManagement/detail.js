@@ -171,7 +171,7 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
   });
 }
 
-const editLoan = () => {
+const updateLoan = () => {
   alert("수정 - 융자운용");
 }
 
@@ -192,7 +192,7 @@ const cancel = () => {
 }
 
 const loanManagementTaskMapper = {
-  EDIT: editLoan,
+  UPDATE: updateLoan,
   DELETE: deleteLoan,
   REQUEST: requestLoan,
   DENIED: deniedLoanRequest,
