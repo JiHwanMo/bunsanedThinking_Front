@@ -189,11 +189,11 @@ const setOneRow = (item, type) => {
   row.innerHTML = context[type].rowGetter(item);
   // 각 행에 클릭 이벤트 추가
   row.addEventListener("click", () => {
-    if (selectedRow) {
-      selectedRow.classList.remove("selected");
+    if (window.selectedRow) {
+      window.selectedRow.classList.remove("selected");
     }
     row.classList.add("selected");
-    selectedRow = row;
+    window.selectedRow = row;
   });
 
   // 더블 클릭 시 상세 페이지로 이동
@@ -252,11 +252,11 @@ const setTableBody = () => {
     let id = context[type].idGetter(item);
     // 각 행에 클릭 이벤트 추가
     row.addEventListener("click", () => {
-      if (selectedRow) {
-        selectedRow.classList.remove("selected");
+      if (window.selectedRow) {
+        window.selectedRow.classList.remove("selected");
       }
       row.classList.add("selected");
-      selectedRow = row;
+      window.selectedRow = row;
     });
 
     // 더블 클릭 시 상세 페이지로 이동
