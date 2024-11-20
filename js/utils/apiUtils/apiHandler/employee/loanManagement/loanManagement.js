@@ -7,7 +7,7 @@ export const fetchGetAllHandler = async () => {
 };
 
 export const fetchGetLoanProductHandler = async (loanId) => {
-  return await fetchGetHandler(`${defaultURL}/getLoan?id=${loanId}`);
+  return await fetchGetHandler(`${defaultURL}/getLoanProduct?id=${loanId}`);
 }
 
 export const fetchGetOutcomeHandler = async (contractId) => {
@@ -19,7 +19,7 @@ export const fetchGetAllLoanRequestHandler = async () => {
 }
 
 export const fetchGetLoanRequestHandler = async (contractId) => {
-  return await fetchGetHandler(`${defaultURL}/getLoanRequest?contractId=${contractId}`);
+  return await fetchGetHandler(`${defaultURL}/getLoanRequest?id=${contractId}`);
 }
 
 export const fetchGetEmployeeHandler = async (employeeId) => {
@@ -65,4 +65,12 @@ export const fetchUpdateLoanProductHandler = async (index, input, loanId) => {
 
 export const fetchDeleteLoanProductHandler = async (productId) => {
   await fetchDeleteHandler(`${defaultURL}/deleteLoanProduct?id=${productId}`);
+};
+
+export const fetchGetAllCompletedLoanRequestHandler = async () => {
+  return await fetchGetHandler(`${defaultURL}/getAllCompletedLoanRequest`);
+};
+
+export const fetchGetAllUnprocessedLoanRequestHandler = async () => {
+  return await fetchGetHandler(`${defaultURL}/getAllUnprocessedLoanRequest`);
 };

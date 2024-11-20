@@ -1,6 +1,6 @@
 import { BUTTON } from '../../../../../../config/employee/loanManagement/loanManagement.js';
-import { viewInformationListAll } from '../../../tableRenderer/employee/loanManagement/loanManagement.js';
-import { informationType } from '../../../tableRenderer/employee/loanManagement/loanManagement.js';
+import { viewInformationListAll } from '../../../tableRenderer/employee/loanManagement/informationList.js';
+import { informationType } from '../../../tableRenderer/employee/loanManagement/informationList.js';
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT.HOME, loanManagementTaskMapper);

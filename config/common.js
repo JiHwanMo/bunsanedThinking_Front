@@ -5,7 +5,7 @@ export const MESSAGES = {
 export const BUTTON = {
   COMMON:{
     OK:'확인',
-    CANCLE:'취소',
+    CANCEL:'취소',
     SEARCH:'검색',
     POST: '등록',
     UPDATE: '수정',
