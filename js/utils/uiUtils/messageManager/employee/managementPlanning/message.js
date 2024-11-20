@@ -3,7 +3,7 @@ import { MESSAGES } from '../../../../../../config/common.js';
 
 export const renderGreeting = async () => {
   const container = document.querySelector(".container");
-  const employeeId = sessionStorage.getItem("employeeId");
+  const employeeId = sessionStorage.getItem("id");
   const getEmployee = await fetchGetEmployee(employeeId); // Employee 데이터 가져오기
   const greetingConstant = MESSAGES.GREETING;
   const greeting = document.createElement("div");
