@@ -3,20 +3,20 @@ import { fetchloginEmployee } from './utils/apiUtils/apiDocumentation/authentica
 import { fetchloginPartnerCompany } from './utils/apiUtils/apiDocumentation/authentication.js';
 
 const link = {
-  CUSTOMER: "customer/customer.html",
+  CUSTOMER: "./customer/home.html",
   ADMINISTRATIVE: "./employee/administrative/home.html",
-  COMPENSATION: "./employee/compensation/compensation.html",
-  COMPENSATION_PLANNING: "./employee/compensationPlanning/compensationPlanning.html",
-  CONTRACT_MANAGEMENT: "./employee/contractManagement/contractManagement.html",
+  COMPENSATION: "./employee/compensation/home.html",
+  COMPENSATION_PLANNING: "./employee/compensationPlanning/home.html",
+  CONTRACT_MANAGEMENT: "./employee/contractManagement/home.html",
   CUSTOMER_INFORMATION_MANAGEMENT: "./employee/customerInformationManagement/home.html",
-  CUSTOMER_SUPPORT: "./employee/customerSupport/customerSupport.html",
-  FINANCIAL_ACCOUNTANT: "./employee/financialAccountant/financialAccountant.html",
-  HUMAN_RESOURCE: "./employee/humanResource/humanResource.html",
-  LOAN_MANAGEMENT: "./employee/loanManagement/loanManagement.html",
+  CUSTOMER_SUPPORT: "./employee/customerSupport/home.html",
+  FINANCIAL_ACCOUNTANT: "./employee/financialAccountant/home.html",
+  HUMAN_RESOURCE: "./employee/humanResource/home.html",
+  LOAN_MANAGEMENT: "./employee/loanManagement/home.html",
   MANAGEMENT_PLANNING: "./employee/managementPlanning/home.html",
-  PRODUCT_MANAGEMENT: "./employee/productManagement/productManagement.html",
-  SALES: "./employee/sales/sales.html",
-  UNDERWRITNG: "./employee/underWriting/underWriting.html",
+  PRODUCT_MANAGEMENT: "./employee/productManagement/home.html",
+  SALES: "./employee/sales/home.html",
+  UNDERWRITNG: "./employee/underWriting/home.html",
   PARTNERCOMPANY: "./partnerCompany/home.html",
 }
 
