@@ -4,20 +4,20 @@ import { fetchloginPartnerCompany } from './utils/apiUtils/apiDocumentation/auth
 
 const link = {
   CUSTOMER: "customer/customer.html",
-  ADMINISTRATIVE: "./employee/administrative/administrative.html",
+  ADMINISTRATIVE: "./employee/administrative/home.html",
   COMPENSATION: "./employee/compensation/compensation.html",
   COMPENSATION_PLANNING: "./employee/compensationPlanning/compensationPlanning.html",
   CONTRACT_MANAGEMENT: "./employee/contractManagement/contractManagement.html",
-  CUSTOMER_INFORMATION_MANAGEMENT: "./employee/customerInformationManagement/customerInformationManagement.html",
+  CUSTOMER_INFORMATION_MANAGEMENT: "./employee/customerInformationManagement/home.html",
   CUSTOMER_SUPPORT: "./employee/customerSupport/customerSupport.html",
   FINANCIAL_ACCOUNTANT: "./employee/financialAccountant/financialAccountant.html",
   HUMAN_RESOURCE: "./employee/humanResource/humanResource.html",
   LOAN_MANAGEMENT: "./employee/loanManagement/loanManagement.html",
-  MANAGEMENT_PLANNING: "./employee/managementPlanning/managementPlanning.html",
+  MANAGEMENT_PLANNING: "./employee/managementPlanning/home.html",
   PRODUCT_MANAGEMENT: "./employee/productManagement/productManagement.html",
   SALES: "./employee/sales/sales.html",
   UNDERWRITNG: "./employee/underWriting/underWriting.html",
-  PARTNERCOMPANY: "./partnerCompany/partnerCompany.html",
+  PARTNERCOMPANY: "./partnerCompany/home.html",
 }
 
 const toNextPage = (user, id) => {
