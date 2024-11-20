@@ -19,9 +19,7 @@ const loanDetail = (data) => {
 
 const collateralDetail = (detail, data) => {
   detail.push(
-    { label: "담보 종류", value: data.collateralType }
-  );
-  detail.push(
+    { label: "담보 종류", value: data.collateralType },
     { label: "최소 가치", value: data.minimumValue }
   );
   return detail;
