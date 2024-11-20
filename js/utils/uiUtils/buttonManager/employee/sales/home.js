@@ -1,5 +1,5 @@
 import { BUTTON } from '../../../../../../config/employee/sales/sales.js';
-import { viewInformationListAll,informationType } from '../../../tableRenderer/employee/sales/sales.js';
+import { viewInformationListAll,informationType } from '../../../tableRenderer/employee/sales/informationList.js';
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.EMPLOYEE.SALES.HOME, salesTaskMapper);
