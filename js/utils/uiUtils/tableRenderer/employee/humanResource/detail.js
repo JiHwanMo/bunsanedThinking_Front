@@ -96,7 +96,7 @@ const renderDetailsTable = (data) => {
 };
 
 const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, loanManagementTaskMapper);
+  initialButtons(context[sessionStorage.getItem("currentType")].buttons, humanResourceTaskMapper);
 };
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
@@ -121,7 +121,7 @@ const deleteEmployee = () => {
   alert("삭제 - 인사관리");
 }
 
-const loanManagementTaskMapper = {
+const humanResourceTaskMapper = {
   UPDATE: updateEmployee,
   DELETE: deleteEmployee
 }
