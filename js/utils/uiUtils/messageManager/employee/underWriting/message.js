@@ -1,4 +1,4 @@
-// import {  } from '../../../../apiUtils/apiDocumentation/employee/underWriting/underWriting.js';
+// import {  } from '../../../../apiUtils/apiDocumentation/employee/underWriting/informationList.js';
 import { fetchGetCustomerById } from '../../../../apiUtils/apiDocumentation/customer/customer.js';
 import { MESSAGES } from '../../../../../../config/common.js';
 

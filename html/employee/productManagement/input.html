@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>보험 상품 입력</title>
+  <link rel="stylesheet" href="../../../css/dynamicInsuranceInput.css">
+</head>
+<body>
+
+<div class="container">
+  <h3>보험 상품 입력</h3>
+
+  <!-- 콤보박스 컨테이너 -->
+  <div id="comboBoxContainer"></div>
+
+  <!-- 입력란 컨테이너 -->
+  <div id="inputFieldsContainer"></div>
+
+  <!-- 버튼 컨테이너 -->
+  <div class="button-container" id="buttonContainer">
+    <!-- JavaScript로 동적으로 추가 -->
+  </div>
+</div>
+
+<script type="module">
+  import { addButtons } from "../../../js/utils/uiUtils/buttonManager/employee/productManagement/input.js";
+  import { renderComboBox, renderInputFields } from "../../../js/utils/uiUtils/tableRenderer/employee/productManagement/input.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const comboBoxContainer = document.getElementById("comboBoxContainer");
+    const inputFieldsContainer = document.getElementById("inputFieldsContainer");
+    const buttonContainer = document.getElementById("buttonContainer");
+
+    // 콤보박스 렌더링
+    const insuranceType = renderComboBox(comboBoxContainer);
+
+    // 입력란 변경 이벤트 추가
+    insuranceType.addEventListener("change", () => {
+      renderInputFields(insuranceType, inputFieldsContainer);
+    });
+
+    // 버튼 추가
+    addButtons(buttonContainer, insuranceType, inputFieldsContainer);
+  });
+</script>
+</body>
+</html>

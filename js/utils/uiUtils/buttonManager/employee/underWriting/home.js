@@ -1,5 +1,5 @@
 import { BUTTON } from '../../../../../../config/employee/underWriting/underWriting.js';
-import { viewInformationListAll,informationType } from '../../../tableRenderer/employee/underWriting/underWriting.js';
+import { viewInformationListAll,informationType } from '../../../tableRenderer/employee/underWriting/informationList.js';
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.EMPLOYEE.UNDERWRITING.HOME, underWritingTaskMapper);

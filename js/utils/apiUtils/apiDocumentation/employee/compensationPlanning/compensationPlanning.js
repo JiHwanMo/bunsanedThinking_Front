@@ -1,6 +1,7 @@
 import { fetchAddPartnerCompanyHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
 import { fetchEvaluatePartnerCompanyHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
-import { fetchGetPartnerCompanyHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
+import { fetchGetPartnerCompanyByIdHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
+import { fetchGetPartnerCompanyRowByIdHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
 import { fetchUpdatePartnerCompanyHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
 import { fetchDeletePartnerCompanyHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
 import { fetchGetAllHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
@@ -29,13 +30,17 @@ export const fetchEvaluatePartnerCompany = async (evaluate, partnerCompanyId) =>
 //   console.log(data); // 받아온 데이터를 콘솔에 출력
 // })();
 
-export const fetchGetPartnerCompany = async (id) => {
-  return await fetchGetPartnerCompanyHandler(id);
+export const fetchGetPartnerCompanyById = async (id) => {
+  return await fetchGetPartnerCompanyByIdHandler(id);
 }
 // (async () => {
 //   const data = await fetchGetPartnerCompany(3002);
 //   console.log(data); // 받아온 데이터를 콘솔에 출력
 // })();
+
+export const fetchGetPartnerCompanyRowById = async (id) => {
+  return await fetchGetPartnerCompanyRowByIdHandler(id);
+}
 
 export const fetchUpdatePartnerCompany = async (partnerCompanyDTO) => {
   return await fetchUpdatePartnerCompanyHandler(partnerCompanyDTO);

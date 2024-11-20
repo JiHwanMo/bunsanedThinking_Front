@@ -4,10 +4,12 @@ import { fetchGetAllInsuranceMoneyHandler } from '../../../apiHandler/employee/c
 import { fetchGetAllUnprocessedInsuranceMoneyHandler } from '../../../apiHandler/employee/compensation/compensation.js';
 import { fetchGetAllProcessedInsuranceMoneyHandler } from '../../../apiHandler/employee/compensation/compensation.js';
 import { fetchGetInsuranceMoneyByIdHandler } from '../../../apiHandler/employee/compensation/compensation.js';
+import { fetchGetInsuranceMoneyRowByIdHandler } from '../../../apiHandler/employee/compensation/compensation.js';
 import { fetchGetContractByIdHandler } from '../../../apiHandler/employee/compensation/compensation.js';
 import { fetchGetCustomerByIdHandler } from '../../../apiHandler/employee/compensation/compensation.js';
 import { fetchGetAllReportHandler } from '../../../apiHandler/employee/compensation/compensation.js';
 import { fetchGetReportByIdHandler } from '../../../apiHandler/employee/compensation/compensation.js';
+import { fetchGetReportRowByIdHandler } from '../../../apiHandler/employee/compensation/compensation.js';
 import { fetchGetAllUnprocessedReportHandler } from '../../../apiHandler/employee/compensation/compensation.js';
 import { fetchGetAllCompletedReportHandler } from '../../../apiHandler/employee/compensation/compensation.js';
 import { fetchGetAutomobileByCustomerIdHandler } from '../../../apiHandler/employee/compensation/compensation.js';
@@ -61,6 +63,10 @@ export const fetchGetInsuranceMoneyById = async (id) => {
   return await fetchGetInsuranceMoneyByIdHandler(id);
 }
 
+export const fetchGetInsuranceMoneyRowById = async (id) => {
+  return await fetchGetInsuranceMoneyRowByIdHandler(id);
+}
+
 export const fetchGetContractById = async (id) => {
   return await fetchGetContractByIdHandler(id);
 }
@@ -75,6 +81,10 @@ export const fetchGetAllReport = async () => {
 
 export const fetchGetReportById = async (id) => {
   return await fetchGetReportByIdHandler(id);
+}
+
+export const fetchGetReportRowById = async (id) => {
+  return await fetchGetReportRowByIdHandler(id);
 }
 
 export const fetchGetAllUnprocessedReport = async () => {

@@ -1,5 +1,4 @@
 import { fetchGetAllInsuranceProduct, fetchGetAllLoanProduct, fetchGetAllCounsel, fetchGetAllSales} from '../../../../../../js/utils/apiUtils/apiDocumentation/employee/sales/sales.js';
-import {timeStampFormatter} from '../../../../TimeStampFormatter.js';
 
 export const informationType = {
   EVALUATE_SALES_PERFORMANCE: "EVALUATE_SALES_PERFORMANCE",
