@@ -90,11 +90,11 @@ const surgeryHistory = (data) => {
 const context = {
   MANAGEMENT_LOAN_PRODUCT: {
     detailGetter: loanDetail,
-    fetchGetById: fetchGetLoanProduct,
+    fetchGetById: fetchGetLoanProduct
   },
   LOAN_REQUEST: {
     detailGetter: loanRequestDetail,
-    fetchGetById: fetchGetLoanRequest,
+    fetchGetById: fetchGetLoanRequest
   }
 }
 

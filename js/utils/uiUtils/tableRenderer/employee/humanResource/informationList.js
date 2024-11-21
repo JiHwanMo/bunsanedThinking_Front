@@ -15,7 +15,6 @@ const employeeRow = (employee) => {
     <td>${employee.position}</td>
     <td>${employee.departmentID}</td>
     <td>${employee.salary}</td>
-    <td></td>
   `;
 }
 
