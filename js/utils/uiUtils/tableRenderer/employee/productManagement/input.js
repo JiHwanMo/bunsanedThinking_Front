@@ -235,6 +235,10 @@ export const renderInputFieldsWithValues = (insuranceType, inputFieldsContainer,
           <option value="serious" ${data.injuryType === "Serious" ? "selected" : ""}>중상</option>
         </select>
       </div>
+      <div class="form-group">
+        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}</label>
+        <input type="number" id="surgeriesLimit" name="surgeriesLimit" value="${data.surgeriesLimit || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}을 입력하세요" required>
+      </div>
     `,
     Disease: `
       ${commonFields}
