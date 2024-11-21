@@ -2,7 +2,12 @@ import {
   fetchEvaluateSalesPerformanceHandler,
   fetchGetAllCompletedCounselHandler,
   fetchGetAllUnprocessedCounselHandler,
-  fetchGetInsuranceProductHandler, fetchGetLoanProductHandler,
+  fetchGetCounselDetailHandler,
+  fetchGetInsuranceProductDetailHandler,
+  fetchGetInsuranceProductHandler,
+  fetchGetLoanProductDetailHandler,
+  fetchGetLoanProductHandler,
+  fetchGetSalesDetailHandler,
 } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchHandleInsuranceConsultationHandler } from '../../../apiHandler/employee/sales/sales.js';
 import { fetchInduceInsuranceProductHandler } from '../../../apiHandler/employee/sales/sales.js';
@@ -48,6 +53,10 @@ export const fetchGetSales = async (id) => {
   return await fetchGetSalesHandler(id);
 }
 
+export const fetchGetSalesDetail = async (id) => {
+  return await fetchGetSalesDetailHandler(id);
+}
+
 export const fetchGetAllCounsel = async () => {
   return await fetchGetAllCounselHandler();
 }
@@ -64,6 +73,10 @@ export const fetchGetCounsel = async (id) => {
   return await fetchGetCounselHandler(id);
 }
 
+export const fetchGetCounselDetail = async (id) => {
+  return await fetchGetCounselDetailHandler(id);
+}
+
 export const fetchGetAllInsuranceProduct = async () => {
   return await fetchGetAllInsuranceProductHandler();
 }
@@ -72,8 +85,16 @@ export const fetchGetInsuranceProduct = async (id) => {
   return await fetchGetInsuranceProductHandler(id);
 }
 
+export const fetchGetInsuranceProductDetail = async (id) => {
+  return await fetchGetInsuranceProductDetailHandler(id);
+}
+
 export const fetchGetAllLoanProduct = async () => {
   return await fetchGetAllLoanProductHandler();
+}
+
+export const fetchGetLoanProductDetail = async (id) => {
+  return await fetchGetLoanProductDetailHandler(id);
 }
 
 export const fetchGetLoanProduct = async (id) => {

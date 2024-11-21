@@ -3,6 +3,7 @@ import {fetchGetInsuranceProductDetail} from "../../../../apiUtils/apiDocumentat
 
 const insuranceDetail = (dto) => {
   const detail = [
+    { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.NAME, value: dto.id },
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.NAME, value: dto.name },
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.INSURANCE_TYPE, value: dto.insuranceType },
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.AGE_RANGE, value: dto.ageRange },

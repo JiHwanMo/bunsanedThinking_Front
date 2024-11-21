@@ -30,6 +30,10 @@ export const fetchGetSalesHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getSales?id=${id}`);
 }
 
+export const fetchGetSalesDetailHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getSalesDetail?id=${id}`);
+}
+
 export const fetchGetAllCounselHandler = async () => {
   return await fetchGetHandler(`${defaultUrl}/getAllCounsel`);
 }
@@ -46,6 +50,9 @@ export const fetchGetCounselHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getCounsel?id=${id}`);
 }
 
+export const fetchGetCounselDetailHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getCounselDetail?id=${id}`);
+}
 export const fetchGetAllInsuranceProductHandler = async () => {
   return await fetchGetHandler(`${defaultUrl}/getAllInsuranceProduct`);
 }
@@ -54,12 +61,20 @@ export const fetchGetInsuranceProductHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getInsuranceProduct?id=${id}`);
 }
 
+export const fetchGetInsuranceProductDetailHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getInsuranceProductDetail?id=${id}`);
+}
+
 export const fetchGetAllLoanProductHandler = async () => {
   return await fetchGetHandler(`${defaultUrl}/getAllLoanProduct`);
 }
 
 export const fetchGetLoanProductHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getLoanProduct?id=${id}`);
+}
+
+export const fetchGetLoanProductDetailHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getLoanProductDetail?id=${id}`);
 }
 
 export const fetchAddDiseaseHistoryHandler = async (induceDiseaseHistoryDTO) => {

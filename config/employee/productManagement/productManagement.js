@@ -38,6 +38,7 @@ export const COLUMN_NAME = {
 
 export const DETAIL_COLUMN_NAME = {
   MANAGE_INSURANCE_PRODUCT:{
+    ID: "보험 상품 번호",
     NAME: "보험 상품 이름",
     INSURANCE_TYPE: "보험 종류",
     AGE_RANGE: "연령대",
