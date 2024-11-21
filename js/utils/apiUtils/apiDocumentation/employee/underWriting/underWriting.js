@@ -1,5 +1,5 @@
 import {
-  fetchApplyCoperationHandler, fetchGetAllContractHandler
+  fetchApplyCoperationHandler, fetchGetAllContractHandler, fetchGetContractDetailHandler
 } from '../../../apiHandler/employee/underWriting/underWriting.js';
 import { fetchApplyReinsuranceHandler } from '../../../apiHandler/employee/underWriting/underWriting.js';
 import { fetchReviewAcquisitionHandler } from '../../../apiHandler/employee/underWriting/underWriting.js';
@@ -26,6 +26,10 @@ export const fetchGetCustomer = async (id) => {
 
 export const fetchGetContract = async (id) => {
   return await fetchGetContractHandler(id);
+}
+
+export const fetchGetContractDetail = async (id) => {
+  return await fetchGetContractDetailHandler(id);
 }
 
 export const fetchGetAllContract = async () => {

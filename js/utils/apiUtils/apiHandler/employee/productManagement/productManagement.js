@@ -10,6 +10,10 @@ export const fetchGetInsuranceProductHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getInsuranceProduct?id=${id}`);
 }
 
+export const fetchGetInsuranceProductDetailHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getInsuranceProductDetail?id=${id}`);
+}
+
 export const fetchAddInjuryInsuranceHandler = async (addInjuryInsuranceDTO) => {
   return await fetchPostHandler(`${defaultUrl}/addInjuryInsurance`,addInjuryInsuranceDTO);
 }
