@@ -1,4 +1,3 @@
-import { BUTTON } from '../../../../../../config/employee/financialAccountant/financialAccountant.js';
 import {
   fetchGetPaymentDetail
 } from "../../../../apiUtils/apiDocumentation/employee/financialAccountant/financialAccountant.js";
