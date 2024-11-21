@@ -1,3 +1,5 @@
+import { BUTTON as COMMON_BUTTON } from '../../common.js'
+
 export const BUTTON = {
   TASK: {
     COMPENSATION: {
@@ -5,6 +7,14 @@ export const BUTTON = {
         REQUEST_COMPENSATION: '보상 지급 요청',
         REQUEST_INSURANCE_MONEY: '보험금 지급 요청'
       },
+      REQUEST_COMPENSATION: {
+        REQUEST: "요청",
+        CANCEL: COMMON_BUTTON.COMMON.CANCEL
+      },
+      REQUEST_INSURANCE_MONEY: {
+        REQUEST: "요청",
+        CANCEL: COMMON_BUTTON.COMMON.CANCEL
+      }
     }
   }
 };

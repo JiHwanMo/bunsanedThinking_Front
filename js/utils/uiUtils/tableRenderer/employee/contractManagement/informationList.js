@@ -269,7 +269,7 @@ const setOneRow = (item, type) => {
   row.addEventListener("dblclick", () => {
     // 상세 정보를 세션에 저장
     sessionStorage.setItem("selectedDataId", item.id);
-    // window.location.href = "detail.html";
+    window.location.href = "detail.html";
   });
 
   tableBody.appendChild(row);
