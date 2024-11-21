@@ -257,20 +257,20 @@ const setOneRow = (item, type) => {
   const row = document.createElement("tr");
   row.innerHTML = context[type].rowGetter(item);
   // 각 행에 클릭 이벤트 추가
-  // row.addEventListener("click", () => {
-  //   if (selectedRow) {
-  //     selectedRow.classList.remove("selected");
-  //   }
-  //   row.classList.add("selected");
-  //   selectedRow = row;
-  // });
+  row.addEventListener("click", () => {
+    if (window.selectedRow) {
+      window.selectedRow.classList.remove("selected");
+    }
+    row.classList.add("selected");
+    window.selectedRow = row;
+  });
 
   // 더블 클릭 시 상세 페이지로 이동
-  // row.addEventListener("dblclick", () => {
-  //   // 상세 정보를 세션에 저장
-  //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
-  //   window.location.href = "detail.html";
-  // });
+  row.addEventListener("dblclick", () => {
+    // 상세 정보를 세션에 저장
+    sessionStorage.setItem("selectedDataId", item.id);
+    window.location.href = "detail.html";
+  });
 
   tableBody.appendChild(row);
 }

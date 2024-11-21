@@ -34,11 +34,6 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
 
     button.addEventListener("click", buttonActionMapper[key]);
 
-    // buttonActionMapper[PRODUCT_LIST] -> showProductListMenu
-    // buttonActionMapper[MANAGEMENT_CONTRACT] -> managementContract
-    // buttonActionMapper[VIEW_ACCIDENT] -> viewAccident
-    // buttonActionMapper[VIEW_COMPLAINT] -> viewComplaint
-
     buttonContainer.appendChild(button);
   });
 }
