@@ -219,19 +219,20 @@ const renderDetailsTable = (data) => {
 }
 
 const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, customerTaskMapper);
+  initialButtons();
 }
 
-const initialButtons = (buttonMessages, buttonActionMapper) => {
+const initialButtons = () => {
   const buttonContainer = document.getElementById("buttonContainer");
   const type = sessionStorage.getItem("currentType");
+  const buttonMessages = context[type].buttons;
   // 객체의 각 항목을 순회하여 버튼 생성
   Object.entries(buttonMessages).forEach(([key, name]) => {
     const button = document.createElement("div");
     button.className = "button-item";
     button.textContent = name; // 버튼에 표시할 텍스트 설정
 
-    button.addEventListener("click", buttonActionMapper[type][key]);
+    button.addEventListener("click", customerTaskMapper[type][key]);
 
     buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
   });

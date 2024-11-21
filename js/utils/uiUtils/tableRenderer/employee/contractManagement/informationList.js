@@ -1,19 +1,19 @@
 import { fetchGetAllDefaultContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetContractRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetContractById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetReContractRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetReContractById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllUnprocessedReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllProcessedReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetEndorsementRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetEndorsementById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllUnprocessedEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllProcessedEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllRevivalContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetRevivalRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetRevivalById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllUnprocessedRevival } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllProcessedRevival } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetTerminationRowById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import { fetchGetTerminationById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllUnprocessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllProcessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { BUTTON } from '../../../../../../config/common.js';
@@ -100,7 +100,7 @@ const terminationRow = (dto) => {
 const context = {
   DEFAULT_CONTRACT: {
     listFetch: fetchGetAllDefaultContract,
-    listFetchById: fetchGetContractRowById,
+    listFetchById: fetchGetContractById,
     rowGetter: contractRow,
     comboListFetch: {
       all: fetchGetAllDefaultContract
@@ -109,7 +109,7 @@ const context = {
   },
   RECONTRACT: {
     listFetch: fetchGetAllReContract,
-    listFetchById: fetchGetReContractRowById,
+    listFetchById: fetchGetReContractById,
     rowGetter: recontractRow,
     comboListFetch: {
       all: fetchGetAllReContract,
@@ -119,7 +119,7 @@ const context = {
   },
   ENDORSEMENT: {
     listFetch: fetchGetAllEndorsementContract,
-    listFetchById: fetchGetEndorsementRowById,
+    listFetchById: fetchGetEndorsementById,
     rowGetter: endorsementRow,
     comboListFetch: {
       all: fetchGetAllEndorsementContract,
@@ -129,7 +129,7 @@ const context = {
   },
   REVIVAL: {
     listFetch: fetchGetAllRevivalContract,
-    listFetchById: fetchGetRevivalRowById,
+    listFetchById: fetchGetRevivalById,
     rowGetter: revivalRow,
     comboListFetch: {
       all: fetchGetAllRevivalContract,
@@ -139,7 +139,7 @@ const context = {
   },
   TERMINATION: {
     listFetch: fetchGetAllTerminatingContract,
-    listFetchById: fetchGetTerminationRowById,
+    listFetchById: fetchGetTerminationById,
     rowGetter: terminationRow,
     comboListFetch: {
       all: fetchGetAllTerminatingContract,
