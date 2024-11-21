@@ -70,9 +70,8 @@ export const renderDetails = async () => {
   // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
-    console.log(selectedData)
     renderDetailsTable(selectedData);
-    renderButtons(selectedDataId);
+    renderButtons(selectedData);
   }
 };
 
@@ -124,8 +123,8 @@ const renderDetailsTable = (data) => {
 };
 
 
-const renderButtons = (selectedDataId) => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, productManagementTaskMapper(selectedDataId));
+const renderButtons = (selectedData) => {
+  initialButtons(context[sessionStorage.getItem("currentType")].buttons, productManagementTaskMapper(selectedData));
 };
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
@@ -142,18 +141,20 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
   });
 }
 
-const updateInsurance = (selectedDataId) => {
-  sessionStorage.setItem("selectedDataId", JSON.stringify(selectedDataId));
+const updateInsurance = async (selectedData) => {
+  sessionStorage.setItem("selectedDataId", JSON.stringify(selectedData.id));
+  sessionStorage.setItem("selectedDataInsuranceType", JSON.stringify(selectedData.insuranceType));
+  sessionStorage.setItem("selectedButtonType", JSON.stringify("UPDATE"));
   window.location.href = "input.html";
 }
 
-const deleteInsurance = async (selectedDataId) => {
-  await context.MANAGE_INSURANCE_PRODUCT.fetchDelete(selectedDataId)
+const deleteInsurance = async (selectedData) => {
+  await context.MANAGE_INSURANCE_PRODUCT.fetchDelete(selectedData.id)
   alert("삭제 완료.");
   window.location.href = "home.html";
 }
 
-const productManagementTaskMapper = (selectedDataId) => ({
-  UPDATE: () => updateInsurance(selectedDataId),
-  DELETE: () => deleteInsurance(selectedDataId)
+const productManagementTaskMapper = (selectedData) => ({
+  UPDATE: () => updateInsurance(selectedData),
+  DELETE: () => deleteInsurance(selectedData)
 });

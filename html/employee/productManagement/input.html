@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>보험 상품 입력</title>
-  <link rel="stylesheet" href="../../../css/dynamicInsuranceInput.css">
+  <link rel="stylesheet" href="../../../css/input.css">
 </head>
 <body>
 
@@ -18,9 +18,7 @@
   <div id="inputFieldsContainer"></div>
 
   <!-- 버튼 컨테이너 -->
-  <div class="button-container" id="buttonContainer">
-    <!-- JavaScript로 동적으로 추가 -->
-  </div>
+  <div class="button-container" id="buttonContainer"></div>
 </div>
 
 <script type="module">
@@ -32,16 +30,22 @@
     const inputFieldsContainer = document.getElementById("inputFieldsContainer");
     const buttonContainer = document.getElementById("buttonContainer");
 
-    // 콤보박스 렌더링
-    const insuranceType = renderComboBox(comboBoxContainer);
+    const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
 
-    // 입력란 변경 이벤트 추가
-    insuranceType.addEventListener("change", () => {
-      renderInputFields(insuranceType, inputFieldsContainer);
-    });
+    if (selectedButtonType === "POST") {
+      // 콤보박스 렌더링
+      const insuranceType = renderComboBox(comboBoxContainer);
+      // 입력란 변경 이벤트 추가
+      insuranceType.addEventListener("change", () => {
+        renderInputFields(insuranceType.value, inputFieldsContainer);
+      });
+    } else if (selectedButtonType === "UPDATE") {
+      // 바로 입력란 렌더링 (기본값으로 설정)
+      renderInputFields(JSON.parse(sessionStorage.getItem("selectedDataInsuranceType")), inputFieldsContainer);
+    }
 
     // 버튼 추가
-    addButtons(buttonContainer, insuranceType, inputFieldsContainer);
+    addButtons(buttonContainer);
   });
 </script>
 </body>

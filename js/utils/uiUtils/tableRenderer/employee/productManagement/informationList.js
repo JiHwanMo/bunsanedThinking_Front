@@ -58,15 +58,22 @@ const setSearchBar = () => {
   const container = document.querySelector(".search-container");
   const type = sessionStorage.getItem("currentType");
   const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
-  if (select != null) { // 추가
+
+  if (select != null) {
     container.appendChild(select);
-    if (select.id === "post")
-      post.addEventListener("click", () => alert("버튼 눌림 - POST")); // 수정
-    else select.onchange = () => initTableBySelect(select.id, type); // 추가
+    if (select.id === "post") {
+      select.addEventListener("click", () => {
+        sessionStorage.setItem("selectedButtonType", JSON.stringify("POST"));
+        window.location.href = "input.html";
+      });
+    } else {
+      select.onchange = () => initTableBySelect(select.id, type);
+    }
   }
+
   container.appendChild(setInput());
   container.appendChild(setButton());
-}
+};
 
 const setComboBox = () => {
   const select = document.createElement("select");

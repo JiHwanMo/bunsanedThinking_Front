@@ -12,9 +12,6 @@ import { fetchUpdateAutomobileInsuranceHandler } from '../../../apiHandler/emplo
 import { fetchGetAllInsuranceHandler, fetchGetAllAutomobileInsuranceHandler,fetchGetAllDiseaseInsuranceHandler, fetchGetAllInJuryHandler } from '../../../apiHandler/employee/productManagement/productManagement.js';
 
 
-export const fetchAddDiseaseInsurance = async (addDiseaseInsuranceDTO) => {
-  return await fetchAddDiseaseInsuranceHandler(addDiseaseInsuranceDTO);
-}
 
 export const fetchGetInsuranceProduct = async (id) => {
   return await fetchGetInsuranceProductHandler(id);
@@ -22,6 +19,10 @@ export const fetchGetInsuranceProduct = async (id) => {
 
 export const fetchGetInsuranceProductDetail = async (id) => {
   return await fetchGetInsuranceProductDetailHandler(id);
+}
+
+export const fetchAddDiseaseInsurance = async (addDiseaseInsuranceDTO) => {
+  return await fetchAddDiseaseInsuranceHandler(addDiseaseInsuranceDTO);
 }
 
 export const fetchAddInjuryInsurance = async (addInjuryInsuranceDTO) => {
