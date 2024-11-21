@@ -1,5 +1,8 @@
 import {BUTTON, DETAIL_COLUMN_NAME} from "../../../../../../config/employee/productManagement/productManagement.js";
-import {fetchGetInsuranceProductDetail} from "../../../../apiUtils/apiDocumentation/employee/productManagement/productManagement.js"
+import {
+  fetchDeleteInsuranceProduct,
+  fetchGetInsuranceProductDetail
+} from "../../../../apiUtils/apiDocumentation/employee/productManagement/productManagement.js"
 
 const insuranceDetail = (dto) => {
   const detail = [
@@ -55,6 +58,7 @@ const context = {
   MANAGE_INSURANCE_PRODUCT: {
     detailGetter: insuranceDetail,
     fetchGetById: fetchGetInsuranceProductDetail,
+    fetchDelete: fetchDeleteInsuranceProduct,
     buttons: BUTTON.TASK.EMPLOYEE.PRODUCT_MANAGEMENT.MANAGE_INSURANCE_PRODUCT
   }
 }
@@ -68,7 +72,7 @@ export const renderDetails = async () => {
     const selectedData = await context[type].fetchGetById(selectedDataId);
     console.log(selectedData)
     renderDetailsTable(selectedData);
-    renderButtons();
+    renderButtons(selectedDataId);
   }
 };
 
@@ -120,8 +124,8 @@ const renderDetailsTable = (data) => {
 };
 
 
-const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, productManagementTaskMapper);
+const renderButtons = (selectedDataId) => {
+  initialButtons(context[sessionStorage.getItem("currentType")].buttons, productManagementTaskMapper(selectedDataId));
 };
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
@@ -138,15 +142,18 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
   });
 }
 
-const updateInsurance = () => {
-  alert("수정");
+const updateInsurance = (selectedDataId) => {
+  sessionStorage.setItem("selectedDataId", JSON.stringify(selectedDataId));
+  window.location.href = "input.html";
 }
 
-const deleteInsurance = () => {
-  alert("삭제");
+const deleteInsurance = async (selectedDataId) => {
+  await context.MANAGE_INSURANCE_PRODUCT.fetchDelete(selectedDataId)
+  alert("삭제 완료.");
+  window.location.href = "home.html";
 }
 
-const productManagementTaskMapper = {
-  UPDATE: updateInsurance,
-  DELETE: deleteInsurance,
-}
+const productManagementTaskMapper = (selectedDataId) => ({
+  UPDATE: () => updateInsurance(selectedDataId),
+  DELETE: () => deleteInsurance(selectedDataId)
+});

@@ -44,7 +44,7 @@ const context = {
   REVIEW_ACQUISITION: {
     detailGetter: contractDetail,
     fetchGetById: fetchGetContractDetail,
-    reviewAcquisition: fetchReviewAcquisition,
+    fetchReviewAcquisition: fetchReviewAcquisition,
     buttons: BUTTON.TASK.EMPLOYEE.UNDERWRITING.REVIEW_ACQUISITION
   },
   APPLY_COPERATION: {},
@@ -126,13 +126,13 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
 };
 
 const acceptanceInsurance = async (selectedDataId) => {
-  await context.REVIEW_ACQUISITION.reviewAcquisition(selectedDataId, true);
+  await context.REVIEW_ACQUISITION.fetchReviewAcquisition(selectedDataId, true);
   alert("승인 완료");
   window.location.href = "home.html";
 };
 
 const deniedInsurance = async (selectedDataId) => {
-  await context.REVIEW_ACQUISITION.reviewAcquisition(selectedDataId, false);
+  await context.REVIEW_ACQUISITION.fetchReviewAcquisition(selectedDataId, false);
   alert("거절 완료");
   window.location.href = "home.html";
 };

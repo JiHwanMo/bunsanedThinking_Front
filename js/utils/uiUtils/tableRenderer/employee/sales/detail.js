@@ -1,6 +1,10 @@
 import {BUTTON, DETAIL_COLUMN_NAME} from "../../../../../../config/employee/sales/sales.js";
 import {
-  fetchGetInsuranceProductDetail, fetchGetLoanProductDetail, fetchGetSalesDetail, fetchGetCounselDetail
+  fetchGetInsuranceProductDetail,
+  fetchGetLoanProductDetail,
+  fetchGetSalesDetail,
+  fetchGetCounselDetail,
+  fetchHandleInsuranceConsultation
 } from "../../../../apiUtils/apiDocumentation/employee/Sales/sales.js";
 
 const salesDetail = (dto) => {
@@ -120,6 +124,7 @@ const context = {
   HANDLE_INSURANCE_CONSULTATION: {
     detailGetter: counselDetail,
     fetchGetById: fetchGetCounselDetail,
+    fetchHandleInsuranceConsultation: fetchHandleInsuranceConsultation,
     buttons: BUTTON.TASK.EMPLOYEE.SALES.HANDLE_INSURANCE_CONSULTATION
   },
   INDUCE_INSURANCE_PRODUCT: {
@@ -143,7 +148,7 @@ export const renderDetails = async () => {
     const selectedData = await context[type].fetchGetById(selectedDataId);
     console.log(selectedData)
     renderDetailsTable(selectedData);
-    renderButtons();
+    renderButtons(selectedDataId);
   }
 };
 
@@ -195,8 +200,8 @@ const renderDetailsTable = (data) => {
 };
 
 
-const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, salesTaskMapper);
+const renderButtons = (selectedDataId) => {
+  initialButtons(context[sessionStorage.getItem("currentType")].buttons, salesTaskMapper(selectedDataId));
 };
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
@@ -213,36 +218,41 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
   });
 }
 
-const reservationInsuranceCounsel = () => {
-  alert("보험 상담 예약");
+const reservationInsuranceCounsel = async (selectedDataId) => {
+  alert("예약되었습니다.");
+  await context.HANDLE_INSURANCE_CONSULTATION.fetchHandleInsuranceConsultation(selectedDataId)
+  window.location.href = "home.html";
 }
 
-const evaluationSales = () => {
-  alert("평가");
+const evaluationSales = (selectedDataId) => {
+  sessionStorage.setItem("selectedDataId", JSON.stringify(selectedDataId));
+  window.location.href = "input.html";
 }
 
 const cancel = () => {
-  alert("취소");
+  window.location.href = "home.html";
 }
 
 const sendingNotice = () => {
-  alert("안내장 발송");
+  alert("안내장이 발송되었습니다.");
+  window.location.href = "home.html";
 }
 
-const insuranceEnrollmentRequest = () => {
-  alert("보험 가입 요청");
+const insuranceEnrollmentRequest = (selectedDataId) => {
+  sessionStorage.setItem("selectedDataId", JSON.stringify(selectedDataId));
+  window.location.href = "input.html";
 }
 
-const loanRequest = () => {
-  alert("대출 요청");
+const loanRequest = (selectedDataId) => {
+  sessionStorage.setItem("selectedDataId", JSON.stringify(selectedDataId));
+  window.location.href = "input.html";
 }
 
-
-const salesTaskMapper = {
-  RESERVATION: reservationInsuranceCounsel,
-  CANCEL: cancel,
-  EVALUATION:evaluationSales,
-  SENDING_NOTICE: sendingNotice,
-  INSURANCE_ENROLLMENT_REQUEST: insuranceEnrollmentRequest,
-  LOAN_REQUEST: loanRequest
-}
+const salesTaskMapper = (selectedDataId) => ({
+  RESERVATION: () => reservationInsuranceCounsel(selectedDataId),
+  CANCEL: () => cancel(),
+  EVALUATION: () => evaluationSales(selectedDataId),
+  SENDING_NOTICE: () => sendingNotice(),
+  INSURANCE_ENROLLMENT_REQUEST: () => insuranceEnrollmentRequest(selectedDataId),
+  LOAN_REQUEST: () => loanRequest(selectedDataId)
+});
