@@ -1,10 +1,10 @@
-import { fetchGetPartnerCompany } from "../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
+import { fetchGetPartnerCompanyById } from "../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import { MESSAGES } from '../../../../../config/common.js';
 
 export const renderGreeting = async () => {
   const container = document.querySelector(".container");
   const id = sessionStorage.getItem("id");
-  const getPartnerCompany = await fetchGetPartnerCompany(id); // Employee 데이터 가져오기
+  const getPartnerCompany = await fetchGetPartnerCompanyById(id); // Employee 데이터 가져오기
   const greetingConstant = MESSAGES.GREETING;
   const greeting = document.createElement("div");
   greeting.className = "greeting";
