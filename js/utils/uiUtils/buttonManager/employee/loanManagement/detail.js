@@ -1,31 +1,10 @@
 import {BUTTON} from "../../../../../../config/employee/loanManagement/loanManagement.js";
-
-const context = {
-  MANAGEMENT_LOAN_PRODUCT: {
-    buttons: BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT.MANAGEMENT_LOAN_PRODUCT
-  },
-  LOAN_REQUEST: {
-    buttons: BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT.LOAN_REQUEST
-  }
-}
+import {initialButtons} from "../../../common/buttonUtils.js";
 
 export const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, loanManagementTaskMapper);
+  const type = sessionStorage.getItem("currentType");
+  initialButtons(BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT[type], loanManagementTaskMapper[type]);
 };
-
-const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  // 객체의 각 항목을 순회하여 버튼 생성
-  Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
-    button.textContent = name; // 버튼에 표시할 텍스트 설정
-
-    button.addEventListener("click", buttonActionMapper[key]);
-
-    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
-  });
-}
 
 const updateLoan = () => {
   alert("수정 - 융자운용");
@@ -48,9 +27,13 @@ const cancel = () => {
 }
 
 const loanManagementTaskMapper = {
-  UPDATE: updateLoan,
-  DELETE: deleteLoan,
-  REQUEST: requestLoan,
-  DENIED: deniedLoanRequest,
-  CANCEL: cancel
+  MANAGEMENT_LOAN_PRODUCT: {
+    UPDATE: updateLoan,
+    DELETE: deleteLoan
+  },
+  LOAN_REQUEST: {
+    REQUEST: requestLoan,
+    DENIED: deniedLoanRequest,
+    CANCEL: cancel
+  }
 }
