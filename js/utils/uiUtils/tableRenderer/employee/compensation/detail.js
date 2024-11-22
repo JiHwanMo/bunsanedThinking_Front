@@ -3,7 +3,7 @@ import {
   fetchGetReportById
 } from "../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js";
 import {BUTTON} from "../../../../../../config/employee/compensation/compensation.js";
-import {renderDetailButtons} from "../../../buttonManager/employee/compensation/home.js";
+import {initialButtons} from "../../../common/buttonUtils.js";
 
 const serviceTypeStr = {
   EmergencyTowing: "긴급견인",
@@ -78,7 +78,7 @@ export const renderDetails = async () => {
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
     renderDetailsTable(selectedData);
-    renderDetailButtons();
+    renderButtons();
   }
 }
 
@@ -126,4 +126,32 @@ const renderDetailsTable = (data) => {
     }
     detailsTable.querySelector("tbody").appendChild(row);
   });
+}
+
+const requestCompensation = () => {
+  alert("보상처리");
+}
+
+const requestInsuranceMoney = () => {
+  alert("보험금 지급");
+}
+
+const cancel = () => {
+  window.history.back();
+}
+
+const compensationTaskMapper = {
+  REQUEST_COMPENSATION: {
+    REQUEST: requestCompensation,
+    CANCEL: cancel
+  },
+  REQUEST_INSURANCE_MONEY: {
+    REQUEST: requestInsuranceMoney,
+    CANCEL: cancel
+  }
+}
+
+const renderButtons = () => {
+  const type = sessionStorage.getItem("currentType");
+  initialButtons(BUTTON.TASK.COMPENSATION[type], compensationTaskMapper[type]);
 }
