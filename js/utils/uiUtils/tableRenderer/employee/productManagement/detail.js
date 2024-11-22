@@ -72,7 +72,7 @@ export const renderDetails = async () => {
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
     renderDetailsTable(selectedData);
-    renderButtons(selectedData);
+    renderButtons();
   }
 };
 
@@ -124,8 +124,8 @@ const renderDetailsTable = (data) => {
 };
 
 
-const renderButtons = (selectedData) => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, productManagementTaskMapper(selectedData));
+const renderButtons = () => {
+  initialButtons(context[sessionStorage.getItem("currentType")].buttons, productManagementTaskMapper);
 };
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
@@ -142,21 +142,20 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
   });
 }
 
-const updateInsurance = async (selectedData) => {
-  sessionStorage.setItem("selectedDataId", JSON.stringify(selectedData.id));
-  sessionStorage.setItem("selectedDataInsuranceType", JSON.stringify(selectedData.insuranceType));
+const updateInsurance = async () => {
   sessionStorage.setItem("selectedButtonType", JSON.stringify("UPDATE"));
   window.location.href = "input.html";
 }
 
-const deleteInsurance = async (selectedData) => {
+const deleteInsurance = async () => {
   const type = sessionStorage.getItem("currentType");
-  await context[type].fetchDelete(selectedData.id)
+  const id = sessionStorage.getItem("selectedDataId");
+  await context[type].fetchDelete(id);
   alert("삭제 완료.");
   window.location.href = "home.html";
 }
 
-const productManagementTaskMapper = (selectedData) => ({
-  UPDATE: () => updateInsurance(selectedData),
-  DELETE: () => deleteInsurance(selectedData)
-});
+const productManagementTaskMapper = {
+  UPDATE: updateInsurance,
+  DELETE: deleteInsurance
+};
