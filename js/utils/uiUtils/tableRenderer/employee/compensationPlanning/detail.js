@@ -1,6 +1,4 @@
-import {
-  fetchGetPartnerCompanyById
-} from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
+import { fetchGetPartnerCompanyById } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import {BUTTON} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
 
 const partnerCompanyTypeStr = {

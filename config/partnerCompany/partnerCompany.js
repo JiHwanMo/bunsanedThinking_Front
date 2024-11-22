@@ -1,8 +1,14 @@
+import { BUTTON as COMMON_BUTTON } from '../common.js'
+
 export const BUTTON = {
   TASK: {
     PARTNERCOMPANY: {
       HOME: {
         REPORT_LIST: '손해 예상 금액 입력',
+      },
+      REPORT_DETAIL: {
+        UPDATE: COMMON_BUTTON.COMMON.UPDATE,
+        DELETE: COMMON_BUTTON.COMMON.DELETE
       }
     }
   }

@@ -13,7 +13,7 @@ const viewCustomerInformation = async () => {
 
 // 버튼 동작 매핑 객체
 const customerInformationManagementTaskMapper = {
-  CUSTOMERINFORMATION_LIST: viewCustomerInformation // '집기 비품 재고 관리' 버튼과 함수 연결
+  CUSTOMERINFORMATION_LIST: viewCustomerInformation
 };
 
 // 버튼 생성 및 렌더링 함수
@@ -23,16 +23,13 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
   while (buttonContainer.firstChild) {
     buttonContainer.firstChild.remove();
   }
-
   // 새로운 버튼 생성
   Object.entries(buttonMessages).forEach(([key, name]) => {
     const button = document.createElement('div');
     button.className = 'button-item';
     button.textContent = name; // 버튼에 표시할 텍스트 설정
-
     // 클릭 이벤트 추가
     button.addEventListener('click', buttonActionMapper[key]);
-
     buttonContainer.appendChild(button); // 버튼을 컨테이너에 추가
   });
 };
