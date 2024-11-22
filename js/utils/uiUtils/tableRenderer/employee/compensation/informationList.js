@@ -15,25 +15,6 @@ export const informationType = {
   REQUEST_COMPENSATION: "REQUEST_COMPENSATION",
   REQUEST_INSURANCE_MONEY: "REQUEST_INSURANCE_MONEY"
 }
-
-// 사고 정보 리스트 (
-//   신고처리 정보,
-//   처리 상태(processStatus),
-//   손해 사정 금액(damageAssessmentMoney)
-// ),
-// 신고처리 정보 (
-//   사고 신고 정보,
-//   접수 상태(accident.processStatus)
-// ),
-// 사고 신고 정보 (
-//   사고 번호(accident.id),
-//   서비스 종류(accident.serviceType),
-//   사고 날짜(accident.date),
-//   사고 시간(accident.??),
-//   사고 위치(accident.location),
-//   이름(location.customerName),
-//   전화번호(accident.customerPhoneNumber)
-// )
 const accidentRow = (dto) => {
   return `
     <td>${dto.id}</td>
@@ -189,20 +170,20 @@ const setOneRow = (item, type) => {
   const row = document.createElement("tr");
   row.innerHTML = context[type].rowGetter(item);
   // 각 행에 클릭 이벤트 추가
-  // row.addEventListener("click", () => {
-  //   if (selectedRow) {
-  //     selectedRow.classList.remove("selected");
-  //   }
-  //   row.classList.add("selected");
-  //   selectedRow = row;
-  // });
+  row.addEventListener("click", () => {
+    if (window.selectedRow) {
+      window.selectedRow.classList.remove("selected");
+    }
+    row.classList.add("selected");
+    window.selectedRow = row;
+  });
 
   // 더블 클릭 시 상세 페이지로 이동
-  // row.addEventListener("dblclick", () => {
-  //   // 상세 정보를 세션에 저장
-  //   sessionStorage.setItem("selectedInsurance", JSON.stringify(item));
-  //   window.location.href = "detail.html";
-  // });
+  row.addEventListener("dblclick", () => {
+    // 상세 정보를 세션에 저장
+    sessionStorage.setItem("selectedDataId", item.id);
+    window.location.href = "detail.html";
+  });
 
   tableBody.appendChild(row);
 }

@@ -1,25 +1,178 @@
-export const addButtons = (buttonContainer, insuranceType, inputFieldsContainer) => {
-  // 저장 버튼 생성
+import {
+  fetchAddAutomobileInsurance,
+  fetchAddDiseaseInsurance,
+  fetchAddInjuryInsurance,
+  fetchUpdateAutomobileInsurance,
+  fetchUpdateDiseaseInsurance,
+  fetchUpdateInjuryInsurance
+} from "../../../../apiUtils/apiDocumentation/employee/productManagement/productManagement.js";
+
+const context = {
+  MANAGE_INSURANCE_PRODUCT: {
+    fetchAddInsurance: {
+      fetchAddDiseaseInsurance,
+      fetchAddInjuryInsurance,
+      fetchAddAutomobileInsurance
+    },
+    fetchUpdateInsurance: {
+      fetchUpdateDiseaseInsurance,
+      fetchUpdateInjuryInsurance,
+      fetchUpdateAutomobileInsurance
+    }
+    // postButtons: BUTTON.TASK.EMPLOYEE.PRODUCT_MANAGEMENT.MANAGE_INSURANCE_PRODUCT
+  }
+}
+
+export const addButtons = (buttonContainer) => {
+  const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
+  const type = sessionStorage.getItem("currentType");
+
   const saveButton = document.createElement("button");
-  saveButton.id = "saveButton";
-  saveButton.type = "button";
-  saveButton.textContent = "저장";
-  saveButton.addEventListener("click", () => {
-    alert("저장되었습니다.");
-    // 데이터 저장 로직 추가 가능
-  });
-
-  // 취소 버튼 생성
   const cancelButton = document.createElement("button");
-  cancelButton.id = "cancelButton";
-  cancelButton.type = "button";
-  cancelButton.textContent = "취소";
-  cancelButton.addEventListener("click", () => {
-    insuranceType.value = ""; // 콤보박스 초기화
-    inputFieldsContainer.innerHTML = ""; // 입력란 초기화
-  });
 
-  // 버튼 컨테이너에 추가
+  // 공통 스타일 적용
+  saveButton.className = "button-item";
+  cancelButton.className = "button-item";
+
+  if (selectedButtonType === "POST") {
+    saveButton.textContent = "확인";
+    saveButton.addEventListener("click", async () => {
+      const formData = collectFormDataForPost();
+      console.log("POST 데이터:", formData);
+      alert("정말 등록하겠습니까?");
+
+      if (formData.insuranceType === "Injury")
+        await context.MANAGE_INSURANCE_PRODUCT.fetchAddInsurance.fetchAddInjuryInsurance(formData)
+      else if (formData.insuranceType === "Disease")
+        await context.MANAGE_INSURANCE_PRODUCT.fetchAddInsurance.fetchAddDiseaseInsurance(formData)
+      else if (formData.insuranceType === "Automobile")
+        await context.MANAGE_INSURANCE_PRODUCT.fetchAddInsurance.fetchAddAutomobileInsurance(formData)
+
+      window.location.href = "home.html"
+    });
+
+    cancelButton.textContent = "취소";
+    cancelButton.addEventListener("click", () => window.location.href = "home.html");
+  } else if (selectedButtonType === "UPDATE") {
+    saveButton.textContent = "수정";
+    saveButton.addEventListener("click", async () => {
+      const formData = collectFormDataForUpdate();
+      console.log("UPDATE 데이터:", formData);
+      alert("정말 수정하시겠습니까?");
+
+      if (formData.insuranceType === "Injury")
+        await context.MANAGE_INSURANCE_PRODUCT.fetchUpdateInsurance.fetchUpdateInjuryInsurance(formData)
+      else if (formData.insuranceType === "Disease")
+        await context.MANAGE_INSURANCE_PRODUCT.fetchUpdateInsurance.fetchUpdateDiseaseInsurance(formData)
+      else if (formData.insuranceType === "Automobile")
+        await context.MANAGE_INSURANCE_PRODUCT.fetchUpdateInsurance.fetchUpdateAutomobileInsurance(formData)
+
+      window.location.href = "home.html"
+    });
+
+    cancelButton.textContent = "취소";
+    cancelButton.addEventListener("click", () => window.location.href = "home.html");
+  }
+
   buttonContainer.appendChild(saveButton);
   buttonContainer.appendChild(cancelButton);
+};
+
+const collectFormDataForPost = () => {
+  const getValueById = (id) => {
+    const element = document.getElementById(id);
+    return element ? element.value : null; // 요소가 존재하면 value 반환, 아니면 null 반환
+  };
+
+  const getCheckedValues = (name) => {
+    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(
+      (checkbox) => checkbox.value
+    );
+  };
+
+  const insuranceType = getValueById("insuranceType"); // POST는 콤보박스에서 선택한 값 사용
+  const commonData = {
+    insuranceType,
+    name: getValueById("insuranceName"),
+    ageRange: getValueById("ageRange"),
+    coverage: getValueById("coverage"),
+    maximumMoney: getValueById("maximumMoney"),
+    monthlyPremium: getValueById("monthlyPremium"),
+    contractPeriod: getValueById("contractPeriod"),
+  };
+
+  // 보험 유형별로 데이터 추가
+  switch (insuranceType) {
+    case "Injury":
+      return {
+        ...commonData,
+        injuryType: getValueById("injuryType"),
+        surgeriesLimit: getValueById("surgeriesLimit")
+      };
+    case "Disease":
+      return {
+        ...commonData,
+        diseaseLimit: getValueById("diseaseLimit"),
+        diseaseName: getValueById("diseaseName"),
+        surgeriesLimit: getValueById("surgeriesLimit"),
+      };
+    case "Automobile":
+      return {
+        ...commonData,
+        vehicleType: getValueById("vehicleType"),
+        serviceTypes: getCheckedValues("services"),
+      };
+    default:
+      return commonData; // 기본 데이터 반환 (보험 유형이 없을 때)
+  }
+};
+
+const collectFormDataForUpdate = () => {
+  const getValueById = (id) => {
+    const element = document.getElementById(id);
+    return element ? element.value : null; // 요소가 존재하면 value 반환, 아니면 null 반환
+  };
+
+  const getCheckedValues = (name) => {
+    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(
+      (checkbox) => checkbox.value
+    );
+  };
+
+  const insuranceType = JSON.parse(sessionStorage.getItem("selectedDataInsuranceType")); // UPDATE는 세션 데이터 사용
+  const commonData = {
+    id: JSON.parse(sessionStorage.getItem("selectedDataId")), // UPDATE는 id 포함
+    insuranceType,
+    name: getValueById("insuranceName"),
+    ageRange: getValueById("ageRange"),
+    coverage: getValueById("coverage"),
+    maximumMoney: getValueById("maximumMoney"),
+    monthlyPremium: getValueById("monthlyPremium"),
+    contractPeriod: getValueById("contractPeriod"),
+  };
+
+  // 보험 유형별로 데이터 추가
+  switch (insuranceType) {
+    case "Injury":
+      return {
+        ...commonData,
+        injuryType: getValueById("injuryType"),
+        surgeriesLimit: getValueById("surgeriesLimit")
+      };
+    case "Disease":
+      return {
+        ...commonData,
+        diseaseLimit: getValueById("diseaseLimit"),
+        diseaseName: getValueById("diseaseName"),
+        surgeriesLimit: getValueById("surgeriesLimit"),
+      };
+    case "Automobile":
+      return {
+        ...commonData,
+        vehicleType: getValueById("vehicleType"),
+        serviceTypes: getCheckedValues("services"),
+      };
+    default:
+      return commonData; // 기본 데이터 반환 (보험 유형이 없을 때)
+  }
 };

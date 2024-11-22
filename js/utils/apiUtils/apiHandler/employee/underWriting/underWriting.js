@@ -1,4 +1,5 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchPatchWithParams, fetchDeleteHandler } from '../../FetchHandler.js';
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchPatchWithParams, fetchDeleteHandler } from '../../../common/FetchHandler.js';
+import {fetchGetContractDetail} from "../../../apiDocumentation/employee/underWriting/underWriting.js";
 
 const defaultUrl = "http://localhost:8080/employee/underWriting";
 
@@ -20,6 +21,14 @@ export const fetchGetCustomerHandler = async (id) => {
 
 export const fetchGetContractHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getContract?id=${id}`);
+}
+
+export const fetchGetContractDetailHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getContractDetail?id=${id}`);
+}
+
+export const fetchGetAllContractHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllContract`);
 }
 
 export const fetchGetAllNotRequestingInsuranceHandler = async () => {

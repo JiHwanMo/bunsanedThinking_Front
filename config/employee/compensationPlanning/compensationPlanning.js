@@ -1,9 +1,15 @@
+import { BUTTON as COMMON_BUTTON } from '../../common.js'
+
 export const BUTTON = {
   TASK: {
     COMPENSATIONPLANNING: {
       HOME: {
         EVALUATE_PARTNERCOMPANY: '협력업체 평가',
         MANAGEMENT_PARTNERCOMPANY: '협력업체 관리'
+      },
+      EVALUATE_PARTNERCOMPANY: {
+        EVALUATE: "평가",
+        CANCEL: COMMON_BUTTON.COMMON.CANCEL
       }
     }
   }

@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from '../../FetchHandler.js';
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from '../../../common/FetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/employee/contractManagement";
 
@@ -30,16 +30,8 @@ export const fetchGetContractByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getContractById?id=${id}`);
 }
 
-export const fetchGetContractRowByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getContractRowById?id=${id}`);
-}
-
 export const fetchGetTerminationByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getTerminationById?id=${id}`);
-}
-
-export const fetchGetTerminationRowByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getTerminationRowById?id=${id}`);
 }
 
 export const fetchGetAllTerminatingContractHandler = async () => {
@@ -74,10 +66,6 @@ export const fetchGetEndorsementByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getEndorsementById?id=${id}`);
 }
 
-export const fetchGetEndorsementRowByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getEndorsementRowById?id=${id}`);
-}
-
 export const fetchGetAllReContractHandler = async () => {
   return await fetchGetHandler(`${defaultUrl}/getAllReContract`);
 }
@@ -94,20 +82,12 @@ export const fetchGetReContractByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getReContractById?id=${id}`);
 }
 
-export const fetchGetReContractRowByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getReContractRowById?id=${id}`);
-}
-
 export const fetchGetAllRevivalContractHandler = async () => {
   return await fetchGetHandler(`${defaultUrl}/getAllRevivalContract`);
 }
 
 export const fetchGetRevivalByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getRevivalById?id=${id}`);
-}
-
-export const fetchGetRevivalRowByIdHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getRevivalRowById?id=${id}`);
 }
 
 export const fetchGetAllUnprocessedRevivalHandler = async () => {

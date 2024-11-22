@@ -1,3 +1,5 @@
+import {BUTTON as COMMON_BUTTON} from '../common.js';
+
 export const BUTTON = {
   TASK: {
     CUSTOMER: {
@@ -12,7 +14,20 @@ export const BUTTON = {
         LOAN_LIST: '대출 상품 리스트'
       },
       MANAGEMENT_CONTRACT: {
-        TERMINATION: '해지 신청'
+        RECONTRACT: "만기 재가입 신청",
+        REVIVAL: "부활 신청",
+        TERMINATION: "해지 신청",
+        ENDORSEMENT: "배서 신청",
+        PAY_INSURANCE_FEE: "보험료 납부",
+        RECEIVE_INSURANCE: "보험금 신청"
+      },
+      INSURANCE_LIST: {
+        COUNSEL: "상담 신청",
+        BUY_INSURANCE: "보험 가입 신청"
+      },
+      LOAN_LIST: {
+        APPLY: "신청",
+        CANCEL: COMMON_BUTTON.COMMON.CANCEL
       }
     }
   }

@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPatchWithParams } from "../../FetchHandler.js"
+import { fetchGetHandler, fetchPatchWithParams } from "../../../common/FetchHandler.js"
 
 const defaultURL = "http://localhost:8080/employee/financialAccountant";
 

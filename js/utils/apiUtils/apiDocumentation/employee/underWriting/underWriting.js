@@ -1,4 +1,6 @@
-import { fetchApplyCoperationHandler } from '../../../apiHandler/employee/underWriting/underWriting.js';
+import {
+  fetchApplyCoperationHandler, fetchGetAllContractHandler, fetchGetContractDetailHandler
+} from '../../../apiHandler/employee/underWriting/underWriting.js';
 import { fetchApplyReinsuranceHandler } from '../../../apiHandler/employee/underWriting/underWriting.js';
 import { fetchReviewAcquisitionHandler } from '../../../apiHandler/employee/underWriting/underWriting.js';
 import { fetchGetCustomerHandler } from '../../../apiHandler/employee/underWriting/underWriting.js';
@@ -24,6 +26,14 @@ export const fetchGetCustomer = async (id) => {
 
 export const fetchGetContract = async (id) => {
   return await fetchGetContractHandler(id);
+}
+
+export const fetchGetContractDetail = async (id) => {
+  return await fetchGetContractDetailHandler(id);
+}
+
+export const fetchGetAllContract = async () => {
+  return await fetchGetAllContractHandler();
 }
 
 export const fetchGetAllNotRequestingInsurance = async () => {
