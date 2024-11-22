@@ -1,6 +1,6 @@
 import { fetchGetPartnerCompanyById } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import {BUTTON} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
-import {renderDetailButtons} from "../../../buttonManager/employee/compensationPlanning/home.js";
+import {initialButtons} from "../../../common/buttonUtils.js";
 
 const partnerCompanyTypeStr = {
   // Hospital: "병원",
@@ -38,7 +38,7 @@ export const renderDetails = async () => {
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
     renderDetailsTable(selectedData);
-    renderDetailButtons();
+    renderButtons();
   }
 }
 
@@ -86,4 +86,24 @@ const renderDetailsTable = (data) => {
     }
     detailsTable.querySelector("tbody").appendChild(row);
   });
+}
+
+const evaluate = () => {
+  alert("평가-보상기획");
+}
+
+const cancel = () => {
+  window.location.href = "informationList.html";
+}
+
+const compensationPlanningTaskMapper = {
+  EVALUATE_PARTNERCOMPANY: {
+    EVALUATE: evaluate,
+    CANCEL: cancel
+  }
+}
+
+const renderButtons = () => {
+  const type = sessionStorage.getItem("currentType");
+  initialButtons(BUTTON.TASK.COMPENSATIONPLANNING[type], compensationPlanningTaskMapper[type]);
 }
