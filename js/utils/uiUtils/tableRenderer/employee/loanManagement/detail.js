@@ -1,5 +1,5 @@
 import {
-  fetchGetLoanProduct,
+  fetchGetLoanProductDetail,
   fetchGetLoanRequest
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
 
@@ -90,7 +90,7 @@ const surgeryHistory = (data) => {
 const context = {
   MANAGEMENT_LOAN_PRODUCT: {
     detailGetter: loanDetail,
-    fetchGetById: fetchGetLoanProduct
+    fetchGetById: fetchGetLoanProductDetail
   },
   LOAN_REQUEST: {
     detailGetter: loanRequestDetail,
