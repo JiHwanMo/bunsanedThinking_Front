@@ -2,10 +2,6 @@ import { BUTTON } from '../../../../../../config/employee/compensation/compensat
 import { viewInformationList } from '../../../tableRenderer/employee/compensation/informationList.js';
 import { informationType } from '../../../tableRenderer/employee/compensation/informationList.js';
 
-export const renderButtons = () => {
-  initialButtons(BUTTON.TASK.COMPENSATION.HOME, compensationTaskMapper);
-}
-
 const viewRequestCompensation = () => {
   viewInformationList(informationType.REQUEST_COMPENSATION);
 }
@@ -14,9 +10,40 @@ const viewRequestInsuranceMoney = () => {
   viewInformationList(informationType.REQUEST_INSURANCE_MONEY);
 }
 
+const requestCompensation = () => {
+  alert("보상처리");
+}
+
+const requestInsuranceMoney = () => {
+  alert("보험금 지급");
+}
+
+const cancel = () => {
+  window.location.href = "informationList.html";
+}
+
 const compensationTaskMapper = {
-  REQUEST_COMPENSATION: viewRequestCompensation,
-  REQUEST_INSURANCE_MONEY: viewRequestInsuranceMoney
+  HOME: {
+    REQUEST_COMPENSATION: viewRequestCompensation,
+    REQUEST_INSURANCE_MONEY: viewRequestInsuranceMoney
+  },
+  REQUEST_COMPENSATION: {
+    REQUEST: requestCompensation,
+    CANCEL: cancel
+  },
+  REQUEST_INSURANCE_MONEY: {
+    REQUEST: requestInsuranceMoney,
+    CANCEL: cancel
+  }
+}
+
+export const renderButtons = () => {
+  initialButtons(BUTTON.TASK.COMPENSATION.HOME, compensationTaskMapper.HOME);
+}
+
+export const renderDetailButtons = () => {
+  const type = sessionStorage.getItem("currentType");
+  initialButtons(BUTTON.TASK.COMPENSATION[type], compensationTaskMapper[type]);
 }
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {

@@ -1,3 +1,5 @@
+import {BUTTON as COMMON_BUTTON} from "../../common.js";
+
 export const BUTTON = {
   TASK: {
     CONTRACT_MANAGEMENT: {
@@ -7,6 +9,26 @@ export const BUTTON = {
         ENDORSEMENT: '배서 심사',
         REVIVAL: '부활 심사',
         TERMINATION: '제지급금 지급 요청'
+      },
+      DEFAULT_CONTRACT: {
+        NOTICE: "안내장 발송",
+        CANCEL: COMMON_BUTTON.COMMON.CANCEL
+      },
+      RECONTRACT: {
+        APPLY: "승인",
+        DENY: "거절"
+      },
+      ENDORSEMENT: {
+        APPLY: "승인",
+        DENY: "거절"
+      },
+      REVIVAL: {
+        APPLY: "승인",
+        DENY: "거절"
+      },
+      TERMINATION: {
+        REQUEST: "요청",
+        CANCEL: COMMON_BUTTON.COMMON.CANCEL
       }
     }
   }
