@@ -15,10 +15,6 @@ export const fetchGetAllEmployee = async () => {
 export const fetchGetAllDepartment = async () => {
   return await fetchGetAllDepartmentHandler();
 };
-// (async () => {
-//   const data = await fetchGetAllDepartment();
-//   console.log(data);
-// })();
 
 export const fetchGetDepartment = async (departmentId) => {
   return await fetchGetDepartmentHandler(departmentId); // 9101

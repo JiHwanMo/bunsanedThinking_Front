@@ -43,8 +43,8 @@ export const fetchGetAllPaymentDetail = async () => {
   return await fetchGetAllPaymentDetailHandler();
 };
 
-export const fetchGetDepositDetail = async (depostDetailId) => {
-  return await fetchGetDepositDetailHandler(depostDetailId); // 8101
+export const fetchGetDepositDetail = async (depositDetailId) => {
+  return await fetchGetDepositDetailHandler(depositDetailId); // 8101
 };
 
 export const fetchHandlePayment = async (paymentDetailId, employeeId) => {
