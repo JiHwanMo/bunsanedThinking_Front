@@ -26,6 +26,10 @@ const context = {
   EVALUATE_PARTNERCOMPANY: {
     detailGetter: partnerCompanyDetail,
     fetchGetById: fetchGetPartnerCompanyById
+  },
+  MANAGEMENT_PARTNERCOMPANY: {
+    detailGetter: partnerCompanyDetail,
+    fetchGetById: fetchGetPartnerCompanyById
   }
 }
 
