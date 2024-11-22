@@ -1,4 +1,4 @@
-import {BUTTON as COMMON_BUTTON} from '../../config/common.js';
+import {BUTTON as COMMON_BUTTON} from '../common.js';
 
 export const BUTTON = {
   TASK: {
