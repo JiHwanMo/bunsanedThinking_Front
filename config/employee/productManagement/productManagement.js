@@ -45,6 +45,7 @@ export const DETAIL_COLUMN_NAME = {
     COVERAGE: "보장 내용",
     MONTHLY_PREMIUM: "월 보험료",
     CONTRACT_PERIOD: "계약기간",
+    MAXIMUM_MONEY: "한도",
 
     TYPE:{
       DISEASE:{

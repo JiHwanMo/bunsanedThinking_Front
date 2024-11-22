@@ -6,11 +6,12 @@ import {
 
 const insuranceDetail = (dto) => {
   const detail = [
-    { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.NAME, value: dto.id },
+    { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.ID, value: dto.id },
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.NAME, value: dto.name },
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.INSURANCE_TYPE, value: dto.insuranceType },
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.AGE_RANGE, value: dto.ageRange },
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.COVERAGE, value: dto.coverage },
+    { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.MAXIMUM_MONEY, value: dto.maximumMoney },
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.MONTHLY_PREMIUM, value: dto.monthlyPremium },
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.CONTRACT_PERIOD, value: dto.contractPeriod }
   ];
@@ -149,7 +150,8 @@ const updateInsurance = async (selectedData) => {
 }
 
 const deleteInsurance = async (selectedData) => {
-  await context.MANAGE_INSURANCE_PRODUCT.fetchDelete(selectedData.id)
+  const type = sessionStorage.getItem("currentType");
+  await context[type].fetchDelete(selectedData.id)
   alert("삭제 완료.");
   window.location.href = "home.html";
 }

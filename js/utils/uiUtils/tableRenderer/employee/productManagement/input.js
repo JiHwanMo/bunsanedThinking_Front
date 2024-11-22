@@ -1,29 +1,4 @@
 import {DETAIL_COLUMN_NAME} from "../../../../../../config/employee/productManagement/productManagement.js";
-import {
-  fetchAddAutomobileInsurance,
-  fetchAddDiseaseInsurance,
-  fetchAddInjuryInsurance,
-  fetchGetInsuranceProductDetail,
-  fetchUpdateAutomobileInsurance,
-  fetchUpdateDiseaseInsurance,
-  fetchUpdateInjuryInsurance
-} from "../../../../apiUtils/apiDocumentation/employee/productManagement/productManagement.js";
-
-const context = {
-  MANAGE_INSURANCE_PRODUCT: {
-    fetchGetById: fetchGetInsuranceProductDetail,
-    fetchUpdate: {
-      fetchUpdateDiseaseInsurance,
-      fetchUpdateInjuryInsurance,
-      fetchUpdateAutomobileInsurance
-    },
-    fetchAdd:{
-      fetchAddDiseaseInsurance,
-      fetchAddInjuryInsurance,
-      fetchAddAutomobileInsurance
-    }
-  }
-}
 
 export const renderComboBox = (container) => {
   // 콤보박스 컨테이너 초기화
@@ -98,6 +73,10 @@ export const renderInputFields = (insuranceType, inputFieldsContainer) => {
       <label for="contractPeriod">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.CONTRACT_PERIOD}</label>
       <input type="number" id="contractPeriod" name="contractPeriod" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.CONTRACT_PERIOD}을 입력하세요" required>
     </div>
+    <div class="form-group">
+      <label for="maximumMoney">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.MAXIMUM_MONEY}</label>
+      <input type="number" id="maximumMoney" name="maximumMoney" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.MAXIMUM_MONEY}을 입력하세요" required>
+    </div>
   `;
 
   const fields = {
@@ -107,9 +86,13 @@ export const renderInputFields = (insuranceType, inputFieldsContainer) => {
         <label for="injuryType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.INJURY_TYPE}</label>
         <select id="injuryType" name="injuryType">
           <option value="">상해 종류를 선택하세요</option>
-          <option value="minor">경상</option>
-          <option value="serious">중상</option>
+          <option value="Minor">경상</option>
+          <option value="Serious">중상</option>
         </select>
+      </div>
+      <div class="form-group">
+        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}</label>
+        <input type="number" id="surgeriesLimit" name="surgeriesLimit" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}을 입력하세요" required>
       </div>
     `,
     Disease: `
@@ -133,9 +116,9 @@ export const renderInputFields = (insuranceType, inputFieldsContainer) => {
         <label for="vehicleType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.VEHICLE_TYPE}</label>
         <select id="vehicleType" name="vehicleType">
           <option value="">차량 종류를 선택하세요</option>
-          <option value="small">소형</option>
-          <option value="medium">중형</option>
-          <option value="large">대형</option>
+          <option value="Amall">소형</option>
+          <option value="Medium">중형</option>
+          <option value="Large">대형</option>
         </select>
       </div>
       <div class="form-group">
@@ -195,6 +178,10 @@ export const renderInputFieldsWithValues = (insuranceType, inputFieldsContainer,
       <label for="contractPeriod">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.CONTRACT_PERIOD}</label>
       <input type="number" id="contractPeriod" name="contractPeriod" value="${data.contractPeriod || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.CONTRACT_PERIOD}을 입력하세요" required>
     </div>
+    <div class="form-group">
+      <label for="maximumMoney">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.MAXIMUM_MONEY}</label>
+      <input type="number" id="maximumMoney" name="maximumMoney" value="${data.maximumMoney || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.MAXIMUM_MONEY}을 입력하세요" required>
+    </div>
   `;
 
   const renderServiceCheckbox = (selectedServices = []) => {
@@ -231,8 +218,8 @@ export const renderInputFieldsWithValues = (insuranceType, inputFieldsContainer,
       <div class="form-group">
         <label for="injuryType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.INJURY_TYPE}</label>
         <select id="injuryType" name="injuryType">
-          <option value="minor" ${data.injuryType === "Minor" ? "selected" : ""}>경상</option>
-          <option value="serious" ${data.injuryType === "Serious" ? "selected" : ""}>중상</option>
+          <option value="Minor" ${data.injuryType === "Minor" ? "selected" : ""}>경상</option>
+          <option value="Serious" ${data.injuryType === "Serious" ? "selected" : ""}>중상</option>
         </select>
       </div>
       <div class="form-group">
@@ -264,9 +251,9 @@ export const renderInputFieldsWithValues = (insuranceType, inputFieldsContainer,
       <div class="form-group">
         <label for="vehicleType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.VEHICLE_TYPE}</label>
         <select id="vehicleType" name="vehicleType">
-          <option value="small" ${data.vehicleType === "Small" ? "selected" : ""}>소형</option>
-          <option value="medium" ${data.vehicleType === "Medium" ? "selected" : ""}>중형</option>
-          <option value="large" ${data.vehicleType === "Large" ? "selected" : ""}>대형</option>
+          <option value="Small" ${data.vehicleType === "Small" ? "selected" : ""}>소형</option>
+          <option value="Medium" ${data.vehicleType === "Medium" ? "selected" : ""}>중형</option>
+          <option value="Large" ${data.vehicleType === "Large" ? "selected" : ""}>대형</option>
         </select>
       </div>
       <div class="form-group">
