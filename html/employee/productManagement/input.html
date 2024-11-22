@@ -22,32 +22,10 @@
 </div>
 
 <script type="module">
-  import { addButtons } from "../../../js/utils/uiUtils/buttonManager/employee/productManagement/input.js";
-  import { renderComboBox, renderInputFields, renderInputFieldsWithValues } from "../../../js/utils/uiUtils/tableRenderer/employee/productManagement/input.js";
-  import { fetchGetInsuranceProductDetail } from "../../../js/utils/apiUtils/apiDocumentation/employee/productManagement/productManagement.js";
+  import {renderInput} from "../../../js/utils/uiUtils/tableRenderer/employee/productManagement/input.js";
 
   document.addEventListener("DOMContentLoaded", async () => {
-    const comboBoxContainer = document.getElementById("comboBoxContainer");
-    const inputFieldsContainer = document.getElementById("inputFieldsContainer");
-    const buttonContainer = document.getElementById("buttonContainer");
-
-    const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
-
-    if (selectedButtonType === "POST") {
-      // POST: 콤보박스 렌더링
-      const insuranceType = renderComboBox(comboBoxContainer);
-      insuranceType.addEventListener("change", () => {
-        renderInputFields(insuranceType.value, inputFieldsContainer);
-      });
-    } else if (selectedButtonType === "UPDATE") {
-      // UPDATE: 데이터 가져오기 및 필드 렌더링
-      const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-      const insuranceData = await fetchGetInsuranceProductDetail(selectedDataId);
-      renderInputFieldsWithValues(insuranceData.insuranceType, inputFieldsContainer, insuranceData);
-    }
-
-    // 버튼 추가
-    addButtons(buttonContainer);
+    await renderInput();
   });
 </script>
 </body>
