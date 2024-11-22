@@ -1,31 +1,10 @@
 import {BUTTON} from "../../../../../../config/employee/customerSupport/customerSupport.js";
-
-const context = {
-  HANDLE_REPORT: {
-    buttons: BUTTON.TASK.EMPLOYEE.CUSTOMER_SUPPORT.HANDLE_REPORT
-  },
-  HANDLE_COMPLAINT: {
-    buttons: BUTTON.TASK.EMPLOYEE.CUSTOMER_SUPPORT.HANDLE_COMPLAINT
-  }
-}
+import {initialButtons} from "../../../common/buttonUtils.js";
 
 export const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, customerSupportTaskMapper);
+  const type = sessionStorage.getItem("currentType");
+  initialButtons(BUTTON.TASK.EMPLOYEE.CUSTOMER_SUPPORT[type], customerSupportTaskMapper[type]);
 };
-
-const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  // 객체의 각 항목을 순회하여 버튼 생성
-  Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
-    button.textContent = name; // 버튼에 표시할 텍스트 설정
-
-    button.addEventListener("click", buttonActionMapper[key]);
-
-    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
-  });
-}
 
 const handleReport = () => {
   alert("신고 접수 - 고객지원");
@@ -44,8 +23,12 @@ const cancelComplaint = () => {
 }
 
 const customerSupportTaskMapper = {
-  HANDLE_REPORT: handleReport,
-  HANDLE_COMPLAINT: handleComplaint,
-  CANCEL_REPORT: cancelReport,
-  CANCEL_COMPLAINT: cancelComplaint
+  HANDLE_REPORT: {
+    HANDLE_REPORT: handleReport,
+    CANCEL_REPORT: cancelReport
+  },
+  HANDLE_COMPLAINT: {
+    HANDLE_COMPLAINT: handleComplaint,
+    CANCEL_COMPLAINT: cancelComplaint
+  }
 }
