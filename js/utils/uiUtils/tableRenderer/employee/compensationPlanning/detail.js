@@ -2,6 +2,7 @@ import {
   fetchGetPartnerCompanyById
 } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import {BUTTON} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
+import {renderDetailButtons} from "../../../buttonManager/employee/compensationPlanning/home.js";
 
 const partnerCompanyTypeStr = {
   // Hospital: "병원",
@@ -39,7 +40,7 @@ export const renderDetails = async () => {
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
     renderDetailsTable(selectedData);
-    renderButtons();
+    renderDetailButtons();
   }
 }
 
@@ -87,39 +88,4 @@ const renderDetailsTable = (data) => {
     }
     detailsTable.querySelector("tbody").appendChild(row);
   });
-}
-
-const renderButtons = () => {
-  initialButtons();
-}
-
-const initialButtons = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  const type = sessionStorage.getItem("currentType");
-  const buttonMessages = context[type].buttons;
-  // 객체의 각 항목을 순회하여 버튼 생성
-  Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
-    button.textContent = name; // 버튼에 표시할 텍스트 설정
-
-    button.addEventListener("click", compensationPlanningTaskMapper[type][key]);
-
-    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
-  });
-}
-
-const evaluate = () => {
-  alert("평가-보상기획");
-}
-
-const cancel = () => {
-  window.location.href = "informationList.html";
-}
-
-const compensationPlanningTaskMapper = {
-  EVALUATE_PARTNERCOMPANY: {
-    EVALUATE: evaluate,
-    CANCEL: cancel
-  }
 }
