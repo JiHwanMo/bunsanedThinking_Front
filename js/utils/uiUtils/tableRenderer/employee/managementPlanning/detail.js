@@ -7,7 +7,7 @@ const departmentDetail = (data) => {
     { label: "부서 이름", value: data.name },
     { label: "주 업무", value: data.task },
     { label: "부서 목적", value: data.purpose },
-    { label: "소속 인원", value: data.employeeList.map((employee) => employee.name).join(", ") || "없음" },
+    { label: "소속 인원", value: data.employeeList.length || "없음" },
     { label: "부서장 이름", value: data.headName }
   ];
 }
