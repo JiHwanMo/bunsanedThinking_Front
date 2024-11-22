@@ -21,16 +21,16 @@ export const fetchGetPartnerCompany = async (id) => {
 export const fetchGetAllReportByDamageAssessmentCompanyID = async (id) => {
   return await fetchGetAllReportByDamageAssessmentCompanyIDHandler(id);
 }
-(async () => {
-  const data = await fetchGetAllReportByDamageAssessmentCompanyID(3001);
-  console.log(data);
-})();
+// (async () => {
+//   const data = await fetchGetAllReportByDamageAssessmentCompanyID(3001);
+//   console.log(data);
+// })();
 
 export const fetchGetReport = async (id) => {
   return await fetchGetReportHandler(id);
 }
 // (async () => {
-//   const data = await fetchGetReport(4002);
+//   const data = await fetchGetReport(4001);
 //   console.log(data);
 // })();
 

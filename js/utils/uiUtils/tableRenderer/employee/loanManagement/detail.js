@@ -80,7 +80,7 @@ const diseaseHistory = (data) => {
 
 const surgeryHistory = (data) => {
   return [
-    { label: "질병 이력 번호", value: data.id },
+    { label: "수술 이력 번호", value: data.id },
     { label: "수술명", value: data.name },
     { label: "수술 병원", value: data.hospitalName },
     { label: "수술 날짜", value: data.date }

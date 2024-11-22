@@ -1,9 +1,15 @@
+import { BUTTON as COMMON_BUTTON } from '../../common.js'
+
 export const BUTTON = {
    TASK: {
     EMPLOYEE: {
       CUSTOMERINFORMATIONMANAGEMENT: {
         HOME: {
           CUSTOMERINFORMATION_LIST: '고객 정보 관리'
+        },
+        CUSTOMERINFORMATION_DETAIL:{
+          UPDATE: COMMON_BUTTON.COMMON.UPDATE,
+          DELETE: COMMON_BUTTON.COMMON.DELETE
         }
       }
     }

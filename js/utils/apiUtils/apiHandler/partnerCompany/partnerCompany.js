@@ -3,7 +3,7 @@ import { fetchGetHandler, fetchPatchWithParams } from '../../common/FetchHandler
 const defaultUrl = "http://localhost:8080/partnerCompany";
 
 export const fetchGetPartnerCompanyHandler = async (id) => {
-  return await fetchGetHandler(`${defaultUrl}/getPartnerCompany?id=${id}`);
+  return await fetchGetHandler(`${defaultUrl}/getPartnerCompanyById?id=${id}`);
 };
 
 export const fetchGetAllReportByDamageAssessmentCompanyIDHandler = async (id) => {

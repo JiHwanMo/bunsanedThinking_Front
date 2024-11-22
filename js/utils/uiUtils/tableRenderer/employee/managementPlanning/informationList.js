@@ -1,8 +1,12 @@
 import { fetchGetAllDepartment } from '../../../../../../js/utils/apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
+import { fetchGetDepartment } from "../../../../../../js/utils/apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
 import { BUTTON } from '../../../../../../config/common.js';
 import { COMBOBOX } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
 import { TABLE_TITLE } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
 import { COLUMN_NAME } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
+import {
+  fetchGetAllOfficeSupplies
+} from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
 
 
 const departmentRow = (dto) => {
@@ -16,27 +20,39 @@ const departmentRow = (dto) => {
 
 const context = {
   DEPARTMENT_LIST: {
-    title: "부서 정보 리스트",
+    // title: "부서 정보 리스트",
+    needDetail: true,
     listFetch: fetchGetAllDepartment,
+    listFetchById: fetchGetDepartment,
     rowGetter: departmentRow,
     comboListFetch: {}
   }
 }
 
 
+// export const viewDepartmentListAll = async () => {
+//   try {
+//     const list = await fetchGetAllDepartment();
+//     if (!list || !list.length) {
+//       console.warn("No management planning data fetched.");
+//       return;
+//     }
+//     sessionStorage.setItem("list", JSON.stringify(list));
+//     console.log("Data saved in sessionStorage:", sessionStorage.getItem("list"));
+//     window.location.href = "informationList.html"; // 경로 확인 필요
+//   } catch (error) {
+//     console.error("Error fetching management planning:", error);
+//   }
+// };
+
 export const viewDepartmentListAll = async () => {
-  try {
-    const list = await fetchGetAllDepartment();
-    if (!list || !list.length) {
-      console.warn("No management planning data fetched.");
-      return;
-    }
-    sessionStorage.setItem("list", JSON.stringify(list));
-    console.log("Data saved in sessionStorage:", sessionStorage.getItem("list"));
-    window.location.href = "informationList.html"; // 경로 확인 필요
-  } catch (error) {
-    console.error("Error fetching management planning:", error);
-  }
+  const list = await fetchGetAllDepartment();
+  if (!list || !list.length) return;
+
+  sessionStorage.setItem("list", JSON.stringify(list));
+  sessionStorage.setItem("currentType", "DEPARTMENT_DETAIL"); // currentType 설정
+
+  window.location.href = "informationList.html"; // 페이지 이동
 };
 
 export const renderTable = () => {
@@ -55,6 +71,30 @@ const setInput = () => {
   input.id = "searchInput";
   input.placeholder = "검색어 입력";
   return input;
+};
+
+const initTableByInput = async (id, type) => {
+  const tableBody = document.getElementById("list");
+  while (tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  if (id.length > 0) {
+    const item = await context[type].listFetchById(id); // 개별 데이터 가져오기
+    setOneRow(item, type);
+  } else {
+    const list = await context[type].listFetch(); // 전체 데이터 가져오기
+    if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+    setTableBody();
+  }
+};
+
+const setButton = () => {
+  const button = document.createElement("button");
+  button.id = "searchButton";
+  button.textContent = BUTTON.COMMON.SEARCH;
+  button.addEventListener("click", () => {
+    const value = document.getElementById("searchInput").value;
+    initTableByInput(value, "DEPARTMENT_LIST");
+  });
+  return button;
 };
 
 const setComboBox = () => {
@@ -101,11 +141,11 @@ const setSearchBar = () => {
     container.appendChild(setPostButton());
   }
 
-  container.appendChild(setInput());
+  const input = setInput("searchInput", "검색어 입력");
+  container.appendChild(input);
 
-  const button = document.createElement("button");
-  button.id = "searchButton";
-  button.textContent = BUTTON.COMMON.SEARCH;
+  // 검색 버튼 추가
+  const button = setButton();
   container.appendChild(button);
 };
 
@@ -121,6 +161,30 @@ const setColumn = () => {
   });
 
   head.appendChild(columns);
+};
+
+const setOneRow = (item, type) => {
+  const tableBody = document.getElementById("list");
+  const row = document.createElement("tr");
+  row.innerHTML = context[type].rowGetter(item);
+
+  row.addEventListener("click", () => {
+    if (window.selectedRow) {
+      window.selectedRow.classList.remove("selected");
+    }
+    row.classList.add("selected");
+    window.selectedRow = row;
+  });
+
+  if (context[type].needDetail) {
+    row.addEventListener("dblclick", () => {
+      // 상세 정보를 세션에 저장
+      sessionStorage.setItem("selectedDataId", item.id);
+      window.location.href = "detail.html";
+    });
+  }
+
+  tableBody.appendChild(row);
 };
 
 const setTableBody = () => {
@@ -141,7 +205,7 @@ const setTableBody = () => {
     });
 
     row.addEventListener("dblclick", () => {
-      sessionStorage.setItem("selectedManagementPlanning", JSON.stringify(item)); // 선택된 데이터 저장
+      sessionStorage.setItem("selectedDataId", item.id); // 선택된 데이터 저장
       window.location.href = "detail.html"; // 상세 페이지로 이동
     });
 
