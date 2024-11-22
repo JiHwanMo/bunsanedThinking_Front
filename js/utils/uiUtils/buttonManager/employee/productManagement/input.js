@@ -10,14 +10,14 @@ import {
 const context = {
   MANAGE_INSURANCE_PRODUCT: {
     fetchAddInsurance: {
-      fetchAddDiseaseInsurance,
-      fetchAddInjuryInsurance,
-      fetchAddAutomobileInsurance
+      Disease: fetchAddDiseaseInsurance,
+      Injury: fetchAddInjuryInsurance,
+      Automobile: fetchAddAutomobileInsurance
     },
     fetchUpdateInsurance: {
-      fetchUpdateDiseaseInsurance,
-      fetchUpdateInjuryInsurance,
-      fetchUpdateAutomobileInsurance
+      Disease: fetchUpdateDiseaseInsurance,
+      Injury: fetchUpdateInjuryInsurance,
+      Automobile: fetchUpdateAutomobileInsurance
     }
     // postButtons: BUTTON.TASK.EMPLOYEE.PRODUCT_MANAGEMENT.MANAGE_INSURANCE_PRODUCT
   }
@@ -41,12 +41,7 @@ export const addButtons = (buttonContainer) => {
       console.log("POST 데이터:", formData);
       alert("정말 등록하겠습니까?");
 
-      if (formData.insuranceType === "Injury")
-        await context.MANAGE_INSURANCE_PRODUCT.fetchAddInsurance.fetchAddInjuryInsurance(formData)
-      else if (formData.insuranceType === "Disease")
-        await context.MANAGE_INSURANCE_PRODUCT.fetchAddInsurance.fetchAddDiseaseInsurance(formData)
-      else if (formData.insuranceType === "Automobile")
-        await context.MANAGE_INSURANCE_PRODUCT.fetchAddInsurance.fetchAddAutomobileInsurance(formData)
+      await context[type].fetchAddInsurance[formData.insuranceType](formData);
 
       window.location.href = "home.html"
     });
@@ -60,12 +55,7 @@ export const addButtons = (buttonContainer) => {
       console.log("UPDATE 데이터:", formData);
       alert("정말 수정하시겠습니까?");
 
-      if (formData.insuranceType === "Injury")
-        await context.MANAGE_INSURANCE_PRODUCT.fetchUpdateInsurance.fetchUpdateInjuryInsurance(formData)
-      else if (formData.insuranceType === "Disease")
-        await context.MANAGE_INSURANCE_PRODUCT.fetchUpdateInsurance.fetchUpdateDiseaseInsurance(formData)
-      else if (formData.insuranceType === "Automobile")
-        await context.MANAGE_INSURANCE_PRODUCT.fetchUpdateInsurance.fetchUpdateAutomobileInsurance(formData)
+      await context[type].fetchUpdateInsurance[formData.insuranceType](formData);
 
       window.location.href = "home.html"
     });
