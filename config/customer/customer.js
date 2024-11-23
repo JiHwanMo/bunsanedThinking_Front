@@ -28,6 +28,9 @@ export const BUTTON = {
       LOAN_LIST: {
         APPLY: "신청",
         CANCEL: COMMON_BUTTON.COMMON.CANCEL
+      },
+      INPUT: {
+
       }
     }
   }
@@ -159,3 +162,7 @@ export const COLUMN_NAME = {
     "대출가능 최대 금액(원)"
   ]
 };
+
+export const INPUT_LABEL = {
+
+}

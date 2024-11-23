@@ -1,5 +1,5 @@
 import {initialButtons} from "../../../common/buttonUtils.js";
-import {BUTTON} from "../../../../../../config/employee/compensation/compensation.js";
+import {BUTTON, INPUT_FORM} from "../../../../../../config/employee/compensation/compensation.js";
 import {
   fetchRequestCompensation,
   fetchRequestInsuranceMoney
@@ -21,9 +21,9 @@ const getInsuranceMoneyDTO = (money, index) => {
   }
 }
 
-const reqCompensation = async () => {
-  const money = document.getElementById("money").value;
-  const index = document.getElementById("paymentType").selectedIndex;
+const requestCompensation = async () => {
+  const money = document.getElementById(INPUT_FORM.MONEY.id).value;
+  const index = document.getElementById(INPUT_FORM.PAYMENTTYPE.id).selectedIndex;
   if (money.length === 0 || money <= 0) alert("금액을 다시 입력해 주세요");
   else if (index === 0) alert("현금 혹은 계좌이체 중에서 선택해주세요");
   else {
@@ -36,9 +36,9 @@ const reqCompensation = async () => {
   }
 }
 
-const reqInsuranceMoney = async () => {
-  const money = document.getElementById("money").value;
-  const index = document.getElementById("paymentType").selectedIndex;
+const requestInsuranceMoney = async () => {
+  const money = document.getElementById(INPUT_FORM.MONEY.id).value;
+  const index = document.getElementById(INPUT_FORM.PAYMENTTYPE.id).selectedIndex;
   if (money.length === 0 || money <= 0) alert("금액을 다시 입력해 주세요");
   else if (index === 0) alert("현금 혹은 계좌이체 중에서 선택해주세요");
   else {
@@ -57,11 +57,11 @@ const cancel = () => {
 
 const compensationTaskMapper = {
   REQUEST_COMPENSATION: {
-    OK: reqCompensation,
+    OK: requestCompensation,
     CANCEL: cancel
   },
   REQUEST_INSURANCE_MONEY: {
-    OK: reqInsuranceMoney,
+    OK: requestInsuranceMoney,
     CANCEL: cancel
   }
 }

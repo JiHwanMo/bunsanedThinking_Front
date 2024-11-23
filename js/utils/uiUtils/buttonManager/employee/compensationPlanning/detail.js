@@ -1,9 +1,13 @@
 import {initialButtons} from "../../../common/buttonUtils.js";
 import {BUTTON} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
-import {BUTTON as COMMON_BUTTON} from "../../../../../../config/common.js";
+import {inputType} from "../../../tableRenderer/employee/compensationPlanning/input.js";
+import {
+  fetchDeletePartnerCompany
+} from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 
 const evaluate = () => {
-  alert("평가-보상기획");
+  sessionStorage.setItem("selectedButtonType", inputType.EVALUATE);
+  window.location.href = "input.html";
 }
 
 const cancel = () => {
@@ -11,11 +15,16 @@ const cancel = () => {
 }
 
 const updatePartnerCompany = () => {
-  alert("수정-보상기획");
+  sessionStorage.setItem("selectedButtonType", inputType.UPDATE);
+  window.location.href = "input.html";
 }
 
-const deletePartnerCompany = () => {
-  alert("삭제-보상기획");
+const deletePartnerCompany = async () => {
+  const id = sessionStorage.getItem("selectedDataId");
+  // await fetchDeletePartnerCompany(id);
+  alert("삭제-"+id);
+  window.history.back();
+  window.history.back();
 }
 
 const compensationPlanningTaskMapper = {

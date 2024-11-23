@@ -131,3 +131,21 @@ export const INPUT_LABEL = {
     PAYMENTTYPE: "지급 형태"
   }
 }
+
+export const INPUT_FORM  = {
+  MONEY: {
+    isCombo: false,
+    for: "money",
+    label: "MONEY",
+    type: "number",
+    id: "money",
+    name: "money",
+    placeholder: "MONEY"
+  },
+  PAYMENTTYPE: {
+    isCombo: true,
+    for: "paymentType",
+    label: "PAYMENTTYPE",
+    id: "paymentType"
+  }
+}

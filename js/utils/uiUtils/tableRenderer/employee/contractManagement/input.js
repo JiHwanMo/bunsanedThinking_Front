@@ -1,6 +1,5 @@
 import {BUTTON, COMBOBOX, INPUT_LABEL} from "../../../../../../config/employee/compensation/compensation.js";
 import {renderButton} from "../../../buttonManager/employee/compensation/input.js";
-import {INPUT_FORM} from "../../../../../../config/employee/compensation/compensation.js";
 
 export const renderInput = async () => {
   const title = document.getElementById("title");
@@ -12,8 +11,26 @@ export const renderInput = async () => {
 const renderInputFields = () => {
   const inputFieldsContainer = document.getElementById("inputFieldsContainer");
   while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
-  Object.entries(INPUT_FORM).forEach(([key, form]) => inputFieldsContainer.appendChild(createForm(form)));
+  forms.forEach(form => inputFieldsContainer.appendChild(createForm(form)));
 };
+
+const forms = [
+  {
+    isCombo: false,
+    for: "money",
+    label: "MONEY",
+    type: "number",
+    id: "money",
+    name: "money",
+    placeholder: "MONEY"
+  },
+  {
+    isCombo: true,
+    for: "paymentType",
+    label: "PAYMENTTYPE",
+    id: "paymentType"
+  }
+];
 
 const createForm = (form) => {
   const type = sessionStorage.getItem("currentType");

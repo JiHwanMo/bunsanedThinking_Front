@@ -3,6 +3,7 @@ import { fetchGetPartnerCompanyRowById } from '../../../../apiUtils/apiDocumenta
 import { BUTTON } from '../../../../../../config/common.js';
 import { TABLE_TITLE } from '../../../../../../config/employee/compensationPlanning/compensationPlanning.js';
 import { COLUMN_NAME } from '../../../../../../config/employee/compensationPlanning/compensationPlanning.js';
+import {setPost} from "../../../buttonManager/employee/compensationPlanning/informationList.js";
 
 export const informationType = {
   EVALUATE_PARTNERCOMPANY: "EVALUATE_PARTNERCOMPANY",
@@ -48,17 +49,6 @@ const setTitle = () => {
   const title = TABLE_TITLE[sessionStorage.getItem("currentType")];
   const contextTitle = document.getElementById("title");
   contextTitle.innerText = title;
-}
-
-const setPost = () => {
-  const post = document.createElement("div");
-  post.id = "post";
-  post.className = "post-button";
-  post.textContent = BUTTON.COMMON.POST;
-  post.addEventListener("click", () => {
-    alert("등록 - 보상기획");
-  });
-  return post;
 }
 
 const setInput = () => {
