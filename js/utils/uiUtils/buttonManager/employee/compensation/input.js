@@ -1,0 +1,72 @@
+import {initialButtons} from "../../../common/buttonUtils.js";
+import {BUTTON} from "../../../../../../config/employee/compensation/compensation.js";
+import {
+  fetchRequestCompensation,
+  fetchRequestInsuranceMoney
+} from "../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js";
+
+const getCompensationDTO = (money, index) => {
+  return {
+    money: money,
+    paymentType: index-1,
+    reportId: sessionStorage.getItem("selectedDataId")
+  }
+}
+
+const getInsuranceMoneyDTO = (money, index) => {
+  return {
+    money: money,
+    paymentType: index-1,
+    insuranceMoneyId: sessionStorage.getItem("selectedDataId")
+  }
+}
+
+const reqCompensation = async () => {
+  const money = document.getElementById("money").value;
+  const index = document.getElementById("paymentType").selectedIndex;
+  if (money.length === 0 || money <= 0) alert("금액을 다시 입력해 주세요");
+  else if (index === 0) alert("현금 혹은 계좌이체 중에서 선택해주세요");
+  else {
+    alert(JSON.stringify(getCompensationDTO(money, index)));
+    // await fetchRequestCompensation(getCompensationDTO());
+    alert("요청이 완료되었습니다");
+    window.history.back();
+    window.history.back();
+    window.history.back();
+  }
+}
+
+const reqInsuranceMoney = async () => {
+  const money = document.getElementById("money").value;
+  const index = document.getElementById("paymentType").selectedIndex;
+  if (money.length === 0 || money <= 0) alert("금액을 다시 입력해 주세요");
+  else if (index === 0) alert("현금 혹은 계좌이체 중에서 선택해주세요");
+  else {
+    alert(JSON.stringify(getInsuranceMoneyDTO(money, index)));
+    // await fetchRequestInsuranceMoney(getInsuranceMoneyDTO());
+    alert("요청이 완료되었습니다");
+    window.history.back();
+    window.history.back();
+    window.history.back();
+  }
+}
+
+const cancel = () => {
+  window.history.back();
+}
+
+const compensationTaskMapper = {
+  REQUEST_COMPENSATION: {
+    OK: reqCompensation,
+    CANCEL: cancel
+  },
+  REQUEST_INSURANCE_MONEY: {
+    OK: reqInsuranceMoney,
+    CANCEL: cancel
+  }
+}
+
+export const renderButton = () => {
+  const type = sessionStorage.getItem("currentType");
+  initialButtons(BUTTON.TASK.COMPENSATION.INPUT[type], compensationTaskMapper[type]);
+}
