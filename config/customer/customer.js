@@ -30,7 +30,30 @@ export const BUTTON = {
         CANCEL: COMMON_BUTTON.COMMON.CANCEL
       },
       INPUT: {
-
+        APPLY_ENDORSEMENT: {
+          OK: COMMON_BUTTON.COMMON.OK,
+          CANCEL: COMMON_BUTTON.COMMON.CANCEL
+        },
+        PAY_INSURANCE_FEE: {
+          OK: COMMON_BUTTON.COMMON.OK,
+          CANCEL: COMMON_BUTTON.COMMON.CANCEL
+        },
+        RECEIVE_INSURANCE: {
+          OK: COMMON_BUTTON.COMMON.OK,
+          CANCEL: COMMON_BUTTON.COMMON.CANCEL
+        },
+        ASK_INSURANCE_COUNSEL: {
+          OK: "상담 신청",
+          CANCEL: COMMON_BUTTON.COMMON.CANCEL
+        },
+        ADD_ACCIDENT: {
+          POST: COMMON_BUTTON.COMMON.POST,
+          CANCEL: COMMON_BUTTON.COMMON.CANCEL
+        },
+        ADD_COMPLAINT: {
+          POST: COMMON_BUTTON.COMMON.POST,
+          CANCEL: COMMON_BUTTON.COMMON.CANCEL
+        }
       }
     }
   }
@@ -109,6 +132,84 @@ export const COMBOBOX = {
         label: "보험계약"
       }
     ]
+  },
+  INPUT: {
+    PAY_INSURANCE_FEE: {
+      DEPOSIT_PATH: [
+        {
+          value: "all",
+          label: "납입방식"
+        },
+        {
+          value: "cash",
+          label: "현금"
+        },
+        {
+          value: "creditCard",
+          label: "카드"
+        },
+        {
+          value: "accountTransfer",
+          label: "계좌이체"
+        }
+      ]
+    },
+    ADD_ACCIDENT: {
+      TYPE: [
+        {
+          value: "all",
+          label: "서비스 종류"
+        },
+        {
+          value: "emergencyTowing",
+          label: "긴급견인"
+        },
+        {
+          value: "emergencyStart",
+          label: "긴급시동"
+        },
+        {
+          value: "emergencyRefueling",
+          label: "비상급유"
+        },
+        {
+          value: "batteryCharging",
+          label: "배터리충전"
+        },
+        {
+          value: "engineOverheatingRepair",
+          label: "엔진과열 수리"
+        },
+        {
+          value: "tirepunkRepair",
+          label: "타이어펑크 수리"
+        }
+      ]
+    },
+    ADD_COMPLAINT: {
+      TYPE: [
+        {
+          value: "all",
+          label: "민원 종류"
+        },
+        {
+          value: "service",
+          label: "서비스 민원"
+        },
+        {
+          value: "product",
+          label: "상품 민원"
+        },
+        {
+          value: "question",
+          label: "질문 민원"
+        },
+        {
+          value: "others",
+          label: "기타 민원"
+        }
+      ]
+    }
   }
 };
 export const TABLE_TITLE = {
@@ -164,5 +265,162 @@ export const COLUMN_NAME = {
 };
 
 export const INPUT_LABEL = {
+  APPLY_ENDORSEMENT: {
+    DEPOSIT_DATE: "납부일"
+  },
+  PAY_INSURANCE_FEE: {
+    DEPOSIT_PATH: "납입 방식",
+    DEPOSIT_MONEY: "납입 금액"
+  },
+  RECEIVE_INSURANCE: {
+    MEDICAL_CERTIFICATE: "진단서",
+    RECEIPT: "영수증",
+    RESIDENT_REGISTRATION_CARD: "신분증 사본"
+  },
+  ASK_INSURANCE_COUNSEL: {
+    COUNSEL_DATE: "상담 일자"
+  },
+  ADD_ACCIDENT: {
+    TYPE: "서비스 종류",
+    ACCIDENT_DATE: "사고 날짜",
+    LOCATION: "사고 위치"
+  },
+  ADD_COMPLAINT: {
+    TYPE: "민원 종류",
+    TITLE: "민원 제목",
+    CONTENT: "민원 내용"
+  }
+}
 
+export const INPUT_FORM = {
+  APPLY_ENDORSEMENT: {
+    DEPOSIT_DATE: {
+      isCombo: false,
+      for: "depositDate",
+      label: "DEPOSIT_DATE",
+      type: "text",
+      id: "depositDate",
+      name: "depositDate",
+      value: "depositDate",
+      placeholder: "DEPOSIT_DATE"
+    }
+  },
+  PAY_INSURANCE_FEE: {
+    DEPOSIT_PATH: {
+      isCombo: true,
+      for: "depositPath",
+      label: "DEPOSIT_PATH",
+      id: "depositPath"
+    },
+    DEPOSIT_MONEY: {
+      isCombo: false,
+      for: "depositMoney",
+      label: "DEPOSIT_MONEY",
+      type: "number",
+      id: "depositMoney",
+      name: "depositMoney",
+      value: "depositMoney",
+      placeholder: "DEPOSIT_MONEY"
+    }
+  },
+  RECEIVE_INSURANCE: {
+    MEDICAL_CERTIFICATE: {
+      isCombo: false,
+      for: "medicalCertificate",
+      label: "MEDICAL_CERTIFICATE",
+      type: "text",
+      id: "medicalCertificate",
+      name: "medicalCertificate",
+      value: "medicalCertificate",
+      placeholder: "MEDICAL_CERTIFICATE"
+    },
+    RECEIPT: {
+      isCombo: false,
+      for: "receipt",
+      label: "RECEIPT",
+      type: "text",
+      id: "receipt",
+      name: "receipt",
+      value: "receipt",
+      placeholder: "RECEIPT"
+    },
+    RESIDENT_REGISTRATION_CARD: {
+      isCombo: false,
+      for: "residentRegistrationCard",
+      label: "RESIDENT_REGISTRATION_CARD",
+      type: "text",
+      id: "residentRegistrationCard",
+      name: "residentRegistrationCard",
+      value: "residentRegistrationCard",
+      placeholder: "RESIDENT_REGISTRATION_CARD"
+    }
+  },
+  ASK_INSURANCE_COUNSEL: {
+    COUNSEL_DATE: {
+      isCombo: false,
+      for: "counselDate",
+      label: "COUNSEL_DATE",
+      type: "text",
+      id: "counselDate",
+      name: "counselDate",
+      value: "counselDate",
+      placeholder: "COUNSEL_DATE"
+    }
+  },
+  ADD_ACCIDENT: {
+    TYPE: {
+      isCombo: true,
+      for: "type",
+      label: "TYPE",
+      id: "type"
+    },
+    ACCIDENT_DATE: {
+      isCombo: false,
+      for: "accidentDate",
+      label: "ACCIDENT_DATE",
+      type: "text",
+      id: "accidentDate",
+      name: "accidentDate",
+      value: "accidentDate",
+      placeholder: "ACCIDENT_DATE"
+    },
+    LOCATION: {
+      isCombo: false,
+      for: "location",
+      label: "LOCATION",
+      type: "text",
+      id: "location",
+      name: "location",
+      value: "location",
+      placeholder: "LOCATION"
+    }
+  },
+  ADD_COMPLAINT: {
+    TYPE: {
+      isCombo: true,
+      for: "type",
+      label: "TYPE",
+      id: "type"
+    },
+    TITLE: {
+      isCombo: false,
+      for: "title",
+      label: "TITLE",
+      type: "text",
+      id: "title",
+      name: "title",
+      value: "title",
+      placeholder: "TITLE"
+    },
+    CONTENT: {
+      isCombo: false,
+      for: "content",
+      label: "CONTENT",
+      type: "text",
+      id: "content",
+      name: "content",
+      value: "content",
+      placeholder: "CONTENT"
+    }
+  }
 }

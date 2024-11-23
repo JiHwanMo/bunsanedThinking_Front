@@ -1,26 +1,26 @@
-import { fetchGetAllInsurance } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetInsuranceRowByProductId } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllDiseaseInsurance } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllInjuryInsurance } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllAutomobileInsurance } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllLoan } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetLoanRowByProductId } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllCollateralLoan } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllFixedDepositLoan } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllInsuranceContractLoan } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllContractByCustomerId } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllAutomobileContractByCustomerId } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllInjuryContractByCustomerId } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllDiseaseContractByCustomerId } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetContractRowById } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllAccidentByCustomerId } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAccidentRowById } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetAllComplaintsByCustomerId } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { fetchGetComplaintRowById } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import { BUTTON } from '../../../../../config/common.js';
-import { COMBOBOX } from '../../../../../config/customer/customer.js';
-import { TABLE_TITLE } from '../../../../../config/customer/customer.js';
-import { COLUMN_NAME } from '../../../../../config/customer/customer.js';
+import {
+  fetchGetAccidentRowById,
+  fetchGetAllAccidentByCustomerId,
+  fetchGetAllAutomobileContractByCustomerId,
+  fetchGetAllAutomobileInsurance,
+  fetchGetAllCollateralLoan,
+  fetchGetAllComplaintsByCustomerId,
+  fetchGetAllContractByCustomerId,
+  fetchGetAllDiseaseContractByCustomerId,
+  fetchGetAllDiseaseInsurance,
+  fetchGetAllFixedDepositLoan,
+  fetchGetAllInjuryContractByCustomerId,
+  fetchGetAllInjuryInsurance,
+  fetchGetAllInsurance,
+  fetchGetAllInsuranceContractLoan,
+  fetchGetAllLoan,
+  fetchGetComplaintRowById,
+  fetchGetContractRowById,
+  fetchGetInsuranceRowByProductId,
+  fetchGetLoanRowByProductId
+} from '../../../apiUtils/apiDocumentation/customer/customer.js';
+import {COLUMN_NAME, COMBOBOX, TABLE_TITLE} from '../../../../../config/customer/customer.js';
+import {setButton, setPost} from "../../buttonManager/customer/information.js";
 
 export const informationType = {
   INSURANCE_LIST: "INSURANCE_LIST",
@@ -175,15 +175,8 @@ const setTitle = () => {
   contextTitle.innerText = title;
 }
 
-const setPost = () => {
-  const post = document.createElement("div");
-  post.id = "post";
-  post.className = "post-button";
-  post.textContent = BUTTON.COMMON.POST;
-  return post;
-}
-
 const setComboBox = () => {
+  const container = document.querySelector(".search-container");
   const select = document.createElement("select");
   const type = sessionStorage.getItem("currentType");
   const boxContext = COMBOBOX[type];
@@ -197,18 +190,22 @@ const setComboBox = () => {
     option.textContent = optionType.label;
     select.appendChild(option);
   });
+  container.appendChild(select);
+  select.onchange = () => initTableBySelect(select.id, type); // 추가
   return select;
 }
 
 const setInput = () => {
+  const container = document.querySelector(".search-container");
   const input = document.createElement("input");
   input.type = "text";
   input.id = "searchInput";
   input.placeholder = "검색어 입력";
+  container.appendChild(input);
   return input;
 }
 
-const initTableByInput = async (id, type) => { // 추가
+export const initTableByInput = async (id, type) => { // 추가
   const tableBody = document.getElementById('list');
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   if (id.length > 0) {
@@ -223,20 +220,6 @@ const initTableByInput = async (id, type) => { // 추가
     if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
     setTableBody();
   }
-}
-
-const setButton = () => {
-  const button = document.createElement("button");
-  button.id = "searchButton";
-  button.textContent = BUTTON.COMMON.SEARCH;
-  const type = sessionStorage.getItem("currentType");
-  button.addEventListener("click", () => {
-    const value = document.getElementById("searchInput").value;
-    initTableByInput(value, type);
-    const select = document.getElementById(COMBOBOX[type].id);
-    if (select != null) select.selectedIndex = 0;
-  })
-  return button;
 }
 
 const initTableBySelect = async (id, type) => { // 추가
@@ -254,17 +237,11 @@ const initTableBySelect = async (id, type) => { // 추가
 }
 
 const setSearchBar = () => {
-  const container = document.querySelector(".search-container");
   const type = sessionStorage.getItem("currentType");
-  const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
-  if (select != null) { // 추가
-    container.appendChild(select);
-    if (select.id === "post")
-      post.addEventListener("click", () => alert("버튼 눌림 - POST")); // 수정
-    else select.onchange = () => initTableBySelect(select.id, type); // 추가
-  }
-  container.appendChild(setInput());
-  container.appendChild(setButton());
+  if (COMBOBOX[type].isCombo) setComboBox();
+  else setPost();
+  setInput();
+  setButton();
 }
 
 const setColumn = () => {
