@@ -21,8 +21,6 @@ const createPostButton = () => {
     const formData = collectFormDataForPost();
     alert("정말 등록하겠습니까?");
 
-    alert(JSON.stringify(formData));
-
     await functions[formData.loanType].postFunction(formData);
 
     window.location.href = "home.html"
