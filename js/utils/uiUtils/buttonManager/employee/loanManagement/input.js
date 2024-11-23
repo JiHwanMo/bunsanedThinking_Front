@@ -1,117 +1,152 @@
 import {
-  fetchAddAutomobileInsurance,
-  fetchAddDiseaseInsurance,
-  fetchAddInjuryInsurance,
-  fetchUpdateAutomobileInsurance,
-  fetchUpdateDiseaseInsurance,
-  fetchUpdateInjuryInsurance
-} from "../../../../apiUtils/apiDocumentation/employee/productManagement/productManagement.js";
+  fetchAddCollateralProduct,
+  fetchAddLoanProduct,
+  fetchRequestLoan,
+  fetchUpdateCollateralProduct,
+  fetchUpdateFixedDepositProduct,
+  fetchUpdateInsuranceContractProduct,
+} from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
+import {BUTTON as COMMON_BUTTON} from "../../../../../../config/common.js";
+
+export const renderButtons = () => {
+  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
+  context[selectedButtonType].createButtons();
+};
+
+const createPostButton = () => {
+  const buttonContainer = document.getElementById("buttonContainer");
+
+  const oKButton = createButton(COMMON_BUTTON.COMMON.OK);
+  oKButton.addEventListener("click", async () => {
+    const formData = collectFormDataForPost();
+    alert("정말 등록하겠습니까?");
+
+    alert(JSON.stringify(formData));
+
+    await functions[formData.loanType].postFunction(formData);
+
+    window.location.href = "home.html"
+  });
+
+  buttonContainer.appendChild(oKButton);
+  createCancelButton();
+}
+
+const createUpdateButton = () => {
+  const buttonContainer = document.getElementById("buttonContainer");
+
+  const updateButton = createButton(COMMON_BUTTON.COMMON.UPDATE);
+  updateButton.addEventListener("click", async () => {
+    const formData = collectFormDataForUpdate();
+    alert("정말 수정하시겠습니까?");
+
+    await functions[formData.loanType].updateFunction(formData);
+
+    window.location.href = "home.html"
+  });
+
+  buttonContainer.appendChild(updateButton);
+  createCancelButton();
+}
+
+const createLoanRequestButton = () => {
+  const buttonContainer = document.getElementById("buttonContainer");
+
+  const oKButton = createButton(COMMON_BUTTON.COMMON.OK);
+  oKButton.addEventListener("click", async () => {
+    let id = sessionStorage.getItem("selectedDataId");
+    let money = getValueById("money");
+    let paymentType = getValueById("paymentType");
+    alert("정말 처리하시겠습니까?");
+
+    await fetchRequestLoan(id, money, paymentType, true);
+
+    window.location.href = "home.html"
+  });
+
+  buttonContainer.appendChild(oKButton);
+  createCancelButton();
+}
 
 const context = {
-  MANAGE_INSURANCE_PRODUCT: {
-    fetchAddInsurance: {
-      Disease: fetchAddDiseaseInsurance,
-      Injury: fetchAddInjuryInsurance,
-      Automobile: fetchAddAutomobileInsurance
-    },
-    fetchUpdateInsurance: {
-      Disease: fetchUpdateDiseaseInsurance,
-      Injury: fetchUpdateInjuryInsurance,
-      Automobile: fetchUpdateAutomobileInsurance
-    }
-    // postButtons: BUTTON.TASK.EMPLOYEE.PRODUCT_MANAGEMENT.MANAGE_INSURANCE_PRODUCT
+  POST: {
+    createButtons: createPostButton
+  },
+  UPDATE: {
+    createButtons: createUpdateButton
+  },
+  LOAN_REQUEST: {
+    createButtons: createLoanRequestButton
   }
 }
 
-export const addButtons = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
-  const type = sessionStorage.getItem("currentType");
-
-  const saveButton = document.createElement("button");
-  const cancelButton = document.createElement("button");
-
-  // 공통 스타일 적용
-  saveButton.className = "button-item";
-  cancelButton.className = "button-item";
-
-  if (selectedButtonType === "POST") {
-    saveButton.textContent = "확인";
-    saveButton.addEventListener("click", async () => {
-      const formData = collectFormDataForPost();
-      console.log("POST 데이터:", formData);
-      alert("정말 등록하겠습니까?");
-
-      await context[type].fetchAddInsurance[formData.insuranceType](formData);
-
-      window.location.href = "home.html"
-    });
-
-    cancelButton.textContent = "취소";
-    cancelButton.addEventListener("click", () => window.location.href = "home.html");
-  } else if (selectedButtonType === "UPDATE") {
-    saveButton.textContent = "수정";
-    saveButton.addEventListener("click", async () => {
-      const formData = collectFormDataForUpdate();
-      console.log("UPDATE 데이터:", formData);
-      alert("정말 수정하시겠습니까?");
-
-      await context[type].fetchUpdateInsurance[formData.insuranceType](formData);
-
-      window.location.href = "home.html"
-    });
-
-    cancelButton.textContent = "취소";
-    cancelButton.addEventListener("click", () => window.location.href = "home.html");
+const functions= {
+  Collateral: {
+    postFunction: fetchAddCollateralProduct,
+    updateFunction: fetchUpdateCollateralProduct
+  },
+  FixedDeposit: {
+    postFunction: fetchAddLoanProduct,
+    updateFunction: fetchUpdateFixedDepositProduct
+  },
+  InsuranceContract: {
+    postFunction: fetchAddLoanProduct,
+    updateFunction: fetchUpdateInsuranceContractProduct
   }
+}
 
-  buttonContainer.appendChild(saveButton);
+const createButton = (textContent) => {
+  const okButton = document.createElement("button");
+  okButton.className = "button-item";
+  okButton.textContent = textContent;
+  return okButton;
+}
+
+const createCancelButton = () => {
+  const buttonContainer = document.getElementById("buttonContainer");
+
+  const cancelButton = document.createElement("button");
+  cancelButton.className = "button-item";
+  cancelButton.textContent = COMMON_BUTTON.COMMON.CANCEL;
+
+  cancelButton.addEventListener("click", () => window.history.back());
+
   buttonContainer.appendChild(cancelButton);
+}
+
+const getValueById = (id) => {
+  const element = document.getElementById(id);
+  return element ? element.value : null; // 요소가 존재하면 value 반환, 아니면 null 반환
 };
 
 const collectFormDataForPost = () => {
-  const getValueById = (id) => {
-    const element = document.getElementById(id);
-    return element ? element.value : null; // 요소가 존재하면 value 반환, 아니면 null 반환
-  };
-
-  const getCheckedValues = (name) => {
-    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(
-      (checkbox) => checkbox.value
-    );
-  };
-
-  const insuranceType = getValueById("insuranceType"); // POST는 콤보박스에서 선택한 값 사용
+  const loanType = getValueById("loanType");
   const commonData = {
-    insuranceType,
-    name: getValueById("insuranceName"),
-    ageRange: getValueById("ageRange"),
-    coverage: getValueById("coverage"),
+    loanType: loanType,
+    name: getValueById("loanName"),
+    interestRate: getValueById("interestRate"),
     maximumMoney: getValueById("maximumMoney"),
-    monthlyPremium: getValueById("monthlyPremium"),
-    contractPeriod: getValueById("contractPeriod"),
+    minimumAsset: getValueById("minimumAsset")
   };
 
   // 보험 유형별로 데이터 추가
-  switch (insuranceType) {
-    case "Injury":
+
+  switch (loanType) {
+    case "Collateral":
       return {
         ...commonData,
-        injuryType: getValueById("injuryType"),
-        surgeriesLimit: getValueById("surgeriesLimit")
+        collateralType: getValueById("collateralType"),
+        minimumValue: getValueById("minimumValue")
       };
-    case "Disease":
+    case "FixedDeposit":
       return {
         ...commonData,
-        diseaseLimit: getValueById("diseaseLimit"),
-        diseaseName: getValueById("diseaseName"),
-        surgeriesLimit: getValueById("surgeriesLimit"),
+        parameter: getValueById("minimumAmount")
       };
-    case "Automobile":
+    case "InsuranceContract":
       return {
         ...commonData,
-        vehicleType: getValueById("vehicleType"),
-        serviceTypes: getCheckedValues("services"),
+        parameter: getValueById("insuranceId")
       };
     default:
       return commonData; // 기본 데이터 반환 (보험 유형이 없을 때)
@@ -119,51 +154,34 @@ const collectFormDataForPost = () => {
 };
 
 const collectFormDataForUpdate = () => {
-  const getValueById = (id) => {
-    const element = document.getElementById(id);
-    return element ? element.value : null; // 요소가 존재하면 value 반환, 아니면 null 반환
-  };
-
-  const getCheckedValues = (name) => {
-    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(
-      (checkbox) => checkbox.value
-    );
-  };
-
-  const insuranceType = JSON.parse(sessionStorage.getItem("selectedDataInsuranceType")); // UPDATE는 세션 데이터 사용
+  const loanType = sessionStorage.getItem("selectedDataType");
   const commonData = {
-    id: JSON.parse(sessionStorage.getItem("selectedDataId")), // UPDATE는 id 포함
-    insuranceType,
-    name: getValueById("insuranceName"),
-    ageRange: getValueById("ageRange"),
-    coverage: getValueById("coverage"),
+    id: JSON.parse(sessionStorage.getItem("selectedDataId")),
+    loanType: loanType,
+    name: getValueById("loanName"),
+    interestRate: getValueById("interestRate"),
     maximumMoney: getValueById("maximumMoney"),
-    monthlyPremium: getValueById("monthlyPremium"),
-    contractPeriod: getValueById("contractPeriod"),
+    minimumAsset: getValueById("minimumAsset")
   };
 
-  // 보험 유형별로 데이터 추가
-  switch (insuranceType) {
-    case "Injury":
+  switch (loanType) {
+    case "Collateral":
       return {
         ...commonData,
-        injuryType: getValueById("injuryType"),
-        surgeriesLimit: getValueById("surgeriesLimit")
+        collateralType: getValueById("collateralType"),
+        minimumValue: getValueById("minimumValue")
       };
-    case "Disease":
+    case "FixedDeposit":
       return {
         ...commonData,
-        diseaseLimit: getValueById("diseaseLimit"),
-        diseaseName: getValueById("diseaseName"),
-        surgeriesLimit: getValueById("surgeriesLimit"),
+        minimumAmount: getValueById("minimumAmount")
       };
-    case "Automobile":
+    case "InsuranceContract":
       return {
         ...commonData,
-        vehicleType: getValueById("vehicleType"),
-        serviceTypes: getCheckedValues("services"),
+        insuranceId: getValueById("insuranceId")
       };
     default:
       return commonData; // 기본 데이터 반환 (보험 유형이 없을 때)
   }
-};
+}

@@ -7,7 +7,8 @@ export const renderButtons = () => {
 };
 
 const updateLoan = () => {
-  alert("수정 - 융자운용");
+  sessionStorage.setItem("selectedButtonType", "UPDATE");
+  window.location.href = "input.html";
 }
 
 const deleteLoan = () => {
@@ -15,7 +16,8 @@ const deleteLoan = () => {
 }
 
 const requestLoan = () => {
-  alert("요청 - 융자운용");
+  sessionStorage.setItem("selectedButtonType", "LOAN_REQUEST");
+  window.location.href = "input.html";
 }
 
 const deniedLoanRequest = () => {

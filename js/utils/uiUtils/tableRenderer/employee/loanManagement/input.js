@@ -1,49 +1,32 @@
-import {DETAIL_COLUMN_NAME} from "../../../../../../config/employee/productManagement/productManagement.js";
-import { addButtons } from "../../../buttonManager/employee/loanManagement/input.js";
-import { fetchGetInsuranceProductDetail } from "../../../../apiUtils/apiDocumentation/employee/productManagement/productManagement.js";
-
-
+import {DETAIL_COLUMN_NAME} from "../../../../../../config/employee/loanManagement/loanManagement.js";
+import {
+  fetchGetLoanProductDetail
+} from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
 
 export const renderInput = () => {
-
   const selectedButtonType = sessionStorage.getItem("selectedButtonType");
   context[selectedButtonType].renderingInput();
-  // if (selectedButtonType === "POST") {
-  //   // POST: 콤보박스 렌더링
-  //   const loanType = renderComboBox();
-  //   loanType.addEventListener("change", () => {
-  //     renderInputFields(loanType.value);
-  //   });
-  // } else if (selectedButtonType === "UPDATE") {
-  //   // UPDATE: 데이터 가져오기 및 필드 렌더링
-  //   const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  //   const insuranceData = await fetchGetInsuranceProductDetail(selectedDataId);
-  //   renderCommonInputFieldsWithValues(insuranceData.insuranceType, insuranceData);
-  // } else if (selectedButtonType === "LOAN_REQUEST") {
-  //   renderInputFields()
-  // }
-  //
-  // 버튼 추가
-  addButtons(); // 이건 나중에 input.html 에서 부르도록
 }
 
-// renderInputFileds에 type.value를 넣는게 아니라 어떤 context 값을 넣어서 공용으로 쓰게 만들기
+const getType = () => {
+  return sessionStorage.getItem("currentType");
+}
 
 const renderAddLoanInput = () => {
   const loanType = renderComboBox();
   loanType.addEventListener("change", () => {
-    renderInputFields(loanType.value);
+    renderAddLoanInputFields(loanType.value);
   });
 }
 
 const renderUpdateLoanInput = async () => {
   const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const insuranceData = await fetchGetInsuranceProductDetail(selectedDataId);
-  renderCommonInputFieldsWithValues(insuranceData.insuranceType, insuranceData);
+  const loanData = await fetchGetLoanProductDetail(selectedDataId);
+  renderCommonInputFieldsWithValues(loanData.loanType, loanData);
 }
 
 const renderRequestLoanInput = () => {
-  renderInputFields()
+  renderLoanRequestInputFields();
 }
 
 const context = {
@@ -61,112 +44,78 @@ const context = {
 const options = [
   {
     value: "",
-    label: "보험 종류를 선택하세요"
+    label: "대출 종류를 선택하세요"
   },
   {
-    value: "Injury",
-    label: "상해 보험"
+    value: "Collateral",
+    label: "담보 대출"
   },
   {
-    value: "Disease",
-    label: "질병 보험"
+    value: "FixedDeposit",
+    label: "정기 예금 대출"
   },
   {
-    value: "Automobile",
-    label: "자동차 보험"
+    value: "InsuranceContract",
+    label: "보험 계약 대출"
   }
 ];
 
 const renderComboBox = () => {
   const comboBoxContainer = document.getElementById("comboBoxContainer");
   // 콤보박스 컨테이너 초기화
-  let insuranceTypeContainer = document.getElementById("insuranceTypeContainer");
+  let loanTypeContainer = document.getElementById("loanTypeContainer");
 
-  if (!insuranceTypeContainer) {
-    insuranceTypeContainer = document.createElement("div");
-    insuranceTypeContainer.className = "form-group";
-    insuranceTypeContainer.id = "insuranceTypeContainer";
+  if (loanTypeContainer)
+    return document.getElementById("loanType"); // 이미 존재하는 콤보박스 반환
 
-    const label = document.createElement("label");
-    label.setAttribute("for", "insuranceType");
-    label.textContent = "보험 종류";
+  loanTypeContainer = document.createElement("div");
+  loanTypeContainer.className = "form-group";
+  loanTypeContainer.id = "loanTypeContainer";
 
-    const select = document.createElement("select");
-    select.id = "insuranceType";
+  const label = document.createElement("label");
+  label.setAttribute("for", "loanType");
+  label.textContent = "대출 종류";
 
-    options.forEach(optionValue => {
-      const option = document.createElement("option");
-      option.value = optionValue.value;
-      option.textContent = optionValue.label;
-      select.appendChild(option);
-    });
+  const select = document.createElement("select");
+  select.id = "loanType";
 
-    // 콤보박스 컨테이너에 추가
-    insuranceTypeContainer.appendChild(label);
-    insuranceTypeContainer.appendChild(select);
+  options.forEach(optionValue => {
+    const option = document.createElement("option");
+    option.value = optionValue.value;
+    option.textContent = optionValue.label;
+    select.appendChild(option);
+  });
 
-    // 메인 컨테이너에 추가
-    comboBoxContainer.appendChild(insuranceTypeContainer);
+  // 콤보박스 컨테이너에 추가
+  loanTypeContainer.appendChild(label);
+  loanTypeContainer.appendChild(select);
 
-    return select; // 생성된 콤보박스를 반환
-  }
+  // 메인 컨테이너에 추가
+  comboBoxContainer.appendChild(loanTypeContainer);
 
-  return document.getElementById("insuranceType"); // 이미 존재하는 콤보박스 반환
+  return select; // 생성된 콤보박스를 반환
 };
 
-const commonForms = [
+const commonLoanForms = [
   {
-    isTextArea: false,
-    for: "insuranceName",
+    for: "loanName",
     label: "NAME",
     type: "text",
-    id: "insuranceName",
-    name: "insuranceName",
+    id: "loanName",
+    name: "loanName",
     value: "name",
     placeholder: "NAME"
   },
   {
-    isTextArea: false,
-    for: "ageRange",
-    label: "AGE_RANGE",
-    type: "text",
-    id: "ageRange",
-    name: "ageRange",
-    value: "ageRange",
-    placeholder: "AGE_RANGE"
-  },
-  {
-    isTextArea: true,
-    for: "coverage",
-    label: "COVERAGE",
-    rows: "4",
-    id: "coverage",
-    name: "coverage",
-    value: "coverage",
-    placeholder: "COVERAGE"
-  },
-  {
-    isTextArea: false,
-    for: "monthlyPremium",
-    label: "MONTHLY_PREMIUM",
+    for: "interestRate",
+    label: "INTEREST_RATE",
     type: "number",
-    id: "monthlyPremium",
-    name: "monthlyPremium",
-    value: "monthlyPremium",
-    placeholder: "MONTHLY_PREMIUM"
+    id: "interestRate",
+    name: "interestRate",
+    value: "interestRate",
+    placeholder: "INTEREST_RATE"
   },
   {
-    isTextArea: false,
-    for: "contractPeriod",
-    label: "CONTRACT_PERIOD",
-    type: "number",
-    id: "contractPeriod",
-    name: "contractPeriod",
-    value: "contractPeriod",
-    placeholder: "CONTRACT_PERIOD"
-  },
-  {
-    isTextArea: false,
     for: "maximumMoney",
     label: "MAXIMUM_MONEY",
     type: "number",
@@ -174,223 +123,155 @@ const commonForms = [
     name: "maximumMoney",
     value: "maximumMoney",
     placeholder: "MAXIMUM_MONEY"
+  },
+  {
+    for: "minimumAsset",
+    label: "MINIMUM_ASSET",
+    type: "number",
+    id: "minimumAsset",
+    name: "minimumAsset",
+    value: "minimumAsset",
+    placeholder: "MINIMUM_ASSET"
   }
 ];
 
-const createCommonForm = (form) => {
+const createCommonForm = (form, type) => {
   const formDiv = document.createElement("div");
   formDiv.className = "form-group";
   const formLabel = document.createElement("label");
   formLabel.for = form.for;
-  formLabel.textContent = DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT[form.label];
+  formLabel.textContent = DETAIL_COLUMN_NAME[type][form.label];
   formDiv.appendChild(formLabel);
-  let formInput;
-  if (form.isTextArea) {
-    formInput = document.createElement("textarea");
-    formInput.rows = form.rows;
-  } else {
-    formInput = document.createElement("input");
-    formInput.type = form.type;
-  }
+  let formInput = document.createElement("input");
+  formInput.type = form.type;
   formInput.id = form.id;
   formInput.name = form.name;
-  formInput.placeholder = `${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT[form.placeholder]}을(를) 입력하세요`;
+  formInput.placeholder = `${DETAIL_COLUMN_NAME[type][form.placeholder]}을(를) 입력하세요`;
   formDiv.appendChild(formInput);
   return formDiv;
 }
 
-const createInjuryForm = () => {
+const createCollateralForm = (type) => {
   return `
       <div class="form-group">
-        <label for="injuryType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.INJURY_TYPE}</label>
-        <select id="injuryType" name="injuryType">
-          <option value="">상해 종류를 선택하세요</option>
-          <option value="Minor">경상</option>
-          <option value="Serious">중상</option>
+        <label for="collateralType">${DETAIL_COLUMN_NAME[type].TYPE.COLLATERAL.COLLATERAL_TYPE}</label>
+        <select id="collateralType" name="collateralType">
+          <option value="RealEstate" selected>부동산</option>
+          <option value="Car">자동차</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}</label>
-        <input type="number" id="surgeriesLimit" name="surgeriesLimit" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}을 입력하세요" required>
+        <label for="minimumValue">${DETAIL_COLUMN_NAME[type].TYPE.COLLATERAL.MINIMUM_VALUE}</label>
+        <input type="number" id="minimumValue" name="minimumValue" placeholder="${DETAIL_COLUMN_NAME[type].TYPE.COLLATERAL.MINIMUM_VALUE}를 입력하세요" required>
       </div>
     `;
 }
 
-const createDiseaseForm = () => {
+const createFixedDepositForm = (type) => {
   return `
       <div class="form-group">
-        <label for="diseaseLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}</label>
-        <input type="number" id="diseaseLimit" name="diseaseLimit" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}을 입력하세요" required>
-      </div>
-      <div class="form-group">
-        <label for="diseaseName">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}</label>
-        <input type="text" id="diseaseName" name="diseaseName" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}을 입력하세요" required>
-      </div>
-      <div class="form-group">
-        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}</label>
-        <input type="number" id="surgeriesLimit" name="surgeriesLimit" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}을 입력하세요" required>
+        <label for="minimumAmount">${DETAIL_COLUMN_NAME[type].TYPE.FIXED_DEPOSIT.MINIMUM_AMOUNT}</label>
+        <input type="number" id="minimumAmount" name="minimumAmount" placeholder="${DETAIL_COLUMN_NAME[type].TYPE.FIXED_DEPOSIT.MINIMUM_AMOUNT}을 입력하세요" required>
       </div>
     `;
 }
 
-const createAutomobileForm = () => {
+const createInsuranceContractForm = (type) => {
   return `
       <div class="form-group">
-        <label for="vehicleType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.VEHICLE_TYPE}</label>
-        <select id="vehicleType" name="vehicleType">
-          <option value="">차량 종류를 선택하세요</option>
-          <option value="Amall">소형</option>
-          <option value="Medium">중형</option>
-          <option value="Large">대형</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.SERVICES}</label>
-        <div class="checkbox-group">
-          <div class="checkbox-item">
-            <label for="serviceTowing">긴급견인</label>
-            <input type="checkbox" id="serviceTowing" name="services" value="EmergencyTowing">
-          </div>
-          <div class="checkbox-item">
-            <label for="serviceJumpstart">긴급시동</label>
-            <input type="checkbox" id="serviceJumpstart" name="services" value="EmergencyStart">
-          </div>
-          <div class="checkbox-item">
-            <label for="serviceRefueling">비상급유</label>
-            <input type="checkbox" id="serviceRefueling" name="services" value="EmergencyRefueling">
-          </div>
-          <div class="checkbox-item">
-            <label for="serviceBattery">배터리충전</label>
-            <input type="checkbox" id="serviceBattery" name="services" value="BatteryCharging">
-          </div>
-          <div class="checkbox-item">
-            <label for="serviceEngineRepair">엔진과열 수리</label>
-            <input type="checkbox" id="serviceEngineRepair" name="services" value="EngineOverheatingRepair">
-          </div>
-          <div class="checkbox-item">
-            <label for="serviceTireRepair">타이어펑크 수리</label>
-            <input type="checkbox" id="serviceTireRepair" name="services" value="TirepunkRepair">
-          </div>
-        </div>
+        <label for="insuranceId">${DETAIL_COLUMN_NAME[type].TYPE.INSURANCE_CONTRACT.INSURANCE_ID}</label>
+        <input type="number" id="insuranceId" name="insuranceId" placeholder="${DETAIL_COLUMN_NAME[type].TYPE.INSURANCE_CONTRACT.INSURANCE_ID}를 입력하세요" required>
       </div>
     `;
+}
+
+const renderAddLoanInputFields = (loanType) => {
+  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
+  while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
+  if (loanType === "") return;
+  let type = getType();
+  commonLoanForms.forEach(form => inputFieldsContainer.appendChild(createCommonForm(form, type)));
+  inputFieldsContainer.innerHTML += fields[loanType](type); // 선택된 옵션에 따라 입력란 표시
 }
 
 const fields = {
-  Injury: createInjuryForm,
-  Disease: createDiseaseForm,
-  Automobile: createAutomobileForm
+  Collateral: createCollateralForm,
+  FixedDeposit: createFixedDepositForm,
+  InsuranceContract: createInsuranceContractForm
 };
 
-const renderInputFields = (insuranceType) => {
+const renderLoanRequestInputFields = () => {
   const inputFieldsContainer = document.getElementById("inputFieldsContainer");
-  while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
-  if (insuranceType === "") return;
-  commonForms.forEach(form => inputFieldsContainer.appendChild(createCommonForm(form)));
-  inputFieldsContainer.innerHTML += fields[insuranceType](); // 선택된 옵션에 따라 입력란 표시
-};
+  inputFieldsContainer.innerHTML += createLoanRequestInputForm();
+}
 
-const renderCommonInputFieldsWithValues = (insuranceType, data) => {
+const createLoanRequestInputForm = () => {
+  let type = getType();
+  return `
+      <div class="form-group">
+        <label for="paymentType">${DETAIL_COLUMN_NAME[type].PAYMENT_TYPE}</label>
+        <select id="paymentType" name="paymentType">
+          <option value="Cash" selected>현금</option>
+          <option value="AccountTransfer">계좌이체</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="money">${DETAIL_COLUMN_NAME[type].MONEY}</label>
+        <input type="number" id="money" name="money" placeholder="${DETAIL_COLUMN_NAME[type].MONEY}을 입력하세요" required>
+      </div>
+    `;
+}
+
+const renderCommonInputFieldsWithValues = (loanType, data) => {
+  sessionStorage.setItem("selectedDataType", loanType);
   const inputFieldsContainer = document.getElementById("inputFieldsContainer");
   while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
-  if (insuranceType === "") return;
-  commonForms.forEach(form => {
-    inputFieldsContainer.appendChild(createCommonForm(form))
+  if (loanType === "") return;
+  const type = getType();
+  commonLoanForms.forEach(form => {
+    inputFieldsContainer.appendChild(createCommonForm(form, type))
     const input = document.getElementById(form.id);
-    if (form.isTextArea)
-      input.textContent = data[form.value];
-    else
-      input.setAttribute("value", data[form.value]);
+    input.setAttribute("value", data[form.value]);
   });
-  inputFieldsContainer.innerHTML += fieldsWithDetail[insuranceType](data); // 선택된 옵션에 따라 입력란 표시
+  inputFieldsContainer.innerHTML += fieldsWithDetail[loanType](data, type); // 선택된 옵션에 따라 입력란 표시
 };
 
-const createInjuryFormWithDetail = (data) => {
+const createCollateralFormWithDetail = (data, type) => {
   return `
       <div class="form-group">
-        <label for="injuryType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.INJURY_TYPE}</label>
-        <select id="injuryType" name="injuryType">
-          <option value="Minor" ${data.injuryType === "Minor" ? "selected" : ""}>경상</option>
-          <option value="Serious" ${data.injuryType === "Serious" ? "selected" : ""}>중상</option>
+        <label for="collateralType">${DETAIL_COLUMN_NAME[type].TYPE.COLLATERAL.COLLATERAL_TYPE}</label>
+        <select id="collateralType" name="collateralType">
+          <option value="RealEstate" ${data.collateralType === "RealEstate" ? "selected" : ""}>부동산</option>
+          <option value="Car" ${data.collateralType === "Car" ? "selected" : ""}>자동차</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}</label>
-        <input type="number" id="surgeriesLimit" name="surgeriesLimit" value="${data.surgeriesLimit || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}을 입력하세요" required>
+        <label for="minimumValue">${DETAIL_COLUMN_NAME[type].TYPE.COLLATERAL.MINIMUM_VALUE}</label>
+        <input type="number" id="minimumValue" name="minimumValue" value="${data.minimumValue || ""}" placeholder="${DETAIL_COLUMN_NAME[type].TYPE.COLLATERAL.MINIMUM_VALUE}를 입력하세요" required>
       </div>
     `;
 }
 
-const createDiseaseFormWithDetail = (data) => {
+const createFixedDepositFormWithDetail = (data, type) => {
   return `
       <div class="form-group">
-        <label for="diseaseLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}</label>
-        <input type="number" id="diseaseLimit" name="diseaseLimit" value="${data.diseaseLimit || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}을 입력하세요" required>
-      </div>
-      <div class="form-group">
-        <label for="diseaseName">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}</label>
-        <input type="text" id="diseaseName" name="diseaseName" value="${data.diseaseName || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}을 입력하세요" required>
-      </div>
-      <div class="form-group">
-        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}</label>
-        <input type="number" id="surgeriesLimit" name="surgeriesLimit" value="${data.surgeriesLimit || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}을 입력하세요" required>
+        <label for="minimumAmount">${DETAIL_COLUMN_NAME[type].TYPE.FIXED_DEPOSIT.MINIMUM_AMOUNT}</label>
+        <input type="number" id="minimumAmount" name="minimumAmount" value="${data.minimumAmount || ""}" placeholder="${DETAIL_COLUMN_NAME[type].TYPE.FIXED_DEPOSIT.MINIMUM_AMOUNT}을 입력하세요" required>
       </div>
     `;
 }
 
-const createAutomobileFormWithDetail = (data) => {
-  const renderServiceCheckbox = (selectedServices = []) => {
-    const serviceOptions = [
-      { value: "EmergencyTowing", label: "긴급견인" },
-      { value: "EmergencyStart", label: "긴급시동" },
-      { value: "EmergencyRefueling", label: "비상급유" },
-      { value: "BatteryCharging", label: "배터리충전" },
-      { value: "EngineOverheatingRepair", label: "엔진과열 수리" },
-      { value: "TirepunkRepair", label: "타이어펑크 수리" }
-    ];
-
-    return serviceOptions
-      .map(
-        (service) => `
-        <div class="checkbox-item">
-          <label for="service-${service.value}">${service.label}</label>
-          <input
-            type="checkbox"
-            id="service-${service.value}"
-            name="services"
-            value="${service.value}"
-            ${selectedServices.includes(service.value) ? "checked" : ""}
-          />
-        </div>
-      `
-      )
-      .join("");
-  };
-
+const createInsuranceContractFormWithDetail = (data, type) => {
   return `
       <div class="form-group">
-        <label for="accidentLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.ACCIDENT_LIMIT}</label>
-        <input type="number" id="accidentLimit" name="accidentLimit" value="${data.accidentLimit || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.ACCIDENT_LIMIT}을 입력하세요" required>
-      </div>
-      <div class="form-group">
-        <label for="vehicleType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.VEHICLE_TYPE}</label>
-        <select id="vehicleType" name="vehicleType">
-          <option value="Small" ${data.vehicleType === "Small" ? "selected" : ""}>소형</option>
-          <option value="Medium" ${data.vehicleType === "Medium" ? "selected" : ""}>중형</option>
-          <option value="Large" ${data.vehicleType === "Large" ? "selected" : ""}>대형</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.SERVICES}</label>
-        <div class="checkbox-group">
-          ${renderServiceCheckbox(data.serviceTypes || [])}
-        </div>
+        <label for="insuranceId">${DETAIL_COLUMN_NAME[type].TYPE.INSURANCE_CONTRACT.INSURANCE_ID}</label>
+        <input type="number" id="insuranceId" name="insuranceId" value="${data.insuranceId || ""}" placeholder="${DETAIL_COLUMN_NAME[type].TYPE.INSURANCE_CONTRACT.INSURANCE_ID}를 입력하세요" required>
       </div>
     `;
 }
 
 const fieldsWithDetail = {
-  Injury: createInjuryFormWithDetail,
-  Disease: createDiseaseFormWithDetail,
-  Automobile: createAutomobileFormWithDetail
+  Collateral: createCollateralFormWithDetail,
+  FixedDeposit: createFixedDepositFormWithDetail,
+  InsuranceContract: createInsuranceContractFormWithDetail
 }

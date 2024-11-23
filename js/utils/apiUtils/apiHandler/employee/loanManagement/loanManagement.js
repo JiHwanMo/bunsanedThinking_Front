@@ -1,4 +1,10 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from "../../../common/FetchHandler.js"
+import {
+  fetchGetHandler,
+  fetchPostHandler,
+  fetchPatchWithParams,
+  fetchDeleteHandler,
+  fetchPatchWithBody
+} from "../../../common/FetchHandler.js"
 
 const defaultURL = "http://localhost:8080/employee/loanManagement"
 
@@ -26,34 +32,25 @@ export const fetchGetLoanRequestHandler = async (contractId) => {
   return await fetchGetHandler(`${defaultURL}/getLoanRequest?id=${contractId}`);
 }
 
-export const fetchAddCollateralProductHandler = async (loanType, name, interestRate, maximumMoney, minimumAsset, collateralType, minimumValue, monthlyIncome) => {
-  return await fetchPostHandler(`${defaultURL}/addCollateralProduct`,
-    {
-      loanType: loanType,
-      name: name,
-      interestRate: interestRate,
-      maximumMoney: maximumMoney,
-      minimumAsset: minimumAsset,
-      collateralType: collateralType,
-      minimumValue: minimumValue,
-      monthlyIncome: monthlyIncome
-    }
-  );
+export const fetchAddCollateralProductHandler = async (addCollateralDto) => {
+  return await fetchPostHandler(`${defaultURL}/addCollateralProduct`, addCollateralDto);
 };
 
-export const fetchAddLoanProductHandler = async (loanType, name, interestRate, maximumMoney, minimumAsset, parameter, monthlyIncome) => {
-  return await fetchPostHandler(`${defaultURL}/addLoanProduct`,
-    {
-      loanType: loanType,
-      name: name,
-      interestRate: interestRate,
-      maximumMoney: maximumMoney,
-      minimumAsset: minimumAsset,
-      parameter: parameter,
-      monthlyIncome: monthlyIncome
-    }
-  );
+export const fetchAddLoanProductHandler = async (addLoanDto) => {
+  return await fetchPostHandler(`${defaultURL}/addLoanProduct`, addLoanDto);
 };
+
+export const fetchUpdateCollateralProductHandler = async (updateCollateralDto) => {
+  await fetchPatchWithBody(`${defaultURL}/updateCollateralProduct`, updateCollateralDto);
+}
+
+export const fetchUpdateFixedDepositProductHandler = async (updateFixedDepositDto) => {
+  await fetchPatchWithBody(`${defaultURL}/updateFixedDepositProduct`, updateFixedDepositDto);
+}
+
+export const fetchUpdateInsuranceContractHandler = async (updateInsuranceContractDto) => {
+  await fetchPatchWithBody(`${defaultURL}/updateInsuranceContractProduct`, updateInsuranceContractDto);
+}
 
 export const fetchRequestLoanHandler = async (contractId, money, paymentType, result) => {
   await fetchPostHandler(`${defaultURL}/requestLoan?contractId=${contractId}&money=${money}&paymentType=${paymentType}&result=${result}`,)
