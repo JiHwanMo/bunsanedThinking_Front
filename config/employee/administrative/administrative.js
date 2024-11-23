@@ -34,3 +34,14 @@ export const COLUMN_NAME = {
     "총 재고"
   ]
 };
+
+export const DETAIL_COLUMN_NAME = {
+  OFFICESUPPLY_LIST: {
+    ID: "비품 번호",
+    NAME: "비품 이름",
+    INVENTORY: "현재 재고",
+    TOTAL_INVENTORY: "총 재고",
+    DESCRIPTION: "설명",
+    DEPARTMENT_ID: "부서ID"
+  }
+};

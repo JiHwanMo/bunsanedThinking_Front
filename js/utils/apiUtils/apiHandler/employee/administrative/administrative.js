@@ -26,7 +26,4 @@ export const fetchGetTotalInventoryHandler = async () => {
   return await fetchGetHandler(`${defaultUrl}/getTotalInventory`);
 };
 
-// export const fetchGetEmployeeByIdHandelr = async (id) => {
-//   return await fetchGetEmployeeHandler
-// }
 
