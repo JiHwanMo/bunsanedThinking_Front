@@ -28,8 +28,8 @@ const addPartnerCompany = async () => {
   else if (headPhoneNumber === "") alert("업체 대표 핸드폰 번호를 입력해주세요");
   else {
     const dto = getPartnerCompanyAddDTO(name, phoneNumber, type, headName, headPhoneNumber);
-    // await fetchAddPartnerCompany(dto);
-    alert(JSON.stringify(dto)+"-추가 완");
+    await fetchAddPartnerCompany(dto);
+    alert("등록되었습니다.");
     window.history.back();
     window.history.back();
   }
@@ -52,8 +52,8 @@ const updatePartnerCompany = async () => {
   if (index === 0) alert("수정 옵션을 선택해주세요");
   else {
     const updateDTO = getPartnerCompanyUpdateDTO(dataId, input, index);
-    // await fetchUpdatePartnerCompany(updateDTO);
-    alert(JSON.stringify(updateDTO)+"-없뎃");
+    await fetchUpdatePartnerCompany(updateDTO);
+    alert("수정되었습니다.");
     window.history.back();
     window.history.back();
     window.history.back();
@@ -64,10 +64,10 @@ const cancel = () => {
   window.history.back();
 }
 
-const evaluatePartnerCompany = (evaluate) => {
+const evaluatePartnerCompany = async (evaluate) => {
   const dataId = sessionStorage.getItem("selectedDataId");
-  // fetchEvaluatePartnerCompany(evaluate, dataId);
-  alert("평가-"+evaluate);
+  await fetchEvaluatePartnerCompany(evaluate, dataId);
+  alert("평가되었습니다.");
   window.history.back();
   window.history.back();
   window.history.back();

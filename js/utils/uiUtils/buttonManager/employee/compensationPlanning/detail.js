@@ -21,8 +21,8 @@ const updatePartnerCompany = () => {
 
 const deletePartnerCompany = async () => {
   const id = sessionStorage.getItem("selectedDataId");
-  // await fetchDeletePartnerCompany(id);
-  alert("삭제-"+id);
+  await fetchDeletePartnerCompany(id);
+  alert("삭제되었습니다.");
   window.history.back();
   window.history.back();
 }
