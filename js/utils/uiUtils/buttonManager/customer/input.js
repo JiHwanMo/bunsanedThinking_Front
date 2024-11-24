@@ -16,9 +16,8 @@ const applyEndorsement = async () => {
   const depositDate = document.getElementById(inputForm.DEPOSIT_DATE.id).value;
   if (depositDate === "") alert(inputForm.DEPOSIT_DATE.exception);
   else {
-    // await fetchApplyEndorsementById(depositDate, contractId);
-    // alert("배서 신청이 완료되었습니다");
-    alert(depositDate);
+    await fetchApplyEndorsementById(depositDate, contractId);
+    alert("배서 신청이 완료되었습니다");
     window.history.back();
     window.history.back();
     window.history.back();
@@ -43,9 +42,8 @@ const payInsuranceFee = async () => {
     alert(inputForm.DEPOSIT_MONEY.exception);
   else {
     const depositDTO = getPayInsuranceFeeDTO(contractId, depositMoney, depositPath);
-    // await fetchPayInsurancefee(depositDTO);
-    // alert("보험금 납입이 완료되었습니다");
-    alert(JSON.stringify(depositDTO));
+    await fetchPayInsurancefee(depositDTO);
+    alert("보험금 납입이 완료되었습니다");
     window.history.back();
     window.history.back();
     window.history.back();
@@ -101,9 +99,8 @@ const askInsuranceCounsel = async () => {
   else {
     // date 형식은 무조건 yyyy-mm-dd 형식이어야 함
     const askInsuranceCounselDTO = getAskInsuranceCounsel(id, insuranceId, counselDate);
-    // await fetchAskInsuranceCounsel(askInsuranceCounselDTO);
-    // alert("상담 신청이 완료되었습니다");
-    alert(JSON.stringify(askInsuranceCounselDTO));
+    await fetchAskInsuranceCounsel(askInsuranceCounselDTO);
+    alert("상담 신청이 완료되었습니다");
     window.history.back();
     window.history.back();
     window.history.back();
@@ -131,9 +128,8 @@ const reportAccident = async () => {
   else {
     // date 형식은 무조건 yyyy-mm-dd 형식이어야 함
     const reportAccidentDTO = getReportAccident(id, type, accidentDate, location);
-    // await fetchReportAccident(reportAccidentDTO);
-    // alert("사고 신고가 완료되었습니다");
-    alert(JSON.stringify(reportAccidentDTO));
+    await fetchReportAccident(reportAccidentDTO);
+    alert("사고 신고가 완료되었습니다");
     window.history.back();
     window.history.back();
   }
@@ -159,9 +155,8 @@ const complain = async () => {
   else if (content === "") alert(inputForm.CONTENT.exception);
   else {
     const complainDTO = getComplainDTO(id, type, complaintTitle, content);
-    // await fetchComplain(complainDTO);
-    // alert("민원 신청이 완료되었습니다");
-    alert(JSON.stringify(complainDTO));
+    await fetchComplain(complainDTO);
+    alert("민원 신청이 완료되었습니다");
     window.history.back();
     window.history.back();
   }

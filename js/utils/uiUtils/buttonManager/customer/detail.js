@@ -9,7 +9,7 @@ import {buttonType} from "../../tableRenderer/customer/input.js";
 
 const applyRecontract = async () => { // 팝업
   const contractId = sessionStorage.getItem("selectedDataId");
-  // await fetchApplyInsuranceRecontractById(contractId);
+  await fetchApplyInsuranceRecontractById(contractId);
   alert("재계약 신청이 완료되었습니다");
   window.history.back();
   window.history.back();
@@ -17,7 +17,7 @@ const applyRecontract = async () => { // 팝업
 
 const applyRevival = async () => { // 팝업
   const contractId = sessionStorage.getItem("selectedDataId");
-  // await fetchApplyInsuranceRevivalById(contractId);
+  await fetchApplyInsuranceRevivalById(contractId);
   alert("부활 신청이 완료되었습니다");
   window.history.back();
   window.history.back();
@@ -25,7 +25,7 @@ const applyRevival = async () => { // 팝업
 
 const applyTermination = async () => { // 팝업
   const contractId = sessionStorage.getItem("selectedDataId");
-  // await fetchApplyInsuranceTerminationById(contractId);
+  await fetchApplyInsuranceTerminationById(contractId);
   alert("해지 신청이 완료되었습니다");
   window.history.back();
   window.history.back();
@@ -56,7 +56,7 @@ const buyInsurance = async () => { // 팝업
     insuranceId: sessionStorage.getItem("selectedDataId"),
     customerId: sessionStorage.getItem("id")
   };
-  // await fetchBuyInsurance(buyInsuranceDTO);
+  await fetchBuyInsurance(buyInsuranceDTO);
   alert("보험 계약 신청이 완료되었습니다");
   window.history.back();
   window.history.back();
@@ -67,7 +67,7 @@ const loan = async () => { // 팝업
     loanId: sessionStorage.getItem("selectedDataId"),
     customerId: sessionStorage.getItem("id")
   }
-  // await fetchLoan(loanDTO);
+  await fetchLoan(loanDTO);
   alert("대출 신청이 완료되었습니다");
   window.history.back();
   window.history.back();
