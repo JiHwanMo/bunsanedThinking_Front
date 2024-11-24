@@ -1,29 +1,65 @@
 import {initialButtons} from "../../../common/buttonUtils.js";
 import {BUTTON} from "../../../../../../config/employee/contractManagement/contractManagement.js";
+import {
+  fetchRequestTerminationFee,
+  fetchReviewEndorsement,
+  fetchReviewRecontract, fetchReviewRevival
+} from "../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js";
 
 const sendNotice = () => {
-  alert("안내장 발송");
+  // const selectedDataId = sessionStorage.getItem("selectedDataId");
+  alert("안내장 발송이 완료되었습니다.");
+  window.history.back();
+  window.history.back();
 }
-const reviewRecontract = () => {
-  alert("재계약 승인");
+const reviewRecontract = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  await fetchReviewRecontract(selectedDataId, 1);
+  alert("승인이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
-const denyRecontract = () => {
-  alert("재계약 거절");
+const denyRecontract = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  await fetchReviewRecontract(selectedDataId, 2);
+  alert("거절이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
-const reviewEndorsement = () => {
-  alert("배서 승인");
+const reviewEndorsement = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  await fetchReviewEndorsement(selectedDataId, 1);
+  alert("승인이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
-const denyEndorsement = () => {
-  alert("배서 거절");
+const denyEndorsement = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  await fetchReviewEndorsement(selectedDataId, 2);
+  alert("거절이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
-const reviewRevival = () => {
-  alert("부활 승인");
+const reviewRevival = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  await fetchReviewRevival(selectedDataId, 1);
+  alert("승인이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
-const denyRevival = () => {
-  alert("부활 거절");
+const denyRevival = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  await fetchReviewRevival(selectedDataId, 2);
+  alert("거절이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
-const requestTerminationFee = () => {
-  alert("해지 승인");
+const requestTerminationFee = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  await fetchRequestTerminationFee(selectedDataId);
+  alert("승인이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
 const cancel = () => {
   window.history.back();

@@ -29,6 +29,9 @@ export const BUTTON = {
       TERMINATION: {
         REQUEST: "요청",
         CANCEL: COMMON_BUTTON.COMMON.CANCEL
+      },
+      INPUT: {
+
       }
     }
   }
@@ -175,3 +178,7 @@ export const COLUMN_NAME = {
     "접수 상태"
   ]
 };
+
+export const INPUT_LABEL = {
+
+}
