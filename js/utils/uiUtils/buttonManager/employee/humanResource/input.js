@@ -1,11 +1,3 @@
-import {
-  fetchAddCollateralProduct,
-  fetchAddLoanProduct,
-  fetchRequestLoan,
-  fetchUpdateCollateralProduct,
-  fetchUpdateFixedDepositProduct,
-  fetchUpdateInsuranceContractProduct,
-} from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
 import {BUTTON as COMMON_BUTTON} from "../../../../../../config/common.js";
 import {
   fetchAddEmployee,

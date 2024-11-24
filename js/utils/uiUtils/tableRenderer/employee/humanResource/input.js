@@ -132,7 +132,7 @@ const addDepartmentComboBox = async (inputFieldsContainer, type) => {
   formDiv.className = "form-group";
   const formLabel = document.createElement("label");
   formLabel.for = "departmentId";
-  formLabel.textContent = DETAIL_COLUMN_NAME[type].RELATIONSHIP;
+  formLabel.textContent = DETAIL_COLUMN_NAME[type].DEPARTMENT;
   const formSelect = document.createElement("select");
   formSelect.id = "departmentId";
   formSelect.name = "departmentId";

@@ -36,6 +36,7 @@ export const DETAIL_COLUMN_NAME = {
     BANK_ACCOUNT: "계좌번호",
     POSITION: "직급",
     DEPARTMENT_ID: "부서 번호",
+    DEPARTMENT: "부서",
 
     FAMILY_ID: "가족 번호",
     RELATIONSHIP: "가족 관계",
