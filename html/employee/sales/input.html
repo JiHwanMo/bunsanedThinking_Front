@@ -9,9 +9,6 @@
 <body>
 
 <div class="container">
-  <!-- 콤보박스 컨테이너 -->
-  <div id="comboBoxContainer"></div>
-
   <!-- 입력란 컨테이너 -->
   <div id="inputFieldsContainer"></div>
 
@@ -23,10 +20,10 @@
 </div>
 
 <script type="module">
-  import {addStarButtons} from "../../../js/utils/uiUtils/buttonManager/employee/sales/input.js";
+  import {renderInput} from "../../../js/utils/uiUtils/tableRenderer/employee/sales/input.js";
 
   document.addEventListener("DOMContentLoaded", async () => {
-    addStarButtons();
+    renderInput();
   });
 </script>
 </body>

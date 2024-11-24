@@ -1,3 +1,4 @@
+/* 기존 스타일 */
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -134,4 +135,66 @@ button:hover {
 .star-button:hover {
   color: #000; /* 호버 시 텍스트 색상 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 */
+}
+
+/* 추가된 스타일 */
+.dynamic-section {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.add-button {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #333;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #ccc;
+}
+
+.dynamic-input {
+  display: flex;
+  gap: 10px; /* 입력 필드 간격 */
+  margin-bottom: 10px;
+}
+
+.dynamic-input input {
+  flex: 1; /* 입력 필드 너비 균등 */
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.gender-button {
+  padding: 10px 20px;
+  border: 1px solid #333;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.gender-button:hover {
+  background-color: #ddd;
+  color: #000;
+}
+
+.gender-button.selected {
+  background-color: #333; /* 선택된 버튼 배경색 */
+  color: #fff; /* 선택된 버튼 글자색 */
+  border-color: #333; /* 선택된 버튼 경계선 색상 */
 }
