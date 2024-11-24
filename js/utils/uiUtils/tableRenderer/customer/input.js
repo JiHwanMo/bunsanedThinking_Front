@@ -54,6 +54,7 @@ const createForm = (form, type) => {
     formInput.name = form.name;
     formInput.placeholder = `${INPUT_LABEL[type][form.placeholder]} 을(를) 입력하세요`;
   }
+  console.log(form.id+"-"+formInput.id);
   formDiv.appendChild(formInput);
   return formDiv;
 }

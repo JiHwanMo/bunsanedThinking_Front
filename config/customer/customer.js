@@ -287,7 +287,7 @@ export const INPUT_LABEL = {
   },
   ADD_COMPLAINT: {
     TYPE: "민원 종류",
-    TITLE: "민원 제목",
+    COMPLAINT_TITLE: "민원 제목",
     CONTENT: "민원 내용"
   }
 }
@@ -301,8 +301,8 @@ export const INPUT_FORM = {
       type: "text",
       id: "depositDate",
       name: "depositDate",
-      value: "depositDate",
-      placeholder: "DEPOSIT_DATE"
+      placeholder: "DEPOSIT_DATE",
+      exception: "날짜를 다시 입력해주세요"
     }
   },
   PAY_INSURANCE_FEE: {
@@ -310,7 +310,8 @@ export const INPUT_FORM = {
       isCombo: true,
       for: "depositPath",
       label: "DEPOSIT_PATH",
-      id: "depositPath"
+      id: "depositPath",
+      exception: "납입 방식을 셋 중에서 선택해주세요"
     },
     DEPOSIT_MONEY: {
       isCombo: false,
@@ -319,8 +320,8 @@ export const INPUT_FORM = {
       type: "number",
       id: "depositMoney",
       name: "depositMoney",
-      value: "depositMoney",
-      placeholder: "DEPOSIT_MONEY"
+      placeholder: "DEPOSIT_MONEY",
+      exception: "금액을 다시 입력해주세요"
     }
   },
   RECEIVE_INSURANCE: {
@@ -331,8 +332,8 @@ export const INPUT_FORM = {
       type: "text",
       id: "medicalCertificate",
       name: "medicalCertificate",
-      value: "medicalCertificate",
-      placeholder: "MEDICAL_CERTIFICATE"
+      placeholder: "MEDICAL_CERTIFICATE",
+      exception: "진단서를 다시 입력해주세요"
     },
     RECEIPT: {
       isCombo: false,
@@ -341,8 +342,8 @@ export const INPUT_FORM = {
       type: "text",
       id: "receipt",
       name: "receipt",
-      value: "receipt",
-      placeholder: "RECEIPT"
+      placeholder: "RECEIPT",
+      exception: "영수증을 다시 입력해주세요"
     },
     RESIDENT_REGISTRATION_CARD: {
       isCombo: false,
@@ -351,8 +352,8 @@ export const INPUT_FORM = {
       type: "text",
       id: "residentRegistrationCard",
       name: "residentRegistrationCard",
-      value: "residentRegistrationCard",
-      placeholder: "RESIDENT_REGISTRATION_CARD"
+      placeholder: "RESIDENT_REGISTRATION_CARD",
+      exception: "신분증 사본을 다시 입력해주세요"
     }
   },
   ASK_INSURANCE_COUNSEL: {
@@ -363,8 +364,8 @@ export const INPUT_FORM = {
       type: "text",
       id: "counselDate",
       name: "counselDate",
-      value: "counselDate",
-      placeholder: "COUNSEL_DATE"
+      placeholder: "COUNSEL_DATE",
+      exception: "상담 날짜를 다시 입력해 주세요"
     }
   },
   ADD_ACCIDENT: {
@@ -372,7 +373,8 @@ export const INPUT_FORM = {
       isCombo: true,
       for: "type",
       label: "TYPE",
-      id: "type"
+      id: "type",
+      exception: "서비스 종류를 다시 입력해주세요"
     },
     ACCIDENT_DATE: {
       isCombo: false,
@@ -381,8 +383,8 @@ export const INPUT_FORM = {
       type: "text",
       id: "accidentDate",
       name: "accidentDate",
-      value: "accidentDate",
-      placeholder: "ACCIDENT_DATE"
+      placeholder: "ACCIDENT_DATE",
+      exception: "사고 날짜를 다시 입력해주세요"
     },
     LOCATION: {
       isCombo: false,
@@ -391,8 +393,8 @@ export const INPUT_FORM = {
       type: "text",
       id: "location",
       name: "location",
-      value: "location",
-      placeholder: "LOCATION"
+      placeholder: "LOCATION",
+      exception: "사고 위치를 다시 입력해주세요"
     }
   },
   ADD_COMPLAINT: {
@@ -400,17 +402,18 @@ export const INPUT_FORM = {
       isCombo: true,
       for: "type",
       label: "TYPE",
-      id: "type"
+      id: "type",
+      exception: "민원 종류를 다시 입력해주세요"
     },
-    TITLE: {
+    COMPLAINT_TITLE: {
       isCombo: false,
-      for: "title",
-      label: "TITLE",
+      for: "complaintTitle",
+      label: "COMPLAINT_TITLE",
       type: "text",
-      id: "title",
-      name: "title",
-      value: "title",
-      placeholder: "TITLE"
+      id: "complaintTitle",
+      name: "complaintTitle",
+      placeholder: "COMPLAINT_TITLE",
+      exception: "제목을 다시 입력해주세요"
     },
     CONTENT: {
       isCombo: false,
@@ -419,8 +422,8 @@ export const INPUT_FORM = {
       type: "text",
       id: "content",
       name: "content",
-      value: "content",
-      placeholder: "CONTENT"
+      placeholder: "CONTENT",
+      exception: "내용을 한 글자 이상 입력해주세요"
     }
   }
 }
