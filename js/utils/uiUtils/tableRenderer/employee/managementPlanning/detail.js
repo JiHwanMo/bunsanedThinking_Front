@@ -1,5 +1,6 @@
-import { fetchGetDepartment } from "../../../../../../js/utils/apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
-import { BUTTON } from "../../../../../../config/employee/managementPlanning/managementPlanning.js";
+import { fetchGetDepartment } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
+import { BUTTON } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
+import { fetchDeleteDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
 
 const departmentDetail = (data) => {
   return [
@@ -16,6 +17,7 @@ const context = {
   DEPARTMENT_DETAIL: {
     detailGetter: departmentDetail,
     fetchGetById: fetchGetDepartment,
+    fetchDelete: fetchDeleteDepartment,
     buttons: BUTTON.TASK.EMPLOYEE.MANAGEMENTPLANNING.DEPARTMENT_DETAIL
   }
 }
@@ -70,12 +72,42 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
 }
 
 const update = () => {
-  alert("수정 버튼 클릭!");
+  sessionStorage.setItem("selectedButtonType", JSON.stringify("UPDATE"));
+  window.location.href = "input.html"; // 수정 화면으로 이동
 }
 
 const deleteItem = () => {
-  // window.location.href = "informationList.html";
-  alert("삭제 버튼 클릭!");
+  const modal = document.createElement("div");
+  modal.className = "custom-modal";
+  modal.innerHTML = `
+    <div class="modal-content">
+      <p>삭제하시겠습니까?</p>
+      <div class="modal-buttons">
+        <button id="confirmDeleteButton">확인</button>
+        <button id="cancelDeleteButton">취소</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  document.getElementById("confirmDeleteButton").addEventListener("click", async () => {
+    const id = sessionStorage.getItem("selectedDataId");
+    try {
+      await fetchDeleteDepartment(id);
+      alert("삭제가 완료되었습니다.");
+      document.body.removeChild(modal);
+      window.location.href = "home.html";
+    } catch (error) {
+      console.error("삭제 중 오류 발생:", error);
+      alert("삭제 중 오류가 발생했습니다.");
+      document.body.removeChild(modal);
+    }
+  });
+  document.getElementById("cancelDeleteButton").addEventListener("click", () => {
+    document.body.removeChild(modal); // 모달 닫기
+    window.location.href = "home.html";
+  });
 }
 
 const managementPlanningTaskMapper  = {

@@ -7,8 +7,7 @@ export const BUTTON = {
         REPORT_LIST: '손해 예상 금액 입력',
       },
       REPORT_DETAIL: {
-        UPDATE: COMMON_BUTTON.COMMON.UPDATE,
-        DELETE: COMMON_BUTTON.COMMON.DELETE
+        UPDATE: COMMON_BUTTON.COMMON.UPDATE
       }
     }
   }
@@ -29,3 +28,11 @@ export const COLUMN_NAME = {
     "사고 번호"
   ]
 };
+
+export const DETAIL_COLUMN_NAME = {
+  REPORT_LIST: {
+    ACCIDENT_ID: "사고 번호",
+    DAMAGE_ASSESSMENT_MONEY: "손해 사정 금액"
+  }
+}
+

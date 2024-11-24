@@ -1,5 +1,5 @@
-import { fetchGetReport } from '../../../../../js/utils/apiUtils/apiDocumentation/partnerCompany/partnerCompany.js';
-import { BUTTON } from "../../../../../config/partnerCompany/partnerCompany.js";
+import { fetchGetReport } from '../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js';
+import { BUTTON } from '../../../../../config/partnerCompany/partnerCompany.js';
 
 const reportDetail = (data) => {
   return [
@@ -18,16 +18,11 @@ const context = {
 
 export const renderDetails = async () => {
   const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  // const type = sessionStorage.getItem("currentType");
   if (!selectedDataId) {
     console.error("No selected data ID found.");
     return;
   }
-  // if (selectedDataId) {
-  //   const selectedData = await context[type].fetchGetById(selectedDataId);
-  //   renderDetailsTable(selectedData);
-  //   renderButtons();
-  // }
+
   const selectedData = await context.REPORT_DETAIL.fetchGetById(selectedDataId);
   if (selectedData) {
     renderDetailsTable(selectedData);
@@ -39,7 +34,6 @@ export const renderDetails = async () => {
 
 const renderDetailsTable = (data) => {
   const detailsTable = document.getElementById("detailsTable");
-  // const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
   const details = context.REPORT_DETAIL.detailGetter(data);
 
   details.forEach(detail => {
@@ -59,23 +53,8 @@ const renderDetailsTable = (data) => {
 };
 
 const renderButtons = () => {
-  // initialButtons(context[sessionStorage.getItem("currentType")].buttons, partnerCompanyTaskMapper);
   initialButtons(context.REPORT_DETAIL.buttons, partnerCompanyTaskMapper);
 };
-
-// const initialButtons = (buttonMessages, buttonActionMapper) => {
-//   const buttonContainer = document.getElementById("buttonContainer");
-//   // const type = sessionStorage.getItem("currentType");
-//
-//   Object.entries(buttonMessages).forEach(([key, name]) => {
-//     const button = document.createElement("div");
-//     button.className = "button-item";
-//     button.textContent = name;
-//
-//     button.addEventListener("click", buttonActionMapper[key]);
-//     buttonContainer.appendChild(button);
-//   });
-// }
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
   const buttonContainer = document.getElementById("buttonContainer");
@@ -97,18 +76,12 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
 
 
 const update = () => {
-  alert("수정 버튼 클릭!");
-}
-
-const deleteItem = () => {
-  // window.location.href = "informationList.html";
-  alert("삭제 버튼 클릭!");
+  window.location.href = "input.html";
 }
 
 const partnerCompanyTaskMapper = {
   REPORT_DETAIL: {
-    UPDATE: update,
-    DELETE: deleteItem
+    UPDATE: update
   }
 }
 

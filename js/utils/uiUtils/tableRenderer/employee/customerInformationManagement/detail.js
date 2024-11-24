@@ -1,4 +1,7 @@
-import { fetchGetCustomerInformation} from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
+import {
+  fetchDeleteCustomerInformation,
+  fetchGetCustomerInformation
+} from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
 import { BUTTON } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
 
 const customerInformationDetail = (data) => {
@@ -43,6 +46,7 @@ const context = {
   CUSTOMERINFORMATION_DETAIL: {
     detailGetter: customerInformationDetail,
     fetchGetById: fetchGetCustomerInformation,
+    fetchDelete: fetchDeleteCustomerInformation,
     buttons: BUTTON.TASK.EMPLOYEE.CUSTOMERINFORMATIONMANAGEMENT.CUSTOMERINFORMATION_DETAIL,
   }
 }
@@ -57,52 +61,6 @@ export const renderDetails = async () => {
     renderButtons();
   }
 }
-
-// const renderDetailsTable = (data) => {
-//   const detailsTable = document.getElementById("detailsTable");
-//   const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
-//
-//   details.forEach(detail => {
-//     const row = document.createElement("tr");
-//
-//     if (Array.isArray(detail.value)) {
-//       const tableHead = document.createElement("th");
-//       tableHead.textContent = detail.label;
-//
-//       const tableData = document.createElement("td");
-//       detail.value.forEach(listDetail => {
-//         const nestedTable = document.createElement("table");
-//         listDetail.forEach(item => {
-//           const nestedRow = document.createElement("tr");
-//
-//           const labelCell = document.createElement("th");
-//           labelCell.textContent = item.label;
-//
-//           const valueCell = document.createElement("td");
-//           valueCell.textContent = item.value;
-//
-//           nestedRow.appendChild(labelCell);
-//           nestedRow.appendChild(valueCell);
-//
-//           nestedTable.appendChild(nestedRow);
-//         });
-//         tableData.appendChild(nestedTable);
-//       });
-//       row.appendChild(tableHead);
-//       row.appendChild(tableData);
-//     } else {
-//       const labelCell = document.createElement("th");
-//       labelCell.textContent = detail.label;
-//
-//       const valueCell = document.createElement("td");
-//       valueCell.textContent = detail.value;
-//
-//       row.appendChild(labelCell);
-//       row.appendChild(valueCell);
-//     }
-//     detailsTable.querySelector("tbody").appendChild(row);
-//   });
-// };
 
 const renderDetailsTable = (data) => {
   const detailsTable = document.getElementById("detailsTable");
@@ -193,12 +151,42 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
 }
 
 const update = () => {
-  alert("수정 버튼 클릭!");
+  sessionStorage.setItem("selectedButtonType", JSON.stringify("UPDATE"));
+  window.location.href = "input.html"; // 수정 화면으로 이동
 }
 
 const deleteItem = () => {
-  // window.location.href = "informationList.html";
-  alert("삭제 버튼 클릭!");
+  const modal = document.createElement("div");
+  modal.className = "custom-modal";
+  modal.innerHTML = `
+    <div class="modal-content">
+      <p>삭제하시겠습니까?</p>
+      <div class="modal-buttons">
+        <button id="confirmDeleteButton">확인</button>
+        <button id="cancelDeleteButton">취소</button>
+      </div>
+    </div>
+  `;
+  // 모달 추가
+  document.body.appendChild(modal);
+  // 버튼 이벤트 핸들링
+  document.getElementById("confirmDeleteButton").addEventListener("click", async () => {
+    const id = sessionStorage.getItem("selectedDataId");
+
+    try {
+      await fetchDeleteCustomerInformation(id);
+      alert("삭제가 완료되었습니다.");
+      document.body.removeChild(modal); // 모달 닫기
+      window.location.href = "home.html"; // 홈 화면으로 이동
+    } catch (error) {
+      console.error("삭제 중 오류 발생:", error);
+      document.body.removeChild(modal); // 모달 닫기
+    }
+  });
+  document.getElementById("cancelDeleteButton").addEventListener("click", () => {
+    document.body.removeChild(modal); // 모달 닫기
+    window.location.href = "home.html";
+  });
 }
 
 const customerInformationTaskMapper = {

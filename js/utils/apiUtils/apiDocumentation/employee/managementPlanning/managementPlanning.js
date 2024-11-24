@@ -30,7 +30,7 @@ export const fetchGetDepartment = async(id)  => {
   return await fetchGetDepartmentHandler(id);
 }
 // (async () => {
-//   const data = await fetchGetDepartment(91014);
+//   const data = await fetchGetDepartment(91010);
 //   console.log(data);
 // })();
 
@@ -46,7 +46,7 @@ export const fetchUpdateDepartment = async(updateDepartmentDTO)  => {
 //   const data = await fetchUpdateDepartment(updateDepartmentDTO);
 //   console.log(data);
 // })();
-
+//
 // (async () => {
 //   const updateDepartmentDTO = {
 //     "id": 91014,
@@ -56,7 +56,7 @@ export const fetchUpdateDepartment = async(updateDepartmentDTO)  => {
 //   const data = await fetchUpdateDepartment(updateDepartmentDTO);
 //   console.log(data);
 // })();
-
+//
 // (async () => {
 //   const updateDepartmentDTO = {
 //     "id": 91014,
@@ -66,7 +66,7 @@ export const fetchUpdateDepartment = async(updateDepartmentDTO)  => {
 //   const data = await fetchUpdateDepartment(updateDepartmentDTO);
 //   console.log(data);
 // })();
-
+//
 // (async () => {
 //   const updateDepartmentDTO = {
 //     "id": 91014,

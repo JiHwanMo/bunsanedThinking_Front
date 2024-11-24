@@ -1,12 +1,10 @@
-import { fetchGetAllDepartment } from '../../../../../../js/utils/apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
-import { fetchGetDepartment } from "../../../../../../js/utils/apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
+import { fetchGetAllDepartment } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
+import { fetchGetDepartment } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
 import { BUTTON } from '../../../../../../config/common.js';
 import { COMBOBOX } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
 import { TABLE_TITLE } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
 import { COLUMN_NAME } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
-import {
-  fetchGetAllOfficeSupplies
-} from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
+
 
 
 const departmentRow = (dto) => {
@@ -28,22 +26,6 @@ const context = {
     comboListFetch: {}
   }
 }
-
-
-// export const viewDepartmentListAll = async () => {
-//   try {
-//     const list = await fetchGetAllDepartment();
-//     if (!list || !list.length) {
-//       console.warn("No management planning data fetched.");
-//       return;
-//     }
-//     sessionStorage.setItem("list", JSON.stringify(list));
-//     console.log("Data saved in sessionStorage:", sessionStorage.getItem("list"));
-//     window.location.href = "informationList.html"; // 경로 확인 필요
-//   } catch (error) {
-//     console.error("Error fetching management planning:", error);
-//   }
-// };
 
 export const viewDepartmentListAll = async () => {
   const list = await fetchGetAllDepartment();
@@ -127,7 +109,9 @@ const setPostButton = () => {
   button.id = "postButton";
   button.textContent = BUTTON.COMMON.POST;
   button.addEventListener("click", () => {
-    alert("등록 버튼 클릭!");
+    // alert("등록 버튼 클릭!");
+    sessionStorage.setItem("selectedButtonType", JSON.stringify("POST")); // 등록 타입 설정
+    window.location.href = "input.html"; // 등록 화면으로 이동
   });
   return button;
 };

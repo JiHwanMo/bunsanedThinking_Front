@@ -1,5 +1,5 @@
-import { fetchGetAllOfficeSupplies } from '../../../../../../js/utils/apiUtils/apiDocumentation/employee/administrative/administrative.js';
-import { fetchGetOfficeSupply } from '../../../../../../js/utils/apiUtils/apiDocumentation/employee/administrative/administrative.js';
+import { fetchGetAllOfficeSupplies } from '../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js';
+import { fetchGetOfficeSupply } from '../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js';
 import { BUTTON } from '../../../../../../config/common.js';
 import { COMBOBOX } from '../../../../../../config/employee/administrative/administrative.js';
 import { TABLE_TITLE } from '../../../../../../config/employee/administrative/administrative.js';
@@ -24,21 +24,6 @@ const context = {
     comboListFetch: {}
   }
 }
-
-// export const viewOfficeSupplyListAll = async () => {
-//   try {
-//     const list = await fetchGetAllOfficeSupplies();
-//     if (!list || !list.length) {
-//       console.warn("No office supplies data fetched.");
-//       return;
-//     }
-//     sessionStorage.setItem("list", JSON.stringify(list));
-//     console.log("Data saved in sessionStorage:", sessionStorage.getItem("list"));
-//     window.location.href = "informationList.html"; // 경로 확인 필요
-//   } catch (error) {
-//     console.error("Error fetching office supplies:", error);
-//   }
-// };
 
 export const viewOfficeSupplyListAll = async () => {
   const list = await fetchGetAllOfficeSupplies();
@@ -124,7 +109,9 @@ const setPostButton = () => {
   button.id = "postButton";
   button.textContent = BUTTON.COMMON.POST;
   button.addEventListener("click", () => {
-    alert("등록 버튼 클릭!");
+    // alert("등록 버튼 클릭!");
+    sessionStorage.setItem("selectedButtonType", JSON.stringify("POST")); // 등록 타입 설정
+    window.location.href = "input.html"; // 등록 화면으로 이동
   });
   return button;
 };
@@ -202,7 +189,6 @@ const setTableBody = () => {
     });
 
     row.addEventListener("dblclick", () => {
-      // sessionStorage.setItem("selectedSupply", JSON.stringify(item)); // 선택된 데이터 저장
       sessionStorage.setItem("selectedDataId", item.id); // 데이터 ID 저장
       window.location.href = "detail.html"; // 상세 페이지로 이동
     });

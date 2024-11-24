@@ -22,28 +22,6 @@ const context = {
   }
 }
 
-
-// export const viewSetDamageAssessmentMoney = async () => {
-//   try {
-//     const id = sessionStorage.getItem("id");
-//     if (!id) {
-//       console.error("No company ID found in sessionStorage.");
-//       return;
-//     }
-//
-//     const list = await fetchGetAllReportByDamageAssessmentCompanyID(id);
-//     if (!list || !list.length) {
-//       console.warn("No report data fetched.");
-//       return;
-//     }
-//     sessionStorage.setItem("list", JSON.stringify(list));
-//     console.log("Data saved in sessionStorage:", sessionStorage.getItem("list"));
-//     window.location.href = "informationList.html"; // 경로 확인 필요
-//   } catch (error) {
-//     console.error("Error fetching report data:", error);
-//   }
-// };
-
 export const viewSetDamageAssessmentMoney = async () => {
   const id = sessionStorage.getItem("id");
   if (!id) return;

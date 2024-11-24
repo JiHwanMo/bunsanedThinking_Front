@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>고객 정보 입력</title>
+  <link rel="stylesheet" href="../../../css/input.css">
+</head>
+<body>
+<div class="container">
+  <h3>고객 정보 입력</h3>
+
+  <!-- 입력란 컨테이너 -->
+  <div id="inputFieldsContainer"></div>
+
+  <!-- 버튼 컨테이너 -->
+  <div class="button-container" id="buttonContainer"></div>
+</div>
+<script type="module">
+  import { renderInput } from "../../../js/utils/uiUtils/tableRenderer/employee/customerInformationManagement/input.js";
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    await renderInput();
+  });
+</script>
+</body>
+</html>

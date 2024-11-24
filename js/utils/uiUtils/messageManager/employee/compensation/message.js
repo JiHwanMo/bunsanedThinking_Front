@@ -1,5 +1,4 @@
 import { fetchGetEmployee } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
-
 import { MESSAGES } from '../../../../../../config/common.js';
 
 export const renderGreeting = async () => {

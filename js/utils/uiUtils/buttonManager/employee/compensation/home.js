@@ -1,7 +1,7 @@
 import { BUTTON } from '../../../../../../config/employee/compensation/compensation.js';
 import { viewInformationList } from '../../../tableRenderer/employee/compensation/informationList.js';
 import { informationType } from '../../../tableRenderer/employee/compensation/informationList.js';
-import {initialButtons} from "../../../common/buttonUtils.js";
+import { initialButtons } from "../../../common/buttonUtils.js";
 
 const viewRequestCompensation = () => {
   viewInformationList(informationType.REQUEST_COMPENSATION);

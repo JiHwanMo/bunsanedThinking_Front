@@ -1,4 +1,5 @@
-import { fetchGetOfficeSupply } from "../../../../../../js/utils/apiUtils/apiDocumentation/employee/administrative/administrative.js";
+import { fetchGetOfficeSupply } from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
+import { fetchDeleteOfficeSupply } from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
 import { BUTTON } from "../../../../../../config/employee/administrative/administrative.js";
 
 const administrativeDetail = (data) => {
@@ -15,6 +16,7 @@ const context = {
   OFFICESUPPLY_DETAIL: {
     detailGetter: administrativeDetail,
     fetchGetById: fetchGetOfficeSupply,
+    fetchDelete: fetchDeleteOfficeSupply,
     buttons: BUTTON.TASK.EMPLOYEE.ADMINISTRATIVE.OFFICESUPPLY_DETAIL
   }
 }
@@ -68,14 +70,44 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
   });
 }
 
-const update = () => {
-  alert("수정 버튼 클릭!");
+const update = async () => {
+  sessionStorage.setItem("selectedButtonType", JSON.stringify("UPDATE"));
+  window.location.href = "input.html"; // 수정 화면으로 이동
 }
 
-const deleteItem = () => {
-  // window.location.href = "informationList.html";
-  alert("삭제 버튼 클릭!");
-}
+const deleteItem = async () => {
+  const modal = document.createElement("div");
+  modal.className = "custom-modal";
+  modal.innerHTML = `
+    <div class="modal-content">
+      <p>삭제하시겠습니까?</p>
+      <div class="modal-buttons">
+        <button id="confirmDeleteButton">확인</button>
+        <button id="cancelDeleteButton">취소</button>
+      </div>
+    </div>
+  `;
+  // 모달 추가
+  document.body.appendChild(modal);
+  // 버튼 이벤트 핸들링
+  document.getElementById("confirmDeleteButton").addEventListener("click", async () => {
+    const id = sessionStorage.getItem("selectedDataId");
+
+    try {
+      await fetchDeleteOfficeSupply(id);
+      alert("삭제가 완료되었습니다.");
+      document.body.removeChild(modal); // 모달 닫기
+      window.location.href = "home.html"; // 홈 화면으로 이동
+    } catch (error) {
+      console.error("삭제 중 오류 발생:", error);
+      document.body.removeChild(modal); // 모달 닫기
+    }
+  });
+  document.getElementById("cancelDeleteButton").addEventListener("click", () => {
+    document.body.removeChild(modal); // 모달 닫기
+    window.location.href = "home.html";
+  });
+};
 
 const administrativeTaskMapper = {
   OFFICESUPPLY_DETAIL: {
