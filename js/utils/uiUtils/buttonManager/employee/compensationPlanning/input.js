@@ -1,4 +1,3 @@
-import {initialButtons} from "../../../common/buttonUtils.js";
 import {BUTTON, INPUT_FORM} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
 import {
   fetchAddPartnerCompany, fetchEvaluatePartnerCompany, fetchUpdatePartnerCompany
@@ -95,4 +94,17 @@ export const renderButton = () => {
   const selectedButtonType = sessionStorage.getItem("selectedButtonType");
   initialButtons(BUTTON.TASK.COMPENSATIONPLANNING.INPUT[selectedButtonType],
     compensationPlanningTaskMapper[selectedButtonType]);
+}
+
+const initialButtons = (buttonMessages, buttonActionMapper) => {
+  const buttonContainer = document.getElementById("buttonContainer");
+  buttonContainer.className = "star-buttons-container";
+  Object.entries(buttonMessages).forEach(([key, name]) => {
+    const button = document.createElement("div");
+    button.className = "star-button";
+    button.textContent = name; // 버튼에 표시할 텍스트 설정
+
+    button.addEventListener("click", buttonActionMapper[key]);
+    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
+  });
 }
