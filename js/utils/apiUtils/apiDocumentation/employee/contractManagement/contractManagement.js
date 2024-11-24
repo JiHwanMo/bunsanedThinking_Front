@@ -26,8 +26,8 @@ import {
 } from '../../../apiHandler/employee/contractManagement/contractManagement.js';
 
 // 검증 완
-export const fetchRequestTerminationFee = async (tercontractId, customerId) => {
-  return await fetchRequestTerminationFeeHandler(tercontractId, customerId);
+export const fetchRequestTerminationFee = async (tercontractId) => {
+  return await fetchRequestTerminationFeeHandler(tercontractId);
 }
 // (async () => {
 //   const data = await fetchRequestTerminationFee(1002, 2002);

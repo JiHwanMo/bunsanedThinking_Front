@@ -1,22 +1,20 @@
 import {
-  fetchGetPartnerCompanyById
+  fetchGetPartnerCompanyDetailById
 } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import {renderButtons} from "../../../buttonManager/employee/compensationPlanning/detail.js";
 
-const partnerCompanyTypeStr = {
-  // Hospital: "병원",
-  // RepairShop: "카센터",
-  // LawFirm: "법무법인",
-  DamageAssessmentCompany: "손해사정업체",
-  RoadsideAssistanceCompany: "긴급출동회사"
-}
+const partnerCompanyType = [
+  "DUMY",
+  "긴급출동회사",
+  "손해사정업체"
+];
 
 const partnerCompanyDetail = (data) => {
   return [
     { label: "협력업체 번호", value: data.id },
     { label: "협력업체 이름", value: data.name },
     { label: "협력업체 전화번호", value: data.phoneNumber },
-    { label: "협력업체 종류", value: partnerCompanyTypeStr[data.partnerCompanyType] },
+    { label: "협력업체 종류", value: partnerCompanyType[data.type] },
     { label: "대표자 이름", value: data.headName },
     { label: "대표자 전화번호", value: data.headPhoneNumber }
   ];
@@ -25,7 +23,11 @@ const partnerCompanyDetail = (data) => {
 const context = {
   EVALUATE_PARTNERCOMPANY: {
     detailGetter: partnerCompanyDetail,
-    fetchGetById: fetchGetPartnerCompanyById
+    fetchGetById: fetchGetPartnerCompanyDetailById
+  },
+  MANAGEMENT_PARTNERCOMPANY: {
+    detailGetter: partnerCompanyDetail,
+    fetchGetById: fetchGetPartnerCompanyDetailById
   }
 }
 

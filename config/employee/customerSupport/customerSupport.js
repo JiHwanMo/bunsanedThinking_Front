@@ -64,4 +64,14 @@ export const COMBOBOX = {
     ]
   }
 };
-// export const COLUMN_NAME = {};
+
+export const DETAIL_COLUMN_NAME = {
+  HANDLE_COMPLAINT: {
+    EMPLOYEE_NAME: "담당자 이름",
+    RESULT: "접수 결과"
+  },
+  HANDLE_REPORT: {
+    DAMAGE_ASSESSMENT_COMPANY_ID: "손해 사정 업체 번호",
+    ROADSIDE_ASSISTANCE_COMPANY_ID: "긴급 출동 업체 번호"
+  }
+};

@@ -56,9 +56,9 @@ export const fetchAddEmployee = async (addEmployeeDTO) => {
   */
 };
 
-export const fetchUpdateEmployee = async (employeeId, index, input) => {
+export const fetchUpdateEmployee = async (updateEmployeeDto) => {
   // 6001, 1, "Test"
-  await fetchUpdateEmployeeHandler(employeeId, index, input);
+  await fetchUpdateEmployeeHandler(updateEmployeeDto);
 };
 
 export const fetchDeleteEmployee = async (employeeId) => {

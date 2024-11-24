@@ -2,11 +2,11 @@ import {initialButtons} from "../../../common/buttonUtils.js";
 import {BUTTON} from "../../../../../../config/employee/compensation/compensation.js";
 
 const requestCompensation = () => {
-  alert("보상처리");
+  window.location.href = "input.html";
 }
 
 const requestInsuranceMoney = () => {
-  alert("보험금 지급");
+  window.location.href = "input.html";
 }
 
 const cancel = () => {

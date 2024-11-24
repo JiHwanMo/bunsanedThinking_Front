@@ -1,38 +1,32 @@
 import {BUTTON} from "../../../../../../config/employee/financialAccountant/financialAccountant.js";
-
-const context = {
-  HANDLE_PAYMENT_DETAIL: {
-    buttons: BUTTON.TASK.EMPLOYEE.FINANCIAL_ACCOUNTANT.HANDLE_PAYMENT_DETAIL
-  }
-}
+import {initialButtons} from "../../../common/buttonUtils.js";
+import {
+  fetchHandlePayment
+} from "../../../../apiUtils/apiDocumentation/employee/financialAccountant/financialAccountant.js";
 
 export const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, financialAccountantTaskMapper);
+  const type = sessionStorage.getItem("currentType");
+  initialButtons(BUTTON.TASK.EMPLOYEE.FINANCIAL_ACCOUNTANT[type], financialAccountantTaskMapper[type]);
 };
 
-const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  // 객체의 각 항목을 순회하여 버튼 생성
-  Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
-    button.textContent = name; // 버튼에 표시할 텍스트 설정
+const handlePaymentDetail = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  const employeeId = sessionStorage.getItem("id");
 
-    button.addEventListener("click", buttonActionMapper[key]);
+  alert("지급 처리 하시겠습니까?");
 
-    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
-  });
-}
+  await fetchHandlePayment(selectedDataId, employeeId);
 
-const handlePaymentDetail = () => {
-  alert("지급 - 재무회계");
+  window.location.href = "home.html";
 }
 
 const cancel = () => {
-  alert("취소 - 재무회계");
+  window.history.back();
 }
 
 const financialAccountantTaskMapper = {
-  PAY: handlePaymentDetail,
-  CANCEL: cancel
+  HANDLE_PAYMENT_DETAIL: {
+    PAY: handlePaymentDetail,
+    CANCEL: cancel
+  }
 }

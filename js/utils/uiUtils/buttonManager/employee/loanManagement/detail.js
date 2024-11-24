@@ -1,56 +1,55 @@
 import {BUTTON} from "../../../../../../config/employee/loanManagement/loanManagement.js";
-
-const context = {
-  MANAGEMENT_LOAN_PRODUCT: {
-    buttons: BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT.MANAGEMENT_LOAN_PRODUCT
-  },
-  LOAN_REQUEST: {
-    buttons: BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT.LOAN_REQUEST
-  }
-}
+import {initialButtons} from "../../../common/buttonUtils.js";
+import {
+  fetchDeleteLoanProduct,
+  fetchDeniedLoanRequest
+} from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
 
 export const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, loanManagementTaskMapper);
+  const type = sessionStorage.getItem("currentType");
+  initialButtons(BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT[type], loanManagementTaskMapper[type]);
 };
 
-const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  // 객체의 각 항목을 순회하여 버튼 생성
-  Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
-    button.textContent = name; // 버튼에 표시할 텍스트 설정
-
-    button.addEventListener("click", buttonActionMapper[key]);
-
-    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
-  });
-}
-
 const updateLoan = () => {
-  alert("수정 - 융자운용");
+  sessionStorage.setItem("selectedButtonType", "UPDATE");
+  window.location.href = "input.html";
 }
 
-const deleteLoan = () => {
-  alert("삭제 - 융자운용");
+const deleteLoan = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+
+  alert("정말 삭제하시겠습니까?");
+  await fetchDeleteLoanProduct(selectedDataId);
+
+  window.location.href = "home.html";
 }
 
 const requestLoan = () => {
-  alert("요청 - 융자운용");
+  sessionStorage.setItem("selectedButtonType", "LOAN_REQUEST");
+  window.location.href = "input.html";
 }
 
-const deniedLoanRequest = () => {
-  alert("거절 - 융자운용");
+const deniedLoanRequest = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+
+  alert("정말 거절하시겠습니까?");
+  await fetchDeniedLoanRequest(selectedDataId, false);
+
+  window.location.href = "home.html";
 }
 
 const cancel = () => {
-  alert("취소 - 융자운용");
+  window.history.back();
 }
 
 const loanManagementTaskMapper = {
-  UPDATE: updateLoan,
-  DELETE: deleteLoan,
-  REQUEST: requestLoan,
-  DENIED: deniedLoanRequest,
-  CANCEL: cancel
+  MANAGEMENT_LOAN_PRODUCT: {
+    UPDATE: updateLoan,
+    DELETE: deleteLoan
+  },
+  LOAN_REQUEST: {
+    REQUEST: requestLoan,
+    DENIED: deniedLoanRequest,
+    CANCEL: cancel
+  }
 }

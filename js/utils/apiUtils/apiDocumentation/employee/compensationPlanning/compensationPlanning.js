@@ -1,4 +1,7 @@
-import { fetchAddPartnerCompanyHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
+import {
+  fetchAddPartnerCompanyHandler,
+  fetchGetPartnerCompanyDetailByIdHandler
+} from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
 import { fetchEvaluatePartnerCompanyHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
 import { fetchGetPartnerCompanyByIdHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
 import { fetchGetPartnerCompanyRowByIdHandler } from '../../../apiHandler/employee/compensationPlanning/compensationPlanning.js';
@@ -37,6 +40,10 @@ export const fetchGetPartnerCompanyById = async (id) => {
 //   const data = await fetchGetPartnerCompany(3002);
 //   console.log(data); // 받아온 데이터를 콘솔에 출력
 // })();
+
+export const fetchGetPartnerCompanyDetailById = async (id) => {
+  return await fetchGetPartnerCompanyDetailByIdHandler(id);
+}
 
 export const fetchGetPartnerCompanyRowById = async (id) => {
   return await fetchGetPartnerCompanyRowByIdHandler(id);

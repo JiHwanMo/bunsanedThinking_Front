@@ -175,8 +175,12 @@ const setSearchBar = () => {
   if (select != null) { // 추가
     container.appendChild(select);
     if (select.id === "post")
-      select.addEventListener("click", () => alert("버튼 눌림 - POST")); // 수정
-    else select.onchange = () => initTableBySelect(select.id, type); // 추가
+      select.addEventListener("click", () => {
+        sessionStorage.setItem("selectedButtonType", "POST");
+        window.location.href = "input.html";
+      }); // 수정
+    else
+      select.onchange = () => initTableBySelect(select.id, type); // 추가
   }
   container.appendChild(setInput());
   container.appendChild(setButton());

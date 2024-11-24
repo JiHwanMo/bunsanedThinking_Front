@@ -6,7 +6,7 @@ export const fetchApplyEndorsementHandler = async (index, id) => {
   return await fetchPatchWithParams(`${defaultUrl}/applyEndorsement?index=${index}&contractId=${id}`);
 };
 
-export const fetchInsuranceRevivalByIdHandler = async (id) => {
+export const fetchApplyInsuranceRevivalByIdHandler = async (id) => {
   return await fetchPatchWithParams(`${defaultUrl}/applyInsuranceRevival?contractId=${id}`);
 };
 
