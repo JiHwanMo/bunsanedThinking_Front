@@ -17,11 +17,11 @@ const handleComplaint = () => {
 }
 
 const cancelReport = () => {
-  alert("신고 취소 - 고객지원");
+  window.history.back();
 }
 
 const cancelComplaint = () => {
-  alert("민원 취소 - 고객지원");
+  window.history.back();
 }
 
 const customerSupportTaskMapper = {
