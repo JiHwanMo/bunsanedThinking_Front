@@ -14,7 +14,8 @@ import {
   fetchGetLoanProductDetailHandler,
   fetchUpdateCollateralProductHandler,
   fetchUpdateFixedDepositProductHandler,
-  fetchUpdateInsuranceContractHandler
+  fetchUpdateInsuranceContractHandler,
+  fetchDeniedLoanRequestHandler
 } from '../../../apiHandler/employee/loanManagement/loanManagement.js';
 
 export const fetchGetAll = async () => {
@@ -56,6 +57,10 @@ export const fetchRequestLoan = async (contractId, money, paymentType, result) =
   // 1004, 1000, 1, true
   return await fetchRequestLoanHandler(contractId, money, paymentType, result);
 };
+
+export const fetchDeniedLoanRequest = async (contractId, result) => {
+  return await fetchDeniedLoanRequestHandler(contractId, result);
+}
 
 export const fetchUpdateLoanProduct = async (index, input, loanId) => {
   // 1, "Test Loan", 7002004

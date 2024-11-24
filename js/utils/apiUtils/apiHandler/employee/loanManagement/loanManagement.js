@@ -56,6 +56,10 @@ export const fetchRequestLoanHandler = async (contractId, money, paymentType, re
   await fetchPostHandler(`${defaultURL}/requestLoan?contractId=${contractId}&money=${money}&paymentType=${paymentType}&result=${result}`,)
 };
 
+export const fetchDeniedLoanRequestHandler = async (contractId, result) => {
+  await fetchPostHandler(`${defaultURL}/requestLoan?contractId=${contractId}&result=${result}`,)
+}
+
 export const fetchUpdateLoanProductHandler = async (index, input, loanId) => {
   await fetchPatchWithParams(`${defaultURL}/updateLoanProduct?index=${index}&input=${input}&loanId=${loanId}`);
 };

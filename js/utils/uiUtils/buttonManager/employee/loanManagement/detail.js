@@ -1,5 +1,9 @@
 import {BUTTON} from "../../../../../../config/employee/loanManagement/loanManagement.js";
 import {initialButtons} from "../../../common/buttonUtils.js";
+import {
+  fetchDeleteLoanProduct,
+  fetchDeniedLoanRequest
+} from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
 
 export const renderButtons = () => {
   const type = sessionStorage.getItem("currentType");
@@ -11,8 +15,13 @@ const updateLoan = () => {
   window.location.href = "input.html";
 }
 
-const deleteLoan = () => {
-  alert("삭제 - 융자운용");
+const deleteLoan = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+
+  alert("정말 삭제하시겠습니까?");
+  await fetchDeleteLoanProduct(selectedDataId);
+
+  window.location.href = "home.html";
 }
 
 const requestLoan = () => {
@@ -20,12 +29,17 @@ const requestLoan = () => {
   window.location.href = "input.html";
 }
 
-const deniedLoanRequest = () => {
-  alert("거절 - 융자운용");
+const deniedLoanRequest = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+
+  alert("정말 거절하시겠습니까?");
+  await fetchDeniedLoanRequest(selectedDataId, false);
+
+  window.location.href = "home.html";
 }
 
 const cancel = () => {
-  alert("취소 - 융자운용");
+  window.history.back();
 }
 
 const loanManagementTaskMapper = {
