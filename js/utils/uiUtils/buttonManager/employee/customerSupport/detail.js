@@ -7,11 +7,13 @@ export const renderButtons = () => {
 };
 
 const handleReport = () => {
-  alert("신고 접수 - 고객지원");
+  sessionStorage.setItem("selectedButtonType", "HANDLE_REPORT");
+  window.location.href = "input.html";
 }
 
 const handleComplaint = () => {
-  alert("민원 접수 - 고객지원");
+  sessionStorage.setItem("selectedButtonType", "HANDLE_COMPLAINT");
+  window.location.href = "input.html";
 }
 
 const cancelReport = () => {
