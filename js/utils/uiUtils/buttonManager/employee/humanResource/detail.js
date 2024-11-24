@@ -7,7 +7,8 @@ export const renderButtons = () => {
 };
 
 const updateEmployee = () => {
-  alert("수정 - 인사관리");
+  sessionStorage.setItem("selectedButtonType", "UPDATE");
+  window.location.href = "input.html";
 }
 
 const deleteEmployee = () => {
