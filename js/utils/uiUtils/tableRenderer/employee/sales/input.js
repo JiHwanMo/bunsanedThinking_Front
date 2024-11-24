@@ -186,6 +186,14 @@ const addInputField = (sectionDiv, sectionId, fieldNames) => {
   const inputDiv = document.createElement("div");
   inputDiv.className = "form-group";
 
+  // 삭제 버튼 추가
+  const removeButton = document.createElement("button");
+  removeButton.textContent = "-";
+  removeButton.className = "remove-button";
+  removeButton.addEventListener("click", () => {
+    sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
+  });
+
   fieldNames.forEach((field) => {
     const input = document.createElement("input");
     input.type = field === "date" || field === "dateOfDiagnosis" ? "date" : "text";
@@ -195,6 +203,7 @@ const addInputField = (sectionDiv, sectionId, fieldNames) => {
     inputDiv.appendChild(input);
   });
 
+  inputDiv.appendChild(removeButton); // 삭제 버튼 추가
   sectionDiv.appendChild(inputDiv);
 };
 
