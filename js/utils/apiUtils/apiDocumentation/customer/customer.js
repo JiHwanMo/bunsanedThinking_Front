@@ -1,5 +1,5 @@
 import { fetchApplyEndorsementHandler } from '../../apiHandler/customer/customer.js';
-import { fetchInsuranceRevivalByIdHandler } from '../../apiHandler/customer/customer.js';
+import { fetchApplyInsuranceRevivalByIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchApplyInsuranceTerminationHandler } from '../../apiHandler/customer/customer.js';
 import { fetchApplyInsuranceRecontractHandler } from '../../apiHandler/customer/customer.js';
 import { fetchPayInsurancefeeHandler } from '../../apiHandler/customer/customer.js';
@@ -42,7 +42,7 @@ import { fetchReportAccidentHandler } from '../../apiHandler/customer/customer.j
 
 
 // fetchReceiveInsurance 이외 검증 완
-export const fetchApplyEndorsement = async (index, id) => {
+export const fetchApplyEndorsementById = async (index, id) => {
   return await fetchApplyEndorsementHandler(index, id);
 };
 // (async () => {
@@ -50,15 +50,15 @@ export const fetchApplyEndorsement = async (index, id) => {
 //   console.log(data); // 받아온 데이터를 콘솔에 출력
 // })();
 
-export const fetchInsuranceRevivalById = async (id) => {
-  return await fetchInsuranceRevivalByIdHandler(id);
+export const fetchApplyInsuranceRevivalById = async (id) => {
+  return await fetchApplyInsuranceRevivalByIdHandler(id);
 };
 // (async () => {
 //   const data = await fetchInsuranceRevivalById(1004);
 //   console.log(data); // 받아온 데이터를 콘솔에 출력
 // })();
 
-export const fetchApplyInsuranceTermination = async (id) => {
+export const fetchApplyInsuranceTerminationById = async (id) => {
   return await fetchApplyInsuranceTerminationHandler(id);
 };
 // (async () => {
@@ -66,7 +66,7 @@ export const fetchApplyInsuranceTermination = async (id) => {
 //   console.log(data); // 받아온 데이터를 콘솔에 출력
 // })();
 
-export const fetchApplyInsuranceRecontract = async (id) => {
+export const fetchApplyInsuranceRecontractById = async (id) => {
   return await fetchApplyInsuranceRecontractHandler(id);
 };
 // (async () => {
@@ -243,8 +243,7 @@ export const fetchBuyInsurance = async (buyInsuranceDTO) => {
 // (async () => {
 //   const buyInsuranceDTO = {
 //     "insuranceId": 7001001,
-//     "customerId": 2003,
-//     "employeeId": null
+//     "customerId": 2003
 //   }
 //   const data = await fetchBuyInsurance(buyInsuranceDTO);
 //   console.log(data); // 받아온 데이터를 콘솔에 출력
@@ -270,8 +269,7 @@ export const fetchLoan = async (loanDTO) => {
 // (async () => {
 //   const loanDTO = {
 //     "loanId": 7002003,
-//     "customerId": 2001,
-//     "employeeId": null
+//     "customerId": 2001
 //   }
 //   const data = await fetchLoan(loanDTO);
 //   console.log(data); // 받아온 데이터를 콘솔에 출력

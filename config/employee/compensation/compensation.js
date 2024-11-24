@@ -14,6 +14,16 @@ export const BUTTON = {
       REQUEST_INSURANCE_MONEY: {
         REQUEST: "요청",
         CANCEL: COMMON_BUTTON.COMMON.CANCEL
+      },
+      INPUT: {
+        REQUEST_COMPENSATION: {
+          OK: COMMON_BUTTON.COMMON.OK,
+          CANCEL: COMMON_BUTTON.COMMON.CANCEL
+        },
+        REQUEST_INSURANCE_MONEY: {
+          OK: COMMON_BUTTON.COMMON.OK,
+          CANCEL: COMMON_BUTTON.COMMON.CANCEL
+        }
       }
     }
   }
@@ -37,6 +47,20 @@ export const COMBOBOX = {
         value: "unprocessed",
         label: "미완료"
       }
+    ],
+    input: [
+      {
+        value: "paymentType",
+        label: "지급 형태"
+      },
+      {
+        value: "cash",
+        label: "현금"
+      },
+      {
+        value: "accountTransfer",
+        label: "계좌 이체"
+      }
     ]
   },
   REQUEST_INSURANCE_MONEY: {
@@ -54,6 +78,20 @@ export const COMBOBOX = {
       {
         value: "unprocessed",
         label: "미처리"
+      }
+    ],
+    input: [
+      {
+        value: "paymentType",
+        label: "지급 형태"
+      },
+      {
+        value: "cash",
+        label: "현금"
+      },
+      {
+        value: "accountTransfer",
+        label: "계좌 이체"
       }
     ]
   }
@@ -81,4 +119,33 @@ export const COLUMN_NAME = {
     "고객 이름",
     "처리 상태"
   ]
-};
+}
+
+export const INPUT_LABEL = {
+  REQUEST_COMPENSATION: {
+    MONEY: "지급 금액",
+    PAYMENTTYPE: "지급 형태"
+  },
+  REQUEST_INSURANCE_MONEY: {
+    MONEY: "지급 금액",
+    PAYMENTTYPE: "지급 형태"
+  }
+}
+
+export const INPUT_FORM  = {
+  MONEY: {
+    isCombo: false,
+    for: "money",
+    label: "MONEY",
+    type: "number",
+    id: "money",
+    name: "money",
+    placeholder: "MONEY"
+  },
+  PAYMENTTYPE: {
+    isCombo: true,
+    for: "paymentType",
+    label: "PAYMENTTYPE",
+    id: "paymentType"
+  }
+}

@@ -14,6 +14,10 @@ export const fetchGetPartnerCompanyByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getPartnerCompanyById?id=${id}`);
 }
 
+export const fetchGetPartnerCompanyDetailByIdHandler = async (id) => {
+  return await fetchGetHandler(`${defaultUrl}/getPartnerCompanyDetailById?id=${id}`);
+}
+
 export const fetchGetPartnerCompanyRowByIdHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/getPartnerCompanyRowById?id=${id}`);
 }

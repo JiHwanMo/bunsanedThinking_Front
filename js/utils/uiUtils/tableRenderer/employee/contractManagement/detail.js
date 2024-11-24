@@ -116,7 +116,7 @@ const context = {
 
 export const renderDetails = async () => {
   // 세션에서 데이터 가져오기
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
   const type = sessionStorage.getItem("currentType");
 
   // 세션에 데이터가 있으면 렌더링

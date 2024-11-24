@@ -1,41 +1,76 @@
 import {initialButtons} from "../../common/buttonUtils.js";
 import {BUTTON} from "../../../../../config/customer/customer.js";
+import {
+  fetchApplyInsuranceRecontractById,
+  fetchApplyInsuranceRevivalById, fetchApplyInsuranceTerminationById, fetchBuyInsurance, fetchLoan
+} from "../../../apiUtils/apiDocumentation/customer/customer.js";
+import {buttonType} from "../../tableRenderer/customer/input.js";
 
 
-const applyRecontract = () => {
-  alert("재가입 신청");
+const applyRecontract = async () => { // 팝업
+  const contractId = sessionStorage.getItem("selectedDataId");
+  await fetchApplyInsuranceRecontractById(contractId);
+  alert("재계약 신청이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
 
-const applyRevival = () => {
-  alert("부활 신청");
+const applyRevival = async () => { // 팝업
+  const contractId = sessionStorage.getItem("selectedDataId");
+  await fetchApplyInsuranceRevivalById(contractId);
+  alert("부활 신청이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
 
-const applyTermination = () => {
-  alert("해지 신청");
+const applyTermination = async () => { // 팝업
+  const contractId = sessionStorage.getItem("selectedDataId");
+  await fetchApplyInsuranceTerminationById(contractId);
+  alert("해지 신청이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
 
-const applyEndorsement = () => {
-  alert("배서 신청");
+const applyEndorsement = () => { // 입력
+  sessionStorage.setItem("selectedButtonType", buttonType.APPLY_ENDORSEMENT);
+  window.location.href = "input.html";
 }
 
-const payInsuranceFee = () => {
-  alert("보험금 납입");
+const payInsuranceFee = () => { // 입력
+  sessionStorage.setItem("selectedButtonType", buttonType.PAY_INSURANCE_FEE);
+  window.location.href = "input.html";
 }
 
-const receiveInsurance = () => {
-  alert("보험금 신청");
+const receiveInsurance = () => { // 입력 - 얜 모르것다
+  sessionStorage.setItem("selectedButtonType", buttonType.RECEIVE_INSURANCE);
+  window.location.href = "input.html";
 }
 
-const askInsuranceCounsel = () => {
-  alert("상담 신청");
+const askInsuranceCounsel = async () => { // 입력
+  sessionStorage.setItem("selectedButtonType", buttonType.ASK_INSURANCE_COUNSEL);
+  window.location.href = "input.html";
 }
 
-const buyInsurance = () => {
-  alert("보험 구매");
+const buyInsurance = async () => { // 팝업
+  const buyInsuranceDTO = {
+    insuranceId: sessionStorage.getItem("selectedDataId"),
+    customerId: sessionStorage.getItem("id")
+  };
+  await fetchBuyInsurance(buyInsuranceDTO);
+  alert("보험 계약 신청이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
 
-const loan = () => {
-  alert("대출 신청");
+const loan = async () => { // 팝업
+  const loanDTO = {
+    loanId: sessionStorage.getItem("selectedDataId"),
+    customerId: sessionStorage.getItem("id")
+  }
+  await fetchLoan(loanDTO);
+  alert("대출 신청이 완료되었습니다");
+  window.history.back();
+  window.history.back();
 }
 
 const cancel = () => {

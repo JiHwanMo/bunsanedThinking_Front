@@ -3,6 +3,7 @@ import { fetchGetPartnerCompanyRowById } from '../../../../apiUtils/apiDocumenta
 import { BUTTON } from '../../../../../../config/common.js';
 import { TABLE_TITLE } from '../../../../../../config/employee/compensationPlanning/compensationPlanning.js';
 import { COLUMN_NAME } from '../../../../../../config/employee/compensationPlanning/compensationPlanning.js';
+import {setPost} from "../../../buttonManager/employee/compensationPlanning/informationList.js";
 
 export const informationType = {
   EVALUATE_PARTNERCOMPANY: "EVALUATE_PARTNERCOMPANY",
@@ -21,14 +22,12 @@ const partnerCompanyRow = (dto) => {
 const context = {
   EVALUATE_PARTNERCOMPANY: {
     isSubmit: false,
-    needDetail: true,
     listFetch: fetchGetAll,
     listFetchById: fetchGetPartnerCompanyRowById,
     rowGetter: partnerCompanyRow
   },
   MANAGEMENT_PARTNERCOMPANY: {
     isSubmit: true,
-    needDetail: false,
     listFetch: fetchGetAll,
     listFetchById: fetchGetPartnerCompanyRowById,
     rowGetter: partnerCompanyRow
@@ -50,17 +49,6 @@ const setTitle = () => {
   const title = TABLE_TITLE[sessionStorage.getItem("currentType")];
   const contextTitle = document.getElementById("title");
   contextTitle.innerText = title;
-}
-
-const setPost = () => {
-  const post = document.createElement("div");
-  post.id = "post";
-  post.className = "post-button";
-  post.textContent = BUTTON.COMMON.POST;
-  post.addEventListener("click", () => {
-    alert("등록 - 보상기획");
-  });
-  return post;
 }
 
 const setInput = () => {
@@ -131,14 +119,11 @@ const setOneRow = (item, type) => {
     window.selectedRow = row;
   });
 
-  // 더블 클릭 시 상세 페이지로 이동
-  if (context[type].needDetail) {
-    row.addEventListener("dblclick", () => {
-      // 상세 정보를 세션에 저장
-      sessionStorage.setItem("selectedDataId", item.id);
-      window.location.href = "detail.html";
-    });
-  }
+  row.addEventListener("dblclick", () => {
+    // 상세 정보를 세션에 저장
+    sessionStorage.setItem("selectedDataId", item.id);
+    window.location.href = "detail.html";
+  });
 
   tableBody.appendChild(row);
 }
