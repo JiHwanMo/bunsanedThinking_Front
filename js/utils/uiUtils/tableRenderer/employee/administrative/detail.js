@@ -91,11 +91,11 @@ const deleteItem = async () => {
   document.body.appendChild(modal);
   // 버튼 이벤트 핸들링
   document.getElementById("confirmDeleteButton").addEventListener("click", async () => {
-    const type = sessionStorage.getItem("currentType");
     const id = sessionStorage.getItem("selectedDataId");
 
     try {
       await fetchDeleteOfficeSupply(id);
+      alert("삭제가 완료되었습니다.");
       document.body.removeChild(modal); // 모달 닫기
       window.location.href = "home.html"; // 홈 화면으로 이동
     } catch (error) {

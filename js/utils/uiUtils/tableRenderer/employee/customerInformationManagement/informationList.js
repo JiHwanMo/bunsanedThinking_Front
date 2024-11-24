@@ -31,21 +31,6 @@ const context = {
   }
 }
 
-// export const viewCustomerInformationListAll = async () => {
-//   try {
-//     const list = await fetchGetAllCustomerInformation();
-//     if (!list || !list.length) {
-//       console.warn("No customer information data fetched.");
-//       return;
-//     }
-//     sessionStorage.setItem("list", JSON.stringify(list));
-//     console.log("Data saved in sessionStorage:", sessionStorage.getItem("list"));
-//     window.location.href = "informationList.html"; // 경로 확인 필요
-//   } catch (error) {
-//     console.error("Error fetching customer information:", error);
-//   }
-// };
-
 export const viewCustomerInformationListAll = async () => {
   const list = await fetchGetAllCustomerInformation();
   if (!list || !list.length) return;
@@ -130,7 +115,9 @@ const setPostButton = () => {
   button.id = "postButton";
   button.textContent = BUTTON.COMMON.POST;
   button.addEventListener("click", () => {
-    alert("등록 버튼 클릭!");
+    // alert("등록 버튼 클릭!");
+    sessionStorage.setItem("selectedButtonType", JSON.stringify("POST")); // 등록 타입 설정
+    window.location.href = "input.html"; // 등록 화면으로 이동
   });
   return button;
 };

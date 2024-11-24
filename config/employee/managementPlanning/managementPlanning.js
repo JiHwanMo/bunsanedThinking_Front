@@ -34,3 +34,14 @@ export const COLUMN_NAME = {
     "부서장 이름"
   ]
 };
+
+export const DETAIL_COLUMN_NAME = {
+  DEPARTMENT_LIST: {
+    ID: '부서 번호',
+    NAME: '부서 이름',
+    TASK: '주 업무',
+    PURPOSE: '부서 목적',
+    EMPLOYEE_COUNT: '소속 인원',
+    HEAD_NAME: '부서장 이름',
+  },
+};

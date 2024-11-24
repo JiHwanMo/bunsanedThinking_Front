@@ -25,21 +25,6 @@ const context = {
   }
 }
 
-// export const viewOfficeSupplyListAll = async () => {
-//   try {
-//     const list = await fetchGetAllOfficeSupplies();
-//     if (!list || !list.length) {
-//       console.warn("No office supplies data fetched.");
-//       return;
-//     }
-//     sessionStorage.setItem("list", JSON.stringify(list));
-//     console.log("Data saved in sessionStorage:", sessionStorage.getItem("list"));
-//     window.location.href = "informationList.html"; // 경로 확인 필요
-//   } catch (error) {
-//     console.error("Error fetching office supplies:", error);
-//   }
-// };
-
 export const viewOfficeSupplyListAll = async () => {
   const list = await fetchGetAllOfficeSupplies();
   if (!list || !list.length) return;

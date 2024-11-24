@@ -19,23 +19,23 @@ export const addButtons = (buttonContainer) => {
       try {
         await fetchAddOfficeSupply(formData);
 
-        // "저장되었습니다" 모달 표시
+        // "저장이 완료되었습니다" 모달 표시
         const modal = document.createElement("div");
         modal.className = "custom-modal";
         modal.innerHTML = `
           <div class="modal-content">
-            <p>저장되었습니다.</p>
+            <p>저장이 완료되었습니다</p>
           </div>
         `;
 
         // 모달 추가
         document.body.appendChild(modal);
 
-        // 3초 후 모달 제거 및 페이지 이동
+        // 2초 후 모달 제거 및 페이지 이동
         setTimeout(() => {
           document.body.removeChild(modal);
           window.location.href = "home.html";
-        }, 3000);
+        }, 2000);
       } catch (error) {
         console.error("등록 중 오류 발생:", error);
         alert("등록 중 오류가 발생했습니다.");
@@ -71,6 +71,7 @@ export const addButtons = (buttonContainer) => {
       // 버튼 이벤트 핸들링
       document.getElementById("confirmButton").addEventListener("click", async () => {
         await fetchUpdateOfficeSupply(formData);
+        alert("수정이 완료되었습니다.");
         document.body.removeChild(modal); // 모달 닫기
         window.location.href = "home.html";
       });
@@ -100,7 +101,7 @@ const collectFormData = () => {
     const department_id = parseInt(document.getElementById("department_id").value, 10);
     // 입력 값 검증
     if (!name || !description || !inventory || !total_inventory || !department_id) {
-      alert("등록할 값을 모두 입력하세요.");
+      alert("잘못된 정보를 입력하였습니다. 다시 입력해주세요.");
       return null;
     }
     if (inventory > total_inventory) {
@@ -120,7 +121,7 @@ const collectFormData = () => {
     const input = document.getElementById("input").value;
 
     if (!input.trim()) {
-      alert("수정할 값을 입력하세요.");
+      alert("잘못된 정보를 입력하였습니다. 다시 입력해주세요.");
       return null;
     }
     return { id, index, input };

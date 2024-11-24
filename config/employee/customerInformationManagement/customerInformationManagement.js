@@ -40,3 +40,22 @@ export const COLUMN_NAME = {
     "고객 번호"
   ]
 };
+
+export const DETAIL_COLUMN_NAME = {
+  CUSTOMER_LIST: {
+    ID: '고객 번호',
+    NAME: '이름',
+    PHONE_NUMBER: '전화번호',
+    JOB: '직업',
+    AGE: '나이',
+    GENDER: '성별',
+    RESIDENT_REGISTRATION_NUMBER: '주민등록번호',
+    ADDRESS: '주소',
+    PROPERTY: '재산',
+    ACCIDENT_HISTORY: '사고 이력',
+    SURGERY_HISTORY: '수술 이력',
+    DISEASE_HISTORY: '병력',
+    BANK_NAME: '은행명',
+    BANK_ACCOUNT: '계좌 번호'
+  }
+};
