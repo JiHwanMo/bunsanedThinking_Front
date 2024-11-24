@@ -1,38 +1,29 @@
 import {BUTTON} from "../../../../../../config/employee/humanResource/humanResource.js";
-
-const context = {
-  MANAGEMENT_EMPLOYEE: {
-    buttons: BUTTON.TASK.EMPLOYEE.HUMAN_RESOURCE.MANAGEMENT_EMPLOYEE
-  }
-}
+import {initialButtons} from "../../../common/buttonUtils.js";
+import {fetchDeleteEmployee} from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
 
 export const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, humanResourceTaskMapper);
+  const type = sessionStorage.getItem("currentType");
+  initialButtons(BUTTON.TASK.EMPLOYEE.HUMAN_RESOURCE[type], humanResourceTaskMapper[type]);
 };
 
-const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  // 객체의 각 항목을 순회하여 버튼 생성
-  Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
-    button.textContent = name; // 버튼에 표시할 텍스트 설정
-
-    button.addEventListener("click", buttonActionMapper[key]);
-
-    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
-  });
-}
-
 const updateEmployee = () => {
-  alert("수정 - 인사관리");
+  sessionStorage.setItem("selectedButtonType", "UPDATE");
+  window.location.href = "input.html";
 }
 
-const deleteEmployee = () => {
-  alert("삭제 - 인사관리");
+const deleteEmployee = async () => {
+  const selectedDataId = sessionStorage.getItem("selectedDataId");
+
+  alert("정말 삭제하시겠습니까?");
+  await fetchDeleteEmployee(selectedDataId);
+
+  window.location.href = "home.html";
 }
 
 const humanResourceTaskMapper = {
-  UPDATE: updateEmployee,
-  DELETE: deleteEmployee
+  MANAGEMENT_EMPLOYEE: {
+    UPDATE: updateEmployee,
+    DELETE: deleteEmployee
+  }
 }

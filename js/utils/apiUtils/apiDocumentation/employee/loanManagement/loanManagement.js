@@ -11,7 +11,11 @@ import {
   fetchGetLoanRequestHandler,
   fetchGetAllCompletedLoanRequestHandler,
   fetchGetAllUnprocessedLoanRequestHandler,
-  fetchGetLoanProductDetailHandler
+  fetchGetLoanProductDetailHandler,
+  fetchUpdateCollateralProductHandler,
+  fetchUpdateFixedDepositProductHandler,
+  fetchUpdateInsuranceContractHandler,
+  fetchDeniedLoanRequestHandler
 } from '../../../apiHandler/employee/loanManagement/loanManagement.js';
 
 export const fetchGetAll = async () => {
@@ -38,14 +42,14 @@ export const fetchGetOutcome = async (contractId) => {
   return await fetchGetOutcomeHandler(contractId); //1001
 };
 
-export const fetchAddCollateralProduct = async (loanType, name, interestRate, maximumMoney, minimumAsset, collateralType, minimumValue, monthlyIncome) => {
+export const fetchAddCollateralProduct = async (addCollateralDto) => {
   // 0, "Standard Loan", 5, 100000, 20000, 1, 15000, 300
-  return await fetchAddCollateralProductHandler(loanType, name, interestRate, maximumMoney, minimumAsset, collateralType, minimumValue, monthlyIncome);
+  return await fetchAddCollateralProductHandler(addCollateralDto);
 };
 
-export const fetchAddLoanProduct = async (loanType, name, interestRate, maximumMoney, minimumAsset, parameter, monthlyIncome) => {
+export const fetchAddLoanProduct = async (addLoanDto) => {
   // 1, "Standard Loan 2", 5, 100000, 20000, 1, 300
-  return await fetchAddLoanProductHandler(loanType, name, interestRate, maximumMoney, minimumAsset, parameter, monthlyIncome);
+  return await fetchAddLoanProductHandler(addLoanDto);
 };
 
 
@@ -54,10 +58,26 @@ export const fetchRequestLoan = async (contractId, money, paymentType, result) =
   return await fetchRequestLoanHandler(contractId, money, paymentType, result);
 };
 
+export const fetchDeniedLoanRequest = async (contractId, result) => {
+  return await fetchDeniedLoanRequestHandler(contractId, result);
+}
+
 export const fetchUpdateLoanProduct = async (index, input, loanId) => {
   // 1, "Test Loan", 7002004
   return await fetchUpdateLoanProductHandler(index, input, loanId);
 };
+
+export const fetchUpdateCollateralProduct = async (updateCollateralDto) => {
+  return await fetchUpdateCollateralProductHandler(updateCollateralDto);
+}
+
+export const fetchUpdateFixedDepositProduct = async (updateFixedDepositDto) => {
+  return await fetchUpdateFixedDepositProductHandler(updateFixedDepositDto);
+}
+
+export const fetchUpdateInsuranceContractProduct = async (updateInsuranceContractDto) => {
+  return await fetchUpdateInsuranceContractHandler(updateInsuranceContractDto);
+}
 
 export const fetchDeleteLoanProduct = async (productId) => {
   return await fetchDeleteLoanProductHandler(productId); // 7002004
