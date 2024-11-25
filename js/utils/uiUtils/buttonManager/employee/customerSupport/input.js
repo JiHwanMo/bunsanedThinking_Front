@@ -1,4 +1,11 @@
-import {BUTTON as COMMON_BUTTON, ELEMENT_ID as COMMON_ELEMENT_ID, EVENT, KEY, LOCATION} from "../../../../../../config/common.js";
+import {
+  BUTTON as COMMON_BUTTON,
+  ELEMENT_ID as COMMON_ELEMENT_ID,
+  EVENT,
+  KEY,
+  LOCATION,
+  TAG
+} from "../../../../../../config/common.js";
 import {
   fetchHandleAccident,
   fetchHandleComplaint
@@ -60,7 +67,7 @@ const context = {
 }
 
 const createButton = (textContent) => {
-  const okButton = document.createElement("button");
+  const okButton = document.createElement(TAG.BUTTON);
   okButton.className = "button-item";
   okButton.textContent = textContent;
   return okButton;
@@ -69,7 +76,7 @@ const createButton = (textContent) => {
 const createCancelButton = () => {
   const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
-  const cancelButton = document.createElement("button");
+  const cancelButton = document.createElement(TAG.BUTTON);
   cancelButton.className = "button-item";
   cancelButton.textContent = COMMON_BUTTON.COMMON.CANCEL;
 
