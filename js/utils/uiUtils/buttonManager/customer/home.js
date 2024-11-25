@@ -3,9 +3,10 @@ import { viewInformationListById } from '../../tableRenderer/customer/informatio
 import { viewInformationListAll } from '../../tableRenderer/customer/informationList.js';
 import { informationType } from '../../tableRenderer/customer/informationList.js';
 import {initialButtons} from "../../common/buttonUtils.js";
+import {ELEMENT_ID} from "../../../../../config/common.js";
 
 const showProductListMenu = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
   while (buttonContainer.firstChild) buttonContainer.firstChild.remove();
   initialButtons(BUTTON.TASK.CUSTOMER.PRODUCT_LIST, customerTaskMapper.PRODUCT_LIST);
 }

@@ -1,6 +1,7 @@
 import { fetchloginCustomer } from '../../apiUtils/apiDocumentation/authentication.js';
 import { fetchloginEmployee } from '../../apiUtils/apiDocumentation/authentication.js';
 import { fetchloginPartnerCompany } from '../../apiUtils/apiDocumentation/authentication.js';
+import {EVENT, KEY, MESSAGES} from "../../../../config/common.js";
 
 const link = {
   CUSTOMER: "../customer/home.html",
@@ -21,15 +22,15 @@ const link = {
 }
 
 const toNextPage = (user, id) => {
-  alert(`${user.name}님, 환영합니다!`);
-  sessionStorage.setItem("id", id);
+  alert(`${user.name}${MESSAGES.WELCOME}`);
+  sessionStorage.setItem(KEY.LOGIN_ID, id);
   window.location.href = link[user.type];
 }
 
 const submit = async (event) => {
   event.preventDefault(); // 폼 기본 제출 방지
 
-  const id = document.getElementById("id").value;
+  const id = document.getElementById(KEY.LOGIN_ID).value;
 
   // 간단한 유효성 검사
   if (id.trim() === "") {
@@ -57,7 +58,7 @@ const submit = async (event) => {
 
 export const renderLogin = () => {
   const loginForm = document.getElementById("loginForm");
-  loginForm.addEventListener("submit", (event) => {
+  loginForm.addEventListener(EVENT.SUBMIT, (event) => {
     submit(event);
   });
 }

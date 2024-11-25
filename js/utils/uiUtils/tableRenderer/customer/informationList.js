@@ -21,6 +21,7 @@ import {
 } from '../../../apiUtils/apiDocumentation/customer/customer.js';
 import {COLUMN_NAME, COMBOBOX, TABLE_TITLE} from '../../../../../config/customer/customer.js';
 import {setButton, setPost} from "../../buttonManager/customer/information.js";
+import {CLASS, ELEMENT_ID, EVENT, INPUT_TYPE, KEY, LOCATION, MESSAGES, TAG} from "../../../../../config/common.js";
 
 export const informationType = {
   INSURANCE_LIST: "INSURANCE_LIST",
@@ -152,17 +153,17 @@ const context = {
 }
 
 export const viewInformationListById = async (fetchType) => {
-  sessionStorage.setItem("currentType", fetchType);
-  const id = sessionStorage.getItem("id");
+  sessionStorage.setItem(KEY.CURRENT_TYPE, fetchType);
+  const id = sessionStorage.getItem(KEY.LOGIN_ID);
   const list = await context[fetchType].listFetch(id);
-  sessionStorage.setItem("list", JSON.stringify(list));
-  window.location.href = "informationList.html";
+  sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
+  window.location.href = LOCATION.INFORMATION;
 }
 export const viewInformationListAll = async (fetchType) => {
-  sessionStorage.setItem("currentType", fetchType);
+  sessionStorage.setItem(KEY.CURRENT_TYPE, fetchType);
   const list = await context[fetchType].listFetch();
-  sessionStorage.setItem("list", JSON.stringify(list));
-  window.location.href = "informationList.html";
+  sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
+  window.location.href = LOCATION.INFORMATION;
 }
 
 export const renderTable = () => {
@@ -170,22 +171,22 @@ export const renderTable = () => {
 }
 
 const setTitle = () => {
-  const title = TABLE_TITLE[sessionStorage.getItem("currentType")];
-  const contextTitle = document.getElementById("title");
+  const title = TABLE_TITLE[sessionStorage.getItem(KEY.CURRENT_TYPE)];
+  const contextTitle = document.getElementById(ELEMENT_ID.TITLE);
   contextTitle.innerText = title;
 }
 
 const setComboBox = () => {
   const container = document.querySelector(".search-container");
-  const select = document.createElement("select");
-  const type = sessionStorage.getItem("currentType");
+  const select = document.createElement(TAG.SELECT);
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const boxContext = COMBOBOX[type];
   if (!boxContext.isCombo) return null;
   select.id = boxContext.id;
-  select.className = "comboBox";
+  select.className = CLASS.COMBO_BOX;
   const optionTypes = boxContext.optionTypes;
   optionTypes.forEach(optionType => {
-    const option = document.createElement("option");
+    const option = document.createElement(TAG.OPTION);
     option.value = optionType.value;
     option.textContent = optionType.label;
     select.appendChild(option);
@@ -197,27 +198,27 @@ const setComboBox = () => {
 
 const setInput = () => {
   const container = document.querySelector(".search-container");
-  const input = document.createElement("input");
-  input.type = "text";
-  input.id = "searchInput";
-  input.placeholder = "검색어 입력";
+  const input = document.createElement(TAG.INPUT);
+  input.type = INPUT_TYPE.TEXT;
+  input.id = ELEMENT_ID.SEARCH_INPUT;
+  input.placeholder = MESSAGES.PLACE_HOLDER.SEARCH;
   container.appendChild(input);
   return input;
 }
 
 export const initTableByInput = async (id, type) => { // 추가
-  const tableBody = document.getElementById('list');
+  const tableBody = document.getElementById(KEY.LIST);
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   if (id.length > 0) {
     const item = context[type].needCustomerId ?
-      await context[type].listFetchById(id, sessionStorage.getItem("id")) :
+      await context[type].listFetchById(id, sessionStorage.getItem(KEY.LOGIN_ID)) :
       await context[type].listFetchById(id)
     setOneRow(item, type);
   } else {
     const list = context[type].needCustomerId ?
-      await context[type].comboListFetch["all"](sessionStorage.getItem("id")) :
+      await context[type].comboListFetch["all"](sessionStorage.getItem(KEY.LOGIN_ID)) :
       await context[type].comboListFetch["all"]();
-    if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
+    if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
     setTableBody();
   }
 }
@@ -226,18 +227,18 @@ const initTableBySelect = async (id, type) => { // 추가
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
   const list = context[type].needCustomerId ?
-    await context[type].comboListFetch[selectedOption.value](sessionStorage.getItem("id")) :
+    await context[type].comboListFetch[selectedOption.value](sessionStorage.getItem(KEY.LOGIN_ID)) :
     await context[type].comboListFetch[selectedOption.value]();
-  if (list != null) sessionStorage.setItem("list", JSON.stringify(list));
-  const input = document.getElementById("searchInput");
+  if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
+  const input = document.getElementById(ELEMENT_ID.SEARCH_INPUT);
   if (input != null) input.value = "";
-  const tableBody = document.getElementById('list');
+  const tableBody = document.getElementById(KEY.LIST);
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   setTableBody();
 }
 
 const setSearchBar = () => {
-  const type = sessionStorage.getItem("currentType");
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   if (COMBOBOX[type].isCombo) setComboBox();
   else setPost();
   setInput();
@@ -245,11 +246,11 @@ const setSearchBar = () => {
 }
 
 const setColumn = () => {
-  const columnList = COLUMN_NAME[sessionStorage.getItem("currentType")];
-  const head = document.getElementById('tableHead');
-  const columns = document.createElement('tr');
+  const columnList = COLUMN_NAME[sessionStorage.getItem(KEY.CURRENT_TYPE)];
+  const head = document.getElementById(ELEMENT_ID.TABLE);
+  const columns = document.createElement(TAG.TR);
   columnList.forEach(item => {
-    const oneColoumn = document.createElement('th');
+    const oneColoumn = document.createElement(TAG.TH);
     oneColoumn.innerHTML = item;
     columns.appendChild(oneColoumn);
   })
@@ -257,11 +258,11 @@ const setColumn = () => {
 }
 
 const setOneRow = (item, type) => {
-  const tableBody = document.getElementById('list');
-  const row = document.createElement("tr");
+  const tableBody = document.getElementById(KEY.LIST);
+  const row = document.createElement(TAG.TR);
   row.innerHTML = context[type].rowGetter(item);
   // 각 행에 클릭 이벤트 추가
-  row.addEventListener("click", () => {
+  row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
       window.selectedRow.classList.remove("selected");
     }
@@ -271,10 +272,10 @@ const setOneRow = (item, type) => {
 
   // 더블 클릭 시 상세 페이지로 이동
   if (context[type].needDetail) {
-    row.addEventListener("dblclick", () => {
+    row.addEventListener(EVENT.DOUBLE_CLICK, () => {
       // 상세 정보를 세션에 저장
-      sessionStorage.setItem("selectedDataId", item.id);
-      window.location.href = "detail.html";
+      sessionStorage.setItem(KEY.SELECTED_DATA_ID, item.id);
+      window.location.href = LOCATION.DETAIL;
     });
   }
 
@@ -282,8 +283,8 @@ const setOneRow = (item, type) => {
 }
 
 const setTableBody = () => {
-  const type = sessionStorage.getItem("currentType");
-  const data = JSON.parse(sessionStorage.getItem("list"));
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
+  const data = JSON.parse(sessionStorage.getItem(KEY.LIST));
   data.forEach(item => setOneRow(item, type));
 }
 
