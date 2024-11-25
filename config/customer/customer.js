@@ -587,5 +587,8 @@ export const ALERT = {
     ASK_INSURANCE_COUNSEL: "상담 신청이 완료되었습니다",
     ADD_ACCIDENT: "사고 신고가 완료되었습니다",
     ADD_COMPLAINT: "민원 신청이 완료되었습니다"
+  },
+  FAIL: {
+    ADD_ACCIDENT: "신청한 자동차 보험이 없어서 사고 신고를 받을 수 없습니다"
   }
 }

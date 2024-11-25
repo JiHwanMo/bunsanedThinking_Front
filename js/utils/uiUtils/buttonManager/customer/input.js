@@ -1,7 +1,7 @@
 import {initialButtons} from "../../common/buttonUtils.js";
 import {ALERT, BUTTON, INPUT_FORM} from "../../../../../config/customer/customer.js";
 import {
-  fetchApplyEndorsementById, fetchAskInsuranceCounsel, fetchComplain,
+  fetchApplyEndorsementById, fetchAskInsuranceCounsel, fetchComplain, fetchGetAllAutomobileContractByCustomerId,
   fetchPayInsurancefee,
   fetchReceiveInsurance, fetchReportAccident
 } from "../../../apiUtils/apiDocumentation/customer/customer.js";
@@ -122,8 +122,13 @@ const getReportAccident = (id, type, accidentDate, location) => {
 
 const reportAccident = async () => {
   if (!confirm(ALERT.CONFIRM.ADD_ACCIDENT)) return;
-  const inputForm = getInputForm();
   const id = sessionStorage.getItem(KEY.LOGIN_ID);
+  const automobileContracts = await fetchGetAllAutomobileContractByCustomerId(id);
+  if (automobileContracts.length === ZERO) {
+    alert(ALERT.FAIL.ADD_ACCIDENT);
+    return;
+  }
+  const inputForm = getInputForm();
   const type = document.getElementById(inputForm.TYPE.id).selectedIndex;
   const accidentDate = document.getElementById(inputForm.ACCIDENT_DATE.id).value;
   const location = document.getElementById(inputForm.LOCATION.id).value;
