@@ -290,6 +290,11 @@ const addFamilyField = (sectionDiv) => {
   const familyCount = document.querySelectorAll('.radio-group').length;
 
   familyForm.forEach((field) => {
+    const formLabel = document.createElement("label");
+    formLabel.for = `${field.name}`;
+    formLabel.textContent = DETAIL_COLUMN_NAME[type][field.label];
+    inputDiv.appendChild(formLabel);
+
     const input = document.createElement("input");
     input.id = `${field.id}-${familyCount}`;
     input.type = field.type;
@@ -335,111 +340,31 @@ const createFamilyInputForm = (familyCount) => {
 }
 
 const addDepartmentComboBoxWithValue = (inputFieldsContainer, type, employeeData) => {
-  // TODO 기존 코드 재활용하도록 수정 해야됨
-  const formDiv = document.createElement("div");
-  formDiv.className = "form-group";
-  const formLabel = document.createElement("label");
-  formLabel.for = "departmentId";
-  formLabel.textContent = DETAIL_COLUMN_NAME[type].RELATIONSHIP;
-  const formSelect = document.createElement("select");
-  formSelect.id = "departmentId";
-  formSelect.name = "departmentId";
-
-  // TODO 테스트용
-  // const departmentList = await fetchGetAllDepartment();
-  const departmentList = [
-    {
-      id: 9101,
-      name: "융자운용팀"
-    },
-    {
-      id: 9108,
-      name: "인사관리팀"
-    }
-  ]
-
-  departmentList.map(department => {
-    const option = document.createElement("option");
-    option.value = department.id;
-    option.textContent = department.name;
-    if (employeeData.departmentID === department.id)
-      option.selected = true;
-    formSelect.appendChild(option);
-  })
-
-  formDiv.appendChild(formLabel);
-  formDiv.appendChild(formSelect);
-
-  inputFieldsContainer.appendChild(formDiv);
+  addDepartmentComboBox(inputFieldsContainer, type);
+  const option = document.querySelector(`option[value="${employeeData.departmentId}"]`);
+  if (option)
+    option.selected = true;
 }
 
 const addPositionComboBoxWithValue = (inputFieldsContainer, type, employeeData) => {
-  const inputDiv = document.createElement("div");
-  inputDiv.className = "form-group";
-
-  const formLabel = document.createElement("label");
-  formLabel.for = "position";
-  formLabel.textContent = DETAIL_COLUMN_NAME[type].POSITION;
-
-  const formSelect = document.createElement("select");
-  formSelect.id = "position";
-  formSelect.name = "position";
-
-  positions.forEach(position => {
-    const option = document.createElement("option");
-    option.value = position.value;
-    option.textContent = position.label;
-    if (employeeData.position === position.value)
-      option.selected = true;
-    formSelect.appendChild(option);
-  })
-
-  inputDiv.appendChild(formLabel);
-  inputDiv.appendChild(formSelect);
-
-  inputFieldsContainer.appendChild(inputDiv);
+  addPositionComboBox(inputFieldsContainer, type);
+  const option = document.querySelector(`option[value="${employeeData.position}"]`);
+  if (option)
+    option.selected = true;
 }
 
 const createFormWithValue = (form, type, employeeData) => {
-  const formDiv = document.createElement("div");
-  formDiv.className = "form-group";
-  const formLabel = document.createElement("label");
-  formLabel.for = form.for;
-  formLabel.textContent = DETAIL_COLUMN_NAME[type][form.label];
-  formDiv.appendChild(formLabel);
-  let formInput = document.createElement("input");
-  formInput.type = form.type;
-  formInput.id = form.id;
-  formInput.name = form.name;
-  formInput.value = employeeData[form.name];
-  formInput.placeholder = `${DETAIL_COLUMN_NAME[type][form.placeholder]}을(를) 입력하세요`;
-  formDiv.appendChild(formInput);
+  const formDiv = createForm(form, type);
+
+  const input = Array.from(formDiv.children).filter(child => child.id === form.id)[0];
+  if (input)
+    input.value = employeeData[form.name];
   return formDiv;
 }
 
 const addDynamicSectionWithValue = (container, sectionTitle, sectionId, employeeData) => {
-  const sectionDiv = document.createElement("div");
-  sectionDiv.id = `${sectionId}Container`;
-  sectionDiv.className = "dynamic-section";
-
-  const headerDiv = document.createElement("div");
-  headerDiv.className = "section-header";
-
-  const sectionLabel = document.createElement("label");
-  sectionLabel.textContent = sectionTitle;
-
-  const addButton = document.createElement("button");
-  addButton.textContent = "+";
-  addButton.className = "add-button";
-
-  headerDiv.appendChild(sectionLabel);
-
-  addButton.addEventListener("click", () => addFamilyField(sectionDiv, sectionId));
-  headerDiv.appendChild(addButton);
-
-  sectionDiv.appendChild(headerDiv);
-
-  container.appendChild(sectionDiv);
+  addDynamicSection(container, sectionTitle, sectionId);
+  const sectionDiv = document.getElementById(`${sectionId}Container`);
 
   employeeData.familyList.forEach(family => {
     addFamilyFieldWithValue(sectionDiv, family);
