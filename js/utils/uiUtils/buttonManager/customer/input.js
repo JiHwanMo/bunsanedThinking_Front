@@ -5,6 +5,7 @@ import {
   fetchPayInsurancefee,
   fetchReceiveInsurance, fetchReportAccident
 } from "../../../apiUtils/apiDocumentation/customer/customer.js";
+import {KEY, STRING_EMPTY, ZERO} from "../../../../../config/common.js";
 
 const getInputForm = () => {
   return INPUT_FORM[sessionStorage.getItem("selectedButtonType")];
@@ -12,7 +13,7 @@ const getInputForm = () => {
 
 const applyEndorsement = async () => {
   const inputForm = getInputForm();
-  const contractId = sessionStorage.getItem("selectedDataId");
+  const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   const depositDate = document.getElementById(inputForm.DEPOSIT_DATE.id).value;
   if (depositDate === "") alert(inputForm.DEPOSIT_DATE.exception);
   else {
@@ -34,7 +35,7 @@ const getPayInsuranceFeeDTO = (contractId, depositMoney, depositPath) => {
 
 const payInsuranceFee = async () => {
   const inputForm = getInputForm();
-  const contractId = sessionStorage.getItem("selectedDataId");
+  const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   const depositPath = document.getElementById(inputForm.DEPOSIT_PATH.id).selectedIndex;
   const depositMoney = document.getElementById(inputForm.DEPOSIT_MONEY.id).value;
   if (depositPath === 0) alert(inputForm.DEPOSIT_PATH.exception);
@@ -63,13 +64,13 @@ const getReceiveInsuranceDTO = (contractId, medicalCertificate,
 const receiveInsurance = async () => {
   // 만들어두기만 함 - 서버 연동은 아직 미실시
   const inputForm = getInputForm();
-  const contractId = sessionStorage.getItem("selectedDataId");
+  const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   const medicalCertificate = document.getElementById(inputForm.MEDICAL_CERTIFICATE.id).value;
   const receipt = document.getElementById(inputForm.RECEIPT.id).value;
   const residentRegistrationCard = document.getElementById(inputForm.RESIDENT_REGISTRATION_CARD.id).value;
-  if (medicalCertificate === "") alert(inputForm.MEDICAL_CERTIFICATE.exception);
-  else if (receipt === "") alert(inputForm.RECEIPT.exception);
-  else if (residentRegistrationCard === "") alert(inputForm.RESIDENT_REGISTRATION_CARD.exception);
+  if (medicalCertificate === STRING_EMPTY) alert(inputForm.MEDICAL_CERTIFICATE.exception);
+  else if (receipt === STRING_EMPTY) alert(inputForm.RECEIPT.exception);
+  else if (residentRegistrationCard === STRING_EMPTY) alert(inputForm.RESIDENT_REGISTRATION_CARD.exception);
   else {
     const receiveInsuranceDTO = getReceiveInsuranceDTO(contractId,
       medicalCertificate, receipt, residentRegistrationCard);
@@ -92,8 +93,8 @@ const getAskInsuranceCounsel = (id, insuranceId, counselDate) => {
 
 const askInsuranceCounsel = async () => {
   const inputForm = getInputForm();
-  const insuranceId = sessionStorage.getItem("selectedDataId");
-  const id = sessionStorage.getItem("id");
+  const insuranceId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
+  const id = sessionStorage.getItem(KEY.LOGIN_ID);
   const counselDate = document.getElementById(inputForm.COUNSEL_DATE.id).value;
   if (counselDate === "") alert(inputForm.COUNSEL_DATE.exception); // 여기 형식은 다시 찾아봐야 함
   else {
@@ -118,7 +119,7 @@ const getReportAccident = (id, type, accidentDate, location) => {
 
 const reportAccident = async () => {
   const inputForm = getInputForm();
-  const id = sessionStorage.getItem("id");
+  const id = sessionStorage.getItem(KEY.LOGIN_ID);
   const type = document.getElementById(inputForm.TYPE.id).selectedIndex;
   const accidentDate = document.getElementById(inputForm.ACCIDENT_DATE.id).value;
   const location = document.getElementById(inputForm.LOCATION.id).value;
@@ -146,13 +147,13 @@ const getComplainDTO = (id, type, complaintTitle, content) => {
 
 const complain = async () => {
   const inputForm = getInputForm();
-  const id = sessionStorage.getItem("id");
+  const id = sessionStorage.getItem(KEY.LOGIN_ID);
   const type = document.getElementById(inputForm.TYPE.id).selectedIndex;
   const complaintTitle = document.getElementById(inputForm.COMPLAINT_TITLE.id).value;
   const content = document.getElementById(inputForm.CONTENT.id).value;
-  if (type === 0) alert(inputForm.TYPE.exception);
-  else if (complaintTitle === "") alert(inputForm.COMPLAINT_TITLE.exception);
-  else if (content === "") alert(inputForm.CONTENT.exception);
+  if (type === ZERO) alert(inputForm.TYPE.exception);
+  else if (complaintTitle === STRING_EMPTY) alert(inputForm.COMPLAINT_TITLE.exception);
+  else if (content === STRING_EMPTY) alert(inputForm.CONTENT.exception);
   else {
     const complainDTO = getComplainDTO(id, type, complaintTitle, content);
     await fetchComplain(complainDTO);
@@ -194,6 +195,6 @@ const customerTaskMapper = {
 }
 
 export const renderButton = () => {
-  const type = sessionStorage.getItem("selectedButtonType");
+  const type = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
   initialButtons(BUTTON.TASK.CUSTOMER.INPUT[type], customerTaskMapper[type]);
 }

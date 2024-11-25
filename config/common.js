@@ -1,5 +1,6 @@
 export const MESSAGES = {
   GREETING: "님 안녕하세요.",
+  WELCOME: "님, 환영합니다!",
   PLACE_HOLDER: {
     INPUT: "을(를) 입력하세요",
     SEARCH: "검색어 입력"
@@ -49,12 +50,18 @@ export const ELEMENT_ID = {
   TITLE: "title",
   DETAILS_TABLE: "detailsTable",
   SEARCH_INPUT: "searchInput",
-  TABLE: "tableHead"
+  SEARCH_BUTTON: "searchButton",
+  POST: "post",
+  TABLE: "tableHead",
+  INPUT_FIELDS_CONTAINER: "inputFieldsContainer",
+  BUTTON_CONTAINER: "buttonContainer"
 }
 
 export const CLASS = {
   FORM_GROUP: "form-group",
-  COMBO_BOX: "comboBox"
+  POST_BUTTON: "post-button",
+  COMBO_BOX: "comboBox",
+  GREETING: "greeting"
 }
 
 export const LOCATION = {
@@ -72,5 +79,14 @@ export const INPUT_TYPE = {
 
 export const EVENT = {
   CLICK: "click",
-  DOUBLE_CLICK: "dblclick"
+  DOUBLE_CLICK: "dblclick",
+  SUBMIT: "submit"
 }
+
+export const CLASS_SELECTOR = {
+  CONTAINER: ".container",
+  HEADER_LINE: ".header-line"
+}
+
+export const STRING_EMPTY = "";
+export const ZERO = 0;

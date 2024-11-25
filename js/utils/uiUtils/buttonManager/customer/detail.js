@@ -5,10 +5,11 @@ import {
   fetchApplyInsuranceRevivalById, fetchApplyInsuranceTerminationById, fetchBuyInsurance, fetchLoan
 } from "../../../apiUtils/apiDocumentation/customer/customer.js";
 import {buttonType} from "../../tableRenderer/customer/input.js";
+import {KEY, LOCATION} from "../../../../../config/common.js";
 
 
 const applyRecontract = async () => { // 팝업
-  const contractId = sessionStorage.getItem("selectedDataId");
+  const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchApplyInsuranceRecontractById(contractId);
   alert("재계약 신청이 완료되었습니다");
   window.history.back();
@@ -16,7 +17,7 @@ const applyRecontract = async () => { // 팝업
 }
 
 const applyRevival = async () => { // 팝업
-  const contractId = sessionStorage.getItem("selectedDataId");
+  const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchApplyInsuranceRevivalById(contractId);
   alert("부활 신청이 완료되었습니다");
   window.history.back();
@@ -24,7 +25,7 @@ const applyRevival = async () => { // 팝업
 }
 
 const applyTermination = async () => { // 팝업
-  const contractId = sessionStorage.getItem("selectedDataId");
+  const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchApplyInsuranceTerminationById(contractId);
   alert("해지 신청이 완료되었습니다");
   window.history.back();
@@ -32,29 +33,29 @@ const applyTermination = async () => { // 팝업
 }
 
 const applyEndorsement = () => { // 입력
-  sessionStorage.setItem("selectedButtonType", buttonType.APPLY_ENDORSEMENT);
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.APPLY_ENDORSEMENT);
+  window.location.href = LOCATION.INPUT;
 }
 
 const payInsuranceFee = () => { // 입력
-  sessionStorage.setItem("selectedButtonType", buttonType.PAY_INSURANCE_FEE);
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.PAY_INSURANCE_FEE);
+  window.location.href = LOCATION.INPUT;
 }
 
 const receiveInsurance = () => { // 입력 - 얜 모르것다
-  sessionStorage.setItem("selectedButtonType", buttonType.RECEIVE_INSURANCE);
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.RECEIVE_INSURANCE);
+  window.location.href = LOCATION.INPUT;
 }
 
 const askInsuranceCounsel = async () => { // 입력
-  sessionStorage.setItem("selectedButtonType", buttonType.ASK_INSURANCE_COUNSEL);
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.ASK_INSURANCE_COUNSEL);
+  window.location.href = LOCATION.INPUT;
 }
 
 const buyInsurance = async () => { // 팝업
   const buyInsuranceDTO = {
-    insuranceId: sessionStorage.getItem("selectedDataId"),
-    customerId: sessionStorage.getItem("id")
+    insuranceId: sessionStorage.getItem(KEY.SELECTED_DATA_ID),
+    customerId: sessionStorage.getItem(KEY.LOGIN_ID)
   };
   await fetchBuyInsurance(buyInsuranceDTO);
   alert("보험 계약 신청이 완료되었습니다");
@@ -64,8 +65,8 @@ const buyInsurance = async () => { // 팝업
 
 const loan = async () => { // 팝업
   const loanDTO = {
-    loanId: sessionStorage.getItem("selectedDataId"),
-    customerId: sessionStorage.getItem("id")
+    loanId: sessionStorage.getItem(KEY.SELECTED_DATA_ID),
+    customerId: sessionStorage.getItem(KEY.LOGIN_ID)
   }
   await fetchLoan(loanDTO);
   alert("대출 신청이 완료되었습니다");
@@ -97,6 +98,6 @@ const customerTaskMapper = {
 }
 
 export const renderButtons = () => {
-  const type = sessionStorage.getItem("currentType");
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   initialButtons(BUTTON.TASK.CUSTOMER[type], customerTaskMapper[type]);
 }
