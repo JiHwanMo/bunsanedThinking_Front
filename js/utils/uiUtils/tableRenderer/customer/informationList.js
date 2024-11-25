@@ -38,9 +38,9 @@ const contractRow = (dto) => {
     <td>${dto.insuranceId}</td>
     <td>${dto.ageRange}</td>
     <td>${dto.monthlyPremium}</td>
-    <td>${dto.expirationDate}</td>
+    <td>${dto.expirationDate == null ? "" : dto.expirationDate}</td>
     <td>${dto.date}</td>
-    <td>${dto.paymentDate}</td>
+    <td>${dto.paymentDate == null ? "" : dto.paymentDate}</td>
     <td>${dto.status}</td>
   `;
 }
@@ -62,7 +62,7 @@ const complaintRow = (dto) => {
     <td>${dto.type}</td>
     <td>${dto.title}</td>
     <td>${dto.postDate}</td>
-    <td>${dto.processingDate}</td>
+    <td>${dto.processingDate == null ? "" : dto.processingDate}</td>
     <td>${dto.status}</td>
   `;
 }

@@ -11,7 +11,7 @@ export const buttonType = {
   ADD_COMPLAINT: "ADD_COMPLAINT"
 }
 
-export const renderInput = async () => {
+export const renderInput = () => {
   const title = document.getElementById("title");
   const type = sessionStorage.getItem("currentType");
   let titleContent = BUTTON.TASK.CUSTOMER.HOME[type];

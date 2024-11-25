@@ -126,7 +126,8 @@ export const INPUT_FORM = {
       id: "name",
       name: "name",
       value: "name",
-      placeholder: "NAME"
+      placeholder: "NAME",
+      exception: "업체 이름을 입력해주세요"
     },
     PHONE_NUMBER: {
       isCombo: false,
@@ -136,13 +137,15 @@ export const INPUT_FORM = {
       id: "phoneNumber",
       name: "phoneNumber",
       value: "phoneNumber",
-      placeholder: "PHONE_NUMBER"
+      placeholder: "PHONE_NUMBER",
+      exception: "업체 핸드폰 번호를 입력해주세요"
     },
     TYPE: {
       isCombo: true,
       for: "type",
       label: "TYPE",
-      id: "type"
+      id: "type",
+      exception: "업체 유형은 둘 중에서 선택해주세요"
     },
     HEAD_NAME: {
       isCombo: false,
@@ -152,7 +155,8 @@ export const INPUT_FORM = {
       id: "headName",
       name: "headName",
       value: "headName",
-      placeholder: "HEAD_NAME"
+      placeholder: "HEAD_NAME",
+      exception: "업체 대표 이름을 입력해주세요"
     },
     HEAD_PHONE_NUMBER: {
       isCombo: false,
@@ -162,7 +166,8 @@ export const INPUT_FORM = {
       id: "headPhoneNumber",
       name: "headPhoneNumber",
       value: "headPhoneNumber",
-      placeholder: "HEAD_PHONE_NUMBER"
+      placeholder: "HEAD_PHONE_NUMBER",
+      exception: "업체 대표 핸드폰 번호를 입력해주세요"
     }
   },
   UPDATE: {
@@ -170,7 +175,8 @@ export const INPUT_FORM = {
       isCombo: true,
       for: "type",
       label: "TYPE",
-      id: "type"
+      id: "type",
+      exception: "수정 옵션을 선택해주세요"
     },
     INPUT: {
       isCombo: false,

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input</title>
+  <link rel="stylesheet" href="../../css/input.css">
+</head>
+<body>
+
+<div class="container">
+  <h3 id="title"></h3>
+
+  <!-- 콤보박스 컨테이너 -->
+  <div id="comboBoxContainer"></div>
+
+  <!-- 입력란 컨테이너 -->
+  <div id="inputFieldsContainer"></div>
+
+  <!-- 버튼 컨테이너 -->
+  <div class="button-container" id="buttonContainer"></div>
+</div>
+
+<script type="module">
+  import {renderInput} from "../../js/utils/uiUtils/tableRenderer/register.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderInput();
+  });
+</script>
+</body>
+</html>
