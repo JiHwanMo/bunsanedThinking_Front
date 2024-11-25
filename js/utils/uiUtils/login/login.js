@@ -1,6 +1,7 @@
 import { fetchloginCustomer } from '../../apiUtils/apiDocumentation/authentication.js';
 import { fetchloginEmployee } from '../../apiUtils/apiDocumentation/authentication.js';
 import { fetchloginPartnerCompany } from '../../apiUtils/apiDocumentation/authentication.js';
+import {KEY} from "../../../../config/common.js";
 
 const link = {
   CUSTOMER: "../customer/home.html",
@@ -22,7 +23,7 @@ const link = {
 
 const toNextPage = (user, id) => {
   alert(`${user.name}님, 환영합니다!`);
-  sessionStorage.setItem("id", id);
+  sessionStorage.setItem(KEY.LOGIN_ID, id);
   window.location.href = link[user.type];
 }
 
