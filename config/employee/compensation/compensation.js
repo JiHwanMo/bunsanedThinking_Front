@@ -140,12 +140,14 @@ export const INPUT_FORM  = {
     type: "number",
     id: "money",
     name: "money",
-    placeholder: "MONEY"
+    placeholder: "MONEY",
+    exception: "금액을 다시 입력해 주세요"
   },
   PAYMENTTYPE: {
     isCombo: true,
     for: "paymentType",
     label: "PAYMENTTYPE",
-    id: "paymentType"
+    id: "paymentType",
+    exception: "현금 혹은 계좌이체 중에서 선택해주세요"
   }
 }

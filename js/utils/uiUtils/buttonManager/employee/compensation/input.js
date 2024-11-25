@@ -24,8 +24,8 @@ const getInsuranceMoneyDTO = (money, index) => {
 const requestCompensation = async () => {
   const money = document.getElementById(INPUT_FORM.MONEY.id).value;
   const index = document.getElementById(INPUT_FORM.PAYMENTTYPE.id).selectedIndex;
-  if (money.length === 0 || money <= 0) alert("금액을 다시 입력해 주세요");
-  else if (index === 0) alert("현금 혹은 계좌이체 중에서 선택해주세요");
+  if (money.length === 0 || money <= 0) alert(INPUT_FORM.MONEY.exception);
+  else if (index === 0) alert(INPUT_FORM.PAYMENTTYPE.exception);
   else {
     await fetchRequestCompensation(getCompensationDTO(money, index));
     alert("요청이 완료되었습니다");
@@ -38,8 +38,8 @@ const requestCompensation = async () => {
 const requestInsuranceMoney = async () => {
   const money = document.getElementById(INPUT_FORM.MONEY.id).value;
   const index = document.getElementById(INPUT_FORM.PAYMENTTYPE.id).selectedIndex;
-  if (money.length === 0 || money <= 0) alert("금액을 다시 입력해 주세요");
-  else if (index === 0) alert("현금 혹은 계좌이체 중에서 선택해주세요");
+  if (money.length === 0 || money <= 0) alert(INPUT_FORM.MONEY.exception);
+  else if (index === 0) alert(INPUT_FORM.PAYMENTTYPE.exception);
   else {
     await fetchRequestInsuranceMoney(getInsuranceMoneyDTO(money, index));
     alert("요청이 완료되었습니다");
