@@ -20,16 +20,15 @@ import {
   TAG
 } from "../../../../../../config/common.js";
 import {
-  CLASS_LIST,
   COLUMN_NAME,
   COMBO_LIST,
-  COMBOBOX
+  COMBOBOX, INFORMATION_TYPE
 } from "../../../../../../config/employee/customerSupport/customerSupport.js";
 import {TITLE} from "../../../../../../config/employee/customerSupport/customerSupport.js";
 
 export const informationType = {
-  HANDLE_REPORT: "HANDLE_REPORT",
-  HANDLE_COMPLAINT: "HANDLE_COMPLAINT"
+  HANDLE_REPORT: INFORMATION_TYPE.HANDLE_REPORT,
+  HANDLE_COMPLAINT: INFORMATION_TYPE.HANDLE_COMPLAINT
 }
 const complaintRow = (dto) => {
   return `

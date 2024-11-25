@@ -125,3 +125,8 @@ export const TITLE = {
 export const COMBO_LIST= {
   ALL: "all"
 }
+
+export const INFORMATION_TYPE= {
+  HANDLE_REPORT: "HANDLE_REPORT",
+  HANDLE_COMPLAINT: "HANDLE_COMPLAINT"
+}
