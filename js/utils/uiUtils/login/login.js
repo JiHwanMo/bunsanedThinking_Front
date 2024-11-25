@@ -1,7 +1,7 @@
 import { fetchloginCustomer } from '../../apiUtils/apiDocumentation/authentication.js';
 import { fetchloginEmployee } from '../../apiUtils/apiDocumentation/authentication.js';
 import { fetchloginPartnerCompany } from '../../apiUtils/apiDocumentation/authentication.js';
-import {EVENT, KEY, MESSAGES} from "../../../../config/common.js";
+import {EVENT, KEY, MESSAGES, ZERO} from "../../../../config/common.js";
 
 const link = {
   CUSTOMER: "../customer/home.html",
@@ -33,7 +33,7 @@ const submit = async (event) => {
   const id = document.getElementById(KEY.LOGIN_ID).value;
 
   // 간단한 유효성 검사
-  if (id.trim() === "") {
+  if (id.trim() === ZERO) {
     alert("아이디를 입력해주세요.");
     return;
   }

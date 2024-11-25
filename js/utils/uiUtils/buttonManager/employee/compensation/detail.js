@@ -1,12 +1,13 @@
 import {initialButtons} from "../../../common/buttonUtils.js";
 import {BUTTON} from "../../../../../../config/employee/compensation/compensation.js";
+import {KEY, LOCATION} from "../../../../../../config/common.js";
 
 const requestCompensation = () => {
-  window.location.href = "input.html";
+  window.location.href = LOCATION.INPUT;
 }
 
 const requestInsuranceMoney = () => {
-  window.location.href = "input.html";
+  window.location.href = LOCATION.INPUT;
 }
 
 const cancel = () => {
@@ -25,6 +26,6 @@ const compensationTaskMapper = {
 }
 
 export const renderButtons = () => {
-  const type = sessionStorage.getItem("currentType");
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   initialButtons(BUTTON.TASK.COMPENSATION[type], compensationTaskMapper[type]);
 }

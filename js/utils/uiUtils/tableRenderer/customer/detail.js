@@ -4,7 +4,7 @@ import {
   fetchGetLoanByProductId
 } from "../../../apiUtils/apiDocumentation/customer/customer.js";
 import {renderButtons} from "../../buttonManager/customer/detail.js";
-import {ELEMENT_ID, KEY, TAG} from "../../../../../config/common.js";
+import {ELEMENT_ID, KEY, STRING_EMPTY, TAG} from "../../../../../config/common.js";
 
 const insuranceTypeStr = {
   Disease: "질병",
@@ -46,7 +46,7 @@ const vehicleTypeStr = {
 }
 
 const automobileDetail = (detail, data) => {
-  let serviceStr = "";
+  let serviceStr = STRING_EMPTY;
   for (const service of data.serviceList)
     serviceStr += serviceTypeStr[service] + " ";
   detail.push(

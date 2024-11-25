@@ -2,6 +2,7 @@ import {
   fetchGetPartnerCompanyDetailById
 } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import {renderButtons} from "../../../buttonManager/employee/compensationPlanning/detail.js";
+import {ELEMENT_ID, KEY, TAG} from "../../../../../../config/common.js";
 
 const partnerCompanyType = [
   "DUMY",
@@ -33,8 +34,8 @@ const context = {
 
 export const renderDetails = async () => {
   // 세션에서 데이터 가져오기
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const type = sessionStorage.getItem("currentType");
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
@@ -45,26 +46,26 @@ export const renderDetails = async () => {
 }
 
 const renderDetailsTable = (data) => {
-  const detailsTable = document.getElementById("detailsTable");
+  const detailsTable = document.getElementById(ELEMENT_ID.DETAILS_TABLE);
 
-  const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
+  const details = context[sessionStorage.getItem(KEY.CURRENT_TYPE)].detailGetter(data);
 
   // 테이블에 각 정보를 추가
   details.forEach(detail => {
-    const row = document.createElement("tr");
+    const row = document.createElement(TAG.TR);
     if (Array.isArray(detail.value)) {
-      const tableHead = document.createElement("th");
+      const tableHead = document.createElement(TAG.TH);
       tableHead.textContent = detail.label;
 
-      const tableData = document.createElement("td");
+      const tableData = document.createElement(TAG.TD);
       detail.value.forEach(listDetail => {
-        const nestedTable = document.createElement("table");
+        const nestedTable = document.createElement(TAG.TABLE);
         listDetail.forEach(item => {
-          const nestedRow = document.createElement("tr")
-          const labelCell = document.createElement("th");
+          const nestedRow = document.createElement(TAG.TR);
+          const labelCell = document.createElement(TAG.TH);
           labelCell.textContent = item.label;
 
-          const valueCell = document.createElement("td");
+          const valueCell = document.createElement(TAG.TD);
           valueCell.textContent = item.value;
 
           nestedRow.appendChild(labelCell);
@@ -77,15 +78,15 @@ const renderDetailsTable = (data) => {
       row.appendChild(tableHead);
       row.appendChild(tableData);
     } else {
-      const labelCell = document.createElement("th");
+      const labelCell = document.createElement(TAG.TH);
       labelCell.textContent = detail.label;
 
-      const valueCell = document.createElement("td");
+      const valueCell = document.createElement(TAG.TD);
       valueCell.textContent = detail.value;
 
       row.appendChild(labelCell);
       row.appendChild(valueCell);
     }
-    detailsTable.querySelector("tbody").appendChild(row);
+    detailsTable.querySelector(TAG.TBODY).appendChild(row);
   });
 }

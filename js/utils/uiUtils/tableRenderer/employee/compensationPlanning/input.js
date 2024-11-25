@@ -7,6 +7,7 @@ import {
   fetchGetPartnerCompanyDetailById
 } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import {renderButton} from "../../../buttonManager/employee/compensationPlanning/input.js";
+import {CLASS, ELEMENT_ID, KEY, MESSAGES, STRING_EMPTY, TAG} from "../../../../../../config/common.js";
 
 export const inputType = {
   POST: "POST",
@@ -15,11 +16,11 @@ export const inputType = {
 }
 
 export const renderInput = async () => {
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
+  const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
   if (selectedButtonType === "POST") {
     renderInputFields();
   } else if (selectedButtonType === "UPDATE") {
-    const dataId = sessionStorage.getItem("selectedDataId");
+    const dataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
     const data = await fetchGetPartnerCompanyDetailById(dataId);
     renderInputFieldsWithValues(data);
   } else if (selectedButtonType === "EVALUATE") {}
@@ -27,45 +28,45 @@ export const renderInput = async () => {
 }
 
 const createForm = (form) => {
-  const type = sessionStorage.getItem("currentType");
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
-  const formDiv = document.createElement("div");
-  formDiv.className = "form-group";
-  const formLabel = document.createElement("label");
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
+  const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
+  const formDiv = document.createElement(TAG.DIV);
+  formDiv.className = CLASS.FORM_GROUP;
+  const formLabel = document.createElement(TAG.LABEL);
   formLabel.for = form.for;
   formLabel.textContent = INPUT_LABEL[type][selectedButtonType][form.label];
   formDiv.appendChild(formLabel);
   let formInput;
   if (form.isCombo) {
-    formInput = document.createElement("select");
-    const optionTypes = COMBOBOX[sessionStorage.getItem("currentType")].INPUT[selectedButtonType];
+    formInput = document.createElement(TAG.SELECT);
+    const optionTypes = COMBOBOX[sessionStorage.getItem(KEY.CURRENT_TYPE)].INPUT[selectedButtonType];
     formInput.id = form.id;
     optionTypes.forEach(optionType => {
-      const option = document.createElement("option");
+      const option = document.createElement(TAG.OPTION);
       option.value = optionType.value;
       option.textContent = optionType.label;
       formInput.appendChild(option);
     });
   } else {
-    formInput = document.createElement("input");
+    formInput = document.createElement(TAG.INPUT);
     formInput.type = form.type;
     formInput.id = form.id;
     formInput.name = form.name;
-    formInput.placeholder = `${INPUT_LABEL[type][selectedButtonType][form.placeholder]} 을(를) 입력하세요`;
+    formInput.placeholder = `${INPUT_LABEL[type][selectedButtonType][form.placeholder]} ${MESSAGES.PLACE_HOLDER.INPUT}`;
   }
   formDiv.appendChild(formInput);
   return formDiv;
 }
 
 const renderInputFields = () => {
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
+  const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
   while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
   Object.entries(INPUT_FORM[selectedButtonType]).forEach(([key, form]) => inputFieldsContainer.appendChild(createForm(form)));
 };
 const renderInputFieldsWithValues = (data) => {
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
+  const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
   while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
   Object.entries(INPUT_FORM[selectedButtonType]).forEach(([key, form]) => {
     inputFieldsContainer.appendChild(createForm(form));
@@ -76,11 +77,11 @@ const renderInputFieldsWithValues = (data) => {
 const changeUpdateOption = (select, data, selectedButtonType) => {
   const index = select.selectedIndex;
   const input = document.getElementById(INPUT_FORM[selectedButtonType].INPUT.id);
-  input.placeholder = "수정 정보 을(를) 입력하세요";
+  input.placeholder = "수정 정보 "+MESSAGES.PLACE_HOLDER.INPUT;
   // 인덱스에 맞춰서 input 라벨 및 입력창 변경
   switch (index) {
     case 0:
-      input.value = "";
+      input.value = STRING_EMPTY;
       break;
     case 1:
       input.value = data.name;

@@ -4,10 +4,11 @@ import {inputType} from "../../../tableRenderer/employee/compensationPlanning/in
 import {
   fetchDeletePartnerCompany
 } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
+import {KEY, LOCATION} from "../../../../../../config/common.js";
 
 const evaluate = () => {
-  sessionStorage.setItem("selectedButtonType", inputType.EVALUATE);
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, inputType.EVALUATE);
+  window.location.href = LOCATION.INPUT;
 }
 
 const cancel = () => {
@@ -15,12 +16,12 @@ const cancel = () => {
 }
 
 const updatePartnerCompany = () => {
-  sessionStorage.setItem("selectedButtonType", inputType.UPDATE);
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, inputType.UPDATE);
+  window.location.href = LOCATION.INPUT;
 }
 
 const deletePartnerCompany = async () => {
-  const id = sessionStorage.getItem("selectedDataId");
+  const id = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchDeletePartnerCompany(id);
   alert("삭제되었습니다.");
   window.history.back();
@@ -39,6 +40,6 @@ const compensationPlanningTaskMapper = {
 }
 
 export const renderButtons = () => {
-  const type = sessionStorage.getItem("currentType");
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   initialButtons(BUTTON.TASK.COMPENSATIONPLANNING[type], compensationPlanningTaskMapper[type]);
 }
