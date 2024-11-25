@@ -289,6 +289,14 @@ const addFamilyField = (sectionDiv) => {
 
   const familyCount = document.querySelectorAll('.radio-group').length;
 
+  // 삭제 버튼 추가
+  const removeButton = document.createElement("button");
+  removeButton.textContent = "-";
+  removeButton.className = "remove-button";
+  removeButton.addEventListener("click", () => {
+    sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
+  });
+
   familyForm.forEach((field) => {
     const formLabel = document.createElement("label");
     formLabel.for = `${field.name}`;
@@ -377,6 +385,14 @@ const addFamilyFieldWithValue = (sectionDiv, familyData) => {
 
   const type = getType();
   let familyCount = document.querySelectorAll('.radio-group').length;
+
+  // 삭제 버튼 추가
+  const removeButton = document.createElement("button");
+  removeButton.textContent = "-";
+  removeButton.className = "remove-button";
+  removeButton.addEventListener("click", () => {
+    sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
+  });
 
   addFamilyIdLabel(inputDiv, familyData, familyCount);
   familyForm.forEach((field) => {
