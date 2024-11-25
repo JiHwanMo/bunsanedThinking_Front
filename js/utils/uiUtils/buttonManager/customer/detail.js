@@ -1,75 +1,79 @@
 import {initialButtons} from "../../common/buttonUtils.js";
-import {BUTTON} from "../../../../../config/customer/customer.js";
+import {ALERT, BUTTON, BUTTON_TYPE} from "../../../../../config/customer/customer.js";
 import {
   fetchApplyInsuranceRecontractById,
   fetchApplyInsuranceRevivalById, fetchApplyInsuranceTerminationById, fetchBuyInsurance, fetchLoan
 } from "../../../apiUtils/apiDocumentation/customer/customer.js";
-import {buttonType} from "../../tableRenderer/customer/input.js";
 import {KEY, LOCATION} from "../../../../../config/common.js";
 
 
-const applyRecontract = async () => { // 팝업
+const applyRecontract = async () => {
+  if (!confirm(ALERT.CONFIRM.APPLY_RECONTRACT)) return;
   const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchApplyInsuranceRecontractById(contractId);
-  alert("재계약 신청이 완료되었습니다");
+  alert(ALERT.OK.APPLY_RECONTRACT);
   window.history.back();
   window.history.back();
 }
 
-const applyRevival = async () => { // 팝업
+const applyRevival = async () => {
+  if (!confirm(ALERT.CONFIRM.APPLY_REVIVAL)) return;
   const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchApplyInsuranceRevivalById(contractId);
-  alert("부활 신청이 완료되었습니다");
+  alert(ALERT.OK.APPLY_REVIVAL);
   window.history.back();
   window.history.back();
 }
 
-const applyTermination = async () => { // 팝업
+const applyTermination = async () => {
+  if (!confirm(ALERT.CONFIRM.APPLY_TERMINATION)) return;
   const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchApplyInsuranceTerminationById(contractId);
-  alert("해지 신청이 완료되었습니다");
+  alert(ALERT.OK.APPLY_TERMINATION);
   window.history.back();
   window.history.back();
 }
 
-const applyEndorsement = () => { // 입력
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.APPLY_ENDORSEMENT);
+const applyEndorsement = () => {
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, BUTTON_TYPE.APPLY_ENDORSEMENT);
   window.location.href = LOCATION.INPUT;
 }
 
-const payInsuranceFee = () => { // 입력
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.PAY_INSURANCE_FEE);
+const payInsuranceFee = () => {
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, BUTTON_TYPE.PAY_INSURANCE_FEE);
   window.location.href = LOCATION.INPUT;
 }
 
-const receiveInsurance = () => { // 입력 - 얜 모르것다
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.RECEIVE_INSURANCE);
+const receiveInsurance = () => { // 얜 모르것다
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, BUTTON_TYPE.RECEIVE_INSURANCE);
   window.location.href = LOCATION.INPUT;
 }
 
-const askInsuranceCounsel = async () => { // 입력
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.ASK_INSURANCE_COUNSEL);
+const askInsuranceCounsel = async () => {
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, BUTTON_TYPE.ASK_INSURANCE_COUNSEL);
   window.location.href = LOCATION.INPUT;
 }
 
-const buyInsurance = async () => { // 팝업
+const buyInsurance = async () => {
+  if (!confirm(ALERT.CONFIRM.BUY_INSURANCE)) return;
   const buyInsuranceDTO = {
     insuranceId: sessionStorage.getItem(KEY.SELECTED_DATA_ID),
     customerId: sessionStorage.getItem(KEY.LOGIN_ID)
   };
   await fetchBuyInsurance(buyInsuranceDTO);
-  alert("보험 계약 신청이 완료되었습니다");
+  alert(ALERT.OK.BUY_INSURANCE);
   window.history.back();
   window.history.back();
 }
 
-const loan = async () => { // 팝업
+const loan = async () => {
+  if (!confirm(ALERT.CONFIRM.LOAN)) return;
   const loanDTO = {
     loanId: sessionStorage.getItem(KEY.SELECTED_DATA_ID),
     customerId: sessionStorage.getItem(KEY.LOGIN_ID)
   }
   await fetchLoan(loanDTO);
-  alert("대출 신청이 완료되었습니다");
+  alert(ALERT.OK.LOAN);
   window.history.back();
   window.history.back();
 }

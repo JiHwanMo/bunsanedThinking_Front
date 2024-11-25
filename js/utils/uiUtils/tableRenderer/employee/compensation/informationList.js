@@ -17,14 +17,10 @@ import {
   TAG,
   ZERO
 } from '../../../../../../config/common.js';
-import { COMBOBOX } from '../../../../../../config/employee/compensation/compensation.js';
+import {COMBOBOX, COMBOLIST_FETCH_ALL} from '../../../../../../config/employee/compensation/compensation.js';
 import { TABLE_TITLE } from '../../../../../../config/employee/compensation/compensation.js';
 import { COLUMN_NAME } from '../../../../../../config/employee/compensation/compensation.js';
 
-export const informationType = {
-  REQUEST_COMPENSATION: "REQUEST_COMPENSATION",
-  REQUEST_INSURANCE_MONEY: "REQUEST_INSURANCE_MONEY"
-}
 const accidentRow = (dto) => {
   return `
     <td>${dto.id}</td>
@@ -115,11 +111,11 @@ const setInput = () => {
 const initTableByInput = async (id, type) => { // 추가
   const tableBody = document.getElementById(KEY.LIST);
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
-  if (id.length > 0) {
+  if (id.length > ZERO) {
     const item = await context[type].listFetchById(id);
     setOneRow(item, type);
   } else {
-    const list = await context[type].comboListFetch["all"]();
+    const list = await context[type].comboListFetch[COMBOLIST_FETCH_ALL]();
     if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
     setTableBody();
   }
@@ -139,7 +135,7 @@ const setButton = () => {
   return button;
 }
 
-const initTableBySelect = async (id, type) => { // 추가
+const initTableBySelect = async (id, type) => {
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
   const list = await context[type].comboListFetch[selectedOption.value]();
@@ -154,10 +150,10 @@ const initTableBySelect = async (id, type) => { // 추가
 const setSearchBar = () => {
   const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
-  if (COMBOBOX[type].isCombo) { // 수정
+  if (COMBOBOX[type].isCombo) {
     const select = setComboBox();
-    container.appendChild(select); // 수정
-    select.onchange = () => initTableBySelect(select.id, type); // 추가
+    container.appendChild(select);
+    select.onchange = () => initTableBySelect(select.id, type);
   }
   container.appendChild(setInput());
   container.appendChild(setButton());
@@ -179,7 +175,6 @@ const setOneRow = (item, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   const row = document.createElement(TAG.TR);
   row.innerHTML = context[type].rowGetter(item);
-  // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
       window.selectedRow.classList.remove(CLASS.SELECTED);
@@ -188,9 +183,7 @@ const setOneRow = (item, type) => {
     window.selectedRow = row;
   });
 
-  // 더블 클릭 시 상세 페이지로 이동
   row.addEventListener(EVENT.DOUBLE_CLICK, () => {
-    // 상세 정보를 세션에 저장
     sessionStorage.setItem(KEY.SELECTED_DATA_ID, item.id);
     window.location.href = LOCATION.DETAIL;
   });

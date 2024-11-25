@@ -7,46 +7,54 @@ import {
 } from "../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js";
 import {renderButtons} from "../../../buttonManager/employee/contractManagement/detail.js";
 import {ELEMENT_ID, KEY, TAG} from "../../../../../../config/common.js";
+import {
+  ACCIDENT_HISTORY_DETAIL_LABEL,
+  CONTRACT_LABEL,
+  CUSTOMER_LABEL,
+  ENDORSEMENT_DETAIL_LABEL,
+  RECONTRACT_DETAIL_LABEL, REVIVAL_DETAIL_LABEL,
+  SURGERY_HISTORY_DETAIL_LABEL, TERMINATION_DETAIL_LABEL
+} from "../../../../../../config/employee/contractManagement/contractManagement.js";
 
 const accidentHistoryDetail = (data) => {
   return [
-    { label: "사고 이력 번호", value: data.id },
-    { label: "사고 내용", value: data.accidentDetail },
-    { label: "사고 날짜", value: data.date }
+    { label: ACCIDENT_HISTORY_DETAIL_LABEL.ID,              value: data.id },
+    { label: ACCIDENT_HISTORY_DETAIL_LABEL.ACCIDENT_DETAIL, value: data.accidentDetail },
+    { label: ACCIDENT_HISTORY_DETAIL_LABEL.DATE,            value: data.date }
   ];
 }
 
 const surgeryHistoryDetail = (data) => {
   return [
-    { label: "질병 이력 번호", value: data.id },
-    { label: "수술명", value: data.name },
-    { label: "수술 병원", value: data.hospitalName },
-    { label: "수술 날짜", value: data.date }
+    { label: SURGERY_HISTORY_DETAIL_LABEL.ID,               value: data.id },
+    { label: SURGERY_HISTORY_DETAIL_LABEL.NAME,             value: data.name },
+    { label: SURGERY_HISTORY_DETAIL_LABEL.HOSPITAL_NAME,    value: data.hospitalName },
+    { label: SURGERY_HISTORY_DETAIL_LABEL.DATE,             value: data.date }
   ];
 }
 
 const customerDetail = (data) => {
   const customer = data.customerInfoResponse;
   return [
-    { label: "고객 이름", value: customer.name },
-    { label: "전화번호", value: customer.phoneNumber },
-    { label: "직업", value: customer.job },
-    { label: "나이", value: customer.age },
-    { label: "성별", value: customer.gender },
-    { label: "주민등록번호", value: customer.residentRegistrationNumber },
-    { label: "주소", value: customer.address },
-    { label: "계좌 번호", value: customer.bankAccount },
-    { label: "재산", value: customer.property },
-    { label: "사고 이력", value: customer.accidentHistoryList.map(item => accidentHistoryDetail(item)) },
-    { label: "수술 이력", value: customer.surgeryHistoryList.map(item => surgeryHistoryDetail(item)) }
+    { label: CUSTOMER_LABEL.NAME,                           value: customer.name },
+    { label: CUSTOMER_LABEL.PHONE_NUMBER,                   value: customer.phoneNumber },
+    { label: CUSTOMER_LABEL.JOB,                            value: customer.job },
+    { label: CUSTOMER_LABEL.AGE,                            value: customer.age },
+    { label: CUSTOMER_LABEL.GENDER,                         value: customer.gender },
+    { label: CUSTOMER_LABEL.RESIDENT_REGISTRATION_NUMBER,   value: customer.residentRegistrationNumber },
+    { label: CUSTOMER_LABEL.ADDRESS,                        value: customer.address },
+    { label: CUSTOMER_LABEL.BANK_ACCOUNT,                   value: customer.bankAccount },
+    { label: CUSTOMER_LABEL.PROPERTY,                       value: customer.property },
+    { label: CUSTOMER_LABEL.ACCIDENT_HISTORY,               value: customer.accidentHistoryList.map(item => accidentHistoryDetail(item)) },
+    { label: CUSTOMER_LABEL.SURGERY_HISTORY,                value: customer.surgeryHistoryList.map(item => surgeryHistoryDetail(item)) }
   ];
 }
 
 const contractDetail = (data) => {
   const details = customerDetail(data);
   details.push(
-    { label: "보험 상품 번호", value: data.productId },
-    { label: "납부 날짜", value: data.lastPaidDate }
+    { label: CONTRACT_LABEL.PRODUCT_ID,                     value: data.productId },
+    { label: CONTRACT_LABEL.LAST_PAID_DATE,                 value: data.lastPaidDate }
   );
   return details;
 }
@@ -54,9 +62,9 @@ const contractDetail = (data) => {
 const recontractDetail = (data) => {
   const details = customerDetail(data);
   details.push(
-    { label: "보험 상품 번호", value: data.productId },
-    { label: "만기 날짜", value: data.expirationDate },
-    { label: "접수 상태", value: data.reContractStatus }
+    { label: RECONTRACT_DETAIL_LABEL.PRODUCT_ID,            value: data.productId },
+    { label: RECONTRACT_DETAIL_LABEL.EXPIRATION_DATE,       value: data.expirationDate },
+    { label: RECONTRACT_DETAIL_LABEL.RECONTRACT_STATUS,     value: data.reContractStatus }
   );
   return details;
 }
@@ -64,9 +72,9 @@ const recontractDetail = (data) => {
 const endorsementDetail = (data) => {
   const details = customerDetail(data);
   details.push(
-    { label: "보험 상품 번호", value: data.productId },
-    { label: "신청 날짜", value: data.applyDate },
-    { label: "심사 상태", value: data.endorsementStatus }
+    { label: ENDORSEMENT_DETAIL_LABEL.PRODUCT_ID,           value: data.productId },
+    { label: ENDORSEMENT_DETAIL_LABEL.APPLY_DATE,           value: data.applyDate },
+    { label: ENDORSEMENT_DETAIL_LABEL.ENDORSEMENT_STATUS,   value: data.endorsementStatus }
   );
   return details;
 }
@@ -74,9 +82,9 @@ const endorsementDetail = (data) => {
 const revivalDetail = (data) => {
   const details = customerDetail(data);
   details.push(
-    { label: "보험 상품 번호", value: data.productId },
-    { label: "정지 날짜", value: data.terminationDate },
-    { label: "심사 상태", value: data.revivalStatus }
+    { label: REVIVAL_DETAIL_LABEL.PRODUCT_ID,               value: data.productId },
+    { label: REVIVAL_DETAIL_LABEL.TERMINATION_DATE,         value: data.terminationDate },
+    { label: REVIVAL_DETAIL_LABEL.REVIVAL_STATUS,           value: data.revivalStatus }
   );
   return details;
 }
@@ -84,10 +92,10 @@ const revivalDetail = (data) => {
 const terminationDetail = (data) => {
   const details = customerDetail(data);
   details.push(
-    { label: "보험 상품 번호", value: data.productId },
-    { label: "해지 날짜", value: data.applyDate },
-    { label: "제지급 금액", value: data.terminationFee },
-    { label: "심사 상태", value: data.terminationStatus }
+    { label: TERMINATION_DETAIL_LABEL.PRODUCT_ID,           value: data.productId },
+    { label: TERMINATION_DETAIL_LABEL.APPLY_DATE,           value: data.applyDate },
+    { label: TERMINATION_DETAIL_LABEL.TERMINATION_FEE,      value: data.terminationFee },
+    { label: TERMINATION_DETAIL_LABEL.TERMINATION_STATUS,   value: data.terminationStatus }
   );
   return details;
 }

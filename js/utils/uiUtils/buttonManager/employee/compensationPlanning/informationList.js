@@ -1,8 +1,8 @@
 import {BUTTON, CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
-import {inputType} from "../../../tableRenderer/employee/compensationPlanning/input.js";
+import {INPUT_TYPE} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
 
 const postPartnerCompany = () => {
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, inputType.POST);
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, INPUT_TYPE.POST);
   window.location.href = LOCATION.INPUT;
 }
 

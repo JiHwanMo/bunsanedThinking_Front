@@ -1,7 +1,7 @@
 import { fetchGetAll } from '../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js';
 import { fetchGetPartnerCompanyRowById } from '../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js';
 import {
-  BUTTON,
+  BUTTON, CLASS,
   CLASS_SELECTOR,
   ELEMENT_ID,
   EVENT,
@@ -14,11 +14,6 @@ import {
 import { TABLE_TITLE } from '../../../../../../config/employee/compensationPlanning/compensationPlanning.js';
 import { COLUMN_NAME } from '../../../../../../config/employee/compensationPlanning/compensationPlanning.js';
 import {setPost} from "../../../buttonManager/employee/compensationPlanning/informationList.js";
-
-export const informationType = {
-  EVALUATE_PARTNERCOMPANY: "EVALUATE_PARTNERCOMPANY",
-  MANAGEMENT_PARTNERCOMPANY: "MANAGEMENT_PARTNERCOMPANY"
-}
 
 const partnerCompanyRow = (dto) => {
   return `
@@ -123,14 +118,13 @@ const setOneRow = (item, type) => {
   // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
-      window.selectedRow.classList.remove("selected");
+      window.selectedRow.classList.remove(CLASS.SELECTED);
     }
-    row.classList.add("selected");
+    row.classList.add(CLASS.SELECTED);
     window.selectedRow = row;
   });
 
   row.addEventListener(EVENT.DOUBLE_CLICK, () => {
-    // 상세 정보를 세션에 저장
     sessionStorage.setItem(KEY.SELECTED_DATA_ID, item.id);
     window.location.href = LOCATION.DETAIL;
   });

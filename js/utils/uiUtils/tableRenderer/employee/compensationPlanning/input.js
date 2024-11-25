@@ -1,7 +1,7 @@
 import {
   COMBOBOX,
   INPUT_FORM,
-  INPUT_LABEL
+  INPUT_LABEL, INPUT_TYPE, UPDATE_OPTION_PLACEHOLDER
 } from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
 import {
   fetchGetPartnerCompanyDetailById
@@ -9,21 +9,15 @@ import {
 import {renderButton} from "../../../buttonManager/employee/compensationPlanning/input.js";
 import {CLASS, ELEMENT_ID, KEY, MESSAGES, STRING_EMPTY, TAG} from "../../../../../../config/common.js";
 
-export const inputType = {
-  POST: "POST",
-  EVALUATE: "EVALUATE",
-  UPDATE: "UPDATE"
-}
-
 export const renderInput = async () => {
   const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
-  if (selectedButtonType === "POST") {
+  if (selectedButtonType === INPUT_TYPE.POST) {
     renderInputFields();
-  } else if (selectedButtonType === "UPDATE") {
+  } else if (selectedButtonType === INPUT_TYPE.UPDATE) {
     const dataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
     const data = await fetchGetPartnerCompanyDetailById(dataId);
     renderInputFieldsWithValues(data);
-  } else if (selectedButtonType === "EVALUATE") {}
+  } else if (selectedButtonType === INPUT_TYPE.EVALUATE) {}
   renderButton();
 }
 
@@ -77,7 +71,7 @@ const renderInputFieldsWithValues = (data) => {
 const changeUpdateOption = (select, data, selectedButtonType) => {
   const index = select.selectedIndex;
   const input = document.getElementById(INPUT_FORM[selectedButtonType].INPUT.id);
-  input.placeholder = "수정 정보 "+MESSAGES.PLACE_HOLDER.INPUT;
+  input.placeholder = UPDATE_OPTION_PLACEHOLDER+MESSAGES.PLACE_HOLDER.INPUT;
   // 인덱스에 맞춰서 input 라벨 및 입력창 변경
   switch (index) {
     case 0:
