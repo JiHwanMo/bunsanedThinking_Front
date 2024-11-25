@@ -3,6 +3,7 @@ import {
   fetchAddPartnerCompany, fetchEvaluatePartnerCompany, fetchUpdatePartnerCompany
 } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import {initialButtons} from "../../../common/buttonUtils.js";
+import {CLASS, ELEMENT_ID, EVENT, KEY, STRING_EMPTY, TAG, ZERO} from "../../../../../../config/common.js";
 
 const getPartnerCompanyAddDTO = (name, phoneNumber, type, headName, headPhoneNumber) => {
   return {
@@ -21,11 +22,11 @@ const addPartnerCompany = async () => {
   const type = document.getElementById(inputForm.TYPE.id).selectedIndex;
   const headName = document.getElementById(inputForm.HEAD_NAME.id).value;
   const headPhoneNumber = document.getElementById(inputForm.HEAD_PHONE_NUMBER.id).value;
-  if (name === "") alert(inputForm.NAME.exception);
-  else if (phoneNumber === "") alert(inputForm.PHONE_NUMBER.exception);
-  else if (type === 0) alert(inputForm.TYPE.exception);
-  else if (headName === "") alert(inputForm.HEAD_NAME.exception);
-  else if (headPhoneNumber === "") alert(inputForm.HEAD_PHONE_NUMBER.exception);
+  if (name === STRING_EMPTY) alert(inputForm.NAME.exception);
+  else if (phoneNumber === STRING_EMPTY) alert(inputForm.PHONE_NUMBER.exception);
+  else if (type === ZERO) alert(inputForm.TYPE.exception);
+  else if (headName === STRING_EMPTY) alert(inputForm.HEAD_NAME.exception);
+  else if (headPhoneNumber === STRING_EMPTY) alert(inputForm.HEAD_PHONE_NUMBER.exception);
   else {
     const dto = getPartnerCompanyAddDTO(name, phoneNumber, type, headName, headPhoneNumber);
     await fetchAddPartnerCompany(dto);
@@ -44,12 +45,12 @@ const getPartnerCompanyUpdateDTO = (dataId, input, index) => {
 }
 
 const updatePartnerCompany = async () => {
-  const dataId = sessionStorage.getItem("selectedDataId");
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
+  const dataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
+  const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
   const select = document.getElementById(INPUT_FORM[selectedButtonType].TYPE.id);
   const input = document.getElementById(INPUT_FORM[selectedButtonType].INPUT.id).value;
   const index = select.selectedIndex;
-  if (index === 0) alert(INPUT_FORM[selectedButtonType].TYPE.exception);
+  if (index === ZERO) alert(INPUT_FORM[selectedButtonType].TYPE.exception);
   else {
     const updateDTO = getPartnerCompanyUpdateDTO(dataId, input, index);
     await fetchUpdatePartnerCompany(updateDTO);
@@ -65,7 +66,7 @@ const cancel = () => {
 }
 
 const evaluatePartnerCompany = async (evaluate) => {
-  const dataId = sessionStorage.getItem("selectedDataId");
+  const dataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchEvaluatePartnerCompany(evaluate, dataId);
   alert("평가되었습니다.");
   window.history.back();
@@ -92,7 +93,7 @@ const compensationPlanningTaskMapper = {
 }
 
 export const renderButton = () => {
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
+  const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
   if (selectedButtonType === "EVALUATE")
     initialButtonsEvaluate(BUTTON.TASK.COMPENSATIONPLANNING.INPUT[selectedButtonType],
       compensationPlanningTaskMapper[selectedButtonType]);
@@ -101,14 +102,14 @@ export const renderButton = () => {
 }
 
 const initialButtonsEvaluate = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  buttonContainer.className = "star-buttons-container";
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
+  buttonContainer.className = CLASS.STAR_BUTTONS_CONTAINER;
   Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "star-button";
+    const button = document.createElement(TAG.DIV);
+    button.className = CLASS.STAR_BUTTON;
     button.textContent = name; // 버튼에 표시할 텍스트 설정
 
-    button.addEventListener("click", buttonActionMapper[key]);
+    button.addEventListener(EVENT.CLICK, buttonActionMapper[key]);
     buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
   });
 }

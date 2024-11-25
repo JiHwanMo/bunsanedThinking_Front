@@ -21,7 +21,17 @@ import {
 } from '../../../apiUtils/apiDocumentation/customer/customer.js';
 import {COLUMN_NAME, COMBOBOX, TABLE_TITLE} from '../../../../../config/customer/customer.js';
 import {setButton, setPost} from "../../buttonManager/customer/information.js";
-import {CLASS, ELEMENT_ID, EVENT, INPUT_TYPE, KEY, LOCATION, MESSAGES, TAG} from "../../../../../config/common.js";
+import {
+  CLASS, CLASS_SELECTOR,
+  ELEMENT_ID,
+  EVENT,
+  INPUT_TYPE,
+  KEY,
+  LOCATION,
+  MESSAGES,
+  STRING_EMPTY,
+  TAG
+} from "../../../../../config/common.js";
 
 export const informationType = {
   INSURANCE_LIST: "INSURANCE_LIST",
@@ -177,7 +187,7 @@ const setTitle = () => {
 }
 
 const setComboBox = () => {
-  const container = document.querySelector(".search-container");
+  const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const select = document.createElement(TAG.SELECT);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const boxContext = COMBOBOX[type];
@@ -197,7 +207,7 @@ const setComboBox = () => {
 }
 
 const setInput = () => {
-  const container = document.querySelector(".search-container");
+  const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const input = document.createElement(TAG.INPUT);
   input.type = INPUT_TYPE.TEXT;
   input.id = ELEMENT_ID.SEARCH_INPUT;
@@ -231,7 +241,7 @@ const initTableBySelect = async (id, type) => { // 추가
     await context[type].comboListFetch[selectedOption.value]();
   if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   const input = document.getElementById(ELEMENT_ID.SEARCH_INPUT);
-  if (input != null) input.value = "";
+  if (input != null) input.value = STRING_EMPTY;
   const tableBody = document.getElementById(KEY.LIST);
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   setTableBody();
@@ -264,9 +274,9 @@ const setOneRow = (item, type) => {
   // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
-      window.selectedRow.classList.remove("selected");
+      window.selectedRow.classList.remove(CLASS.SELECTED);
     }
-    row.classList.add("selected");
+    row.classList.add(CLASS.SELECTED);
     window.selectedRow = row;
   });
 

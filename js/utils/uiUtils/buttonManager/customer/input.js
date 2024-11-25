@@ -15,7 +15,7 @@ const applyEndorsement = async () => {
   const inputForm = getInputForm();
   const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   const depositDate = document.getElementById(inputForm.DEPOSIT_DATE.id).value;
-  if (depositDate === "") alert(inputForm.DEPOSIT_DATE.exception);
+  if (depositDate === STRING_EMPTY) alert(inputForm.DEPOSIT_DATE.exception);
   else {
     await fetchApplyEndorsementById(depositDate, contractId);
     alert("배서 신청이 완료되었습니다");
@@ -38,8 +38,8 @@ const payInsuranceFee = async () => {
   const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   const depositPath = document.getElementById(inputForm.DEPOSIT_PATH.id).selectedIndex;
   const depositMoney = document.getElementById(inputForm.DEPOSIT_MONEY.id).value;
-  if (depositPath === 0) alert(inputForm.DEPOSIT_PATH.exception);
-  else if (depositMoney === "" || depositMoney <= 0)
+  if (depositPath === ZERO) alert(inputForm.DEPOSIT_PATH.exception);
+  else if (depositMoney === STRING_EMPTY || depositMoney <= ZERO)
     alert(inputForm.DEPOSIT_MONEY.exception);
   else {
     const depositDTO = getPayInsuranceFeeDTO(contractId, depositMoney, depositPath);
@@ -96,7 +96,7 @@ const askInsuranceCounsel = async () => {
   const insuranceId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   const id = sessionStorage.getItem(KEY.LOGIN_ID);
   const counselDate = document.getElementById(inputForm.COUNSEL_DATE.id).value;
-  if (counselDate === "") alert(inputForm.COUNSEL_DATE.exception); // 여기 형식은 다시 찾아봐야 함
+  if (counselDate === STRING_EMPTY) alert(inputForm.COUNSEL_DATE.exception); // 여기 형식은 다시 찾아봐야 함
   else {
     // date 형식은 무조건 yyyy-mm-dd 형식이어야 함
     const askInsuranceCounselDTO = getAskInsuranceCounsel(id, insuranceId, counselDate);
@@ -123,9 +123,9 @@ const reportAccident = async () => {
   const type = document.getElementById(inputForm.TYPE.id).selectedIndex;
   const accidentDate = document.getElementById(inputForm.ACCIDENT_DATE.id).value;
   const location = document.getElementById(inputForm.LOCATION.id).value;
-  if (type === 0) alert(inputForm.TYPE.exception);
-  else if (accidentDate === "") alert(inputForm.ACCIDENT_DATE.exception);
-  else if (location === "") alert(inputForm.LOCATION.exception);
+  if (type === ZERO) alert(inputForm.TYPE.exception);
+  else if (accidentDate === STRING_EMPTY) alert(inputForm.ACCIDENT_DATE.exception);
+  else if (location === STRING_EMPTY) alert(inputForm.LOCATION.exception);
   else {
     // date 형식은 무조건 yyyy-mm-dd 형식이어야 함
     const reportAccidentDTO = getReportAccident(id, type, accidentDate, location);

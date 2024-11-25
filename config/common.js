@@ -35,7 +35,8 @@ export const TAG = {
   TH: "th",
   TD: "td",
   TABLE: "table",
-  TBODY: "tbody"
+  TBODY: "tbody",
+  BUTTON: "button"
 }
 
 export const KEY = {
@@ -61,7 +62,10 @@ export const CLASS = {
   FORM_GROUP: "form-group",
   POST_BUTTON: "post-button",
   COMBO_BOX: "comboBox",
-  GREETING: "greeting"
+  GREETING: "greeting",
+  STAR_BUTTONS_CONTAINER: "star-buttons-container",
+  STAR_BUTTON: "star-button",
+  SELECTED: "selected"
 }
 
 export const LOCATION = {
@@ -85,7 +89,8 @@ export const EVENT = {
 
 export const CLASS_SELECTOR = {
   CONTAINER: ".container",
-  HEADER_LINE: ".header-line"
+  HEADER_LINE: ".header-line",
+  SEARCH_CONTAINER: ".search-container"
 }
 
 export const STRING_EMPTY = "";

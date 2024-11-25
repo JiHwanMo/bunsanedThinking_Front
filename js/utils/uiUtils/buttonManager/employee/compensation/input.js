@@ -4,12 +4,13 @@ import {
   fetchRequestCompensation,
   fetchRequestInsuranceMoney
 } from "../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js";
+import {KEY, ZERO} from "../../../../../../config/common.js";
 
 const getCompensationDTO = (money, index) => {
   return {
     money: money,
     paymentType: index-1,
-    reportId: sessionStorage.getItem("selectedDataId")
+    reportId: sessionStorage.getItem(KEY.SELECTED_DATA_ID)
   }
 }
 
@@ -17,15 +18,15 @@ const getInsuranceMoneyDTO = (money, index) => {
   return {
     money: money,
     paymentType: index-1,
-    insuranceMoneyId: sessionStorage.getItem("selectedDataId")
+    insuranceMoneyId: sessionStorage.getItem(KEY.SELECTED_DATA_ID)
   }
 }
 
 const requestCompensation = async () => {
   const money = document.getElementById(INPUT_FORM.MONEY.id).value;
   const index = document.getElementById(INPUT_FORM.PAYMENTTYPE.id).selectedIndex;
-  if (money.length === 0 || money <= 0) alert(INPUT_FORM.MONEY.exception);
-  else if (index === 0) alert(INPUT_FORM.PAYMENTTYPE.exception);
+  if (money.length === ZERO || money <= ZERO) alert(INPUT_FORM.MONEY.exception);
+  else if (index === ZERO) alert(INPUT_FORM.PAYMENTTYPE.exception);
   else {
     await fetchRequestCompensation(getCompensationDTO(money, index));
     alert("요청이 완료되었습니다");
@@ -38,8 +39,8 @@ const requestCompensation = async () => {
 const requestInsuranceMoney = async () => {
   const money = document.getElementById(INPUT_FORM.MONEY.id).value;
   const index = document.getElementById(INPUT_FORM.PAYMENTTYPE.id).selectedIndex;
-  if (money.length === 0 || money <= 0) alert(INPUT_FORM.MONEY.exception);
-  else if (index === 0) alert(INPUT_FORM.PAYMENTTYPE.exception);
+  if (money.length === ZERO || money <= ZERO) alert(INPUT_FORM.MONEY.exception);
+  else if (index === ZERO) alert(INPUT_FORM.PAYMENTTYPE.exception);
   else {
     await fetchRequestInsuranceMoney(getInsuranceMoneyDTO(money, index));
     alert("요청이 완료되었습니다");
@@ -65,6 +66,6 @@ const compensationTaskMapper = {
 }
 
 export const renderButton = () => {
-  const type = sessionStorage.getItem("currentType");
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   initialButtons(BUTTON.TASK.COMPENSATION.INPUT[type], compensationTaskMapper[type]);
 }
