@@ -172,8 +172,13 @@ const addAccidentHistory = () => {
   newEntry.innerHTML = `
     <input type="date" name="date" placeholder="날짜를 입력하세요" required>
     <input type="text" name="accidentDetail" placeholder="사고 내용을 입력하세요" required>
+    <button type="button" class="remove-button">삭제</button>
   `;
   container.appendChild(newEntry);
+
+  newEntry.querySelector(".remove-button").addEventListener("click", () => {
+    container.removeChild(newEntry);
+  });
 };
 
 const addSurgeryHistory = () => {
@@ -184,8 +189,13 @@ const addSurgeryHistory = () => {
     <input type="date" name="date" placeholder="날짜를 입력하세요" required>
     <input type="text" name="hospitalName" placeholder="병원 이름을 입력하세요" required>
     <input type="text" name="name" placeholder="수술명을 입력하세요" required>
+    <button type="button" class="remove-button">삭제</button>
   `;
   container.appendChild(newEntry);
+
+  newEntry.querySelector(".remove-button").addEventListener("click", () => {
+    container.removeChild(newEntry);
+  });
 };
 
 const addDiseaseHistory = () => {
@@ -195,8 +205,13 @@ const addDiseaseHistory = () => {
   newEntry.innerHTML = `
     <input type="date" name="dateOfDiagnosis" placeholder="진단 날짜를 입력하세요" required>
     <input type="text" name="name" placeholder="질병명을 입력하세요" required>
+    <button type="button" class="remove-button">삭제</button>
   `;
   container.appendChild(newEntry);
+
+  newEntry.querySelector(".remove-button").addEventListener("click", () => {
+    container.removeChild(newEntry);
+  });
 };
 
 
