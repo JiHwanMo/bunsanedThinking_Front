@@ -1,35 +1,29 @@
-import {
-  fetchAddCollateralProduct,
-  fetchAddLoanProduct,
-  fetchRequestLoan,
-  fetchUpdateCollateralProduct,
-  fetchUpdateFixedDepositProduct,
-  fetchUpdateInsuranceContractProduct,
-} from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
-import {BUTTON as COMMON_BUTTON} from "../../../../../../config/common.js";
+import {BUTTON as COMMON_BUTTON, ELEMENT_ID as COMMON_ELEMENT_ID, EVENT, KEY, LOCATION} from "../../../../../../config/common.js";
 import {
   fetchHandleAccident,
   fetchHandleComplaint
 } from "../../../../apiUtils/apiDocumentation/employee/customerSupport/customerSupport.js";
+import {BUTTON, ELEMENT_ID, QUESTION} from "../../../../../../config/employee/customerSupport/customerSupport.js";
 
 export const renderButtons = () => {
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
+  const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
   context[selectedButtonType].createButtons(selectedButtonType);
 };
 
 const createHandleComplaintButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
-  const handleButton = createButton("접수");
-  handleButton.addEventListener("click", async () => {
-    let id = sessionStorage.getItem("selectedDataId");
-    let result = getValueById("result");
-    let employeeName = getValueById("employeeName");
-    alert("정말 처리하시겠습니까?");
+  const handleButton = createButton(BUTTON.TASK.EMPLOYEE.CUSTOMER_SUPPORT.HANDLE_COMPLAINT.HANDLE_COMPLAINT);
+  handleButton.addEventListener(EVENT.CLICK, async () => {
+    let id = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
+    let result = getValueById(ELEMENT_ID.RESULT);
+    let employeeName = getValueById(ELEMENT_ID.EMPLOYEE_NAME);
+    const check = confirm(QUESTION.CONFIRM_HANDLE_COMPLAINT);
 
-    await fetchHandleComplaint(id, result, employeeName);
-
-    window.location.href = "home.html"
+    if (check) {
+      await fetchHandleComplaint(id, result, employeeName);
+      window.location.href = LOCATION.HOME;
+    }
   });
 
   buttonContainer.appendChild(handleButton);
@@ -37,18 +31,19 @@ const createHandleComplaintButton = () => {
 }
 
 const createHandleReportButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
-  const handleButton = createButton("접수");
-  handleButton.addEventListener("click", async () => {
-    let id = sessionStorage.getItem("selectedDataId");
-    let damageAssessmentCompanyId = getValueById("damageAssessmentCompanyId");
-    let roadsideAssistanceCompanyId = getValueById("roadsideAssistanceCompanyId");
-    alert("정말 처리하시겠습니까?");
+  const handleButton = createButton(BUTTON.TASK.EMPLOYEE.CUSTOMER_SUPPORT.HANDLE_REPORT.HANDLE_REPORT);
+  handleButton.addEventListener(EVENT.CLICK, async () => {
+    let id = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
+    let damageAssessmentCompanyId = getValueById(ELEMENT_ID.DAMAGE_ASSESSMENT_COMPANY_ID);
+    let roadsideAssistanceCompanyId = getValueById(ELEMENT_ID.ROADSIDE_ASSISTANCE_COMPANY_ID);
+    const check = confirm(QUESTION.CONFIRM_HANDLE_REPORT);
 
-    await fetchHandleAccident(id, damageAssessmentCompanyId, roadsideAssistanceCompanyId);
-
-    window.location.href = "home.html"
+    if (check) {
+      await fetchHandleAccident(id, damageAssessmentCompanyId, roadsideAssistanceCompanyId);
+      window.location.href = LOCATION.HOME;
+    }
   });
 
   buttonContainer.appendChild(handleButton);
@@ -72,13 +67,13 @@ const createButton = (textContent) => {
 }
 
 const createCancelButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
   const cancelButton = document.createElement("button");
   cancelButton.className = "button-item";
   cancelButton.textContent = COMMON_BUTTON.COMMON.CANCEL;
 
-  cancelButton.addEventListener("click", () => window.history.back());
+  cancelButton.addEventListener(EVENT.CLICK, () => window.history.back());
 
   buttonContainer.appendChild(cancelButton);
 }

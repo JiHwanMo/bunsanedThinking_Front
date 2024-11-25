@@ -2,27 +2,29 @@ import {
   fetchGetAccident,
   fetchGetComplaint
 } from "../../../../apiUtils/apiDocumentation/employee/customerSupport/customerSupport.js";
+import {COLUMN_NAME} from "../../../../../../config/employee/customerSupport/customerSupport.js";
+import {ELEMENT_ID as COMMON_ELEMENT_ID, KEY, TAG} from "../../../../../../config/common.js";
 
 const accidentDetail = (data) => {
   return [
-    { label: "사고 번호", value: data.id },
-    { label: "서비스 종류", value: data.serviceType },
-    { label: "사고 날짜", value: data.date },
-    { label: "사고 위치", value: data.location },
-    { label: "이름", value: data.customerName },
-    { label: "전화번호", value: data.customerPhoneNumber },
-    { label: "처리 상태", value: data.processStatus }
+    { label: COLUMN_NAME.HANDLE_REPORT.ACCIDENT_ID, value: data.id },
+    { label: COLUMN_NAME.HANDLE_REPORT.SERVICE_TYPE, value: data.serviceType },
+    { label: COLUMN_NAME.HANDLE_REPORT.ACCIDENT_DATE, value: data.date },
+    { label: COLUMN_NAME.HANDLE_REPORT.ACCIDENT_LOCATION, value: data.location },
+    { label: COLUMN_NAME.HANDLE_REPORT.CUSTOMER_NAME, value: data.customerName },
+    { label: COLUMN_NAME.HANDLE_REPORT.CUSTOMER_PHONE_NUMBER, value: data.customerPhoneNumber },
+    { label: COLUMN_NAME.HANDLE_REPORT.PROCESS_STATUS, value: data.processStatus }
   ];
 }
 
 const complaintDetail = (data) => {
   return [
-    { label: "민원 종류", value: data.complaint.complaintType },
-    { label: "민원 내용", value: data.complaint.content },
-    { label: "제목", value: data.complaint.title },
-    { label: "처리 상태", value: data.complaint.processStatus },
-    { label: "접수자 이름", value: data.customer.name },
-    { label: "접수자 전화번호", value: data.customer.phoneNumber }
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_TYPE, value: data.complaint.complaintType },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_CONTENT, value: data.complaint.content },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_TITLE, value: data.complaint.title },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.PROCESS_STATUS, value: data.complaint.processStatus },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.CUSTOMER_NAME, value: data.customer.name },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.CUSTOMER_PHONE_NUMBER, value: data.customer.phoneNumber }
   ];
 }
 
@@ -39,8 +41,8 @@ const context = {
 
 export const renderDetails = async () => {
   // 세션에서 데이터 가져오기
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const type = sessionStorage.getItem("currentType");
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
@@ -51,26 +53,26 @@ export const renderDetails = async () => {
 
 // 상세 정보를 테이블 형식으로 렌더링하는 함수
 const renderDetailsTable = (data) => {
-  const detailsTable = document.getElementById("detailsTable");
+  const detailsTable = document.getElementById(COMMON_ELEMENT_ID.DETAILS_TABLE);
 
-  const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
+  const details = context[sessionStorage.getItem(KEY.CURRENT_TYPE)].detailGetter(data);
 
   // 테이블에 각 정보를 추가
   details.forEach(detail => {
-    const row = document.createElement("tr");
+    const row = document.createElement(TAG.TR);
     if (Array.isArray(detail.value)) {
-      const tableHead = document.createElement("th");
+      const tableHead = document.createElement(TAG.TH);
       tableHead.textContent = detail.label;
 
-      const tableData = document.createElement("td");
+      const tableData = document.createElement(TAG.TD);
       detail.value.forEach(listDetail => {
-        const nestedTable = document.createElement("table");
+        const nestedTable = document.createElement(TAG.TABLE);
         listDetail.forEach(item => {
-          const nestedRow = document.createElement("tr")
-          const labelCell = document.createElement("th");
+          const nestedRow = document.createElement(TAG.TR)
+          const labelCell = document.createElement(TAG.TH);
           labelCell.textContent = item.label;
 
-          const valueCell = document.createElement("td");
+          const valueCell = document.createElement(TAG.TD);
           valueCell.textContent = item.value;
 
           nestedRow.appendChild(labelCell);
@@ -83,15 +85,15 @@ const renderDetailsTable = (data) => {
       row.appendChild(tableHead);
       row.appendChild(tableData);
     } else {
-      const labelCell = document.createElement("th");
+      const labelCell = document.createElement(TAG.TH);
       labelCell.textContent = detail.label;
 
-      const valueCell = document.createElement("td");
+      const valueCell = document.createElement(TAG.TD);
       valueCell.textContent = detail.value;
 
       row.appendChild(labelCell);
       row.appendChild(valueCell);
     }
-    detailsTable.querySelector("tbody").appendChild(row);
+    detailsTable.querySelector(TAG.TBODY).appendChild(row);
   });
 };
