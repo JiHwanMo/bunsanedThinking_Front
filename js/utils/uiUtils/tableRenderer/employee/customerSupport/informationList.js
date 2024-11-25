@@ -10,7 +10,7 @@ import {
 } from "../../../../apiUtils/apiDocumentation/employee/customerSupport/customerSupport.js"
 import {
   BUTTON,
-  CLASS,
+  CLASS, CLASS_SELECTOR,
   ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
@@ -234,7 +234,7 @@ const initTableBySelect = async (id, type) => { // 추가
 }
 
 const setSearchBar = () => {
-  const container = document.querySelector(".search-container");
+  const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const select = COMBOBOX[type].isCombo ? setComboBox() : null;
   if (select != null) { // 추가

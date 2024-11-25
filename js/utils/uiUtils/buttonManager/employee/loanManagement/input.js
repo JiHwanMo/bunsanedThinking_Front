@@ -6,24 +6,33 @@ import {
   fetchUpdateFixedDepositProduct,
   fetchUpdateInsuranceContractProduct,
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
-import {BUTTON as COMMON_BUTTON} from "../../../../../../config/common.js";
+import {
+  BUTTON as COMMON_BUTTON,
+  ELEMENT_ID as COMMON_ELEMENT_ID,
+  EVENT,
+  KEY as COMMON_KEY,
+  LOCATION,
+  TAG
+} from "../../../../../../config/common.js";
+import {ELEMENT_ID, KEY, LOAN_TYPE, QUESTION} from "../../../../../../config/employee/loanManagement/loanManagement.js";
 
 export const renderButtons = () => {
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
+  const selectedButtonType = sessionStorage.getItem(COMMON_KEY.SELECTED_BUTTON_TYPE);
   context[selectedButtonType].createButtons();
 };
 
 const createPostButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
   const oKButton = createButton(COMMON_BUTTON.COMMON.OK);
-  oKButton.addEventListener("click", async () => {
+  oKButton.addEventListener(EVENT.CLICK, async () => {
     const formData = collectFormDataForPost();
-    alert("정말 등록하겠습니까?");
+    const check = confirm(QUESTION.CONFIRM_POST);
 
-    await functions[formData.loanType].postFunction(formData);
-
-    window.location.href = "home.html"
+    if (check) {
+      await functions[formData.loanType].postFunction(formData);
+      window.location.href = LOCATION.HOME;
+    }
   });
 
   buttonContainer.appendChild(oKButton);
@@ -31,16 +40,17 @@ const createPostButton = () => {
 }
 
 const createUpdateButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
   const updateButton = createButton(COMMON_BUTTON.COMMON.UPDATE);
-  updateButton.addEventListener("click", async () => {
+  updateButton.addEventListener(EVENT.CLICK, async () => {
     const formData = collectFormDataForUpdate();
-    alert("정말 수정하시겠습니까?");
+    const check = confirm(QUESTION.CONFIRM_UPDATE);
 
-    await functions[formData.loanType].updateFunction(formData);
-
-    window.location.href = "home.html"
+    if (check) {
+      await functions[formData.loanType].updateFunction(formData);
+      window.location.href = LOCATION.HOME;
+    }
   });
 
   buttonContainer.appendChild(updateButton);
@@ -48,18 +58,19 @@ const createUpdateButton = () => {
 }
 
 const createLoanRequestButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
   const oKButton = createButton(COMMON_BUTTON.COMMON.OK);
-  oKButton.addEventListener("click", async () => {
-    let id = sessionStorage.getItem("selectedDataId");
-    let money = getValueById("money");
-    let paymentType = getValueById("paymentType");
-    alert("정말 처리하시겠습니까?");
+  oKButton.addEventListener(EVENT.CLICK, async () => {
+    let id = sessionStorage.getItem(COMMON_KEY.SELECTED_DATA_ID);
+    let money = getValueById(ELEMENT_ID.MONEY);
+    let paymentType = getValueById(ELEMENT_ID.PAYMENT_TYPE);
+    const check = confirm(QUESTION.CONFIRM_REQUEST_LOAN);
 
-    await fetchRequestLoan(id, money, paymentType, true);
-
-    window.location.href = "home.html"
+    if (check) {
+      await fetchRequestLoan(id, money, paymentType, true);
+      window.location.href = LOCATION.HOME;
+    }
   });
 
   buttonContainer.appendChild(oKButton);
@@ -94,20 +105,20 @@ const functions= {
 }
 
 const createButton = (textContent) => {
-  const okButton = document.createElement("button");
+  const okButton = document.createElement(TAG.BUTTON);
   okButton.className = "button-item";
   okButton.textContent = textContent;
   return okButton;
 }
 
 const createCancelButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
-  const cancelButton = document.createElement("button");
+  const cancelButton = document.createElement(TAG.BUTTON);
   cancelButton.className = "button-item";
   cancelButton.textContent = COMMON_BUTTON.COMMON.CANCEL;
 
-  cancelButton.addEventListener("click", () => window.history.back());
+  cancelButton.addEventListener(EVENT.CLICK, () => window.history.back());
 
   buttonContainer.appendChild(cancelButton);
 }
@@ -118,33 +129,33 @@ const getValueById = (id) => {
 };
 
 const collectFormDataForPost = () => {
-  const loanType = getValueById("loanType");
+  const loanType = getValueById(ELEMENT_ID.LOAN_TYPE);
   const commonData = {
     loanType: loanType,
-    name: getValueById("loanName"),
-    interestRate: getValueById("interestRate"),
-    maximumMoney: getValueById("maximumMoney"),
-    minimumAsset: getValueById("minimumAsset")
+    name: getValueById(ELEMENT_ID.LOAN_NAME),
+    interestRate: getValueById(ELEMENT_ID.INTEREST_RATE),
+    maximumMoney: getValueById(ELEMENT_ID.MAXIMUM_MONEY),
+    minimumAsset: getValueById(ELEMENT_ID.MINIMUM_ASSET)
   };
 
   // 보험 유형별로 데이터 추가
 
   switch (loanType) {
-    case "Collateral":
+    case LOAN_TYPE.COLLATERAL:
       return {
         ...commonData,
-        collateralType: getValueById("collateralType"),
-        minimumValue: getValueById("minimumValue")
+        collateralType: getValueById(ELEMENT_ID.COLLATERAL.COLLATERAL_TYPE),
+        minimumValue: getValueById(ELEMENT_ID.COLLATERAL.MINIMUM_VALUE)
       };
-    case "FixedDeposit":
+    case LOAN_TYPE.FIXED_DEPOSIT:
       return {
         ...commonData,
-        parameter: getValueById("minimumAmount")
+        parameter: getValueById(ELEMENT_ID.FIXED_DEPOSIT.MINIMUM_AMOUNT)
       };
-    case "InsuranceContract":
+    case LOAN_TYPE.INSURANCE_CONTRACT:
       return {
         ...commonData,
-        parameter: getValueById("insuranceId")
+        parameter: getValueById(ELEMENT_ID.INSURANCE_CONTRACT.INSURANCE_ID)
       };
     default:
       return commonData; // 기본 데이터 반환 (보험 유형이 없을 때)
@@ -152,32 +163,32 @@ const collectFormDataForPost = () => {
 };
 
 const collectFormDataForUpdate = () => {
-  const loanType = sessionStorage.getItem("selectedDataType");
+  const loanType = sessionStorage.getItem(KEY.SELECTED_DATA_TYPE);
   const commonData = {
-    id: JSON.parse(sessionStorage.getItem("selectedDataId")),
+    id: JSON.parse(sessionStorage.getItem(COMMON_KEY.SELECTED_DATA_ID)),
     loanType: loanType,
-    name: getValueById("loanName"),
-    interestRate: getValueById("interestRate"),
-    maximumMoney: getValueById("maximumMoney"),
-    minimumAsset: getValueById("minimumAsset")
+    name: getValueById(ELEMENT_ID.LOAN_NAME),
+    interestRate: getValueById(ELEMENT_ID.INTEREST_RATE),
+    maximumMoney: getValueById(ELEMENT_ID.MAXIMUM_MONEY),
+    minimumAsset: getValueById(ELEMENT_ID.MINIMUM_ASSET)
   };
 
   switch (loanType) {
-    case "Collateral":
+    case LOAN_TYPE.COLLATERAL:
       return {
         ...commonData,
-        collateralType: getValueById("collateralType"),
-        minimumValue: getValueById("minimumValue")
+        collateralType: getValueById(ELEMENT_ID.COLLATERAL.COLLATERAL_TYPE),
+        minimumValue: getValueById(ELEMENT_ID.COLLATERAL.MINIMUM_VALUE)
       };
-    case "FixedDeposit":
+    case LOAN_TYPE.FIXED_DEPOSIT:
       return {
         ...commonData,
-        minimumAmount: getValueById("minimumAmount")
+        minimumAmount: getValueById(ELEMENT_ID.FIXED_DEPOSIT.MINIMUM_AMOUNT)
       };
-    case "InsuranceContract":
+    case LOAN_TYPE.INSURANCE_CONTRACT:
       return {
         ...commonData,
-        insuranceId: getValueById("insuranceId")
+        insuranceId: getValueById(ELEMENT_ID.INSURANCE_CONTRACT.INSURANCE_ID)
       };
     default:
       return commonData; // 기본 데이터 반환 (보험 유형이 없을 때)

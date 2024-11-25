@@ -4,38 +4,44 @@ import {
   fetchDeleteLoanProduct,
   fetchDeniedLoanRequest
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
+import {KEY, LOCATION} from "../../../../../../config/common.js";
+import {QUESTION, SELECTED_BUTTON_TYPE} from "../../../../../../config/employee/loanManagement/loanManagement.js";
 
 export const renderButtons = () => {
-  const type = sessionStorage.getItem("currentType");
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   initialButtons(BUTTON.TASK.EMPLOYEE.LOAN_MANAGEMENT[type], loanManagementTaskMapper[type]);
 };
 
 const updateLoan = () => {
-  sessionStorage.setItem("selectedButtonType", "UPDATE");
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, SELECTED_BUTTON_TYPE.UPDATE);
+  window.location.href = LOCATION.INPUT;
 }
 
 const deleteLoan = async () => {
-  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
 
-  alert("정말 삭제하시겠습니까?");
-  await fetchDeleteLoanProduct(selectedDataId);
+  const check = confirm(QUESTION.CONFIRM_DELETE);
 
-  window.location.href = "home.html";
+  if (check) {
+    await fetchDeleteLoanProduct(selectedDataId);
+    window.location.href = LOCATION.HOME;
+  }
 }
 
 const requestLoan = () => {
-  sessionStorage.setItem("selectedButtonType", "LOAN_REQUEST");
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, SELECTED_BUTTON_TYPE.LOAN_REQUEST);
+  window.location.href = LOCATION.INPUT;
 }
 
 const deniedLoanRequest = async () => {
-  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
 
-  alert("정말 거절하시겠습니까?");
-  await fetchDeniedLoanRequest(selectedDataId, false);
+  const check = confirm(QUESTION.CONFIRM_DENIED_LOAN_REQUEST);
 
-  window.location.href = "home.html";
+  if (check) {
+    await fetchDeniedLoanRequest(selectedDataId, false);
+    window.location.href = LOCATION.HOME;
+  }
 }
 
 const cancel = () => {
