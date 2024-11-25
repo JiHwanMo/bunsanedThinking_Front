@@ -1,14 +1,13 @@
-// positionManager/informationList.js
 import { fetchGetEmployee } from '../../../../apiUtils/apiDocumentation/employee/customerSupport/customerSupport.js';
-import { MESSAGES } from '../../../../../../config/common.js';
+import {CLASS, KEY, MESSAGES, TAG} from '../../../../../../config/common.js';
 
 export const renderGreeting = async () => {
   const container = document.querySelector(".container");
-  const id = sessionStorage.getItem("id");
+  const id = sessionStorage.getItem(KEY.LOGIN_ID);
   const getEmployee = await fetchGetEmployee(id);
   const greetingConstant = MESSAGES.GREETING;
-  const greeting = document.createElement("div");
-  greeting.className = "greeting";
+  const greeting = document.createElement(TAG.DIV);
+  greeting.className = CLASS.GREETING;
 
   greeting.textContent = `${getEmployee.name} ${greetingConstant} `;
 
