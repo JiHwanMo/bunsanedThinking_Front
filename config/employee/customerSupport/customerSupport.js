@@ -125,7 +125,3 @@ export const TITLE = {
 export const COMBO_LIST= {
   ALL: "all"
 }
-
-export const CLASS_LIST= {
-  SELECTED: "selected"
-}

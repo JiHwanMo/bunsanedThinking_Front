@@ -196,9 +196,9 @@ const setOneRow = (item, type) => {
   // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
-      window.selectedRow.classList.remove(CLASS_LIST.SELECTED);
+      window.selectedRow.classList.remove(CLASS.SELECTED);
     }
-    row.classList.add(CLASS_LIST.SELECTED);
+    row.classList.add(CLASS.SELECTED);
     window.selectedRow = row;
   });
 
@@ -257,9 +257,9 @@ const setTableBody = () => {
     // 각 행에 클릭 이벤트 추가
     row.addEventListener(EVENT.CLICK, () => {
       if (window.selectedRow) {
-        window.selectedRow.classList.remove(CLASS_LIST.SELECTED);
+        window.selectedRow.classList.remove(CLASS.SELECTED);
       }
-      row.classList.add(CLASS_LIST.SELECTED);
+      row.classList.add(CLASS.SELECTED);
       window.selectedRow = row;
     });
 
