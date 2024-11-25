@@ -1,4 +1,4 @@
-import { fetchGetEmployee } from '../../../../apiUtils/apiDocumentation/employee/customerSupport/customerSupport.js';
+import { fetchGetEmployee } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
 import {CLASS, CLASS_SELECTOR, KEY, MESSAGES, TAG} from '../../../../../../config/common.js';
 
 export const renderGreeting = async () => {
