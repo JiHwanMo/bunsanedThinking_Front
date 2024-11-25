@@ -1,11 +1,13 @@
-export const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
-    button.textContent = name; // 버튼에 표시할 텍스트 설정
+import {CLASS, ELEMENT_ID, EVENT, TAG} from "../../../../config/common.js";
 
-    button.addEventListener("click", buttonActionMapper[key]);
+export let initialButtons = (buttonMessages, buttonActionMapper) => {
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
+  Object.entries(buttonMessages).forEach(([key, task]) => {
+    const button = document.createElement(TAG.DIV);
+    button.className = CLASS.BUTTON_ITEM;
+    button.textContent = task; // 버튼에 표시할 텍스트 설정
+
+    button.addEventListener(EVENT.CLICK, buttonActionMapper[key]);
     buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
   });
 }

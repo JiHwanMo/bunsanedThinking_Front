@@ -3,6 +3,7 @@ import {
   fetchDeleteInsuranceProduct,
   fetchGetInsuranceProductDetail
 } from "../../../../apiUtils/apiDocumentation/employee/productManagement/productManagement.js"
+import {CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
 
 const insuranceDetail = (dto) => {
   const detail = [
@@ -66,8 +67,8 @@ const context = {
 
 export const renderDetails = async () => {
   // 세션에서 데이터 가져오기
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const type = sessionStorage.getItem("currentType");
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
@@ -78,26 +79,26 @@ export const renderDetails = async () => {
 
 // 상세 정보를 테이블 형식으로 렌더링하는 함수
 const renderDetailsTable = (data) => {
-  const detailsTable = document.getElementById("detailsTable");
+  const detailsTable = document.getElementById(ELEMENT_ID.DETAILS_TABLE);
 
-  const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
+  const details = context[sessionStorage.getItem(KEY.CURRENT_TYPE)].detailGetter(data);
 
   // 테이블에 각 정보를 추가
   details.forEach(detail => {
-    const row = document.createElement("tr");
+    const row = document.createElement(TAG.TR);
     if (Array.isArray(detail.value)) {
-      const tableHead = document.createElement("th");
+      const tableHead = document.createElement(TAG.TH);
       tableHead.textContent = detail.label;
 
-      const tableData = document.createElement("td");
+      const tableData = document.createElement(TAG.TD);
       detail.value.forEach(listDetail => {
-        const nestedTable = document.createElement("table");
+        const nestedTable = document.createElement(TAG.TABLE);
         listDetail.forEach(item => {
-          const nestedRow = document.createElement("tr")
-          const labelCell = document.createElement("th");
+          const nestedRow = document.createElement(TAG.TR)
+          const labelCell = document.createElement(TAG.TH);
           labelCell.textContent = item.label;
 
-          const valueCell = document.createElement("td");
+          const valueCell = document.createElement(TAG.TD);
           valueCell.textContent = item.value;
 
           nestedRow.appendChild(labelCell);
@@ -110,51 +111,51 @@ const renderDetailsTable = (data) => {
       row.appendChild(tableHead);
       row.appendChild(tableData);
     } else {
-      const labelCell = document.createElement("th");
+      const labelCell = document.createElement(TAG.TH);
       labelCell.textContent = detail.label;
 
-      const valueCell = document.createElement("td");
+      const valueCell = document.createElement(TAG.TD);
       valueCell.textContent = detail.value;
 
       row.appendChild(labelCell);
       row.appendChild(valueCell);
     }
-    detailsTable.querySelector("tbody").appendChild(row);
+    detailsTable.querySelector(TAG.TBODY).appendChild(row);
   });
 };
 
 
 const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, productManagementTaskMapper);
+  initialButtons(context[sessionStorage.getItem(KEY.CURRENT_TYPE)].buttons, productManagementTaskMapper);
 };
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
   // 객체의 각 항목을 순회하여 버튼 생성
   Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
+    const button = document.createElement(TAG.DIV);
+    button.className = CLASS.BUTTON_ITEM;
     button.textContent = name; // 버튼에 표시할 텍스트 설정
 
-    button.addEventListener("click", buttonActionMapper[key]);
+    button.addEventListener(EVENT.CLICK, buttonActionMapper[key]);
 
     buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
   });
 }
 
 const updateInsurance = async () => {
-  sessionStorage.setItem("selectedButtonType", JSON.stringify("UPDATE"));
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, JSON.stringify("UPDATE"));
+  window.location.href = LOCATION.INPUT;
 }
 
 const deleteInsurance = async () => {
   const userConfirmed = confirm(POP_UP.DELETE.QUESTION);
   if (userConfirmed) {
     alert(POP_UP.DELETE.OK);
-    const type = sessionStorage.getItem("currentType");
-    const id = sessionStorage.getItem("selectedDataId");
+    const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
+    const id = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
     await context[type].fetchDelete(id);
-    window.location.href = "home.html";
+    window.location.href = LOCATION.HOME;
   } else {
     window.history.back();
   }

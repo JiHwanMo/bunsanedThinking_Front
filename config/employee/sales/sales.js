@@ -221,3 +221,15 @@ export const NAME_MAPPER= {
   INDUCE_INSURANCE_PRODUCT: "INDUCE_INSURANCE_PRODUCT",
   INDUCE_LOAN_PRODUCT: "INDUCE_LOAN_PRODUCT"
 }
+
+export const INSURANCE_TYPE={
+  DISEASE : "Disease",
+  INJURY : "Injury",
+  AUTOMOBILE: "Automobile",
+}
+
+export const LOAN_TYPE= {
+  COLLATERAL: "Collateral",
+  FIXED_DEPOSIT: "FixedDeposit",
+  INSURANCE_CONTRACT: "InsuranceContract"
+}

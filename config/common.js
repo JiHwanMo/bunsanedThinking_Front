@@ -65,7 +65,10 @@ export const CLASS = {
   GREETING: "greeting",
   STAR_BUTTONS_CONTAINER: "star-buttons-container",
   STAR_BUTTON: "star-button",
-  SELECTED: "selected"
+  SELECTED: "selected",
+  //추가했음
+  BUTTON_ITEM: "button-item",
+  BUTTON_GROUP: "button-group"
 }
 
 export const LOCATION = {
@@ -95,3 +98,8 @@ export const CLASS_SELECTOR = {
 
 export const STRING_EMPTY = "";
 export const ZERO = 0;
+
+//추가했음
+export const COMBO_LIST_FETCH ={
+ ALL: "all"
+};

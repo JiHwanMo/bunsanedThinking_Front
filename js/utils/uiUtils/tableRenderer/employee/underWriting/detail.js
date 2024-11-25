@@ -3,6 +3,8 @@ import {
   fetchGetContractDetail,
   fetchReviewAcquisition
 } from "../../../../apiUtils/apiDocumentation/employee/underWriting/underWriting.js";
+import {ELEMENT_ID, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
+import {initialButtons} from "../../../common/buttonUtils.js";
 
 const contractDetail = (dto) => {
   return [
@@ -52,8 +54,8 @@ const context = {
 };
 
 export const renderDetails = async () => {
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const type = sessionStorage.getItem("currentType");
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
@@ -63,25 +65,25 @@ export const renderDetails = async () => {
 };
 
 const renderDetailsTable = (data) => {
-  const detailsTable = document.getElementById("detailsTable");
+  const detailsTable = document.getElementById(ELEMENT_ID.DETAILS_TABLE);
 
-  const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
+  const details = context[sessionStorage.getItem(KEY.CURRENT_TYPE)].detailGetter(data);
 
   details.forEach(detail => {
-    const row = document.createElement("tr");
+    const row = document.createElement(TAG.TR);
     if (Array.isArray(detail.value)) {
-      const tableHead = document.createElement("th");
+      const tableHead = document.createElement(TAG.TH);
       tableHead.textContent = detail.label;
 
-      const tableData = document.createElement("td");
+      const tableData = document.createElement(TAG.TD);
       detail.value.forEach(listDetail => {
-        const nestedTable = document.createElement("table");
+        const nestedTable = document.createElement(TAG.TABLE);
         listDetail.forEach(item => {
-          const nestedRow = document.createElement("tr");
-          const labelCell = document.createElement("th");
+          const nestedRow = document.createElement(TAG.TR);
+          const labelCell = document.createElement(TAG.TH);
           labelCell.textContent = item.label;
 
-          const valueCell = document.createElement("td");
+          const valueCell = document.createElement(TAG.TD);
           valueCell.textContent = item.value;
 
           nestedRow.appendChild(labelCell);
@@ -94,47 +96,33 @@ const renderDetailsTable = (data) => {
       row.appendChild(tableHead);
       row.appendChild(tableData);
     } else {
-      const labelCell = document.createElement("th");
+      const labelCell = document.createElement(TAG.TH);
       labelCell.textContent = detail.label;
 
-      const valueCell = document.createElement("td");
+      const valueCell = document.createElement(TAG.TD);
       valueCell.textContent = detail.value;
 
       row.appendChild(labelCell);
       row.appendChild(valueCell);
     }
-    detailsTable.querySelector("tbody").appendChild(row);
+    detailsTable.querySelector(TAG.TBODY).appendChild(row);
   });
 };
 
 const renderButtons = (selectedDataId) => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, underwritingTaskMapper(selectedDataId));
-};
-
-const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-
-  Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
-    button.textContent = name;
-
-    button.addEventListener("click", buttonActionMapper[key]);
-
-    buttonContainer.appendChild(button);
-  });
+  initialButtons(context[sessionStorage.getItem(KEY.CURRENT_TYPE)].buttons, underwritingTaskMapper(selectedDataId));
 };
 
 const acceptanceInsurance = async (selectedDataId) => {
   await context.REVIEW_ACQUISITION.fetchReviewAcquisition(selectedDataId, true);
   alert(POP_UP.ACCEPTANCE);
-  window.location.href = "home.html";
+  window.location.href = LOCATION.HOME;
 };
 
 const deniedInsurance = async (selectedDataId) => {
   await context.REVIEW_ACQUISITION.fetchReviewAcquisition(selectedDataId, false);
   alert(POP_UP.DENIED);
-  window.location.href = "home.html";
+  window.location.href = LOCATION.HOME;
 };
 
 const underwritingTaskMapper = (selectedDataId) => ({

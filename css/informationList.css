@@ -86,12 +86,14 @@ table {
   border-collapse: collapse;
   text-align: center;
   font-size: 14px; /* 글자 크기를 약간 줄임 */
+  user-select: none; /* 글자 드래그 방지 */
 }
 
 th, td {
   border: 1px solid #333;
   padding: 8px;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  user-select: none; /* 글자 드래그 방지 */
 }
 
 th {
@@ -99,9 +101,11 @@ th {
   font-size: 14px; /* 헤더의 글자 크기를 약간 줄임 */
 }
 
+
 table tr {
   cursor: pointer;
   transition: background-color 0.3s;
+  user-select: none; /* 글자 드래그 방지 */
 }
 
 table tr:hover {

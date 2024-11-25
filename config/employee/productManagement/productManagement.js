@@ -84,3 +84,7 @@ export const DETAIL_COLUMN_NAME = {
     }
   }
 };
+
+export const NAME_MAPPER= {
+  MANAGE_INSURANCE_PRODUCT: "MANAGE_INSURANCE_PRODUCT"
+}

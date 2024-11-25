@@ -1,5 +1,6 @@
 import { BUTTON } from '../../../../../../config/employee/sales/sales.js';
 import { viewInformationListAll,informationType } from '../../../tableRenderer/employee/sales/informationList.js';
+import {initialButtons} from "../../../common/buttonUtils.js";
 
 export const renderButtons = () => {
   initialButtons(BUTTON.TASK.EMPLOYEE.SALES.HOME, salesTaskMapper);
@@ -27,18 +28,4 @@ const salesTaskMapper = {
   HANDLE_INSURANCE_CONSULTATION: handleInsuranceConsultation,
   INDUCE_INSURANCE_PRODUCT: induceInsuranceProduct,
   INDUCE_LOAN_PRODUCT: induceLoanProduct
-}
-
-const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-
-  Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
-    button.textContent = name;
-
-    button.addEventListener("click", buttonActionMapper[key]);
-
-    buttonContainer.appendChild(button);
-  });
 }
