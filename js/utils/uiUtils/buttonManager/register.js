@@ -1,6 +1,7 @@
 import {initialButtons} from "../common/buttonUtils.js";
 import {BUTTON, INPUT_FORM} from "../../../../config/register.js";
 import {fetchSignUp} from "../../apiUtils/apiDocumentation/customer/customer.js";
+import {STRING_EMPTY, TAG} from "../../../../config/common.js";
 
 const getSignUpDTO = (name, age, gender, address, phoneNumber,
                       residentRegistrationNumber, job,
@@ -30,7 +31,6 @@ const signUp = async () => {
   const age = document.getElementById(INPUT_FORM.AGE.id).value;
   const buttonGroup = document.querySelector(".button-group");
   const gender = buttonGroup ? buttonGroup.dataset.selectedValue : null;
-  // 이거 어캐찾누
   const address = document.getElementById(INPUT_FORM.ADDRESS.id).value;
   const phoneNumber = document.getElementById(INPUT_FORM.PHONE_NUMBER.id).value;
   const residentRegistrationNumber = document.getElementById(INPUT_FORM.RESIDENT_REGISTRATION_NUMBER.id).value;
@@ -41,35 +41,25 @@ const signUp = async () => {
 
   const dto = getSignUpDTO(name, age, gender, address, phoneNumber,
     residentRegistrationNumber, job, bankAccount, bankName, property,
-    mapDynamicFields("accidentHistory", {
-      date: "date",
-      사고내역: "accidentDetail"
-    }),
-    mapDynamicFields("surgeryHistory", {
-      date: "date",
-      병원이름: "hospitalName",
-      수술이름: "name"
-    }),
-    mapDynamicFields("diseaseHistory", {
-      date: "dateOfDiagnosis",
-      질병이름: "name"
-    }));
-  await fetchSignUp(dto);
+    mapDynamicFields("accidentHistory"),
+    mapDynamicFields("surgeryHistory"),
+    mapDynamicFields("diseaseHistory")
+  );
+  console.log(JSON.stringify(dto));
+  // await fetchSignUp(dto); -- 서버쪽 DTO 수정해야 함
 }
 
-const mapDynamicFields = (sectionId, mapping) => {
-  const section = document.getElementById(`${sectionId}Container`);
-  if (!section) return [];
+const mapDynamicFields = (sectionId) => {
+  const sectionDiv = document.getElementById(`${sectionId}Container`);
+  if (!sectionDiv) return [];
 
-  const inputGroups = Array.from(section.querySelectorAll(".form-group"));
-  return inputGroups.map((group) => {
-    const inputs = Array.from(group.querySelectorAll("input"));
+  const inputDivs = Array.from(sectionDiv.querySelectorAll(".form-group"));
+  return inputDivs.map((inputDiv) => {
+    const inputs = Array.from(inputDiv.querySelectorAll(TAG.INPUT));
     const values = {};
     inputs.forEach((input) => {
-      const key = mapping[input.name.replace(sectionId, "")];
-      if (key) {
-        values[key] = input.value;
-      }
+      const key = input.name.replace(sectionId, STRING_EMPTY);
+      if (key) values[key] = input.value;
     });
     return values;
   });

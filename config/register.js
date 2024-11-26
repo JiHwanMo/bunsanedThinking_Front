@@ -102,17 +102,27 @@ export const DYNAMIC_SECTION_FORM = {
   ACCIDENT_HISTORY: {
     sectionTitle: "사고 이력",
     sectionId: "accidentHistory",
-    fieldNames: ["date", "사고 내역"]
+    fieldNames: {
+      date: "date",
+      accidentDetail: "사고 내역"
+    }
   },
   SURGERY_HISTORY: {
     sectionTitle: "수술 이력",
     sectionId: "surgeryHistory",
-    fieldNames: ["date", "병원 이름", "수술 이름"]
+    fieldNames: {
+      date: "date",
+      hospitalName: "병원 이름",
+      name: "수술 이름"
+    }
   },
   DISEASE_HISTORY: {
     sectionTitle: "질병 이력",
     sectionId: "diseaseHistory",
-    fieldNames: ["date", "질병 이름"]
+    fieldNames: {
+      dateOfDiagnosis: "dateOfDiagnosis",
+      name: "질병 이름"
+    }
   }
 }
 
