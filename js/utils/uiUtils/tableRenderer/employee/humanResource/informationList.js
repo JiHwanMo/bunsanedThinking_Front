@@ -18,7 +18,7 @@ import {
   DETAIL_COLUMN_NAME,
   INFORMATION_TYPE, SELECTED_BUTTON_TYPE
 } from "../../../../../../config/employee/humanResource/humanResource.js";
-import {TITLE} from "../../../../../../config/register.js";
+import {TITLE} from "../../../../../../config/employee/humanResource/humanResource.js";
 
 export const informationType = {
   MANAGEMENT_EMPLOYEE: INFORMATION_TYPE.MANAGEMENT_EMPLOYEE
