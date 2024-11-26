@@ -136,7 +136,8 @@ export const DETAIL_COLUMN_NAME = {
 
 export const SELECTED_BUTTON_TYPE= {
   UPDATE: "UPDATE",
-  LOAN_REQUEST: "LOAN_REQUEST"
+  LOAN_REQUEST: "LOAN_REQUEST",
+  POST: "POST"
 }
 
 export const ELEMENT_ID= {
@@ -186,10 +187,6 @@ export const TITLE= {
 
 export const COMBO_BOX= {
   ALL: "all"
-}
-
-export const SELECTED_BUTTON_TYPE= {
-  POST: "POST"
 }
 
 export const LABEL= {
