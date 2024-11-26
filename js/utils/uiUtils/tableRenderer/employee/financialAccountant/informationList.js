@@ -231,7 +231,6 @@ const setSearchBar = () => {
 }
 
 const setTableBody = () => {
-  const tableBody = document.getElementById(KEY.LIST);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const data = JSON.parse(sessionStorage.getItem(KEY.LIST));
   data.forEach(item => {
