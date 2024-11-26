@@ -268,25 +268,6 @@ const setTableBody = () => {
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const data = JSON.parse(sessionStorage.getItem(KEY.LIST));
   data.forEach(item => {
-    const row = document.createElement(TAG.TR);
-    row.innerHTML = context[type].rowGetter(item);
-    let id = context[type].idGetter(item);
-    // 각 행에 클릭 이벤트 추가
-    row.addEventListener(EVENT.CLICK, () => {
-      if (window.selectedRow) {
-        window.selectedRow.classList.remove(CLASS.SELECTED);
-      }
-      row.classList.add(CLASS.SELECTED);
-      window.selectedRow = row;
-    });
-
-    // 더블 클릭 시 상세 페이지로 이동
-    row.addEventListener(EVENT.DOUBLE_CLICK, () => {
-      // 상세 정보를 세션에 저장
-      sessionStorage.setItem(KEY.SELECTED_DATA_ID, JSON.stringify(id));
-      window.location.href = LOCATION.DETAIL;
-    });
-
-    tableBody.appendChild(row);
+    setOneRow(item, type);
   });
 }

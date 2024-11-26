@@ -3,7 +3,7 @@ import {
 } from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js"
 import {
   BUTTON,
-  CLASS,
+  CLASS, CLASS_SELECTOR,
   ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
@@ -185,7 +185,7 @@ const initTableBySelect = async (id, type) => { // 추가
 }
 
 const setSearchBar = () => {
-  const container = document.querySelector(".search-container");
+  const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
   if (select != null) { // 추가
@@ -207,25 +207,6 @@ const setTableBody = () => {
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const data = JSON.parse(sessionStorage.getItem(KEY.LIST));
   data.forEach(item => {
-    const row = document.createElement(TAG.TR);
-    let id = context[type].idGetter(item);
-    row.innerHTML = context[type].rowGetter(item);
-    // 각 행에 클릭 이벤트 추가
-    row.addEventListener(EVENT.CLICK, () => {
-      if (window.selectedRow) {
-        window.selectedRow.classList.remove(CLASS.SELECTED);
-      }
-      row.classList.add(CLASS.SELECTED);
-      window.selectedRow = row;
-    });
-
-    // 더블 클릭 시 상세 페이지로 이동
-    row.addEventListener(EVENT.DOUBLE_CLICK, () => {
-      // 상세 정보를 세션에 저장
-      sessionStorage.setItem(KEY.SELECTED_DATA_ID, JSON.stringify(id));
-      window.location.href = LOCATION.DETAIL;
-    });
-
-    tableBody.appendChild(row);
+    setOneRow(item, type);
   });
 }
