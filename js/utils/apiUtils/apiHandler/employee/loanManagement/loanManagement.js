@@ -32,6 +32,10 @@ export const fetchGetLoanRequestHandler = async (contractId) => {
   return await fetchGetHandler(`${defaultURL}/getLoanRequest?id=${contractId}`);
 }
 
+export const fetchGetLoanRequestDetailHandler = async (contractId) => {
+  return await fetchGetHandler(`${defaultURL}/getLoanRequestDetail?id=${contractId}`)
+}
+
 export const fetchAddCollateralProductHandler = async (addCollateralDto) => {
   return await fetchPostHandler(`${defaultURL}/addCollateralProduct`, addCollateralDto);
 };

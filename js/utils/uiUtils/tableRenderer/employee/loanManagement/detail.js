@@ -1,6 +1,6 @@
 import {
   fetchGetLoanProductDetail,
-  fetchGetLoanRequest
+  fetchGetLoanRequestDetail
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
 import {
   COLUMN_NAME,
@@ -106,7 +106,7 @@ const context = {
   },
   LOAN_REQUEST: {
     detailGetter: loanRequestDetail,
-    fetchGetById: fetchGetLoanRequest
+    fetchGetById: fetchGetLoanRequestDetail
   }
 }
 
