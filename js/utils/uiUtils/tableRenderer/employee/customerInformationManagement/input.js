@@ -89,8 +89,7 @@ const renderInputFields = (data) => {
     addAccidentHistory();
     addSurgeryHistory();
     addDiseaseHistory();
-  }else if(selectedButtonType === "UPDATE"){
-
+  } else if(selectedButtonType === "UPDATE") {
   let selectedIndex = 1; // 기본 선택 항목은 고객 이름
   let placeholderValue = data.name || "";
 
@@ -115,53 +114,125 @@ const renderInputFields = (data) => {
         <option value="7">${DETAIL_COLUMN_NAME.CUSTOMER_LIST.PROPERTY}</option>
         <option value="8">${DETAIL_COLUMN_NAME.CUSTOMER_LIST.BANK_NAME}</option>
         <option value="9">${DETAIL_COLUMN_NAME.CUSTOMER_LIST.BANK_ACCOUNT}</option>
+        <option value="10">${DETAIL_COLUMN_NAME.CUSTOMER_LIST.ACCIDENT_HISTORY}</option>
+        <option value="11">${DETAIL_COLUMN_NAME.CUSTOMER_LIST.SURGERY_HISTORY}</option>
+        <option value="12">${DETAIL_COLUMN_NAME.CUSTOMER_LIST.DISEASE_HISTORY}</option>
       </select>
     </div>
-    <div class="form-group">
+    <div class="form-group basic-input-container">
       <label for="input">수정할 값</label>
       <input type="text" id="input" name="input" value="${placeholderValue}" placeholder="수정할 값을 입력하세요" required>
     </div>
+
+    <!-- 이력 업데이트 전용 필드 -->
+    <div id="historyFields" class="hidden">
+        <div class="form-group">
+          <label for="historyId">이력 ID</label>
+          <input type="number" id="historyId" name="historyId" placeholder="이력 ID를 입력하세요">
+        </div>
+        <div id="accidentFields" class="hidden">
+          <div class="form-group">
+            <label for="accidentDate">사고 날짜</label>
+            <input type="date" id="accidentDate" name="accidentDate">
+          </div>
+          <div class="form-group">
+            <label for="accidentDetail">사고 내용</label>
+            <input type="text" id="accidentDetail" name="accidentDetail" placeholder="사고 내용을 입력하세요">
+          </div>
+        </div>
+        <div id="surgeryFields" class="hidden">
+          <div class="form-group">
+            <label for="surgeryDate">수술 날짜</label>
+            <input type="date" id="surgeryDate" name="surgeryDate">
+          </div>
+          <div class="form-group">
+            <label for="hospitalName">병원 이름</label>
+            <input type="text" id="hospitalName" name="hospitalName" placeholder="병원 이름을 입력하세요">
+          </div>
+          <div class="form-group">
+            <label for="surgeryName">수술명</label>
+            <input type="text" id="surgeryName" name="surgeryName" placeholder="수술명을 입력하세요">
+          </div>
+        </div>
+        <div id="diseaseFields" class="hidden">
+          <div class="form-group">
+            <label for="diseaseDate">진단 날짜</label>
+            <input type="date" id="diseaseDate" name="diseaseDate">
+          </div>
+          <div class="form-group">
+            <label for="diseaseName">질병명</label>
+            <input type="text" id="diseaseName" name="diseaseName" placeholder="질병명을 입력하세요">
+          </div>
+        </div>
+      </div>
   `;
     // `<select>` 요소의 `onchange` 이벤트 추가
     const selectElement = document.getElementById("index");
     const inputElement = document.getElementById("input");
+    const inputContainer = document.querySelector(".basic-input-container");
+    const historyFields = document.getElementById("historyFields");
+    const accidentFields = document.getElementById("accidentFields");
+    const surgeryFields = document.getElementById("surgeryFields");
+    const diseaseFields = document.getElementById("diseaseFields");
 
     selectElement.addEventListener("change", (event) => {
       selectedIndex = parseInt(event.target.value, 10);
 
-      // 선택된 항목에 따라 입력 필드 값 변경
-      switch (selectedIndex) {
-        case 1:
-          placeholderValue = data.name || "";
-          break;
-        case 2:
-          placeholderValue = data.phoneNumber || "";
-          break;
-        case 3:
-          placeholderValue = data.job || "";
-          break;
-        case 4:
-          placeholderValue = data.age || "";
-          break;
-        case 5:
-          placeholderValue = data.gender || "";
-          break;
-        case 6:
-          placeholderValue = data.address || "";
-          break;
-        case 7:
-          placeholderValue = data.property || "";
-          break;
-        case 8:
-          placeholderValue = data.bankName || "";
-          break;
-        case 9:
-          placeholderValue = data.bankAccount || "";
-          break;
-        default:
-          placeholderValue = "";
+      // 기본 숨김 처리
+      inputContainer.classList.add("hidden");
+      historyFields.classList.add("hidden");
+      accidentFields.classList.add("hidden");
+      surgeryFields.classList.add("hidden");
+      diseaseFields.classList.add("hidden");
+
+      if (selectedIndex === 10) {
+        historyFields.classList.remove("hidden");
+        accidentFields.classList.remove("hidden");
+      } else if (selectedIndex === 11) {
+        historyFields.classList.remove("hidden");
+        surgeryFields.classList.remove("hidden");
+      } else if (selectedIndex === 12) {
+        historyFields.classList.remove("hidden");
+        diseaseFields.classList.remove("hidden");
+      } else {
+        inputContainer.classList.remove("hidden");
+
+      // if (selectedIndex >= 1 && selectedIndex <= 9) {
+      //   inputContainer.classList.remove("hidden");
+        // 선택된 항목에 따라 입력 필드 값 변경
+        switch (selectedIndex) {
+          case 1:
+            placeholderValue = data.name || "";
+            break;
+          case 2:
+            placeholderValue = data.phoneNumber || "";
+            break;
+          case 3:
+            placeholderValue = data.job || "";
+            break;
+          case 4:
+            placeholderValue = data.age || "";
+            break;
+          case 5:
+            placeholderValue = data.gender || "";
+            break;
+          case 6:
+            placeholderValue = data.address || "";
+            break;
+          case 7:
+            placeholderValue = data.property || "";
+            break;
+          case 8:
+            placeholderValue = data.bankName || "";
+            break;
+          case 9:
+            placeholderValue = data.bankAccount || "";
+            break;
+          default:
+            placeholderValue = "";
+        }
+        inputElement.value = placeholderValue;
       }
-      inputElement.value = placeholderValue;
     });
   }
 }
