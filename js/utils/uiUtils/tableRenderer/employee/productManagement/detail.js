@@ -1,4 +1,9 @@
-import {BUTTON, DETAIL_COLUMN_NAME, POP_UP} from "../../../../../../config/employee/productManagement/productManagement.js";
+import {
+  BUTTON,
+  DETAIL_COLUMN_NAME,
+  INSURANCE_TYPE,
+  POP_UP, VALUE
+} from "../../../../../../config/employee/productManagement/productManagement.js";
 import {
   fetchDeleteInsuranceProduct,
   fetchGetInsuranceProductDetail
@@ -17,9 +22,9 @@ const insuranceDetail = (dto) => {
     { label: DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.CONTRACT_PERIOD, value: dto.contractPeriod }
   ];
   switch(dto.insuranceType) {
-    case "Disease": return diseaseDetail(detail, dto);
-    case "Injury": return injuryDetail(detail, dto);
-    case "Automobile": return automobileDetail(detail, dto);
+    case INSURANCE_TYPE.DISEASE: return diseaseDetail(detail, dto);
+    case INSURANCE_TYPE.INJURY: return injuryDetail(detail, dto);
+    case INSURANCE_TYPE.AUTOMOBILE: return automobileDetail(detail, dto);
     default: return detail;
   }
 }
@@ -144,7 +149,7 @@ const initialButtons = (buttonMessages, buttonActionMapper) => {
 }
 
 const updateInsurance = async () => {
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, JSON.stringify("UPDATE"));
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, JSON.stringify(VALUE.UPDATE));
   window.location.href = LOCATION.INPUT;
 }
 

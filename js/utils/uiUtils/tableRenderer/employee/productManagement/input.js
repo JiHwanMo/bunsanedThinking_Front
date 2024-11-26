@@ -1,22 +1,34 @@
-import {DETAIL_COLUMN_NAME} from "../../../../../../config/employee/productManagement/productManagement.js";
+import {
+  DETAIL_COLUMN_NAME,
+  VALUE,
+  ELEMENT_ID as PRODUCT_MANAGEMENT_ELEMENT_ID,
+  OPTION,
+  RENDER_COMBO_BOX,
+  COMMON_FORM,
+  INJURY_FORM,
+  DISEASE_FORM,
+  AUTOMOBILE_FORM,
+  RENDER_COMMON_INPUT_FIELDS_WITH_VALUES
+} from "../../../../../../config/employee/productManagement/productManagement.js";
 import { addButtons } from "../../../buttonManager/employee/productManagement/input.js";
 import { fetchGetInsuranceProductDetail } from "../../../../apiUtils/apiDocumentation/employee/productManagement/productManagement.js";
+import {CLASS, ELEMENT_ID, EVENT, KEY, MESSAGES, STRING_EMPTY, TAG} from "../../../../../../config/common.js";
 
 export const renderInput = async () => {
-  const comboBoxContainer = document.getElementById("comboBoxContainer");
-  const buttonContainer = document.getElementById("buttonContainer");
+  const comboBoxContainer = document.getElementById(ELEMENT_ID.COMBO_BOX_CONTAINER);
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
 
-  const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
+  const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));
 
-  if (selectedButtonType === "POST") {
+  if (selectedButtonType === VALUE.POST) {
     // POST: 콤보박스 렌더링
     const insuranceType = renderComboBox(comboBoxContainer);
-    insuranceType.addEventListener("change", () => {
+    insuranceType.addEventListener(EVENT.CHANGE, () => {
       renderInputFields(insuranceType.value);
     });
-  } else if (selectedButtonType === "UPDATE") {
+  } else if (selectedButtonType === VALUE.UPDATE) {
     // UPDATE: 데이터 가져오기 및 필드 렌더링
-    const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
+    const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
     const insuranceData = await fetchGetInsuranceProductDetail(selectedDataId);
     renderCommonInputFieldsWithValues(insuranceData.insuranceType, insuranceData);
   }
@@ -27,41 +39,41 @@ export const renderInput = async () => {
 
 const options = [
   {
-    value: "",
-    label: "보험 종류를 선택하세요"
+    value: OPTION.DEFAULT.VALUE,
+    label: OPTION.DEFAULT.LABEL
   },
   {
-    value: "Injury",
-    label: "상해 보험"
+    value: OPTION.INJURY.VALUE,
+    label: OPTION.INJURY.LABEL
   },
   {
-    value: "Disease",
-    label: "질병 보험"
+    value: OPTION.DISEASE.VALUE,
+    label: OPTION.DISEASE.LABEL
   },
   {
-    value: "Automobile",
-    label: "자동차 보험"
+    value: OPTION.AUTOMOBILE.VALUE,
+    label: OPTION.AUTOMOBILE.LABEL
   }
 ];
 
 const renderComboBox = (container) => {
   // 콤보박스 컨테이너 초기화
-  let comboBoxContainer = document.getElementById("insuranceTypeContainer");
+  let comboBoxContainer = document.getElementById(PRODUCT_MANAGEMENT_ELEMENT_ID.INSURANCE_TYPE_CONTAINER);
 
   if (!comboBoxContainer) {
-    comboBoxContainer = document.createElement("div");
-    comboBoxContainer.className = "form-group";
-    comboBoxContainer.id = "insuranceTypeContainer";
+    comboBoxContainer = document.createElement(TAG.DIV);
+    comboBoxContainer.className = CLASS.FORM_GROUP;
+    comboBoxContainer.id = PRODUCT_MANAGEMENT_ELEMENT_ID.INSURANCE_TYPE_CONTAINER;
 
-    const label = document.createElement("label");
-    label.setAttribute("for", "insuranceType");
-    label.textContent = "보험 종류";
+    const label = document.createElement(TAG.LABEL);
+    label.setAttribute(RENDER_COMBO_BOX.FOR, PRODUCT_MANAGEMENT_ELEMENT_ID.INSURANCE_TYPE);
+    label.textContent = RENDER_COMBO_BOX.INSURANCE_TYPE;
 
-    const select = document.createElement("select");
-    select.id = "insuranceType";
+    const select = document.createElement(TAG.SELECT);
+    select.id = PRODUCT_MANAGEMENT_ELEMENT_ID.INSURANCE_TYPE;
 
     options.forEach(optionValue => {
-      const option = document.createElement("option");
+      const option = document.createElement(TAG.OPTION);
       option.value = optionValue.value;
       option.textContent = optionValue.label;
       select.appendChild(option);
@@ -77,165 +89,169 @@ const renderComboBox = (container) => {
     return select; // 생성된 콤보박스를 반환
   }
 
-  return document.getElementById("insuranceType"); // 이미 존재하는 콤보박스 반환
+  return document.getElementById(PRODUCT_MANAGEMENT_ELEMENT_ID.INSURANCE_TYPE); // 이미 존재하는 콤보박스 반환
 };
 
 const commonForms = [
   {
-    isTextArea: false,
-    for: "insuranceName",
-    label: "NAME",
-    type: "text",
-    id: "insuranceName",
-    name: "insuranceName",
-    value: "name",
-    placeholder: "NAME"
+    isTextArea: COMMON_FORM.NAME.IS_TEXT_AREA,
+    for: COMMON_FORM.NAME.FOR,
+    label: COMMON_FORM.NAME.LABEL,
+    type: COMMON_FORM.NAME.TYPE,
+    id: COMMON_FORM.NAME.ID,
+    name: COMMON_FORM.NAME.NAME,
+    value: COMMON_FORM.NAME.VALUE,
+    placeholder: COMMON_FORM.NAME.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "ageRange",
-    label: "AGE_RANGE",
-    type: "text",
-    id: "ageRange",
-    name: "ageRange",
-    value: "ageRange",
-    placeholder: "AGE_RANGE"
+    isTextArea: COMMON_FORM.AGE_RANGE.IS_TEXT_AREA,
+    for: COMMON_FORM.AGE_RANGE.FOR,
+    label: COMMON_FORM.AGE_RANGE.LABEL,
+    type: COMMON_FORM.AGE_RANGE.TYPE,
+    id: COMMON_FORM.AGE_RANGE.ID,
+    name: COMMON_FORM.AGE_RANGE.NAME,
+    value: COMMON_FORM.AGE_RANGE.VALUE,
+    placeholder: COMMON_FORM.AGE_RANGE.PLACE_HOLDER
   },
   {
-    isTextArea: true,
-    for: "coverage",
-    label: "COVERAGE",
-    rows: "4",
-    id: "coverage",
-    name: "coverage",
-    value: "coverage",
-    placeholder: "COVERAGE"
+    isTextArea: COMMON_FORM.COVERAGE.IS_TEXT_AREA,
+    for: COMMON_FORM.COVERAGE.FOR,
+    label: COMMON_FORM.COVERAGE.LABEL,
+    rows: COMMON_FORM.COVERAGE.ROWS,
+    id: COMMON_FORM.COVERAGE.ID,
+    name: COMMON_FORM.COVERAGE.NAME,
+    value: COMMON_FORM.COVERAGE.VALUE,
+    placeholder: COMMON_FORM.COVERAGE.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "monthlyPremium",
-    label: "MONTHLY_PREMIUM",
-    type: "number",
-    id: "monthlyPremium",
-    name: "monthlyPremium",
-    value: "monthlyPremium",
-    placeholder: "MONTHLY_PREMIUM"
+    isTextArea: COMMON_FORM.MONTHLY_PREMIUM.IS_TEXT_AREA,
+    for: COMMON_FORM.MONTHLY_PREMIUM.FOR,
+    label: COMMON_FORM.MONTHLY_PREMIUM.LABEL,
+    type: COMMON_FORM.MONTHLY_PREMIUM.TYPE,
+    id: COMMON_FORM.MONTHLY_PREMIUM.ID,
+    name: COMMON_FORM.MONTHLY_PREMIUM.NAME,
+    value:COMMON_FORM.MONTHLY_PREMIUM.VALUE,
+    placeholder: COMMON_FORM.MONTHLY_PREMIUM.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "contractPeriod",
-    label: "CONTRACT_PERIOD",
-    type: "number",
-    id: "contractPeriod",
-    name: "contractPeriod",
-    value: "contractPeriod",
-    placeholder: "CONTRACT_PERIOD"
+    isTextArea: COMMON_FORM.CONTRACT_PERIOD.IS_TEXT_AREA,
+    for: COMMON_FORM.CONTRACT_PERIOD.FOR,
+    label: COMMON_FORM.CONTRACT_PERIOD.LABEL,
+    type: COMMON_FORM.CONTRACT_PERIOD.TYPE,
+    id: COMMON_FORM.CONTRACT_PERIOD.ID,
+    name: COMMON_FORM.CONTRACT_PERIOD.NAME,
+    value: COMMON_FORM.CONTRACT_PERIOD.VALUE,
+    placeholder: COMMON_FORM.CONTRACT_PERIOD.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "maximumMoney",
-    label: "MAXIMUM_MONEY",
-    type: "number",
-    id: "maximumMoney",
-    name: "maximumMoney",
-    value: "maximumMoney",
-    placeholder: "MAXIMUM_MONEY"
+    isTextArea: COMMON_FORM.MAXIMUM_MONEY.IS_TEXT_AREA,
+    for: COMMON_FORM.MAXIMUM_MONEY.FOR,
+    label: COMMON_FORM.MAXIMUM_MONEY.LABEL,
+    type: COMMON_FORM.MAXIMUM_MONEY.TYPE,
+    id: COMMON_FORM.MAXIMUM_MONEY.ID,
+    name:COMMON_FORM.MAXIMUM_MONEY.NAME,
+    value: COMMON_FORM.MAXIMUM_MONEY.VALUE,
+    placeholder: COMMON_FORM.MAXIMUM_MONEY.PLACE_HOLDER
   }
 ];
 
 const createCommonForm = (form) => {
-  const formDiv = document.createElement("div");
-  formDiv.className = "form-group";
-  const formLabel = document.createElement("label");
+  const formDiv = document.createElement(TAG.DIV);
+  formDiv.className = CLASS.FORM_GROUP;
+  const formLabel = document.createElement(TAG.LABEL);
   formLabel.for = form.for;
   formLabel.textContent = DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT[form.label];
   formDiv.appendChild(formLabel);
   let formInput;
   if (form.isTextArea) {
-    formInput = document.createElement("textarea");
+    formInput = document.createElement(TAG.TEXT_AREA);
     formInput.rows = form.rows;
   } else {
-    formInput = document.createElement("input");
+    formInput = document.createElement(TAG.INPUT);
     formInput.type = form.type;
   }
   formInput.id = form.id;
   formInput.name = form.name;
-  formInput.placeholder = `${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT[form.placeholder]}을(를) 입력하세요`;
+  formInput.placeholder = `${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT[form.placeholder]}${MESSAGES.PLACE_HOLDER.INPUT}`;
   formDiv.appendChild(formInput);
   return formDiv;
 }
 
 const createInjuryForm = () => {
   return `
-      <div class="form-group">
-        <label for="injuryType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.INJURY_TYPE}</label>
-        <select id="injuryType" name="injuryType">
-          <option value="">상해 종류를 선택하세요</option>
-          <option value="Minor">경상</option>
-          <option value="Serious">중상</option>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${INJURY_FORM.INJURY_TYPE.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.INJURY_TYPE}</label>
+        <select id=${INJURY_FORM.INJURY_TYPE.ID} name=${INJURY_FORM.INJURY_TYPE.NAME}>
+          <option value=${INJURY_FORM.INJURY_TYPE.DEFAULT.VALUE}>${INJURY_FORM.INJURY_TYPE.DEFAULT.LABEL}</option>
+          <option value=${INJURY_FORM.INJURY_TYPE.MINOR.VALUE}>${INJURY_FORM.INJURY_TYPE.MINOR.LABEL}</option>
+          <option value=${INJURY_FORM.INJURY_TYPE.SERIOUS.VALUE}>${INJURY_FORM.INJURY_TYPE.SERIOUS.LABEL}</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}</label>
-        <input type="number" id="surgeriesLimit" name="surgeriesLimit" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${INJURY_FORM.SURGERY_LIMIT.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}</label>
+        <input type=${INJURY_FORM.SURGERY_LIMIT.TYPE} id=${INJURY_FORM.SURGERY_LIMIT.ID} name=${INJURY_FORM.SURGERY_LIMIT.NAME} placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}${MESSAGES.PLACE_HOLDER.INPUT}" required>
       </div>
     `;
 }
 
 const createDiseaseForm = () => {
   return `
-      <div class="form-group">
-        <label for="diseaseLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}</label>
-        <input type="number" id="diseaseLimit" name="diseaseLimit" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${DISEASE_FORM.DISEASE_LIMIT.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}</label>
+        <input type=${DISEASE_FORM.DISEASE_LIMIT.TYPE} id=${DISEASE_FORM.DISEASE_LIMIT.ID} name=${DISEASE_FORM.DISEASE_LIMIT.NAME} placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}${MESSAGES.PLACE_HOLDER.INPUT}" required>
       </div>
-      <div class="form-group">
-        <label for="diseaseName">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}</label>
-        <input type="text" id="diseaseName" name="diseaseName" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${DISEASE_FORM.DISEASE_NAME.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}</label>
+        <input type=${DISEASE_FORM.DISEASE_NAME.TYPE} id=${DISEASE_FORM.DISEASE_NAME.ID} name=${DISEASE_FORM.DISEASE_NAME.NAME} placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}${MESSAGES.PLACE_HOLDER.INPUT}" required>
       </div>
-      <div class="form-group">
-        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}</label>
-        <input type="number" id="surgeriesLimit" name="surgeriesLimit" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${DISEASE_FORM.SURGERY_LIMIT.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}</label>
+        <input type=${DISEASE_FORM.SURGERY_LIMIT.TYPE} id=${DISEASE_FORM.SURGERY_LIMIT.ID} name=${DISEASE_FORM.SURGERY_LIMIT.NAME} placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}${MESSAGES.PLACE_HOLDER.INPUT}" required>
       </div>
     `;
 }
 
 const createAutomobileForm = () => {
   return `
-      <div class="form-group">
-        <label for="vehicleType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.VEHICLE_TYPE}</label>
-        <select id="vehicleType" name="vehicleType">
-          <option value="">차량 종류를 선택하세요</option>
-          <option value="Amall">소형</option>
-          <option value="Medium">중형</option>
-          <option value="Large">대형</option>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${AUTOMOBILE_FORM.ACCIDENT_LIMIT.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.ACCIDENT_LIMIT}</label>
+        <input type=${AUTOMOBILE_FORM.ACCIDENT_LIMIT.TYPE} id=${AUTOMOBILE_FORM.ACCIDENT_LIMIT.ID} name=${AUTOMOBILE_FORM.ACCIDENT_LIMIT.NAME} placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.ACCIDENT_LIMIT}${MESSAGES.PLACE_HOLDER.INPUT}" required>
+      </div>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${AUTOMOBILE_FORM.VEHICLE_TYPE.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.VEHICLE_TYPE}</label>
+        <select id=${AUTOMOBILE_FORM.VEHICLE_TYPE.ID} name=${AUTOMOBILE_FORM.VEHICLE_TYPE.NAME}>
+          <option value=${AUTOMOBILE_FORM.VEHICLE_TYPE.DEFAULT.VALUE}>${AUTOMOBILE_FORM.VEHICLE_TYPE.DEFAULT.LABEL}</option>
+          <option value=${AUTOMOBILE_FORM.VEHICLE_TYPE.SMALL.VALUE}>${AUTOMOBILE_FORM.VEHICLE_TYPE.SMALL.LABEL}</option>
+          <option value=${AUTOMOBILE_FORM.VEHICLE_TYPE.MEDIUM.VALUE}>${AUTOMOBILE_FORM.VEHICLE_TYPE.MEDIUM.LABEL}</option>
+          <option value=${AUTOMOBILE_FORM.VEHICLE_TYPE.LARGE.VALUE}>${AUTOMOBILE_FORM.VEHICLE_TYPE.LARGE.LABEL}</option>
         </select>
       </div>
-      <div class="form-group">
+      <div class=${CLASS.FORM_GROUP}>
         <label>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.SERVICES}</label>
-        <div class="checkbox-group">
-          <div class="checkbox-item">
-            <label for="serviceTowing">긴급견인</label>
-            <input type="checkbox" id="serviceTowing" name="services" value="EmergencyTowing">
+        <div class=${CLASS.CHECK_BOX_GROUP}>
+          <div class=${CLASS.CHECK_BOX_ITEM}>
+            <label for=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TOWING.FOR}>${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TOWING.LABEL}</label>
+            <input type=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TOWING.TYPE} id=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TOWING.ID} name=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TOWING.NAME} value=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TOWING.VALUE}>
           </div>
-          <div class="checkbox-item">
-            <label for="serviceJumpstart">긴급시동</label>
-            <input type="checkbox" id="serviceJumpstart" name="services" value="EmergencyStart">
+          <div class=${CLASS.CHECK_BOX_ITEM}>
+            <label for=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_JUMP_START.FOR}>${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_JUMP_START.LABEL}</label>
+            <input type=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_JUMP_START.TYPE} id=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_JUMP_START.ID} name=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_JUMP_START.NAME} value=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_JUMP_START.VALUE}>
           </div>
-          <div class="checkbox-item">
-            <label for="serviceRefueling">비상급유</label>
-            <input type="checkbox" id="serviceRefueling" name="services" value="EmergencyRefueling">
+          <div class=${CLASS.CHECK_BOX_ITEM}>
+            <label for=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_REFUELING.FOR}>${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_REFUELING.LABEL}</label>
+            <input type=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_REFUELING.TYPE} id=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_REFUELING.ID} name=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_REFUELING.NAME} value=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_REFUELING.VALUE}>
           </div>
-          <div class="checkbox-item">
-            <label for="serviceBattery">배터리충전</label>
-            <input type="checkbox" id="serviceBattery" name="services" value="BatteryCharging">
+          <div class=${CLASS.CHECK_BOX_ITEM}>
+            <label for=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_BATTERY.FOR}>${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_BATTERY.LABEL}</label>
+            <input type=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_BATTERY.TYPE} id=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_BATTERY.ID} name=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_BATTERY.NAME} value=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_BATTERY.VALUE}>
           </div>
-          <div class="checkbox-item">
-            <label for="serviceEngineRepair">엔진과열 수리</label>
-            <input type="checkbox" id="serviceEngineRepair" name="services" value="EngineOverheatingRepair">
+          <div class=${CLASS.CHECK_BOX_ITEM}>
+            <label for=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_ENGINE_REPAIR.FOR}>${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_ENGINE_REPAIR.LABEL}</label>
+            <input type=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_ENGINE_REPAIR.TYPE} id=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_ENGINE_REPAIR.ID} name=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_ENGINE_REPAIR.NAME} value=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_ENGINE_REPAIR.VALUE}>
           </div>
-          <div class="checkbox-item">
-            <label for="serviceTireRepair">타이어펑크 수리</label>
-            <input type="checkbox" id="serviceTireRepair" name="services" value="TirepunkRepair">
+          <div class=${CLASS.CHECK_BOX_ITEM}>
+            <label for=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TIRE_REPAIR.FOR}>${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TIRE_REPAIR.LABEL}</label>
+            <input type=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TIRE_REPAIR.TYPE} id=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TIRE_REPAIR.ID} name=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TIRE_REPAIR.NAME} value=${AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TIRE_REPAIR.VALUE}>
           </div>
         </div>
       </div>
@@ -249,57 +265,57 @@ const fields = {
 };
 
 const renderInputFields = (insuranceType) => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
   while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
-  if (insuranceType === "") return;
+  if (insuranceType === STRING_EMPTY) return;
   commonForms.forEach(form => inputFieldsContainer.appendChild(createCommonForm(form)));
   inputFieldsContainer.innerHTML += fields[insuranceType](); // 선택된 옵션에 따라 입력란 표시
 };
 
 const renderCommonInputFieldsWithValues = (insuranceType, data) => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
   while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
-  if (insuranceType === "") return;
+  if (insuranceType === STRING_EMPTY) return;
   commonForms.forEach(form => {
     inputFieldsContainer.appendChild(createCommonForm(form))
     const input = document.getElementById(form.id);
     if (form.isTextArea)
       input.textContent = data[form.value];
     else
-      input.setAttribute("value", data[form.value]);
+      input.setAttribute(RENDER_COMMON_INPUT_FIELDS_WITH_VALUES.VALUE, data[form.value]);
   });
   inputFieldsContainer.innerHTML += fieldsWithDetail[insuranceType](data); // 선택된 옵션에 따라 입력란 표시
 };
 
 const createInjuryFormWithDetail = (data) => {
   return `
-      <div class="form-group">
-        <label for="injuryType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.INJURY_TYPE}</label>
-        <select id="injuryType" name="injuryType">
-          <option value="Minor" ${data.injuryType === "Minor" ? "selected" : ""}>경상</option>
-          <option value="Serious" ${data.injuryType === "Serious" ? "selected" : ""}>중상</option>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${INJURY_FORM.INJURY_TYPE.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.INJURY_TYPE}</label>
+        <select id=${INJURY_FORM.INJURY_TYPE.ID} name=${INJURY_FORM.INJURY_TYPE.NAME}>
+          <option value=${INJURY_FORM.INJURY_TYPE.MINOR.VALUE} ${data.injuryType === INJURY_FORM.INJURY_TYPE.MINOR.VALUE ? CLASS.SELECTED : STRING_EMPTY}>${INJURY_FORM.INJURY_TYPE.MINOR.LABEL}</option>
+          <option value=${INJURY_FORM.INJURY_TYPE.SERIOUS.VALUE} ${data.injuryType === INJURY_FORM.INJURY_TYPE.SERIOUS.VALUE ? CLASS.SELECTED : STRING_EMPTY}>${INJURY_FORM.INJURY_TYPE.SERIOUS.LABEL}</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}</label>
-        <input type="number" id="surgeriesLimit" name="surgeriesLimit" value="${data.surgeriesLimit || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${INJURY_FORM.SURGERY_LIMIT.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}</label>
+        <input type=${INJURY_FORM.SURGERY_LIMIT.TYPE} id=${INJURY_FORM.SURGERY_LIMIT.ID} name=${INJURY_FORM.SURGERY_LIMIT.NAME} value="${data.surgeriesLimit || STRING_EMPTY}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.INJURY.SURGERIES_LIMIT}${MESSAGES.PLACE_HOLDER.INPUT}" required>
       </div>
     `;
 }
 
 const createDiseaseFormWithDetail = (data) => {
   return `
-      <div class="form-group">
-        <label for="diseaseLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}</label>
-        <input type="number" id="diseaseLimit" name="diseaseLimit" value="${data.diseaseLimit || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${DISEASE_FORM.DISEASE_LIMIT.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}</label>
+        <input type=${DISEASE_FORM.DISEASE_LIMIT.TYPE} id=${DISEASE_FORM.DISEASE_LIMIT.ID} name=${DISEASE_FORM.DISEASE_LIMIT.NAME} value="${data.diseaseLimit || STRING_EMPTY}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_LIMIT}${MESSAGES.PLACE_HOLDER.INPUT}" required>
       </div>
-      <div class="form-group">
-        <label for="diseaseName">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}</label>
-        <input type="text" id="diseaseName" name="diseaseName" value="${data.diseaseName || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${DISEASE_FORM.DISEASE_NAME.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}</label>
+        <input type=${DISEASE_FORM.DISEASE_NAME.TYPE} id=${DISEASE_FORM.DISEASE_NAME.ID} name=${DISEASE_FORM.DISEASE_NAME.NAME} value="${data.diseaseName || STRING_EMPTY}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.DISEASE_NAME}${MESSAGES.PLACE_HOLDER.INPUT}" required>
       </div>
-      <div class="form-group">
-        <label for="surgeriesLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}</label>
-        <input type="number" id="surgeriesLimit" name="surgeriesLimit" value="${data.surgeriesLimit || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${DISEASE_FORM.SURGERY_LIMIT.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}</label>
+        <input type=${DISEASE_FORM.SURGERY_LIMIT.TYPE} id=${DISEASE_FORM.SURGERY_LIMIT.ID} name=${DISEASE_FORM.SURGERY_LIMIT.NAME} value="${data.surgeriesLimit || STRING_EMPTY}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.DISEASE.SURGERIES_LIMIT}${MESSAGES.PLACE_HOLDER.INPUT}" required>
       </div>
     `;
 }
@@ -307,48 +323,48 @@ const createDiseaseFormWithDetail = (data) => {
 const createAutomobileFormWithDetail = (data) => {
   const renderServiceCheckbox = (selectedServices = []) => {
     const serviceOptions = [
-      { value: "EmergencyTowing", label: "긴급견인" },
-      { value: "EmergencyStart", label: "긴급시동" },
-      { value: "EmergencyRefueling", label: "비상급유" },
-      { value: "BatteryCharging", label: "배터리충전" },
-      { value: "EngineOverheatingRepair", label: "엔진과열 수리" },
-      { value: "TirepunkRepair", label: "타이어펑크 수리" }
+      { value: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TOWING.VALUE, label: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TOWING.LABEL },
+      { value: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_JUMP_START.VALUE, label: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_JUMP_START.LABEL },
+      { value: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_REFUELING.VALUE, label: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_REFUELING.LABEL },
+      { value: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_BATTERY.VALUE, label: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_BATTERY.LABEL },
+      { value: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_ENGINE_REPAIR.VALUE, label: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_ENGINE_REPAIR.LABEL },
+      { value: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TIRE_REPAIR.VALUE, label: AUTOMOBILE_FORM.SERVICE_TYPE.SERVICE_TIRE_REPAIR.LABEL }
     ];
 
     return serviceOptions
       .map(
         (service) => `
-        <div class="checkbox-item">
-          <label for="service-${service.value}">${service.label}</label>
+        <div class=${CLASS.CHECK_BOX_ITEM}>
+          <label for="${AUTOMOBILE_FORM.SERVICE.FOR}${service.value}">${service.label}</label>
           <input
-            type="checkbox"
-            id="service-${service.value}"
-            name="services"
+            type=${AUTOMOBILE_FORM.SERVICE.TYPE}
+            id="${AUTOMOBILE_FORM.SERVICE.ID}${service.value}"
+            name=${AUTOMOBILE_FORM.SERVICE.NAME}
             value="${service.value}"
-            ${selectedServices.includes(service.value) ? "checked" : ""}
+            ${selectedServices.includes(service.value) ? CLASS.CHECKED : STRING_EMPTY}
           />
         </div>
       `
       )
-      .join("");
+      .join(STRING_EMPTY);
   };
 
   return `
-      <div class="form-group">
-        <label for="accidentLimit">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.ACCIDENT_LIMIT}</label>
-        <input type="number" id="accidentLimit" name="accidentLimit" value="${data.accidentLimit || ""}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.ACCIDENT_LIMIT}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${AUTOMOBILE_FORM.ACCIDENT_LIMIT.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.ACCIDENT_LIMIT}</label>
+        <input type=${AUTOMOBILE_FORM.ACCIDENT_LIMIT.TYPE} id=${AUTOMOBILE_FORM.ACCIDENT_LIMIT.ID} name=${AUTOMOBILE_FORM.ACCIDENT_LIMIT.NAME} value="${data.accidentLimit || STRING_EMPTY}" placeholder="${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.ACCIDENT_LIMIT}${MESSAGES.PLACE_HOLDER.INPUT}" required>
       </div>
-      <div class="form-group">
-        <label for="vehicleType">${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.VEHICLE_TYPE}</label>
-        <select id="vehicleType" name="vehicleType">
-          <option value="Small" ${data.vehicleType === "Small" ? "selected" : ""}>소형</option>
-          <option value="Medium" ${data.vehicleType === "Medium" ? "selected" : ""}>중형</option>
-          <option value="Large" ${data.vehicleType === "Large" ? "selected" : ""}>대형</option>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${AUTOMOBILE_FORM.VEHICLE_TYPE.FOR}>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.VEHICLE_TYPE}</label>
+        <select id=${AUTOMOBILE_FORM.VEHICLE_TYPE.ID} name=${AUTOMOBILE_FORM.VEHICLE_TYPE.NAME}>
+          <option value=${AUTOMOBILE_FORM.VEHICLE_TYPE.SMALL.VALUE} ${data.vehicleType === AUTOMOBILE_FORM.VEHICLE_TYPE.SMALL.VALUE ? CLASS.SELECTED : STRING_EMPTY}>${AUTOMOBILE_FORM.VEHICLE_TYPE.SMALL.LABEL}</option>
+          <option value=${AUTOMOBILE_FORM.VEHICLE_TYPE.MEDIUM.VALUE} ${data.vehicleType === AUTOMOBILE_FORM.VEHICLE_TYPE.MEDIUM.VALUE ? CLASS.SELECTED : STRING_EMPTY}>${AUTOMOBILE_FORM.VEHICLE_TYPE.MEDIUM.LABEL}</option>
+          <option value=${AUTOMOBILE_FORM.VEHICLE_TYPE.LARGE.VALUE} ${data.vehicleType === AUTOMOBILE_FORM.VEHICLE_TYPE.LARGE.VALUE ? CLASS.SELECTED : STRING_EMPTY}>${AUTOMOBILE_FORM.VEHICLE_TYPE.LARGE.LABEL}</option>
         </select>
       </div>
-      <div class="form-group">
+      <div class=${CLASS.FORM_GROUP}>
         <label>${DETAIL_COLUMN_NAME.MANAGE_INSURANCE_PRODUCT.TYPE.AUTOMOBILE.SERVICES}</label>
-        <div class="checkbox-group">
+        <div class=${CLASS.CHECK_BOX_GROUP}>
           ${renderServiceCheckbox(data.serviceTypes || [])}
         </div>
       </div>

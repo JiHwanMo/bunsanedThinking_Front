@@ -5,17 +5,17 @@ import {
   COLUMN_NAME,
   COMBOBOX,
   NAME_MAPPER,
-  TABLE_TITLE
+  TABLE_TITLE, VALUE
 } from "../../../../../../config/employee/productManagement/productManagement.js";
 import {
   BUTTON,
-  CLASS,
+  CLASS, CLASS_SELECTOR,
   COMBO_LIST_FETCH,
   ELEMENT_ID,
   EVENT, INPUT_TYPE,
   KEY,
   LOCATION,
-  MESSAGES,
+  MESSAGES, STRING_EMPTY,
   TAG, ZERO
 } from "../../../../../../config/common.js";
 
@@ -70,15 +70,15 @@ const setTitle = () => {
 }
 
 const setSearchBar = () => {
-  const container = document.querySelector(".search-container");
+  const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
 
   if (select != null) {
     container.appendChild(select);
-    if (select.id === "post") {
+    if (select.id === ELEMENT_ID.POST) {
       select.addEventListener(EVENT.CLICK, () => {
-        sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, JSON.stringify("POST"));
+        sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, JSON.stringify(VALUE.POST));
         window.location.href = LOCATION.INPUT;
       });
     } else {
@@ -109,8 +109,8 @@ const setComboBox = () => {
 
 const setPost = () => {
   const post = document.createElement(TAG.DIV);
-  post.id = "post";
-  post.className = "post-button";
+  post.id = ELEMENT_ID.POST;
+  post.className = CLASS.POST_BUTTON;
   post.textContent = BUTTON.COMMON.POST;
   return post;
 }
@@ -123,7 +123,7 @@ const initTableBySelect = async (id, type) => { // 추가
     await context[type].comboListFetch[selectedOption.value]();
   if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   const input = document.getElementById(ELEMENT_ID.SEARCH_INPUT);
-  if (input != null) input.value = "";
+  if (input != null) input.value = STRING_EMPTY;
   const tableBody = document.getElementById(KEY.LIST);
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   setTableBody();
@@ -162,7 +162,7 @@ const setButton = () => {
 const initTableByInput = async (id, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
-  if (id.length > 0) {
+  if (id.length > ZERO) {
     const item = context[type].needEmployeeId ?
       await context[type].listFetchById(id, sessionStorage.getItem(KEY.LOGIN_ID)) :
       await context[type].listFetchById(id)
