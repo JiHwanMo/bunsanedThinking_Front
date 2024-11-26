@@ -12,7 +12,7 @@ const employeeDetail = (data) => {
     { label: "계좌번호", value: data.bankAccount },
     { label: "주민등록번호", value: data.residentRegistrationNumber },
     { label: "가족관계", value: data.familyList.map(item => family(item)) },
-    { label: "부서 번호", value: data.departmentID },
+    { label: "부서 번호", value: data.departmentId },
     { label: "급여", value: data.salary },
     { label: "입사 날짜", value: data.employmentDate }
   ];
