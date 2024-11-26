@@ -197,9 +197,6 @@ const renderInputFields = (data) => {
       } else {
         inputContainer.classList.remove("hidden");
 
-      // if (selectedIndex >= 1 && selectedIndex <= 9) {
-      //   inputContainer.classList.remove("hidden");
-        // 선택된 항목에 따라 입력 필드 값 변경
         switch (selectedIndex) {
           case 1:
             placeholderValue = data.name || "";

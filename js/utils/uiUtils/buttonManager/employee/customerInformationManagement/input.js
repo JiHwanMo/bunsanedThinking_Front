@@ -146,12 +146,10 @@ const collectFormData = () => {
     const id = parseInt(sessionStorage.getItem("selectedDataId"), 10);
     const index = parseInt(document.getElementById("index").value, 10);
     const input = document.getElementById("input").value.trim();
-
     if (index === 10) {
       const historyId = parseInt(document.getElementById("historyId").value, 10);
       const accidentDate = document.getElementById("accidentDate").value.trim();
       const accidentDetail = document.getElementById("accidentDetail").value.trim();
-
       return {
         id,
         index,
@@ -162,7 +160,6 @@ const collectFormData = () => {
       const surgeryDate = document.getElementById("surgeryDate").value.trim();
       const hospitalName = document.getElementById("hospitalName").value.trim();
       const surgeryName = document.getElementById("surgeryName").value.trim();
-
       return {
         id,
         index,
@@ -172,7 +169,6 @@ const collectFormData = () => {
       const historyId = parseInt(document.getElementById("historyId").value, 10);
       const diseaseDate = document.getElementById("diseaseDate").value.trim();
       const diseaseName = document.getElementById("diseaseName").value.trim();
-
       return {
         id,
         index,
