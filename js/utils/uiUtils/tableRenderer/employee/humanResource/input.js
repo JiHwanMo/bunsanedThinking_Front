@@ -297,20 +297,14 @@ const addDynamicSection = (container, sectionTitle, sectionId) => {
   container.appendChild(sectionDiv);
 };
 
-const addFamilyField = (sectionDiv) => {
+const addFamilyField = (sectionDiv, sectionId) => {
   const inputDiv = document.createElement(TAG.DIV);
   inputDiv.className = CLASS.FORM_GROUP;
+  inputDiv.id = `${sectionId}${ELEMENT_ID.INPUT}`;
 
   const familyCount = document.querySelectorAll('.radio-group').length;
 
-  // 삭제 버튼 추가
-  const removeButton = document.createElement(TAG.BUTTON);
-  removeButton.textContent = "-";
-  removeButton.className = "remove-button";
-  removeButton.addEventListener(EVENT.CLICK, () => {
-    sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
-  });
-
+  const type = getType();
   familyForm.forEach((field) => {
     const formLabel = document.createElement(TAG.LABEL);
     formLabel.for = `${field.name}`;
@@ -327,6 +321,16 @@ const addFamilyField = (sectionDiv) => {
   });
 
   inputDiv.innerHTML += createFamilyInputForm(familyCount);
+
+  // 삭제 버튼 추가
+  const removeButton = document.createElement(TAG.BUTTON);
+  removeButton.textContent = "-";
+  removeButton.className = "remove-button";
+  removeButton.addEventListener(EVENT.CLICK, () => {
+    sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
+  });
+
+  inputDiv.appendChild(removeButton);
 
   sectionDiv.appendChild(inputDiv);
 };

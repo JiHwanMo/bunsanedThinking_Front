@@ -81,7 +81,8 @@ export const ELEMENT_ID= {
     SURVIVAL: "survival"
   },
 
-  CONTAINER: "Container"
+  CONTAINER: "Container",
+  INPUT: "Input"
 }
 
 export const INFORMATION_TYPE= {
