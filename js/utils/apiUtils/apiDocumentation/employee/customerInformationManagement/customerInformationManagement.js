@@ -162,6 +162,55 @@ export const fetchUpdateCustomerInformation = async (updateCustomerInformationDT
 //   console.log(data);
 // })();
 
+// (async () => {
+//   const updateCustomerInformationDTO = {
+//     "id": 20010,
+//     "index": 10,
+//     "accidentHistoryList": [
+//       {
+//         "id": 4109,
+//         "date": "2013-11-06",
+//         "accidentDetail": "무슨사고"
+//       }
+//     ]
+//   }
+//   const data = await fetchUpdateCustomerInformation(updateCustomerInformationDTO);
+//   console.log(data);
+// })();
+
+// (async () => {
+//   const updateCustomerInformationDTO = {
+//     "id": 20010,
+//     "index": 11,
+//     "surgeryHistoryList": [
+//       {
+//         "id": 6109,
+//         "date": "2023-08-15",
+//         "hospitalName": "명지대병원",
+//         "name": "성형수술"
+//       }
+//     ]
+//   }
+//   const data = await fetchUpdateCustomerInformation(updateCustomerInformationDTO);
+//   console.log(data);
+// })();
+
+// (async () => {
+//   const updateCustomerInformationDTO = {
+//     "id": 20010, // 고객 ID
+//     "index": 12, // 사고 이력 업데이트
+//     "diseaseHistoryList": [
+//       {
+//         "id": 51011, // 기존 사고 이력의 ID (새로 추가시 생략 가능)
+//         "dateOfDiagnosis": "2021-06-20",
+//         "name": "코로나"
+//       }
+//     ]
+//   }
+//   const data = await fetchUpdateCustomerInformation(updateCustomerInformationDTO);
+//   console.log(data);
+// })();
+
 export const fetchGetAllCustomerInformation = async () => {
   return await fetchGetAllCustomerInformationHandler();
 }

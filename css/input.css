@@ -307,3 +307,8 @@ button:hover {
   background-color: #ddd;
   color: #fff;
 }
+
+.hidden {
+  display: none;
+}
+
