@@ -29,7 +29,7 @@ const employeeRow = (employee) => {
     <td>${employee.id}</td>
     <td>${employee.name}</td>
     <td>${employee.position}</td>
-    <td>${employee.departmentID}</td>
+    <td>${employee.departmentId}</td>
     <td>${employee.salary}</td>
   `;
 }
