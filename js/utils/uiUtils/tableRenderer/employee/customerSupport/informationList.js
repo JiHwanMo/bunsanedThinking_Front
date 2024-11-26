@@ -32,15 +32,15 @@ export const informationType = {
 }
 const complaintRow = (dto) => {
   return `
-    <td>${dto.complaint.complaintType}</td>
-    <td>${dto.complaint.id}</td>
-    <td>${dto.complaint.title}</td>
-    <td>${dto.complaint.postDate}</td>
-    <td>${dto.complaint.employeeName}</td>
-    <td>${dto.complaint.processingDate}</td>
-    <td>${dto.complaint.processStatus}</td>
-    <td>${dto.customer.name}</td>
-    <td>${dto.customer.phoneNumber}</td>
+    <td>${dto.complaintType}</td>
+    <td>${dto.id}</td>
+    <td>${dto.title}</td>
+    <td>${dto.postDate}</td>
+    <td>${dto.employeeName}</td>
+    <td>${dto.processingDate}</td>
+    <td>${dto.processStatus}</td>
+    <td>${dto.customerName}</td>
+    <td>${dto.customerPhoneNumber}</td>
   `;
 }
 
@@ -61,7 +61,7 @@ const getAccidentId = (data) => {
 }
 
 const getComplaintId = (data) => {
-  return data.complaint.id;
+  return data.id;
 }
 
 const context = {

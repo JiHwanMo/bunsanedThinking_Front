@@ -54,6 +54,10 @@ export const fetchGetComplaintHandler = async (complaintId) => {
   return await fetchGetHandler(`${defaultURL}/getComplaint?complaintId=${complaintId}`);
 };
 
+export const fetchGetComplaintDetailHandler = async (complaintId) => {
+  return await fetchGetHandler(`${defaultURL}/getComplaintDetail?complaintId=${complaintId}`);
+}
+
 export const fetchGetCustomerHandler = async (customerId) => {
   return await fetchGetHandler(`${defaultURL}/getCustomer?customerId=${customerId}`);
 };
