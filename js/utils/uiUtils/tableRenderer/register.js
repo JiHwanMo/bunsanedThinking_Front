@@ -1,4 +1,11 @@
-import {TITLE, INPUT_FORM, DYNAMIC_SECTION_FORM} from "../../../../config/register.js";
+import {
+  TITLE,
+  INPUT_FORM,
+  DYNAMIC_SECTION_FORM,
+  CONTAINER_KEY,
+  CLASS_REGISTER,
+  CLASS_SELECTOR_REGISTER, TEXT_CONTANT, FIELD_NAME_KEY, PLACE_HOLDER
+} from "../../../../config/register.js";
 import {renderButton} from "../buttonManager/register.js";
 import {CLASS, ELEMENT_ID, EVENT, INPUT_TYPE, TAG} from "../../../../config/common.js";
 
@@ -25,18 +32,18 @@ const createForm = (form) => {
   formLabel.textContent = form.placeholder;
   formDiv.appendChild(formLabel);
 
-  if (form.type === "button-group") {
+  if (form.type === CLASS_REGISTER.BUTTON_GROUP) {
     const buttonGroup = document.createElement(TAG.DIV);
-    buttonGroup.className = "button-group";
+    buttonGroup.className = CLASS_REGISTER.BUTTON_GROUP;
     form.options.forEach((option) => {
       const button = document.createElement(TAG.BUTTON);
-      button.textContent = option.text; // 버튼에 표시할 텍스트
-      button.className = "gender-button";
+      button.textContent = option.text;
+      button.className = CLASS_REGISTER.GENDER_BUTTON;
       button.addEventListener(EVENT.CLICK, () => {
-        document.querySelectorAll(".gender-button").forEach((btn) =>
+        document.querySelectorAll(CLASS_SELECTOR_REGISTER.GENDER_BUTTON).forEach((btn) =>
           btn.classList.remove(CLASS.SELECTED));
         button.classList.add(CLASS.SELECTED);
-        buttonGroup.dataset.selectedValue = option.value; // 선택된 값으로 설정
+        buttonGroup.dataset.selectedValue = option.value;
       });
       buttonGroup.appendChild(button);
     });
@@ -61,18 +68,18 @@ const addDynamicSection = (form) => {
   const fieldNames = form.fieldNames;
   const container = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
   const sectionDiv = document.createElement(TAG.DIV);
-  sectionDiv.id = `${sectionId}Container`;
-  sectionDiv.className = "dynamic-section";
+  sectionDiv.id = `${sectionId}${CONTAINER_KEY}`;
+  sectionDiv.className = CLASS_REGISTER.DYNAMIC_SECTION;
 
   const headerDiv = document.createElement(TAG.DIV);
-  headerDiv.className = "section-header";
+  headerDiv.className = CLASS_REGISTER.SECTION_HEADER;
 
   const sectionLabel = document.createElement(TAG.LABEL);
   sectionLabel.textContent = sectionTitle;
 
   const addButton = document.createElement(TAG.BUTTON);
-  addButton.textContent = "+";
-  addButton.className = "add-button";
+  addButton.textContent = TEXT_CONTANT.PLUS;
+  addButton.className = CLASS_REGISTER.ADD_BUTTON;
   addButton.addEventListener(EVENT.CLICK, () => addInputField(sectionDiv, sectionId, fieldNames));
 
   headerDiv.appendChild(sectionLabel);
@@ -86,21 +93,23 @@ const addInputField = (sectionDiv, sectionId, fieldNames) => {
   const inputDiv = document.createElement(TAG.DIV);
   inputDiv.className = CLASS.FORM_GROUP;
   const removeButton = document.createElement(TAG.BUTTON);
-  removeButton.textContent = "-";
-  removeButton.className = "remove-button";
+  removeButton.textContent = TEXT_CONTANT.MINUS;
+  removeButton.className = CLASS_REGISTER.REMOVE_BUTTON;
   removeButton.addEventListener(EVENT.CLICK, () => {
-    sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
+    sectionDiv.removeChild(inputDiv);
   });
 
   Object.entries(fieldNames).forEach(([key, name]) => {
     const input = document.createElement(TAG.INPUT);
-    input.type = key === "date" || key === "dateOfDiagnosis" ? INPUT_TYPE.DATE : INPUT_TYPE.TEXT;
+    input.type = key === FIELD_NAME_KEY.DATE || key === FIELD_NAME_KEY.DATE_OF_DIAGNOSIS ?
+      INPUT_TYPE.DATE : INPUT_TYPE.TEXT;
     input.name = `${sectionId}${key}`;
-    input.placeholder = key === "date" || key === "dateOfDiagnosis" ? "날짜 입력" : `${name} 입력`;
-    input.className = "input-field";
+    input.placeholder = key === FIELD_NAME_KEY.DATE || key === FIELD_NAME_KEY.DATE_OF_DIAGNOSIS ?
+      `${PLACE_HOLDER.DATE} ${PLACE_HOLDER.DEFAULT}` : `${name} ${PLACE_HOLDER.DEFAULT}`;
+    input.className = CLASS_REGISTER.INPUT_FIELD;
     inputDiv.appendChild(input);
   });
 
-  inputDiv.appendChild(removeButton); // 삭제 버튼 추가
+  inputDiv.appendChild(removeButton);
   sectionDiv.appendChild(inputDiv);
 };

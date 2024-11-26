@@ -1,7 +1,7 @@
 import {initialButtons} from "../common/buttonUtils.js";
-import {BUTTON, INPUT_FORM} from "../../../../config/register.js";
+import {BUTTON, CONTAINER_KEY, DYNAMIC_SECTION_FORM, INPUT_FORM, SIGNUP_MESSAGE} from "../../../../config/register.js";
 import {fetchSignUp} from "../../apiUtils/apiDocumentation/customer/customer.js";
-import {STRING_EMPTY, TAG} from "../../../../config/common.js";
+import {STRING_EMPTY, TAG, ZERO} from "../../../../config/common.js";
 
 const getSignUpDTO = (name, age, gender, address, phoneNumber,
                       residentRegistrationNumber, job,
@@ -27,6 +27,7 @@ const getSignUpDTO = (name, age, gender, address, phoneNumber,
 }
 
 const signUp = async () => {
+  if (!confirm(SIGNUP_MESSAGE.CONFIRM)) return;
   const name = document.getElementById(INPUT_FORM.NAME.id).value;
   const age = document.getElementById(INPUT_FORM.AGE.id).value;
   const buttonGroup = document.querySelector(".button-group");
@@ -38,28 +39,43 @@ const signUp = async () => {
   const bankAccount = document.getElementById(INPUT_FORM.BANK_ACCOUNT.id).value;
   const bankName = document.getElementById(INPUT_FORM.BANK_NAME.id).value;
   const property = document.getElementById(INPUT_FORM.PROPERTY.id).value;
-
-  const dto = getSignUpDTO(name, age, gender, address, phoneNumber,
-    residentRegistrationNumber, job, bankAccount, bankName, property,
-    mapDynamicFields("accidentHistory"),
-    mapDynamicFields("surgeryHistory"),
-    mapDynamicFields("diseaseHistory")
-  );
-  console.log(JSON.stringify(dto));
-  // await fetchSignUp(dto); -- 서버쪽 DTO 수정해야 함
+  if (!name) alert(INPUT_FORM.NAME.exception);
+  else if (!age|| age <= ZERO) alert(INPUT_FORM.AGE.exception);
+  else if (gender === undefined) alert(INPUT_FORM.GENDER.exception);
+  else if (!address) alert(INPUT_FORM.ADDRESS.exception);
+  else if (!phoneNumber) alert(INPUT_FORM.PHONE_NUMBER.exception);
+  else if (!residentRegistrationNumber) alert(INPUT_FORM.RESIDENT_REGISTRATION_NUMBER.exception);
+  else if (!job) alert(INPUT_FORM.JOB.exception);
+  else if (!bankAccount) alert(INPUT_FORM.BANK_ACCOUNT.exception);
+  else if (!bankName) alert(INPUT_FORM.BANK_NAME.exception);
+  else if (!property || property <= ZERO) alert(INPUT_FORM.PROPERTY.exception);
+  else {
+    const accidentHistory = mapDynamicFields(DYNAMIC_SECTION_FORM.ACCIDENT_HISTORY.sectionId);
+    const surgeryHistory = mapDynamicFields(DYNAMIC_SECTION_FORM.SURGERY_HISTORY.sectionId);
+    const diseaseHistory = mapDynamicFields(DYNAMIC_SECTION_FORM.DISEASE_HISTORY.sectionId);
+    const dto = getSignUpDTO(name, age, gender, address, phoneNumber,
+      residentRegistrationNumber, job, bankAccount, bankName, property,
+      accidentHistory, surgeryHistory, diseaseHistory
+    );
+    await fetchSignUp(dto);
+    alert(SIGNUP_MESSAGE.OK);
+    window.history.back();
+  }
 }
 
 const mapDynamicFields = (sectionId) => {
-  const sectionDiv = document.getElementById(`${sectionId}Container`);
-  if (!sectionDiv) return [];
+  const section = document.getElementById(`${sectionId}${CONTAINER_KEY}`);
+  if (!section) return [];
 
-  const inputDivs = Array.from(sectionDiv.querySelectorAll(".form-group"));
-  return inputDivs.map((inputDiv) => {
-    const inputs = Array.from(inputDiv.querySelectorAll(TAG.INPUT));
+  const inputGroups = Array.from(section.querySelectorAll(".form-group"));
+  return inputGroups.map((group) => {
+    const inputs = Array.from(group.querySelectorAll(TAG.INPUT));
     const values = {};
     inputs.forEach((input) => {
       const key = input.name.replace(sectionId, STRING_EMPTY);
-      if (key) values[key] = input.value;
+      if (key) {
+        values[key] = input.value;
+      }
     });
     return values;
   });
