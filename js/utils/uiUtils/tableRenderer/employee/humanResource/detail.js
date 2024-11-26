@@ -1,4 +1,4 @@
-import { fetchGetEmployee } from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
+import { fetchGetEmployeeDetail } from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
 import {ELEMENT_ID, KEY, TAG} from "../../../../../../config/common.js";
 
 const employeeDetail = (data) => {
@@ -30,7 +30,7 @@ const family = (data) => {
 const context = {
   MANAGEMENT_EMPLOYEE: {
     detailGetter: employeeDetail,
-    fetchGetById: fetchGetEmployee
+    fetchGetById: fetchGetEmployeeDetail
   }
 }
 
