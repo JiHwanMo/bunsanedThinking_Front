@@ -118,7 +118,6 @@ export const renderDetails = async () => {
   // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
-    sessionStorage.setItem("item", JSON.stringify(selectedData));
     renderDetailsTable(selectedData);
   }
 };
