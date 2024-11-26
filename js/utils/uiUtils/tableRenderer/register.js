@@ -1,40 +1,49 @@
-import {TITLE, INPUT_FORM, DYNAMIC_SECTION_FORM} from "../../../../config/register.js";
+import {
+  TITLE,
+  INPUT_FORM,
+  DYNAMIC_SECTION_FORM,
+  CONTAINER_KEY,
+  CLASS_REGISTER,
+  CLASS_SELECTOR_REGISTER, TEXT_CONTANT, FIELD_NAME_KEY, PLACE_HOLDER
+} from "../../../../config/register.js";
 import {renderButton} from "../buttonManager/register.js";
+import {CLASS, ELEMENT_ID, EVENT, INPUT_TYPE, TAG} from "../../../../config/common.js";
 
 export const renderInput = () => {
-  const title = document.getElementById("title");
+  const title = document.getElementById(ELEMENT_ID.TITLE);
   title.textContent = TITLE;
   renderInputFields();
   renderButton();
 }
 
 const renderInputFields = () => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
   while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
   Object.entries(INPUT_FORM).forEach(([key, form]) => inputFieldsContainer.appendChild(createForm(form)));
   Object.entries(DYNAMIC_SECTION_FORM).forEach(([key, form]) => addDynamicSection(form));
 }
 
 const createForm = (form) => {
-  const formDiv = document.createElement("div");
-  formDiv.className = "form-group";
+  const formDiv = document.createElement(TAG.DIV);
+  formDiv.className = CLASS.FORM_GROUP;
 
-  const formLabel = document.createElement("label");
+  const formLabel = document.createElement(TAG.LABEL);
   formLabel.for = form.for;
   formLabel.textContent = form.placeholder;
   formDiv.appendChild(formLabel);
 
-  if (form.type === "button-group") {
-    const buttonGroup = document.createElement("div");
-    buttonGroup.className = "button-group";
+  if (form.type === CLASS_REGISTER.BUTTON_GROUP) {
+    const buttonGroup = document.createElement(TAG.DIV);
+    buttonGroup.className = CLASS_REGISTER.BUTTON_GROUP;
     form.options.forEach((option) => {
-      const button = document.createElement("button");
-      button.textContent = option.text; // 버튼에 표시할 텍스트
-      button.className = "gender-button";
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".gender-button").forEach((btn) => btn.classList.remove("selected"));
-        button.classList.add("selected");
-        buttonGroup.dataset.selectedValue = option.value; // 선택된 값으로 설정
+      const button = document.createElement(TAG.BUTTON);
+      button.textContent = option.text;
+      button.className = CLASS_REGISTER.GENDER_BUTTON;
+      button.addEventListener(EVENT.CLICK, () => {
+        document.querySelectorAll(CLASS_SELECTOR_REGISTER.GENDER_BUTTON).forEach((btn) =>
+          btn.classList.remove(CLASS.SELECTED));
+        button.classList.add(CLASS.SELECTED);
+        buttonGroup.dataset.selectedValue = option.value;
       });
       buttonGroup.appendChild(button);
     });
@@ -42,7 +51,7 @@ const createForm = (form) => {
   } else {
     const formInput = form.isTextArea
       ? document.createElement("textarea")
-      : document.createElement("input");
+      : document.createElement(TAG.INPUT);
     formInput.type = form.type;
     formInput.id = form.id;
     formInput.name = form.name;
@@ -57,21 +66,21 @@ const addDynamicSection = (form) => {
   const sectionTitle = form.sectionTitle;
   const sectionId = form.sectionId;
   const fieldNames = form.fieldNames;
-  const container = document.getElementById("inputFieldsContainer");
-  const sectionDiv = document.createElement("div");
-  sectionDiv.id = `${sectionId}Container`;
-  sectionDiv.className = "dynamic-section";
+  const container = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
+  const sectionDiv = document.createElement(TAG.DIV);
+  sectionDiv.id = `${sectionId}${CONTAINER_KEY}`;
+  sectionDiv.className = CLASS_REGISTER.DYNAMIC_SECTION;
 
-  const headerDiv = document.createElement("div");
-  headerDiv.className = "section-header";
+  const headerDiv = document.createElement(TAG.DIV);
+  headerDiv.className = CLASS_REGISTER.SECTION_HEADER;
 
-  const sectionLabel = document.createElement("label");
+  const sectionLabel = document.createElement(TAG.LABEL);
   sectionLabel.textContent = sectionTitle;
 
-  const addButton = document.createElement("button");
-  addButton.textContent = "+";
-  addButton.className = "add-button";
-  addButton.addEventListener("click", () => addInputField(sectionDiv, sectionId, fieldNames));
+  const addButton = document.createElement(TAG.BUTTON);
+  addButton.textContent = TEXT_CONTANT.PLUS;
+  addButton.className = CLASS_REGISTER.ADD_BUTTON;
+  addButton.addEventListener(EVENT.CLICK, () => addInputField(sectionDiv, sectionId, fieldNames));
 
   headerDiv.appendChild(sectionLabel);
   headerDiv.appendChild(addButton);
@@ -81,26 +90,26 @@ const addDynamicSection = (form) => {
 };
 
 const addInputField = (sectionDiv, sectionId, fieldNames) => {
-  const inputDiv = document.createElement("div");
-  inputDiv.className = "form-group";
-
-  // 삭제 버튼 추가
-  const removeButton = document.createElement("button");
-  removeButton.textContent = "-";
-  removeButton.className = "remove-button";
-  removeButton.addEventListener("click", () => {
-    sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
+  const inputDiv = document.createElement(TAG.DIV);
+  inputDiv.className = CLASS.FORM_GROUP;
+  const removeButton = document.createElement(TAG.BUTTON);
+  removeButton.textContent = TEXT_CONTANT.MINUS;
+  removeButton.className = CLASS_REGISTER.REMOVE_BUTTON;
+  removeButton.addEventListener(EVENT.CLICK, () => {
+    sectionDiv.removeChild(inputDiv);
   });
 
-  fieldNames.forEach((field) => {
-    const input = document.createElement("input");
-    input.type = field === "date" || field === "dateOfDiagnosis" ? "date" : "text";
-    input.name = `${sectionId}${field}`;
-    input.placeholder = field === "date" || field === "dateOfDiagnosis" ? "날짜 입력" : `${field} 입력`;
-    input.className = "input-field";
+  Object.entries(fieldNames).forEach(([key, name]) => {
+    const input = document.createElement(TAG.INPUT);
+    input.type = key === FIELD_NAME_KEY.DATE || key === FIELD_NAME_KEY.DATE_OF_DIAGNOSIS ?
+      INPUT_TYPE.DATE : INPUT_TYPE.TEXT;
+    input.name = `${sectionId}${key}`;
+    input.placeholder = key === FIELD_NAME_KEY.DATE || key === FIELD_NAME_KEY.DATE_OF_DIAGNOSIS ?
+      `${PLACE_HOLDER.DATE} ${PLACE_HOLDER.DEFAULT}` : `${name} ${PLACE_HOLDER.DEFAULT}`;
+    input.className = CLASS_REGISTER.INPUT_FIELD;
     inputDiv.appendChild(input);
   });
 
-  inputDiv.appendChild(removeButton); // 삭제 버튼 추가
+  inputDiv.appendChild(removeButton);
   sectionDiv.appendChild(inputDiv);
 };

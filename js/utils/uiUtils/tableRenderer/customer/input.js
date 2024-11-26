@@ -3,15 +3,6 @@ import {COMBOBOX, INPUT_LABEL} from "../../../../../config/customer/customer.js"
 import {renderButton} from "../../buttonManager/customer/input.js";
 import {ELEMENT_ID, KEY, MESSAGES, TAG} from "../../../../../config/common.js";
 
-export const buttonType = {
-  APPLY_ENDORSEMENT: "APPLY_ENDORSEMENT",
-  PAY_INSURANCE_FEE: "PAY_INSURANCE_FEE",
-  RECEIVE_INSURANCE: "RECEIVE_INSURANCE",
-  ASK_INSURANCE_COUNSEL: "ASK_INSURANCE_COUNSEL",
-  ADD_ACCIDENT: "ADD_ACCIDENT",
-  ADD_COMPLAINT: "ADD_COMPLAINT"
-}
-
 export const renderInput = () => {
   const title = document.getElementById(ELEMENT_ID.TITLE);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);

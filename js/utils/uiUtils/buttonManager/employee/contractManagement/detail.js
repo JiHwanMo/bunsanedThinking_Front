@@ -1,5 +1,5 @@
 import {initialButtons} from "../../../common/buttonUtils.js";
-import {BUTTON} from "../../../../../../config/employee/contractManagement/contractManagement.js";
+import {ALERT, BUTTON} from "../../../../../../config/employee/contractManagement/contractManagement.js";
 import {
   fetchRequestTerminationFee,
   fetchReviewEndorsement,
@@ -8,57 +8,65 @@ import {
 import {KEY} from "../../../../../../config/common.js";
 
 const sendNotice = () => {
-  // const selectedDataId = sessionStorage.getItem("selectedDataId");
-  alert("안내장 발송이 완료되었습니다.");
+  if (!confirm(ALERT.CONFIRM.SEND_NOTICE)) return;
+  // const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
+  alert(ALERT.OK.SEND_NOTICE);
   window.history.back();
   window.history.back();
 }
 const reviewRecontract = async () => {
+  if (!confirm(ALERT.CONFIRM.REVIEW_RECONTRACT)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchReviewRecontract(selectedDataId, 1);
-  alert("승인이 완료되었습니다");
+  alert(ALERT.OK.REVIEW_RECONTRACT);
   window.history.back();
   window.history.back();
 }
 const denyRecontract = async () => {
+  if (!confirm(ALERT.CONFIRM_DENY.REVIEW_RECONTRACT)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchReviewRecontract(selectedDataId, 2);
-  alert("거절이 완료되었습니다");
+  alert(ALERT.DENY.REVIEW_RECONTRACT);
   window.history.back();
   window.history.back();
 }
 const reviewEndorsement = async () => {
+  if (!confirm(ALERT.CONFIRM.REVIEW_ENDORSEMENT)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchReviewEndorsement(selectedDataId, 1);
-  alert("승인이 완료되었습니다");
+  alert(ALERT.OK.REVIEW_ENDORSEMENT);
   window.history.back();
   window.history.back();
 }
 const denyEndorsement = async () => {
+  if (!confirm(ALERT.CONFIRM_DENY.REVIEW_ENDORSEMENT)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchReviewEndorsement(selectedDataId, 2);
-  alert("거절이 완료되었습니다");
+  alert(ALERT.DENY.REVIEW_ENDORSEMENT);
   window.history.back();
   window.history.back();
 }
 const reviewRevival = async () => {
+  if (!confirm(ALERT.CONFIRM.REVIEW_REVIVAL)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchReviewRevival(selectedDataId, 1);
-  alert("승인이 완료되었습니다");
+  alert(ALERT.OK.REVIEW_REVIVAL);
   window.history.back();
   window.history.back();
 }
 const denyRevival = async () => {
+  if (!confirm(ALERT.CONFIRM_DENY.REVIEW_REVIVAL)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchReviewRevival(selectedDataId, 2);
-  alert("거절이 완료되었습니다");
+  alert(ALERT.DENY.REVIEW_REVIVAL);
   window.history.back();
   window.history.back();
 }
 const requestTerminationFee = async () => {
+  if (!confirm(ALERT.CONFIRM.REQUEST_TERMINATION_FEE)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchRequestTerminationFee(selectedDataId);
-  alert("승인이 완료되었습니다");
+  alert(ALERT.OK.REQUEST_TERMINATION_FEE);
   window.history.back();
   window.history.back();
 }

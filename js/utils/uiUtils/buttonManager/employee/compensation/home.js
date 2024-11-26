@@ -1,14 +1,13 @@
-import { BUTTON } from '../../../../../../config/employee/compensation/compensation.js';
+import {BUTTON, INFORMATION_TYPE} from '../../../../../../config/employee/compensation/compensation.js';
 import { viewInformationList } from '../../../tableRenderer/employee/compensation/informationList.js';
-import { informationType } from '../../../tableRenderer/employee/compensation/informationList.js';
 import { initialButtons } from "../../../common/buttonUtils.js";
 
 const viewRequestCompensation = () => {
-  viewInformationList(informationType.REQUEST_COMPENSATION);
+  viewInformationList(INFORMATION_TYPE.REQUEST_COMPENSATION);
 }
 
 const viewRequestInsuranceMoney = () => {
-  viewInformationList(informationType.REQUEST_INSURANCE_MONEY);
+  viewInformationList(INFORMATION_TYPE.REQUEST_INSURANCE_MONEY);
 }
 
 const compensationTaskMapper = {

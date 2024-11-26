@@ -1,5 +1,5 @@
 import {initialButtons} from "../../../common/buttonUtils.js";
-import {BUTTON, INPUT_FORM} from "../../../../../../config/employee/compensation/compensation.js";
+import {ALERT, BUTTON, INPUT_FORM} from "../../../../../../config/employee/compensation/compensation.js";
 import {
   fetchRequestCompensation,
   fetchRequestInsuranceMoney
@@ -23,13 +23,14 @@ const getInsuranceMoneyDTO = (money, index) => {
 }
 
 const requestCompensation = async () => {
+  if (!confirm(ALERT.CONFIRM.REQUEST_COMPENSATION)) return;
   const money = document.getElementById(INPUT_FORM.MONEY.id).value;
   const index = document.getElementById(INPUT_FORM.PAYMENTTYPE.id).selectedIndex;
   if (money.length === ZERO || money <= ZERO) alert(INPUT_FORM.MONEY.exception);
   else if (index === ZERO) alert(INPUT_FORM.PAYMENTTYPE.exception);
   else {
     await fetchRequestCompensation(getCompensationDTO(money, index));
-    alert("요청이 완료되었습니다");
+    alert(ALERT.OK.REQUEST_COMPENSATION);
     window.history.back();
     window.history.back();
     window.history.back();
@@ -37,13 +38,14 @@ const requestCompensation = async () => {
 }
 
 const requestInsuranceMoney = async () => {
+  if (!confirm(ALERT.CONFIRM.REQUEST_INSURANCE_MONEY)) return;
   const money = document.getElementById(INPUT_FORM.MONEY.id).value;
   const index = document.getElementById(INPUT_FORM.PAYMENTTYPE.id).selectedIndex;
   if (money.length === ZERO || money <= ZERO) alert(INPUT_FORM.MONEY.exception);
   else if (index === ZERO) alert(INPUT_FORM.PAYMENTTYPE.exception);
   else {
     await fetchRequestInsuranceMoney(getInsuranceMoneyDTO(money, index));
-    alert("요청이 완료되었습니다");
+    alert(ALERT.OK.REQUEST_INSURANCE_MONEY);
     window.history.back();
     window.history.back();
     window.history.back();

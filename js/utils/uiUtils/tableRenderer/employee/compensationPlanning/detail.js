@@ -3,21 +3,19 @@ import {
 } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import {renderButtons} from "../../../buttonManager/employee/compensationPlanning/detail.js";
 import {ELEMENT_ID, KEY, TAG} from "../../../../../../config/common.js";
-
-const partnerCompanyType = [
-  "DUMY",
-  "긴급출동회사",
-  "손해사정업체"
-];
+import {
+  PARTNER_COMPANY_DETAIL_LABEL,
+  PARTNER_COMPANY_TYPE
+} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
 
 const partnerCompanyDetail = (data) => {
   return [
-    { label: "협력업체 번호", value: data.id },
-    { label: "협력업체 이름", value: data.name },
-    { label: "협력업체 전화번호", value: data.phoneNumber },
-    { label: "협력업체 종류", value: partnerCompanyType[data.type] },
-    { label: "대표자 이름", value: data.headName },
-    { label: "대표자 전화번호", value: data.headPhoneNumber }
+    { label: PARTNER_COMPANY_DETAIL_LABEL.ID,                 value: data.id },
+    { label: PARTNER_COMPANY_DETAIL_LABEL.NAME,               value: data.name },
+    { label: PARTNER_COMPANY_DETAIL_LABEL.PHONE_NUMBER,       value: data.phoneNumber },
+    { label: PARTNER_COMPANY_DETAIL_LABEL.TYPE,               value: PARTNER_COMPANY_TYPE[data.type] },
+    { label: PARTNER_COMPANY_DETAIL_LABEL.HEAD_NAME,          value: data.headName },
+    { label: PARTNER_COMPANY_DETAIL_LABEL.HEAD_PHONE_NUMBER,  value: data.headPhoneNumber }
   ];
 }
 

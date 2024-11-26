@@ -1,26 +1,25 @@
-import { BUTTON } from '../../../../../../config/employee/contractManagement/contractManagement.js';
+import {BUTTON, INFORMATION_TYPE} from '../../../../../../config/employee/contractManagement/contractManagement.js';
 import { viewInformationList } from '../../../tableRenderer/employee/contractManagement/informationList.js';
-import { informationType } from '../../../tableRenderer/employee/contractManagement/informationList.js';
 import {initialButtons} from "../../../common/buttonUtils.js";
 
 const viewDefaultContract = () => {
-  viewInformationList(informationType.DEFAULT_CONTRACT);
+  viewInformationList(INFORMATION_TYPE.DEFAULT_CONTRACT);
 }
 
 const viewRecontract = () => {
-  viewInformationList(informationType.RECONTRACT);
+  viewInformationList(INFORMATION_TYPE.RECONTRACT);
 }
 
 const viewEndorsement = () => {
-  viewInformationList(informationType.ENDORSEMENT);
+  viewInformationList(INFORMATION_TYPE.ENDORSEMENT);
 }
 
 const viewRevival = () => {
-  viewInformationList(informationType.REVIVAL);
+  viewInformationList(INFORMATION_TYPE.REVIVAL);
 }
 
 const viewTermination = () => {
-  viewInformationList(informationType.TERMINATION);
+  viewInformationList(INFORMATION_TYPE.TERMINATION);
 }
 
 const contractManagementTaskMapper = {

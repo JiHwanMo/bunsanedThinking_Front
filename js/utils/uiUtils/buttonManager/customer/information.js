@@ -1,15 +1,24 @@
-import {BUTTON, CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG, ZERO} from "../../../../../config/common.js";
-import {COMBOBOX} from "../../../../../config/customer/customer.js";
+import {
+  BUTTON,
+  CLASS,
+  CLASS_SELECTOR,
+  ELEMENT_ID,
+  EVENT,
+  KEY,
+  LOCATION,
+  TAG,
+  ZERO
+} from "../../../../../config/common.js";
+import {BUTTON_TYPE, COMBOBOX} from "../../../../../config/customer/customer.js";
 import {initTableByInput} from "../../tableRenderer/customer/informationList.js";
-import {buttonType} from "../../tableRenderer/customer/input.js";
 
 const addAccident = () => { // 입력
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.ADD_ACCIDENT);
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, BUTTON_TYPE.ADD_ACCIDENT);
   window.location.href = LOCATION.INPUT;
 }
 
 const addComplaint = () => { // 입력
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, buttonType.ADD_COMPLAINT);
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, BUTTON_TYPE.ADD_COMPLAINT);
   window.location.href = LOCATION.INPUT;
 }
 
@@ -24,18 +33,18 @@ const customerTaskMapper = {
 
 export const setPost = () => {
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
-  const container = document.querySelector(".search-container");
+  const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const post = document.createElement(TAG.DIV);
   post.id = ELEMENT_ID.POST;
   post.className = CLASS.POST_BUTTON;
   post.textContent = BUTTON.COMMON.POST;
   container.appendChild(post);
-  post.addEventListener(EVENT.CLICK, customerTaskMapper[type].POST); // 수정
+  post.addEventListener(EVENT.CLICK, customerTaskMapper[type].POST);
   return post;
 }
 
 export const setButton = () => {
-  const container = document.querySelector(".search-container");
+  const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const button = document.createElement(TAG.DIV);
   button.id = ELEMENT_ID.SEARCH_BUTTON;
   button.textContent = BUTTON.COMMON.SEARCH;

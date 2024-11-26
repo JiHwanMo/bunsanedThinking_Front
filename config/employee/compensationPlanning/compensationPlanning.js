@@ -190,3 +190,46 @@ export const INPUT_FORM = {
     }
   }
 }
+
+export const INFORMATION_TYPE = {
+  EVALUATE_PARTNERCOMPANY: "EVALUATE_PARTNERCOMPANY",
+  MANAGEMENT_PARTNERCOMPANY: "MANAGEMENT_PARTNERCOMPANY"
+}
+
+export const INPUT_TYPE = {
+  POST: "POST",
+  EVALUATE: "EVALUATE",
+  UPDATE: "UPDATE"
+}
+
+export const PARTNER_COMPANY_TYPE = [
+  "DUMY",
+  "긴급출동회사",
+  "손해사정업체"
+];
+
+export const PARTNER_COMPANY_DETAIL_LABEL = {
+  ID: "협력업체 번호",
+  NAME: "협력업체 이름",
+  PHONE_NUMBER: "협력업체 전화번호",
+  TYPE: "협력업체 종류",
+  HEAD_NAME: "대표자 이름",
+  HEAD_PHONE_NUMBER: "대표자 전화번호"
+}
+
+export const UPDATE_OPTION_PLACEHOLDER = "수정 정보 ";
+
+export const ALERT = {
+  CONFIRM: {
+    ADD_PARTNER_COMPANY: "정말로 등록하시겠습니까?",
+    UPDATE_PARTNER_COMPANY: "정말로 수정하시겠습니까?",
+    DELETE_PARTNER_COMPANY: "정말로 삭제하시겠습니까?",
+    EVALUATE_PARTNER_COMPANY: "평가를 반영하시겠습니까?"
+  },
+  OK: {
+    ADD_PARTNER_COMPANY: "등록되었습니다.",
+    UPDATE_PARTNER_COMPANY: "수정되었습니다.",
+    DELETE_PARTNER_COMPANY: "삭제되었습니다.",
+    EVALUATE_PARTNER_COMPANY: "평가되었습니다."
+  }
+}

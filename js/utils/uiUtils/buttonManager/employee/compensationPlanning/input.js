@@ -1,4 +1,8 @@
-import {BUTTON, INPUT_FORM} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
+import {
+  ALERT,
+  BUTTON,
+  INPUT_FORM, INPUT_TYPE
+} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
 import {
   fetchAddPartnerCompany, fetchEvaluatePartnerCompany, fetchUpdatePartnerCompany
 } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
@@ -16,6 +20,7 @@ const getPartnerCompanyAddDTO = (name, phoneNumber, type, headName, headPhoneNum
 }
 
 const addPartnerCompany = async () => {
+  if (!confirm(ALERT.CONFIRM.ADD_PARTNER_COMPANY)) return;
   const inputForm = INPUT_FORM.POST;
   const name = document.getElementById(inputForm.NAME.id).value;
   const phoneNumber = document.getElementById(inputForm.PHONE_NUMBER.id).value;
@@ -30,7 +35,7 @@ const addPartnerCompany = async () => {
   else {
     const dto = getPartnerCompanyAddDTO(name, phoneNumber, type, headName, headPhoneNumber);
     await fetchAddPartnerCompany(dto);
-    alert("등록되었습니다.");
+    alert(ALERT.OK.ADD_PARTNER_COMPANY);
     window.history.back();
     window.history.back();
   }
@@ -45,6 +50,7 @@ const getPartnerCompanyUpdateDTO = (dataId, input, index) => {
 }
 
 const updatePartnerCompany = async () => {
+  if (!confirm(ALERT.CONFIRM.UPDATE_PARTNER_COMPANY)) return;
   const dataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
   const select = document.getElementById(INPUT_FORM[selectedButtonType].TYPE.id);
@@ -54,7 +60,7 @@ const updatePartnerCompany = async () => {
   else {
     const updateDTO = getPartnerCompanyUpdateDTO(dataId, input, index);
     await fetchUpdatePartnerCompany(updateDTO);
-    alert("수정되었습니다.");
+    alert(ALERT.OK.UPDATE_PARTNER_COMPANY);
     window.history.back();
     window.history.back();
     window.history.back();
@@ -66,9 +72,10 @@ const cancel = () => {
 }
 
 const evaluatePartnerCompany = async (evaluate) => {
+  if (!confirm(ALERT.CONFIRM.EVALUATE_PARTNER_COMPANY)) return;
   const dataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchEvaluatePartnerCompany(evaluate, dataId);
-  alert("평가되었습니다.");
+  alert(ALERT.OK.EVALUATE_PARTNER_COMPANY);
   window.history.back();
   window.history.back();
   window.history.back();
@@ -94,7 +101,7 @@ const compensationPlanningTaskMapper = {
 
 export const renderButton = () => {
   const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
-  if (selectedButtonType === "EVALUATE")
+  if (selectedButtonType === INPUT_TYPE.EVALUATE)
     initialButtonsEvaluate(BUTTON.TASK.COMPENSATIONPLANNING.INPUT[selectedButtonType],
       compensationPlanningTaskMapper[selectedButtonType]);
   else initialButtons(BUTTON.TASK.COMPENSATIONPLANNING.INPUT[selectedButtonType],

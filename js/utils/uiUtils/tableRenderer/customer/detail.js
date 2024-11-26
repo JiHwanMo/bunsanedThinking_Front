@@ -5,135 +5,117 @@ import {
 } from "../../../apiUtils/apiDocumentation/customer/customer.js";
 import {renderButtons} from "../../buttonManager/customer/detail.js";
 import {ELEMENT_ID, KEY, STRING_EMPTY, TAG} from "../../../../../config/common.js";
-
-const insuranceTypeStr = {
-  Disease: "질병",
-  Automobile: "자동차",
-  Injury: "상해"
-}
+import {
+  COLLATERAL_TYPE_STR, CONTRACT_DETAIL,
+  INJURY_TYPE_STR, INSURANCE_DETAIL, INSURANCE_TYPE_STR, LOAN_DETAIL,
+  LOAN_TYPE_STR, ONE_BLANK,
+  SERVICE_TYPE_STR,
+  VEHICLE_TYPE_STR
+} from "../../../../../config/customer/customer.js";
 
 const insuranceDetail = (data) => {
+  const LABEL = INSURANCE_DETAIL.DETAIL_LABEL;
   const detail = [
-    { label: "보험 상품 이름", value: data.name },
-    { label: "보험 상품 종류", value: insuranceTypeStr[data.insuranceType] },
-    { label: "보험 상품 번호", value: data.id },
-    { label: "연령대", value: data.ageRange },
-    { label: "보장 내용", value: data.coverage },
-    { label: "월 보험료", value: data.monthlyPremium },
-    { label: "계약기간", value: data.contractPeriod }
+    { label: LABEL.NAME,            value: data.name },
+    { label: LABEL.INSURANCE_TYPE,  value: INSURANCE_TYPE_STR[data.insuranceType] },
+    { label: LABEL.ID,              value: data.id },
+    { label: LABEL.AGE_RANGE,       value: data.ageRange },
+    { label: LABEL.COVERAGE,        value: data.coverage },
+    { label: LABEL.MONTHLY_PREMIUM, value: data.monthlyPremium },
+    { label: LABEL.CONTRACT_PERIOD, value: data.contractPeriod }
   ];
-  switch(data.insuranceType) { // case는 재확인 필요
-    case "Automobile": return automobileDetail(detail, data);
-    case "Disease": return diseaseDetail(detail, data);
-    case "Injury": return injuryDetail(detail, data);
+  switch(data.insuranceType) {
+    case INSURANCE_DETAIL.AUTOMOBILE_DETAIL.TYPE_NAME: return automobileDetail(detail, data);
+    case INSURANCE_DETAIL.DISEASE_DETAIL.TYPE_NAME: return diseaseDetail(detail, data);
+    case INSURANCE_DETAIL.INJURY_DETAIL.TYPE_NAME: return injuryDetail(detail, data);
     default: return detail;
   }
 }
 
-const serviceTypeStr = {
-  EmergencyTowing: "긴급견인",
-  EmergencyStart: "긴급시동",
-  EmergencyRefueling: "비상급유",
-  BatteryCharging: "배터리충전",
-  EngineOverheatingRepair: "엔진과열 수리",
-  TirepunkRepair: "타이어펑크 수리"
-}
-
-const vehicleTypeStr = {
-  Small: "소형",
-  Medium: "중형",
-  Large: "대형"
-}
-
 const automobileDetail = (detail, data) => {
+  const LABEL = INSURANCE_DETAIL.AUTOMOBILE_DETAIL.DETAIL_LABEL;
   let serviceStr = STRING_EMPTY;
   for (const service of data.serviceList)
-    serviceStr += serviceTypeStr[service] + " ";
+    serviceStr += SERVICE_TYPE_STR[service] + ONE_BLANK;
   detail.push(
-    { label: "지원 서비스", value: serviceStr },
-    { label: "차량 종류", value: vehicleTypeStr[data.vehicleType] },
-    { label: "최대 사고 횟수", value: data.accidentLimit }
+    { label: LABEL.SERVICE_LIST,    value: serviceStr },
+    { label: LABEL.VEHICLE_TYPE,    value: VEHICLE_TYPE_STR[data.vehicleType] },
+    { label: LABEL.ACCIDENT_LIMIT,  value: data.accidentLimit }
   );
   return detail;
 }
 
 const diseaseDetail = (detail, data) => {
+  const LABEL = INSURANCE_DETAIL.DISEASE_DETAIL.DETAIL_LABEL;
   detail.push(
-    { label: "병명", value: data.diseaseName },
-    { label: "최대 질병 횟수", value: data.diseaseLimit }
+    { label: LABEL.DISEASE_NAME,    value: data.diseaseName },
+    { label: LABEL.DISEASE_LIMIT,   value: data.diseaseLimit }
   );
   return detail;
-}
-
-const injuryTypeStr = {
-  Minor: "경상",
-  Serious: "중상"
 }
 
 const injuryDetail = (detail, data) => {
+  const LABEL = INSURANCE_DETAIL.INJURY_DETAIL.DETAIL_LABEL;
   detail.push(
-    { label: "상해 정도", value: injuryTypeStr[data.injuryType] },
-    { label: "최대 수술 횟수", value: data.surgeriesLimit }
+    { label: LABEL.INJURY_TYPE,     value: INJURY_TYPE_STR[data.injuryType] },
+    { label: LABEL.SURGERIES_LIMIT, value: data.surgeriesLimit }
   );
   return detail;
 }
 
-const loanTypeStr = {
-  Collateral: "담보",
-  FixedDeposit: "정기 예금",
-  InsuranceContract: "보험 계약"
-}
-
 const loanDetail = (data) => {
+  const LABEL = LOAN_DETAIL.DETAIL_LABEL;
   const detail = [
-    { label: "대출 상품 이름", value: data.name },
-    { label: "대출 상품 종류", value: loanTypeStr[data.loanType] },
-    { label: "대출 상품 번호", value: data.id },
-    { label: "이자율", value: data.interestRate },
-    { label: "대출 가능 최대 금액", value: data.maximumMoney },
-    { label: "최소 자산", value: data.minimumAsset }
+    { label: LABEL.NAME,            value: data.name },
+    { label: LABEL.LOAN_TYPE,       value: LOAN_TYPE_STR[data.loanType] },
+    { label: LABEL.ID,              value: data.id },
+    { label: LABEL.INTEREST_RATE,   value: data.interestRate },
+    { label: LABEL.MAXIMUM_MONEY,   value: data.maximumMoney },
+    { label: LABEL.MINIMUM_ASSET,   value: data.minimumAsset }
   ];
   switch(data.loanType) {
-    case "Collateral": return collateralDetail(detail, data);
-    case "FixedDeposit": return fixedDepositDetail(detail, data);
-    case "InsuranceContract": return insuranceContractDetail(detail, data);
+    case LOAN_DETAIL.COLLATERAL_DETAIL.TYPE_NAME: return collateralDetail(detail, data);
+    case LOAN_DETAIL.FIXEDDEPOSIT_DETAIL.TYPE_NAME: return fixedDepositDetail(detail, data);
+    case LOAN_DETAIL.INSURANCE_CONTRACT_DETAIL.TYPE_NAME: return insuranceContractDetail(detail, data);
     default: return detail;
   }
 }
 
-const collateralTypeStr = {
-  RealEstate: "부동산",
-  Car: "자동차"
-}
-
 const collateralDetail = (detail, data) => {
+  const LABEL = LOAN_DETAIL.COLLATERAL_DETAIL.DETAIL_LABEL;
   detail.push(
-    { label: "담보 종류", value: collateralTypeStr[data.collateralType] },
-    { label: "담보 최소 가치", value: data.minimumValue }
+    { label: LABEL.COLLATERAL_TYPE, value: COLLATERAL_TYPE_STR[data.collateralType] },
+    { label: LABEL.MINIMUM_VALUE,   value: data.minimumValue }
   );
   return detail;
 }
 
 const fixedDepositDetail = (detail, data) => {
-  detail.push({ label: "최소 예치 금액", value: data.minimumAmount });
+  const LABEL = LOAN_DETAIL.FIXEDDEPOSIT_DETAIL.DETAIL_LABEL;
+  detail.push(
+    { label: LABEL.MINIMUM_AMOUNT,  value: data.minimumAmount }
+  );
   return detail;
 }
 
 const insuranceContractDetail = (detail, data) => {
-  detail.push({ label: "보험 번호", value: data.insuranceId });
+  const LABEL = LOAN_DETAIL.INSURANCE_CONTRACT_DETAIL.DETAIL_LABEL;
+  detail.push(
+    { label: LABEL.INSURANCE_ID,    value: data.insuranceId }
+  );
   return detail;
 }
 
 const contractDetail = (data) => {
   return [
-    { label: "보험 상품 이름", value: data.name }, // insurance
-    { label: "보험 상품 번호", value: data.insuranceId },
-    { label: "연령대", value: data.ageRange },
-    { label: "월 보험료", value: data.monthlyPremium },
-    { label: "만기일", value: data.expirationDate }, // contract
-    { label: "가입일", value: data.date },
-    { label: "납부일", value: data.paymentDate },
-    { label: "보험 상태", value: data.status }
+    { label: CONTRACT_DETAIL.NAME,            value: data.name }, // insurance
+    { label: CONTRACT_DETAIL.INSURANCE_ID,    value: data.insuranceId },
+    { label: CONTRACT_DETAIL.AGE_RANGE,       value: data.ageRange },
+    { label: CONTRACT_DETAIL.MONTHLY_PREMIUM, value: data.monthlyPremium },
+    { label: CONTRACT_DETAIL.EXPIRATION_DATE, value: data.expirationDate }, // contract
+    { label: CONTRACT_DETAIL.DATE,            value: data.date },
+    { label: CONTRACT_DETAIL.PAYMENT_DATE,    value: data.paymentDate },
+    { label: CONTRACT_DETAIL.STATUS,          value: data.status }
   ];
 }
 

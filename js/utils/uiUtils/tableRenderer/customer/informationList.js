@@ -19,7 +19,7 @@ import {
   fetchGetInsuranceRowByProductId,
   fetchGetLoanRowByProductId
 } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import {COLUMN_NAME, COMBOBOX, TABLE_TITLE} from '../../../../../config/customer/customer.js';
+import {COLUMN_NAME, COMBOBOX, COMBOLIST_FETCH_ALL, TABLE_TITLE} from '../../../../../config/customer/customer.js';
 import {setButton, setPost} from "../../buttonManager/customer/information.js";
 import {
   CLASS, CLASS_SELECTOR,
@@ -33,13 +33,6 @@ import {
   TAG
 } from "../../../../../config/common.js";
 
-export const informationType = {
-  INSURANCE_LIST: "INSURANCE_LIST",
-  LOAN_LIST: "LOAN_LIST",
-  MANAGEMENT_CONTRACT: "MANAGEMENT_CONTRACT",
-  VIEW_ACCIDENT: "VIEW_ACCIDENT",
-  VIEW_COMPLAINT: "VIEW_COMPLAINT"
-}
 
 const contractRow = (dto) => {
   return `
@@ -49,9 +42,9 @@ const contractRow = (dto) => {
     <td>${dto.insuranceId}</td>
     <td>${dto.ageRange}</td>
     <td>${dto.monthlyPremium}</td>
-    <td>${dto.expirationDate == null ? "" : dto.expirationDate}</td>
+    <td>${dto.expirationDate == null ? STRING_EMPTY : dto.expirationDate}</td>
     <td>${dto.date}</td>
-    <td>${dto.paymentDate == null ? "" : dto.paymentDate}</td>
+    <td>${dto.paymentDate == null ? STRING_EMPTY : dto.paymentDate}</td>
     <td>${dto.status}</td>
   `;
 }
@@ -73,7 +66,7 @@ const complaintRow = (dto) => {
     <td>${dto.type}</td>
     <td>${dto.title}</td>
     <td>${dto.postDate}</td>
-    <td>${dto.processingDate == null ? "" : dto.processingDate}</td>
+    <td>${dto.processingDate == null ? STRING_EMPTY : dto.processingDate}</td>
     <td>${dto.status}</td>
   `;
 }
@@ -111,7 +104,6 @@ const context = {
       automobile: fetchGetAllAutomobileContractByCustomerId,
       injury: fetchGetAllInjuryContractByCustomerId
     }
-    // 콤보박스는 있는데 아이디 받는 부분이 뭔가 이상해서 일단 이렇게
   },
   VIEW_ACCIDENT: {
     listFetch: fetchGetAllAccidentByCustomerId,
@@ -122,7 +114,6 @@ const context = {
     comboListFetch: {
       all: fetchGetAllAccidentByCustomerId
     }
-    // 콤보박스가 없어서 비워둠
   },
   VIEW_COMPLAINT: {
     listFetch: fetchGetAllComplaintsByCustomerId,
@@ -202,7 +193,7 @@ const setComboBox = () => {
     select.appendChild(option);
   });
   container.appendChild(select);
-  select.onchange = () => initTableBySelect(select.id, type); // 추가
+  select.onchange = () => initTableBySelect(select.id, type);
   return select;
 }
 
@@ -216,7 +207,7 @@ const setInput = () => {
   return input;
 }
 
-export const initTableByInput = async (id, type) => { // 추가
+export const initTableByInput = async (id, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   if (id.length > 0) {
@@ -226,14 +217,14 @@ export const initTableByInput = async (id, type) => { // 추가
     setOneRow(item, type);
   } else {
     const list = context[type].needCustomerId ?
-      await context[type].comboListFetch["all"](sessionStorage.getItem(KEY.LOGIN_ID)) :
-      await context[type].comboListFetch["all"]();
+      await context[type].comboListFetch[COMBOLIST_FETCH_ALL](sessionStorage.getItem(KEY.LOGIN_ID)) :
+      await context[type].comboListFetch[COMBOLIST_FETCH_ALL]();
     if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
     setTableBody();
   }
 }
 
-const initTableBySelect = async (id, type) => { // 추가
+const initTableBySelect = async (id, type) => {
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
   const list = context[type].needCustomerId ?
@@ -271,7 +262,6 @@ const setOneRow = (item, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   const row = document.createElement(TAG.TR);
   row.innerHTML = context[type].rowGetter(item);
-  // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
       window.selectedRow.classList.remove(CLASS.SELECTED);
@@ -280,7 +270,6 @@ const setOneRow = (item, type) => {
     window.selectedRow = row;
   });
 
-  // 더블 클릭 시 상세 페이지로 이동
   if (context[type].needDetail) {
     row.addEventListener(EVENT.DOUBLE_CLICK, () => {
       // 상세 정보를 세션에 저장
