@@ -45,27 +45,33 @@ const insuranceContractDetail = (detail, data) => {
 }
 
 const loanRequestDetail = (data) => {
-  return [
-    { label: COLUMN_NAME.LOAN_REQUEST.CUSTOMER_NAME, value: data.customer.name },
-    { label: COLUMN_NAME.LOAN_REQUEST.PHONE_NUMBER, value: data.customer.phoneNumber },
-    { label: COLUMN_NAME.LOAN_REQUEST.JOB, value: data.customer.job },
-    { label: COLUMN_NAME.LOAN_REQUEST.AGE, value: data.customer.age },
-    { label: COLUMN_NAME.LOAN_REQUEST.GENDER, value: data.customer.gender },
-    { label: COLUMN_NAME.LOAN_REQUEST.RESIDENT_REGISTRATION_NUMBER, value: data.customer.residentRegistrationNumber },
-    { label: COLUMN_NAME.LOAN_REQUEST.PROPERTY, value: data.customer.property },
-    { label: COLUMN_NAME.LOAN_REQUEST.ADDRESS, value: data.customer.address },
-    { label: COLUMN_NAME.LOAN_REQUEST.ACCIDENT_HISTORY, value: data.customer.accidentHistoryList.map(item => accidentHistory(item)) },
-    { label: COLUMN_NAME.LOAN_REQUEST.SURGERY_HISTORY, value: data.customer.surgeryHistoryList.map(item => surgeryHistory(item)) },
-    { label: COLUMN_NAME.LOAN_REQUEST.DISEASE_HISTORY, value: data.customer.diseaseHistoryList.map(item => diseaseHistory(item)) },
-    { label: COLUMN_NAME.LOAN_REQUEST.BANK_ACCOUNT, value: data.customer.bankAccount },
-    { label: COLUMN_NAME.LOAN_REQUEST.LOAN_NAME, value: data.loan.name },
-    { label: COLUMN_NAME.LOAN_REQUEST.LOAN_TYPE, value: data.loan.loanType },
-    { label: COLUMN_NAME.LOAN_REQUEST.LOAN_ID, value: data.loan.id },
-    { label: COLUMN_NAME.LOAN_REQUEST.INTEREST_RATE, value: data.loan.interestRate },
-    { label: COLUMN_NAME.LOAN_REQUEST.MAXIMUM_MONEY, value: data.loan.maximumMoney },
-    { label: COLUMN_NAME.LOAN_REQUEST.MINIMUM_ASSET, value: data.loan.minimumAsset },
-    { label: COLUMN_NAME.LOAN_REQUEST.CONTRACT_STATUS, value: data.contract.contractStatus }
+  const detail = [
+    { label: COLUMN_NAME.LOAN_REQUEST.CUSTOMER_NAME, value: data.customerName },
+    { label: COLUMN_NAME.LOAN_REQUEST.PHONE_NUMBER, value: data.phoneNumber },
+    { label: COLUMN_NAME.LOAN_REQUEST.JOB, value: data.job },
+    { label: COLUMN_NAME.LOAN_REQUEST.AGE, value: data.age },
+    { label: COLUMN_NAME.LOAN_REQUEST.GENDER, value: data.gender },
+    { label: COLUMN_NAME.LOAN_REQUEST.RESIDENT_REGISTRATION_NUMBER, value: data.residentRegistrationNumber },
+    { label: COLUMN_NAME.LOAN_REQUEST.PROPERTY, value: data.property },
+    { label: COLUMN_NAME.LOAN_REQUEST.ADDRESS, value: data.address },
+    { label: COLUMN_NAME.LOAN_REQUEST.ACCIDENT_HISTORY, value: data.accidentHistoryList.map(item => accidentHistory(item)) },
+    { label: COLUMN_NAME.LOAN_REQUEST.SURGERY_HISTORY, value: data.surgeryHistoryList.map(item => surgeryHistory(item)) },
+    { label: COLUMN_NAME.LOAN_REQUEST.DISEASE_HISTORY, value: data.diseaseHistoryList.map(item => diseaseHistory(item)) },
+    { label: COLUMN_NAME.LOAN_REQUEST.BANK_ACCOUNT, value: data.bankAccount },
+    { label: COLUMN_NAME.LOAN_REQUEST.LOAN_NAME, value: data.loanName },
+    { label: COLUMN_NAME.LOAN_REQUEST.LOAN_TYPE, value: data.loanType },
+    { label: COLUMN_NAME.LOAN_REQUEST.LOAN_ID, value: data.loanId },
+    { label: COLUMN_NAME.LOAN_REQUEST.INTEREST_RATE, value: data.interestRate },
+    { label: COLUMN_NAME.LOAN_REQUEST.MAXIMUM_MONEY, value: data.maximumMoney },
+    { label: COLUMN_NAME.LOAN_REQUEST.MINIMUM_ASSET, value: data.minimumAsset },
+    { label: COLUMN_NAME.LOAN_REQUEST.CONTRACT_STATUS, value: data.contractStatus }
   ];
+  switch(data.loanType) {
+    case LOAN_TYPE.COLLATERAL: return collateralDetail(detail, data);
+    case LOAN_TYPE.FIXED_DEPOSIT: return fixedDepositDetail(detail, data);
+    case LOAN_TYPE.INSURANCE_CONTRACT: return insuranceContractDetail(detail, data);
+    default: return detail;
+  }
 }
 
 const accidentHistory = (data) => {
@@ -112,6 +118,7 @@ export const renderDetails = async () => {
   // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
+    sessionStorage.setItem("item", JSON.stringify(selectedData));
     renderDetailsTable(selectedData);
   }
 };

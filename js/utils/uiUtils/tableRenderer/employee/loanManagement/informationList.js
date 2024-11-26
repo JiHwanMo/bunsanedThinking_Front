@@ -38,23 +38,23 @@ const loanRow = (loan) => {
 
 const loanRequestRow = (dto) => {
   return `
-    <td>${dto.contract.id}</td>
-    <td>${dto.customer.name}</td>
-    <td>${dto.customer.phoneNumber}</td>
-    <td>${dto.customer.job}</td>
-    <td>${dto.customer.age}</td>
-    <td>${dto.customer.gender}</td>
-    <td>${dto.customer.residentRegistrationNumber}</td>
-    <td>${dto.customer.property}</td>
-    <td>${dto.customer.address}</td>
-    <td>${dto.customer.bankName}</td>
-    <td>${dto.customer.bankAccount}</td>
-    <td>${dto.loan.name}</td>
-    <td>${dto.loan.loanType}</td>
-    <td>${dto.loan.id}</td>
-    <td>${dto.loan.interestRate}</td>
-    <td>${dto.loan.maximumMoney}</td>
-    <td>${dto.contract.contractStatus}</td>
+    <td>${dto.contractId}</td>
+    <td>${dto.customerName}</td>
+    <td>${dto.phoneNumber}</td>
+    <td>${dto.job}</td>
+    <td>${dto.age}</td>
+    <td>${dto.gender}</td>
+    <td>${dto.residentRegistrationNumber}</td>
+    <td>${dto.property}</td>
+    <td>${dto.address}</td>
+    <td>${dto.bankName}</td>
+    <td>${dto.bankAccount}</td>
+    <td>${dto.loanName}</td>
+    <td>${dto.loanType}</td>
+    <td>${dto.loanId}</td>
+    <td>${dto.interestRate}</td>
+    <td>${dto.maximumMoney}</td>
+    <td>${dto.contractStatus}</td>
   `;
 }
 
@@ -63,7 +63,7 @@ const getLoanProductId = (data) => {
 }
 
 const getLoanRequestId = (data) => {
-  return data.contract.id;
+  return data.contractId;
 }
 
 const context = {

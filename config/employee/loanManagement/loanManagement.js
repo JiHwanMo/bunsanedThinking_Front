@@ -144,7 +144,7 @@ export const ELEMENT_ID= {
   MONEY: "money",
   PAYMENT_TYPE: "paymentType",
   LOAN_TYPE: "loanType",
-  LOAN_NAME: "loanName",
+  LOAN_NAME: "name",
   INTEREST_RATE: "interestRate",
   MAXIMUM_MONEY: "maximumMoney",
   MINIMUM_ASSET: "minimumAsset",
@@ -166,9 +166,9 @@ export const ELEMENT_ID= {
 }
 
 export const LOAN_TYPE= {
-  COLLATERAL: "Collateral",
-  FIXED_DEPOSIT: "FixedDeposit",
-  INSURANCE_CONTRACT: "InsuranceContract"
+  COLLATERAL: "담보",
+  FIXED_DEPOSIT: "정기 예금",
+  INSURANCE_CONTRACT: "보험 계약"
 }
 
 export const KEY= {
