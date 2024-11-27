@@ -1,12 +1,12 @@
 import {
   DETAIL_COLUMN_NAME, DTO_NAME,
-  ELEMENT_ID,
+  ELEMENT_ID, FAMILY_RESPONSE,
   LABEL,
   POSITION, POSITION_LABEL
 } from "../../../../../../config/employee/humanResource/humanResource.js";
 import {
   fetchGetAllDepartment,
-  fetchGetEmployee
+  fetchGetEmployeeDetail
 } from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
 import {
   INPUT_TYPE,
@@ -117,7 +117,7 @@ const renderUpdateEmployeeInputFields = async () => {
   while (inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
   const type = getType();
   const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
-  const employeeData = await fetchGetEmployee(selectedDataId);
+  const employeeData = await fetchGetEmployeeDetail(selectedDataId);
   await addDepartmentComboBoxWithValue(inputFieldsContainer, type, employeeData);
   addPositionComboBoxWithValue(inputFieldsContainer, type, employeeData);
   addIdLabel(inputFieldsContainer, type, employeeData);
@@ -454,12 +454,12 @@ const createFamilyInputFormWithValue = (familyCount, familyData) => {
       <div class="form-group">
         <label for="relationship-${familyCount}">${DETAIL_COLUMN_NAME[type].RELATIONSHIP}</label>
         <select id="relationship-${familyCount}" name="relationship-${familyCount}">
-          <option value="Mother" ${familyData.relationship === "Mother" ? "selected" : ""}>엄마</option>
-          <option value="Father" ${familyData.relationship === "Father" ? "selected" : ""}>아빠</option>
-          <option value="Sister" ${familyData.relationship === "Sister" ? "selected" : ""}>여형제</option>
-          <option value="Brother" ${familyData.relationship === "Brother" ? "selected" : ""}>남형제</option>
-          <option value="Son" ${familyData.relationship === "Son" ? "selected" : ""}>아들</option>
-          <option value="Daughter" ${familyData.relationship === "Daughter" ? "selected" : ""}>딸</option>
+          <option value="Mother" ${familyData.relationship === FAMILY_RESPONSE.MOTHER ? "selected" : ""}>엄마</option>
+          <option value="Father" ${familyData.relationship === FAMILY_RESPONSE.FATHER ? "selected" : ""}>아빠</option>
+          <option value="Sister" ${familyData.relationship === FAMILY_RESPONSE.SISTER ? "selected" : ""}>여형제</option>
+          <option value="Brother" ${familyData.relationship === FAMILY_RESPONSE.BROTHER ? "selected" : ""}>남형제</option>
+          <option value="Son" ${familyData.relationship === FAMILY_RESPONSE.SON ? "selected" : ""}>아들</option>
+          <option value="Daughter" ${familyData.relationship === FAMILY_RESPONSE.DAUGHTER ? "selected" : ""}>딸</option>
         </select>
       </div>
       <div class="form-group">
@@ -467,11 +467,11 @@ const createFamilyInputFormWithValue = (familyCount, familyData) => {
         <div class="radio-group">
           <div class="radio-item">
             <label for="true-${familyCount}">생존</label>
-            <input type="radio" id="true-${familyCount}" name=survival-${familyCount} value="true" ${familyData.survival === true ? "checked" : ""}>
+            <input type="radio" id="true-${familyCount}" name=survival-${familyCount} value="true" ${familyData.survival === FAMILY_RESPONSE.SURVIVAL ? "checked" : ""}>
           </div>
           <div class="radio-item">
             <label for="false-${familyCount}">사망</label>
-            <input type="radio" id="false-${familyCount}" name="survival-${familyCount}" value="false" ${familyData.survival === false ? "checked" : ""}>
+            <input type="radio" id="false-${familyCount}" name="survival-${familyCount}" value="false" ${familyData.survival === FAMILY_RESPONSE.DECEASE ? "checked" : ""}>
           </div>
         </div>
       </div>

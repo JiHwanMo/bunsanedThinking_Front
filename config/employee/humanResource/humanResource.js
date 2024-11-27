@@ -94,6 +94,17 @@ export const TITLE= {
   FAMILY: "가족"
 }
 
+export const FAMILY_RESPONSE = {
+  SURVIVAL: "생존",
+  DECEASE: "사망",
+  MOTHER: "엄마",
+  FATHER: "아빠",
+  SISTER: "여형제",
+  BROTHER: "남형제",
+  SON: "아들",
+  DAUGHTER: "딸"
+}
+
 export const COMBO_BOX= {
   ALL: "all"
 }
