@@ -23,7 +23,7 @@ export const ELEMENT_ID = {
 export const SUBMIT = {
   NOT_INPUT: "아이디를 입력해주세요.",
   IS_CUSTOMER: "2",
-  IS_EMPLOYEE: "3",
-  IS_PARTNER_COMPANY: "6",
+  IS_EMPLOYEE: "6",
+  IS_PARTNER_COMPANY: "3",
   UNEXPECTED_ID: "유효한 아이디가 없습니다"
 }

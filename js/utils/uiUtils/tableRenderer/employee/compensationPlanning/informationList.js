@@ -42,6 +42,7 @@ const context = {
 export const viewInformationList = async (fetchType) => {
   sessionStorage.setItem(KEY.CURRENT_TYPE, fetchType);
   const list = await context[fetchType].listFetch();
+  if (list == null) return;
   sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   window.location.href = LOCATION.INFORMATION;
 }
@@ -69,10 +70,12 @@ const initTableByInput = async (id, type) => { // 추가
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   if (id.length > ZERO) {
     const item = await context[type].listFetchById(id);
+    if (item == null) return;
     setOneRow(item, type);
   } else {
     const list = await context[type].listFetch();
-    if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
+    if (list == null) return;
+    sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
     setTableBody();
   }
 }

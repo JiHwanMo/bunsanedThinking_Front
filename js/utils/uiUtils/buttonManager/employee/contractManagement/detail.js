@@ -16,7 +16,8 @@ const sendNotice = () => {
 const reviewRecontract = async () => {
   if (!confirm(ALERT.CONFIRM.REVIEW_RECONTRACT)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchReviewRecontract(selectedDataId, 1);
+  const result = await fetchReviewRecontract(selectedDataId, 1);
+  if (result == null) return;
   alert(ALERT.OK.REVIEW_RECONTRACT);
   window.history.back();
   window.history.back();
@@ -24,7 +25,8 @@ const reviewRecontract = async () => {
 const denyRecontract = async () => {
   if (!confirm(ALERT.CONFIRM_DENY.REVIEW_RECONTRACT)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchReviewRecontract(selectedDataId, 2);
+  const result = await fetchReviewRecontract(selectedDataId, 2);
+  if (result == null) return;
   alert(ALERT.DENY.REVIEW_RECONTRACT);
   window.history.back();
   window.history.back();
@@ -32,7 +34,8 @@ const denyRecontract = async () => {
 const reviewEndorsement = async () => {
   if (!confirm(ALERT.CONFIRM.REVIEW_ENDORSEMENT)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchReviewEndorsement(selectedDataId, 1);
+  const result = await fetchReviewEndorsement(selectedDataId, 1);
+  if (result == null) return;
   alert(ALERT.OK.REVIEW_ENDORSEMENT);
   window.history.back();
   window.history.back();
@@ -40,7 +43,8 @@ const reviewEndorsement = async () => {
 const denyEndorsement = async () => {
   if (!confirm(ALERT.CONFIRM_DENY.REVIEW_ENDORSEMENT)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchReviewEndorsement(selectedDataId, 2);
+  const result = await fetchReviewEndorsement(selectedDataId, 2);
+  if (result == null) return;
   alert(ALERT.DENY.REVIEW_ENDORSEMENT);
   window.history.back();
   window.history.back();
@@ -48,7 +52,8 @@ const denyEndorsement = async () => {
 const reviewRevival = async () => {
   if (!confirm(ALERT.CONFIRM.REVIEW_REVIVAL)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchReviewRevival(selectedDataId, 1);
+  const result = await fetchReviewRevival(selectedDataId, 1);
+  if (result == null) return;
   alert(ALERT.OK.REVIEW_REVIVAL);
   window.history.back();
   window.history.back();
@@ -56,7 +61,8 @@ const reviewRevival = async () => {
 const denyRevival = async () => {
   if (!confirm(ALERT.CONFIRM_DENY.REVIEW_REVIVAL)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchReviewRevival(selectedDataId, 2);
+  const result = await fetchReviewRevival(selectedDataId, 2);
+  if (result == null) return;
   alert(ALERT.DENY.REVIEW_REVIVAL);
   window.history.back();
   window.history.back();
@@ -64,7 +70,8 @@ const denyRevival = async () => {
 const requestTerminationFee = async () => {
   if (!confirm(ALERT.CONFIRM.REQUEST_TERMINATION_FEE)) return;
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchRequestTerminationFee(selectedDataId);
+  const result = await fetchRequestTerminationFee(selectedDataId);
+  if (result == null) return;
   alert(ALERT.OK.REQUEST_TERMINATION_FEE);
   window.history.back();
   window.history.back();

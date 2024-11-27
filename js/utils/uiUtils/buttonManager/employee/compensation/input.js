@@ -29,7 +29,8 @@ const requestCompensation = async () => {
   if (money.length === ZERO || money <= ZERO) alert(INPUT_FORM.MONEY.exception);
   else if (index === ZERO) alert(INPUT_FORM.PAYMENTTYPE.exception);
   else {
-    await fetchRequestCompensation(getCompensationDTO(money, index));
+    const result = await fetchRequestCompensation(getCompensationDTO(money, index));
+    if (result == null) return;
     alert(ALERT.OK.REQUEST_COMPENSATION);
     window.history.back();
     window.history.back();
@@ -44,7 +45,8 @@ const requestInsuranceMoney = async () => {
   if (money.length === ZERO || money <= ZERO) alert(INPUT_FORM.MONEY.exception);
   else if (index === ZERO) alert(INPUT_FORM.PAYMENTTYPE.exception);
   else {
-    await fetchRequestInsuranceMoney(getInsuranceMoneyDTO(money, index));
+    const result = await fetchRequestInsuranceMoney(getInsuranceMoneyDTO(money, index));
+    if (result == null) return;
     alert(ALERT.OK.REQUEST_INSURANCE_MONEY);
     window.history.back();
     window.history.back();

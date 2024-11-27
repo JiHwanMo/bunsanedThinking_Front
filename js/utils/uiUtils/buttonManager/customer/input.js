@@ -18,7 +18,8 @@ const applyEndorsement = async () => {
   const depositDate = document.getElementById(inputForm.DEPOSIT_DATE.id).value;
   if (depositDate === STRING_EMPTY) alert(inputForm.DEPOSIT_DATE.exception);
   else {
-    await fetchApplyEndorsementById(depositDate, contractId);
+    const result = await fetchApplyEndorsementById(depositDate, contractId);
+    if (result == null) return;
     alert(ALERT.OK.APPLY_ENDORSEMENT);
     window.history.back();
     window.history.back();
@@ -45,7 +46,8 @@ const payInsuranceFee = async () => {
     alert(inputForm.DEPOSIT_MONEY.exception);
   else {
     const depositDTO = getPayInsuranceFeeDTO(contractId, depositMoney, depositPath);
-    await fetchPayInsurancefee(depositDTO);
+    const result = await fetchPayInsurancefee(depositDTO);
+    if (result == null) return;
     alert(ALERT.OK.PAY_INSURANCE_FEE);
     window.history.back();
     window.history.back();
@@ -77,7 +79,8 @@ const receiveInsurance = async () => {
   else {
     const receiveInsuranceDTO = getReceiveInsuranceDTO(contractId,
       medicalCertificate, receipt, residentRegistrationCard);
-    await fetchReceiveInsurance(receiveInsuranceDTO);
+    const result = await fetchReceiveInsurance(receiveInsuranceDTO);
+    if (result == null) return;
     alert(ALERT.OK.RECEIVE_INSURANCE);
     window.history.back();
     window.history.back();
@@ -102,7 +105,8 @@ const askInsuranceCounsel = async () => {
   if (counselDate === STRING_EMPTY) alert(inputForm.COUNSEL_DATE.exception); // 여기 형식은 다시 찾아봐야 함
   else {
     const askInsuranceCounselDTO = getAskInsuranceCounsel(id, insuranceId, counselDate);
-    await fetchAskInsuranceCounsel(askInsuranceCounselDTO);
+    const result = await fetchAskInsuranceCounsel(askInsuranceCounselDTO);
+    if (result == null) return;
     alert(ALERT.OK.ASK_INSURANCE_COUNSEL);
     window.history.back();
     window.history.back();
@@ -136,7 +140,8 @@ const reportAccident = async () => {
   else if (location === STRING_EMPTY) alert(inputForm.LOCATION.exception);
   else {
     const reportAccidentDTO = getReportAccident(id, type, accidentDate, location);
-    await fetchReportAccident(reportAccidentDTO);
+    const result = await fetchReportAccident(reportAccidentDTO);
+    if (result == null) return;
     alert(ALERT.OK.ADD_ACCIDENT);
     window.history.back();
     window.history.back();
@@ -164,7 +169,8 @@ const complaint = async () => {
   else if (content === STRING_EMPTY) alert(inputForm.CONTENT.exception);
   else {
     const complainDTO = getComplainDTO(id, type, complaintTitle, content);
-    await fetchComplain(complainDTO);
+    const result = await fetchComplain(complainDTO);
+    if (result == null) return;
     alert(ALERT.OK.ADD_COMPLAINT);
     window.history.back();
     window.history.back();

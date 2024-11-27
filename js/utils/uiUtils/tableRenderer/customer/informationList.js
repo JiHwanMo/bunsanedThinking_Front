@@ -160,12 +160,14 @@ export const viewInformationListById = async (fetchType) => {
   sessionStorage.setItem(KEY.CURRENT_TYPE, fetchType);
   const id = sessionStorage.getItem(KEY.LOGIN_ID);
   const list = await context[fetchType].listFetch(id);
+  if (list == null) return;
   sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   window.location.href = LOCATION.INFORMATION;
 }
 export const viewInformationListAll = async (fetchType) => {
   sessionStorage.setItem(KEY.CURRENT_TYPE, fetchType);
   const list = await context[fetchType].listFetch();
+  if (list == null) return;
   sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   window.location.href = LOCATION.INFORMATION;
 }
@@ -217,6 +219,7 @@ export const initTableByInput = async (id, type) => {
     const item = context[type].needCustomerId ?
       await context[type].listFetchById(id, sessionStorage.getItem(KEY.LOGIN_ID)) :
       await context[type].listFetchById(id)
+    if (item == null) return;
     setOneRow(item, type);
   } else {
     const list = context[type].needCustomerId ?

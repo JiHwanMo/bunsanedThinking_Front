@@ -10,7 +10,8 @@ import {KEY, LOCATION} from "../../../../../config/common.js";
 const applyRecontract = async () => {
   if (!confirm(ALERT.CONFIRM.APPLY_RECONTRACT)) return;
   const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchApplyInsuranceRecontractById(contractId);
+  const result = await fetchApplyInsuranceRecontractById(contractId);
+  if (result == null) return;
   alert(ALERT.OK.APPLY_RECONTRACT);
   window.history.back();
   window.history.back();
@@ -19,7 +20,8 @@ const applyRecontract = async () => {
 const applyRevival = async () => {
   if (!confirm(ALERT.CONFIRM.APPLY_REVIVAL)) return;
   const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchApplyInsuranceRevivalById(contractId);
+  const result = await fetchApplyInsuranceRevivalById(contractId);
+  if (result == null) return;
   alert(ALERT.OK.APPLY_REVIVAL);
   window.history.back();
   window.history.back();
@@ -28,7 +30,8 @@ const applyRevival = async () => {
 const applyTermination = async () => {
   if (!confirm(ALERT.CONFIRM.APPLY_TERMINATION)) return;
   const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchApplyInsuranceTerminationById(contractId);
+  const result = await fetchApplyInsuranceTerminationById(contractId);
+  if (result == null) return;
   alert(ALERT.OK.APPLY_TERMINATION);
   window.history.back();
   window.history.back();
@@ -60,7 +63,8 @@ const buyInsurance = async () => {
     insuranceId: sessionStorage.getItem(KEY.SELECTED_DATA_ID),
     customerId: sessionStorage.getItem(KEY.LOGIN_ID)
   };
-  await fetchBuyInsurance(buyInsuranceDTO);
+  const result = await fetchBuyInsurance(buyInsuranceDTO);
+  if (result == null) return;
   alert(ALERT.OK.BUY_INSURANCE);
   window.history.back();
   window.history.back();
@@ -72,7 +76,8 @@ const loan = async () => {
     loanId: sessionStorage.getItem(KEY.SELECTED_DATA_ID),
     customerId: sessionStorage.getItem(KEY.LOGIN_ID)
   }
-  await fetchLoan(loanDTO);
+  const result = await fetchLoan(loanDTO);
+  if (result == null) return;
   alert(ALERT.OK.LOAN);
   window.history.back();
   window.history.back();

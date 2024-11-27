@@ -129,6 +129,7 @@ export const renderDetails = async () => {
 
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
+    if (selectedData == null) return;
     renderDetailsTable(selectedData);
     renderButtons();
   }

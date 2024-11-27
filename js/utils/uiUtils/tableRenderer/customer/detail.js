@@ -145,6 +145,7 @@ export const renderDetails = async () => {
     const selectedData = context[type] ?
       await context[type].fetchGetById(selectedDataId, sessionStorage.getItem(KEY.LOGIN_ID)) :
       await context[type].fetchGetById(selectedDataId);
+    if (selectedData == null) return;
     renderDetailsTable(selectedData);
     renderButtons();
   }
