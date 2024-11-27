@@ -16,7 +16,7 @@ import {
   CLASS,
   MESSAGES, EVENT
 } from "../../../../../../config/common.js";
-import {TITLE} from "../../../../../../config/register.js";
+import {TITLE} from "../../../../../../config/employee/humanResource/humanResource.js";
 
 export const renderInput = () => {
   const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
@@ -151,18 +151,7 @@ const addDepartmentComboBox = async (inputFieldsContainer, type) => {
   formSelect.id = ELEMENT_ID.DEPARTMENT_ID;
   formSelect.name = ELEMENT_ID.DEPARTMENT_ID;
 
-  // TODO 테스트용
-  // const departmentList = await fetchGetAllDepartment();
-  const departmentList = [
-    {
-      id: 9101,
-      name: "융자운용팀"
-    },
-    {
-      id: 9108,
-      name: "인사관리팀"
-    }
-  ]
+  const departmentList = await fetchGetAllDepartment();
 
   departmentList.map(department => {
     const option = document.createElement(TAG.OPTION);
