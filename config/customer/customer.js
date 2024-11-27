@@ -296,6 +296,7 @@ export const INPUT_FORM = {
   APPLY_ENDORSEMENT: {
     DEPOSIT_DATE: {
       isCombo: false,
+      isImage: false,
       for: "depositDate",
       label: "DEPOSIT_DATE",
       type: "text",
@@ -308,6 +309,7 @@ export const INPUT_FORM = {
   PAY_INSURANCE_FEE: {
     DEPOSIT_PATH: {
       isCombo: true,
+      isImage: false,
       for: "depositPath",
       label: "DEPOSIT_PATH",
       id: "depositPath",
@@ -315,6 +317,7 @@ export const INPUT_FORM = {
     },
     DEPOSIT_MONEY: {
       isCombo: false,
+      isImage: false,
       for: "depositMoney",
       label: "DEPOSIT_MONEY",
       type: "number",
@@ -327,9 +330,11 @@ export const INPUT_FORM = {
   RECEIVE_INSURANCE: {
     MEDICAL_CERTIFICATE: {
       isCombo: false,
+      isImage: true,
+      accept: "image/*",
       for: "medicalCertificate",
       label: "MEDICAL_CERTIFICATE",
-      type: "text",
+      type: "file",
       id: "medicalCertificate",
       name: "medicalCertificate",
       placeholder: "MEDICAL_CERTIFICATE",
@@ -337,9 +342,11 @@ export const INPUT_FORM = {
     },
     RECEIPT: {
       isCombo: false,
+      isImage: true,
+      accept: "image/*",
       for: "receipt",
       label: "RECEIPT",
-      type: "text",
+      type: "file",
       id: "receipt",
       name: "receipt",
       placeholder: "RECEIPT",
@@ -347,9 +354,11 @@ export const INPUT_FORM = {
     },
     RESIDENT_REGISTRATION_CARD: {
       isCombo: false,
+      isImage: true,
+      accept: "image/*",
       for: "residentRegistrationCard",
       label: "RESIDENT_REGISTRATION_CARD",
-      type: "text",
+      type: "file",
       id: "residentRegistrationCard",
       name: "residentRegistrationCard",
       placeholder: "RESIDENT_REGISTRATION_CARD",
@@ -359,6 +368,7 @@ export const INPUT_FORM = {
   ASK_INSURANCE_COUNSEL: {
     COUNSEL_DATE: {
       isCombo: false,
+      isImage: false,
       for: "counselDate",
       label: "COUNSEL_DATE",
       type: "date",
@@ -371,6 +381,7 @@ export const INPUT_FORM = {
   ADD_ACCIDENT: {
     TYPE: {
       isCombo: true,
+      isImage: false,
       for: "type",
       label: "TYPE",
       id: "type",
@@ -378,6 +389,7 @@ export const INPUT_FORM = {
     },
     ACCIDENT_DATE: {
       isCombo: false,
+      isImage: false,
       for: "accidentDate",
       label: "ACCIDENT_DATE",
       type: "date",
@@ -388,6 +400,7 @@ export const INPUT_FORM = {
     },
     LOCATION: {
       isCombo: false,
+      isImage: false,
       for: "location",
       label: "LOCATION",
       type: "text",
@@ -400,6 +413,7 @@ export const INPUT_FORM = {
   ADD_COMPLAINT: {
     TYPE: {
       isCombo: true,
+      isImage: false,
       for: "type",
       label: "TYPE",
       id: "type",
@@ -407,6 +421,7 @@ export const INPUT_FORM = {
     },
     COMPLAINT_TITLE: {
       isCombo: false,
+      isImage: false,
       for: "complaintTitle",
       label: "COMPLAINT_TITLE",
       type: "text",
@@ -417,6 +432,7 @@ export const INPUT_FORM = {
     },
     CONTENT: {
       isCombo: false,
+      isImage: false,
       for: "content",
       label: "CONTENT",
       type: "text",

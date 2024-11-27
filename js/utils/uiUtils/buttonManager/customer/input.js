@@ -77,9 +77,8 @@ const receiveInsurance = async () => {
   else {
     const receiveInsuranceDTO = getReceiveInsuranceDTO(contractId,
       medicalCertificate, receipt, residentRegistrationCard);
-    // await fetchReceiveInsurance(receiveInsuranceDTO);
-    // alert(ALERT.OK.RECEIVE_INSURANCE);
-    alert(JSON.stringify(receiveInsuranceDTO));
+    await fetchReceiveInsurance(receiveInsuranceDTO);
+    alert(ALERT.OK.RECEIVE_INSURANCE);
     window.history.back();
     window.history.back();
     window.history.back();
