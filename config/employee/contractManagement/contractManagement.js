@@ -179,10 +179,6 @@ export const COLUMN_NAME = {
   ]
 };
 
-export const INPUT_LABEL = {
-
-}
-
 export const INFORMATION_TYPE = {
   DEFAULT_CONTRACT: "DEFAULT_CONTRACT",
   RECONTRACT: "RECONTRACT",
@@ -190,8 +186,6 @@ export const INFORMATION_TYPE = {
   REVIVAL: "REVIVAL",
   TERMINATION: "TERMINATION"
 }
-
-export const COMBOLIST_FETCH_ALL = "all";
 
 export const ACCIDENT_HISTORY_DETAIL_LABEL = {
   ID: "사고 이력 번호",

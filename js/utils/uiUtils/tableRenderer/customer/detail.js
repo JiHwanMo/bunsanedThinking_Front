@@ -138,15 +138,14 @@ const context = {
 }
 
 export const renderDetails = async () => {
-  // 세션에서 데이터 가져오기
   const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
-  // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
     const selectedData = context[type] ?
       await context[type].fetchGetById(selectedDataId, sessionStorage.getItem(KEY.LOGIN_ID)) :
       await context[type].fetchGetById(selectedDataId);
+    if (selectedData == null) return;
     renderDetailsTable(selectedData);
     renderButtons();
   }

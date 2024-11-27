@@ -117,21 +117,11 @@ export const SIGNUP_MESSAGE = {
 export const CONTAINER_KEY = "Container";
 
 export const CLASS_REGISTER = {
-  DYNAMIC_SECTION: "dynamic-section",
-  SECTION_HEADER: "section-header",
-  ADD_BUTTON: "add-button",
-  REMOVE_BUTTON: "remove-button",
-  INPUT_FIELD: "input-field",
   GENDER_BUTTON: "gender-button"
 }
 
 export const CLASS_SELECTOR_REGISTER = {
   GENDER_BUTTON: ".gender-button"
-}
-
-export const TEXT_CONTANT = {
-  PLUS: "+",
-  MINUS: "-"
 }
 
 export const FIELD_NAME_KEY = {

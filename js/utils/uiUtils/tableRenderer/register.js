@@ -1,13 +1,15 @@
 import {
-  TITLE,
-  INPUT_FORM,
-  DYNAMIC_SECTION_FORM,
-  CONTAINER_KEY,
   CLASS_REGISTER,
-  CLASS_SELECTOR_REGISTER, TEXT_CONTANT, FIELD_NAME_KEY, PLACE_HOLDER
+  CLASS_SELECTOR_REGISTER,
+  CONTAINER_KEY,
+  DYNAMIC_SECTION_FORM,
+  FIELD_NAME_KEY,
+  INPUT_FORM,
+  PLACE_HOLDER,
+  TITLE
 } from "../../../../config/register.js";
 import {renderButton} from "../buttonManager/register.js";
-import {CLASS, ELEMENT_ID, EVENT, INPUT_TYPE, TAG} from "../../../../config/common.js";
+import {CLASS, ELEMENT_ID, EVENT, INPUT_TYPE, MINUS, PLUS, TAG} from "../../../../config/common.js";
 
 export const renderInput = () => {
   const title = document.getElementById(ELEMENT_ID.TITLE);
@@ -50,7 +52,7 @@ const createForm = (form) => {
     formDiv.appendChild(buttonGroup);
   } else {
     const formInput = form.isTextArea
-      ? document.createElement("textarea")
+      ? document.createElement(TAG.TEXT_AREA)
       : document.createElement(TAG.INPUT);
     formInput.type = form.type;
     formInput.id = form.id;
@@ -69,17 +71,17 @@ const addDynamicSection = (form) => {
   const container = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
   const sectionDiv = document.createElement(TAG.DIV);
   sectionDiv.id = `${sectionId}${CONTAINER_KEY}`;
-  sectionDiv.className = CLASS_REGISTER.DYNAMIC_SECTION;
+  sectionDiv.className = CLASS.DYNAMIC_SECTION;
 
   const headerDiv = document.createElement(TAG.DIV);
-  headerDiv.className = CLASS_REGISTER.SECTION_HEADER;
+  headerDiv.className = CLASS.SECTION_HEADER;
 
   const sectionLabel = document.createElement(TAG.LABEL);
   sectionLabel.textContent = sectionTitle;
 
   const addButton = document.createElement(TAG.BUTTON);
-  addButton.textContent = TEXT_CONTANT.PLUS;
-  addButton.className = CLASS_REGISTER.ADD_BUTTON;
+  addButton.textContent = PLUS;
+  addButton.className = CLASS.ADD_BUTTON;
   addButton.addEventListener(EVENT.CLICK, () => addInputField(sectionDiv, sectionId, fieldNames));
 
   headerDiv.appendChild(sectionLabel);
@@ -93,8 +95,8 @@ const addInputField = (sectionDiv, sectionId, fieldNames) => {
   const inputDiv = document.createElement(TAG.DIV);
   inputDiv.className = CLASS.FORM_GROUP;
   const removeButton = document.createElement(TAG.BUTTON);
-  removeButton.textContent = TEXT_CONTANT.MINUS;
-  removeButton.className = CLASS_REGISTER.REMOVE_BUTTON;
+  removeButton.textContent = MINUS;
+  removeButton.className = CLASS.REMOVE_BUTTON;
   removeButton.addEventListener(EVENT.CLICK, () => {
     sectionDiv.removeChild(inputDiv);
   });
@@ -106,7 +108,7 @@ const addInputField = (sectionDiv, sectionId, fieldNames) => {
     input.name = `${sectionId}${key}`;
     input.placeholder = key === FIELD_NAME_KEY.DATE || key === FIELD_NAME_KEY.DATE_OF_DIAGNOSIS ?
       `${PLACE_HOLDER.DATE} ${PLACE_HOLDER.DEFAULT}` : `${name} ${PLACE_HOLDER.DEFAULT}`;
-    input.className = CLASS_REGISTER.INPUT_FIELD;
+    input.className = CLASS.INPUT_FIELD;
     inputDiv.appendChild(input);
   });
 

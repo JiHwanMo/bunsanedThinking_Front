@@ -3,7 +3,7 @@ import {renderButton} from "../../../buttonManager/employee/compensation/input.j
 import {INPUT_FORM} from "../../../../../../config/employee/compensation/compensation.js";
 import {CLASS, ELEMENT_ID, KEY, MESSAGES, TAG} from "../../../../../../config/common.js";
 
-export const renderInput = async () => {
+export const renderInput = () => {
   const title = document.getElementById(ELEMENT_ID.TITLE);
   title.textContent = BUTTON.TASK.COMPENSATION.HOME[sessionStorage.getItem(KEY.CURRENT_TYPE)];
   renderInputFields();

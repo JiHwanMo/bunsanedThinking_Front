@@ -34,7 +34,8 @@ const addPartnerCompany = async () => {
   else if (headPhoneNumber === STRING_EMPTY) alert(inputForm.HEAD_PHONE_NUMBER.exception);
   else {
     const dto = getPartnerCompanyAddDTO(name, phoneNumber, type, headName, headPhoneNumber);
-    await fetchAddPartnerCompany(dto);
+    const result = await fetchAddPartnerCompany(dto);
+    if (result == null) return;
     alert(ALERT.OK.ADD_PARTNER_COMPANY);
     window.history.back();
     window.history.back();
@@ -59,7 +60,8 @@ const updatePartnerCompany = async () => {
   if (index === ZERO) alert(INPUT_FORM[selectedButtonType].TYPE.exception);
   else {
     const updateDTO = getPartnerCompanyUpdateDTO(dataId, input, index);
-    await fetchUpdatePartnerCompany(updateDTO);
+    const result = await fetchUpdatePartnerCompany(updateDTO);
+    if (result == null) return;
     alert(ALERT.OK.UPDATE_PARTNER_COMPANY);
     window.history.back();
     window.history.back();
@@ -74,7 +76,8 @@ const cancel = () => {
 const evaluatePartnerCompany = async (evaluate) => {
   if (!confirm(ALERT.CONFIRM.EVALUATE_PARTNER_COMPANY)) return;
   const dataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchEvaluatePartnerCompany(evaluate, dataId);
+  const result = await fetchEvaluatePartnerCompany(evaluate, dataId);
+  if (result == null) return;
   alert(ALERT.OK.EVALUATE_PARTNER_COMPANY);
   window.history.back();
   window.history.back();
@@ -114,9 +117,9 @@ const initialButtonsEvaluate = (buttonMessages, buttonActionMapper) => {
   Object.entries(buttonMessages).forEach(([key, name]) => {
     const button = document.createElement(TAG.DIV);
     button.className = CLASS.STAR_BUTTON;
-    button.textContent = name; // 버튼에 표시할 텍스트 설정
+    button.textContent = name;
 
     button.addEventListener(EVENT.CLICK, buttonActionMapper[key]);
-    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
+    buttonContainer.appendChild(button);
   });
 }

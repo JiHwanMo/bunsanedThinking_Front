@@ -1,7 +1,7 @@
 import {BUTTON, INPUT_FORM} from "../../../../../config/customer/customer.js";
 import {COMBOBOX, INPUT_LABEL} from "../../../../../config/customer/customer.js";
 import {renderButton} from "../../buttonManager/customer/input.js";
-import {ELEMENT_ID, KEY, MESSAGES, TAG} from "../../../../../config/common.js";
+import {CLASS, ELEMENT_ID, KEY, MESSAGES, TAG} from "../../../../../config/common.js";
 
 export const renderInput = () => {
   const title = document.getElementById(ELEMENT_ID.TITLE);
@@ -23,7 +23,7 @@ const renderInputFields = () => {
 
 const createForm = (form, type) => {
   const formDiv = document.createElement(TAG.DIV);
-  formDiv.className = "form-group";
+  formDiv.className = CLASS.FORM_GROUP;
   const formLabel = document.createElement(TAG.LABEL);
   formLabel.for = form.for;
   formLabel.textContent = INPUT_LABEL[type][form.label];

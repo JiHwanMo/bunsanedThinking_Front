@@ -1,25 +1,29 @@
-import { fetchGetAllReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetReportRowById } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllUnprocessedReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllCompletedReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetInsuranceMoneyRowById } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllUnprocessedInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllProcessedInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import {
-  BUTTON, CLASS, CLASS_SELECTOR,
+  fetchGetAllCompletedReport,
+  fetchGetAllInsuranceMoney,
+  fetchGetAllProcessedInsuranceMoney,
+  fetchGetAllReport,
+  fetchGetAllUnprocessedInsuranceMoney,
+  fetchGetAllUnprocessedReport,
+  fetchGetInsuranceMoneyRowById,
+  fetchGetReportRowById
+} from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
+import {
+  BUTTON,
+  CLASS,
+  CLASS_SELECTOR,
+  COMBO_LIST_FETCH,
   ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
   KEY,
-  LOCATION, MESSAGES,
+  LOCATION,
+  MESSAGES,
   STRING_EMPTY,
   TAG,
   ZERO
 } from '../../../../../../config/common.js';
-import {COMBOBOX, COMBOLIST_FETCH_ALL} from '../../../../../../config/employee/compensation/compensation.js';
-import { TABLE_TITLE } from '../../../../../../config/employee/compensation/compensation.js';
-import { COLUMN_NAME } from '../../../../../../config/employee/compensation/compensation.js';
+import {COLUMN_NAME, COMBOBOX, TABLE_TITLE} from '../../../../../../config/employee/compensation/compensation.js';
 
 const accidentRow = (dto) => {
   return `
@@ -71,6 +75,7 @@ const context = {
 export const viewInformationList = async (fetchType) => {
   sessionStorage.setItem(KEY.CURRENT_TYPE, fetchType);
   const list = await context[fetchType].listFetch();
+  if (list == null) return;
   sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   window.location.href = LOCATION.INFORMATION;
 }
@@ -89,7 +94,7 @@ const setComboBox = () => {
   const select = document.createElement(TAG.SELECT);
   const boxContext = COMBOBOX[sessionStorage.getItem(KEY.CURRENT_TYPE)];
   select.id = boxContext.id;
-  select.className = "combo-Box";
+  select.className = CLASS.COMBO_BOX;
   const optionTypes = boxContext.optionTypes;
   optionTypes.forEach(optionType => {
     const option = document.createElement(TAG.OPTION);
@@ -113,10 +118,12 @@ const initTableByInput = async (id, type) => { // 추가
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   if (id.length > ZERO) {
     const item = await context[type].listFetchById(id);
+    if (item == null) return;
     setOneRow(item, type);
   } else {
-    const list = await context[type].comboListFetch[COMBOLIST_FETCH_ALL]();
-    if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
+    const list = await context[type].comboListFetch[COMBO_LIST_FETCH.ALL]();
+    if (list == null) return;
+    sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
     setTableBody();
   }
 }
@@ -139,7 +146,8 @@ const initTableBySelect = async (id, type) => {
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
   const list = await context[type].comboListFetch[selectedOption.value]();
-  if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
+  if (list == null) return;
+  sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   const input = document.getElementById(ELEMENT_ID.SEARCH_INPUT);
   if (input != null) input.value = STRING_EMPTY;
   const tableBody = document.getElementById(KEY.LIST);

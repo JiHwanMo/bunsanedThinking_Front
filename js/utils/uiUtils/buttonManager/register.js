@@ -1,7 +1,7 @@
 import {initialButtons} from "../common/buttonUtils.js";
 import {BUTTON, CONTAINER_KEY, DYNAMIC_SECTION_FORM, INPUT_FORM, SIGNUP_MESSAGE} from "../../../../config/register.js";
 import {fetchSignUp} from "../../apiUtils/apiDocumentation/customer/customer.js";
-import {STRING_EMPTY, TAG, ZERO} from "../../../../config/common.js";
+import {CLASS_SELECTOR, STRING_EMPTY, TAG, ZERO} from "../../../../config/common.js";
 
 const getSignUpDTO = (name, age, gender, address, phoneNumber,
                       residentRegistrationNumber, job,
@@ -30,7 +30,7 @@ const signUp = async () => {
   if (!confirm(SIGNUP_MESSAGE.CONFIRM)) return;
   const name = document.getElementById(INPUT_FORM.NAME.id).value;
   const age = document.getElementById(INPUT_FORM.AGE.id).value;
-  const buttonGroup = document.querySelector(".button-group");
+  const buttonGroup = document.querySelector(CLASS_SELECTOR.BUTTON_GROUP);
   const gender = buttonGroup ? buttonGroup.dataset.selectedValue : null;
   const address = document.getElementById(INPUT_FORM.ADDRESS.id).value;
   const phoneNumber = document.getElementById(INPUT_FORM.PHONE_NUMBER.id).value;
@@ -57,7 +57,8 @@ const signUp = async () => {
       residentRegistrationNumber, job, bankAccount, bankName, property,
       accidentHistory, surgeryHistory, diseaseHistory
     );
-    await fetchSignUp(dto);
+    const result = await fetchSignUp(dto);
+    if (result == null) return;
     alert(SIGNUP_MESSAGE.OK);
     window.history.back();
   }
@@ -67,7 +68,7 @@ const mapDynamicFields = (sectionId) => {
   const section = document.getElementById(`${sectionId}${CONTAINER_KEY}`);
   if (!section) return [];
 
-  const inputGroups = Array.from(section.querySelectorAll(".form-group"));
+  const inputGroups = Array.from(section.querySelectorAll(CLASS_SELECTOR.FORM_GROUP));
   return inputGroups.map((group) => {
     const inputs = Array.from(group.querySelectorAll(TAG.INPUT));
     const values = {};

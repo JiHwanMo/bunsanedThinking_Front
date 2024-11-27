@@ -26,7 +26,8 @@ const updatePartnerCompany = () => {
 const deletePartnerCompany = async () => {
   if (!confirm(ALERT.CONFIRM.DELETE_PARTNER_COMPANY)) return;
   const id = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  await fetchDeletePartnerCompany(id);
+  const result = await fetchDeletePartnerCompany(id);
+  if (result == null) return;
   alert(ALERT.OK.DELETE_PARTNER_COMPANY);
   window.history.back();
   window.history.back();

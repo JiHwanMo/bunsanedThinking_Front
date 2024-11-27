@@ -19,10 +19,12 @@ import {
   fetchGetInsuranceRowByProductId,
   fetchGetLoanRowByProductId
 } from '../../../apiUtils/apiDocumentation/customer/customer.js';
-import {COLUMN_NAME, COMBOBOX, COMBOLIST_FETCH_ALL, TABLE_TITLE} from '../../../../../config/customer/customer.js';
+import {COLUMN_NAME, COMBOBOX, TABLE_TITLE} from '../../../../../config/customer/customer.js';
 import {setButton, setPost} from "../../buttonManager/customer/information.js";
 import {
-  CLASS, CLASS_SELECTOR,
+  CLASS,
+  CLASS_SELECTOR,
+  COMBO_LIST_FETCH,
   ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
@@ -30,7 +32,8 @@ import {
   LOCATION,
   MESSAGES,
   STRING_EMPTY,
-  TAG, ZERO
+  TAG,
+  ZERO
 } from "../../../../../config/common.js";
 
 
@@ -157,12 +160,14 @@ export const viewInformationListById = async (fetchType) => {
   sessionStorage.setItem(KEY.CURRENT_TYPE, fetchType);
   const id = sessionStorage.getItem(KEY.LOGIN_ID);
   const list = await context[fetchType].listFetch(id);
+  if (list == null) return;
   sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   window.location.href = LOCATION.INFORMATION;
 }
 export const viewInformationListAll = async (fetchType) => {
   sessionStorage.setItem(KEY.CURRENT_TYPE, fetchType);
   const list = await context[fetchType].listFetch();
+  if (list == null) return;
   sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   window.location.href = LOCATION.INFORMATION;
 }
@@ -214,11 +219,12 @@ export const initTableByInput = async (id, type) => {
     const item = context[type].needCustomerId ?
       await context[type].listFetchById(id, sessionStorage.getItem(KEY.LOGIN_ID)) :
       await context[type].listFetchById(id)
+    if (item == null) return;
     setOneRow(item, type);
   } else {
     const list = context[type].needCustomerId ?
-      await context[type].comboListFetch[COMBOLIST_FETCH_ALL](sessionStorage.getItem(KEY.LOGIN_ID)) :
-      await context[type].comboListFetch[COMBOLIST_FETCH_ALL]();
+      await context[type].comboListFetch[COMBO_LIST_FETCH.ALL](sessionStorage.getItem(KEY.LOGIN_ID)) :
+      await context[type].comboListFetch[COMBO_LIST_FETCH.ALL]();
     if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
     setTableBody();
   }

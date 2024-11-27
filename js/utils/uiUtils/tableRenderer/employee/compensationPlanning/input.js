@@ -16,6 +16,7 @@ export const renderInput = async () => {
   } else if (selectedButtonType === INPUT_TYPE.UPDATE) {
     const dataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
     const data = await fetchGetPartnerCompanyDetailById(dataId);
+    if (data == null) return;
     renderInputFieldsWithValues(data);
   } else if (selectedButtonType === INPUT_TYPE.EVALUATE) {}
   renderButton();
