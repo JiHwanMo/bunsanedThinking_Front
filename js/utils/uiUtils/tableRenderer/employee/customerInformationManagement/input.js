@@ -1,19 +1,27 @@
-import { DETAIL_COLUMN_NAME } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
+import {
+  CLASS,
+  CLASS_SELECTOR,
+  DETAIL_COLUMN_NAME,
+  ELEMENT_ID as CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID,
+  token,
+  VALUE
+} from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
 import { fetchGetCustomerInformation } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
 import { addButtons } from "../../../buttonManager/employee/customerInformationManagement/input.js";
+import {BUTTON, ELEMENT_ID, EVENT, KEY, TAG} from "../../../../../../config/common.js";
 
 export const renderInput = async () => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
-  const buttonContainer = document.getElementById("buttonContainer");
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
 
-  const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
+  const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));
 
-  if (selectedButtonType === "POST") {
+  if (selectedButtonType === VALUE.POST) {
     // 등록 화면: 빈 입력 필드 생성
     renderInputFields({});
-  } else if (selectedButtonType === "UPDATE") {
+  } else if (selectedButtonType === VALUE.UPDATE) {
     // 수정 화면: 기존 데이터 불러오기
-    const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
+    const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
     const customerData = await fetchGetCustomerInformation(selectedDataId);
 
     renderInputFields(customerData);
@@ -21,16 +29,16 @@ export const renderInput = async () => {
 
   // 버튼 추가
   addButtons(buttonContainer);
-  document.getElementById("addAccidentHistoryButton")?.addEventListener("click", addAccidentHistory);
-  document.getElementById("addSurgeryHistoryButton")?.addEventListener("click", addSurgeryHistory);
-  document.getElementById("addDiseaseHistoryButton")?.addEventListener("click", addDiseaseHistory);
+  document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.ADD_ACCIDENT_HISTORY_BUTTON)?.addEventListener(EVENT.CLICK, addAccidentHistory);
+  document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.ADD_SURGERY_HISTORY_BUTTON)?.addEventListener(EVENT.CLICK, addSurgeryHistory);
+  document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.ADD_DISEASE_HISTORY_BUTTON)?.addEventListener(EVENT.CLICK, addDiseaseHistory);
 };
 
 const renderInputFields = (data) => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
-  const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
+  const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));
 
-  if (selectedButtonType === "POST") {
+  if (selectedButtonType === VALUE.POST) {
     inputFieldsContainer.innerHTML = `
       <div class="form-group">
         <label for="name">${DETAIL_COLUMN_NAME.CUSTOMER_LIST.NAME}</label>
@@ -89,7 +97,7 @@ const renderInputFields = (data) => {
     addAccidentHistory();
     addSurgeryHistory();
     addDiseaseHistory();
-  } else if(selectedButtonType === "UPDATE") {
+  } else if(selectedButtonType === VALUE.UPDATE) {
   let selectedIndex = 1; // 기본 선택 항목은 고객 이름
   let placeholderValue = data.name || "";
 
@@ -123,7 +131,6 @@ const renderInputFields = (data) => {
       <label for="input">수정할 값</label>
       <input type="text" id="input" name="input" value="${placeholderValue}" placeholder="수정할 값을 입력하세요" required>
     </div>
-
     <!-- 이력 업데이트 전용 필드 -->
     <div id="historyFields" class="hidden">
         <div class="form-group">
@@ -167,35 +174,35 @@ const renderInputFields = (data) => {
       </div>
   `;
     // `<select>` 요소의 `onchange` 이벤트 추가
-    const selectElement = document.getElementById("index");
-    const inputElement = document.getElementById("input");
-    const inputContainer = document.querySelector(".basic-input-container");
-    const historyFields = document.getElementById("historyFields");
-    const accidentFields = document.getElementById("accidentFields");
-    const surgeryFields = document.getElementById("surgeryFields");
-    const diseaseFields = document.getElementById("diseaseFields");
+    const selectElement = document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.INDEX);
+    const inputElement = document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.INPUT);
+    const inputContainer = document.querySelector(CLASS_SELECTOR.BASIC_INPUT_CONTAINER);
+    const historyFields = document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.HISTORY_FIELDS);
+    const accidentFields = document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.ACCIDENT_FIELDS);
+    const surgeryFields = document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.SURGERY_FIELDS);
+    const diseaseFields = document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.DISEASE_FIELDS);
 
-    selectElement.addEventListener("change", (event) => {
+    selectElement.addEventListener(EVENT.CHANGE, (event) => {
       selectedIndex = parseInt(event.target.value, 10);
 
       // 기본 숨김 처리
-      inputContainer.classList.add("hidden");
-      historyFields.classList.add("hidden");
-      accidentFields.classList.add("hidden");
-      surgeryFields.classList.add("hidden");
-      diseaseFields.classList.add("hidden");
+      inputContainer.classList.add(token.HIDDEN);
+      historyFields.classList.add(token.HIDDEN);
+      accidentFields.classList.add(token.HIDDEN);
+      surgeryFields.classList.add(token.HIDDEN);
+      diseaseFields.classList.add(token.HIDDEN);
 
       if (selectedIndex === 10) {
-        historyFields.classList.remove("hidden");
-        accidentFields.classList.remove("hidden");
+        historyFields.classList.remove(token.HIDDEN);
+        accidentFields.classList.remove(token.HIDDEN);
       } else if (selectedIndex === 11) {
-        historyFields.classList.remove("hidden");
-        surgeryFields.classList.remove("hidden");
+        historyFields.classList.remove(token.HIDDEN);
+        surgeryFields.classList.remove(token.HIDDEN);
       } else if (selectedIndex === 12) {
-        historyFields.classList.remove("hidden");
-        diseaseFields.classList.remove("hidden");
+        historyFields.classList.remove(token.HIDDEN);
+        diseaseFields.classList.remove(token.HIDDEN);
       } else {
-        inputContainer.classList.remove("hidden");
+        inputContainer.classList.remove(token.HIDDEN);
 
         switch (selectedIndex) {
           case 1:
@@ -234,9 +241,9 @@ const renderInputFields = (data) => {
   }
 }
 const addAccidentHistory = () => {
-  const container = document.getElementById("accidentHistoryContainer");
-  const newEntry = document.createElement("div");
-  newEntry.className = "accident-history-entry";
+  const container = document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.ACCIDENT_HISTORY_CONTAINER);
+  const newEntry = document.createElement(TAG.DIV);
+  newEntry.className = CLASS.ACCIDENT_HISTORY_ENTRY;
   newEntry.innerHTML = `
     <input type="date" name="date" placeholder="날짜를 입력하세요" required>
     <input type="text" name="accidentDetail" placeholder="사고 내용을 입력하세요" required>
@@ -244,15 +251,15 @@ const addAccidentHistory = () => {
   `;
   container.appendChild(newEntry);
 
-  newEntry.querySelector(".remove-button").addEventListener("click", () => {
+  newEntry.querySelector(".remove-button").addEventListener(EVENT.CLICK, () => {
     container.removeChild(newEntry);
   });
 };
 
 const addSurgeryHistory = () => {
-  const container = document.getElementById("surgeryHistoryContainer");
-  const newEntry = document.createElement("div");
-  newEntry.className = "surgery-history-entry";
+  const container = document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.SURGERY_HISTORY_CONTAINER);
+  const newEntry = document.createElement(TAG.DIV);
+  newEntry.className = CLASS.SURGERY_HISTORY_ENTRY;
   newEntry.innerHTML = `
     <input type="date" name="date" placeholder="날짜를 입력하세요" required>
     <input type="text" name="hospitalName" placeholder="병원 이름을 입력하세요" required>
@@ -261,15 +268,15 @@ const addSurgeryHistory = () => {
   `;
   container.appendChild(newEntry);
 
-  newEntry.querySelector(".remove-button").addEventListener("click", () => {
+  newEntry.querySelector(".remove-button").addEventListener(EVENT.CLICK, () => {
     container.removeChild(newEntry);
   });
 };
 
 const addDiseaseHistory = () => {
-  const container = document.getElementById("diseaseHistoryContainer");
-  const newEntry = document.createElement("div");
-  newEntry.className = "disease-history-entry";
+  const container = document.getElementById(CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID.DISEASE_HISTORY_CONTAINER);
+  const newEntry = document.createElement(TAG.DIV);
+  newEntry.className = CLASS.DISEASE_HISTORY_ENTRY;
   newEntry.innerHTML = `
     <input type="date" name="dateOfDiagnosis" placeholder="진단 날짜를 입력하세요" required>
     <input type="text" name="name" placeholder="질병명을 입력하세요" required>
@@ -277,7 +284,7 @@ const addDiseaseHistory = () => {
   `;
   container.appendChild(newEntry);
 
-  newEntry.querySelector(".remove-button").addEventListener("click", () => {
+  newEntry.querySelector(".remove-button").addEventListener(EVENT.CLICK, () => {
     container.removeChild(newEntry);
   });
 };

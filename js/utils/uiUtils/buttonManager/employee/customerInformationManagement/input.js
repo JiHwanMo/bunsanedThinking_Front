@@ -1,78 +1,66 @@
 import { fetchAddCustomerInformation, fetchUpdateCustomerInformation } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
+import {BUTTON, CLASS, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
+import {
+  ELEMENT_ID,
+  POP_UP,
+  VALUE
+} from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
 
 export const addButtons = (buttonContainer) => {
-  const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
+  const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));
 
-  const saveButton = document.createElement("button");
-  const cancelButton = document.createElement("button");
+  const saveButton = document.createElement(TAG.BUTTON);
+  const cancelButton = document.createElement(TAG.BUTTON);
 
-  saveButton.className = "button-item";
-  cancelButton.className = "button-item";
+  saveButton.className = CLASS.BUTTON_ITEM;
+  cancelButton.className = CLASS.BUTTON_ITEM;
 
-  if (selectedButtonType === "POST") {
-    saveButton.textContent = "확인";
-    saveButton.addEventListener("click", async () => {
+  if (selectedButtonType === VALUE.POST) {
+    saveButton.textContent = BUTTON.COMMON.OK;
+    saveButton.addEventListener(EVENT.CLICK, async () => {
       const formData = collectFormData();
       if (!formData) return;
 
-      try {
-        await fetchAddCustomerInformation(formData);
-
-        const modal = document.createElement("div");
-        modal.className = "custom-modal";
-        modal.innerHTML = `
-          <div class="modal-content">
-            <p>저장이 완료되었습니다</p>
-          </div>
-        `;
-        document.body.appendChild(modal);
-
-        setTimeout(() => {
-          document.body.removeChild(modal);
-          window.location.href = "home.html";
-        }, 2000);
-      } catch (error) {
-        console.error("등록 중 오류 발생:", error);
-        alert("등록 중 오류가 발생했습니다.");
+      const userConfirmed = confirm(POP_UP.POST.QUESTION);
+      if (userConfirmed) {
+        try {
+          await fetchAddCustomerInformation(formData);
+          alert(POP_UP.POST.OK);
+          window.location.href = LOCATION.HOME;
+        } catch (error) {
+          console.error(POP_UP.POST.CONSOLE_ERROR, error);
+          alert(POP_UP.POST.ERROR);
+        }
+      } else {
+        window.history.back();
       }
     });
 
-    cancelButton.textContent = "취소";
-    cancelButton.addEventListener("click", () => window.location.href = "home.html");
-  } else if (selectedButtonType === "UPDATE") {
-    saveButton.textContent = "수정";
-    saveButton.addEventListener("click", async () => {
+    cancelButton.textContent = BUTTON.COMMON.CANCEL;
+    cancelButton.addEventListener(EVENT.CLICK, () => window.location.href = LOCATION.HOME);
+  } else if (selectedButtonType === VALUE.UPDATE) {
+    saveButton.textContent = BUTTON.COMMON.UPDATE;
+    saveButton.addEventListener(EVENT.CLICK, async () => {
       const formData = collectFormData();
       if (!formData) return;
 
-      const modal = document.createElement("div");
-      modal.className = "custom-modal";
-      modal.innerHTML = `
-        <div class="modal-content">
-            <p>수정하시겠습니까?</p>
-            <div class="modal-buttons">
-              <button id="confirmButton">확인</button>
-              <button id="cancelButton">취소</button>
-            </div>
-        </div>
-      `;
-      document.body.appendChild(modal);
-
-      document.getElementById("confirmButton").addEventListener("click", async () => {
+      const userConfirmed = confirm(POP_UP.UPDATE.QUESTION); // confirm 다이얼로그 표시
+      if (userConfirmed) {
+        try {
           await fetchUpdateCustomerInformation(formData);
-          alert("수정이 완료되었습니다.");
-          document.body.removeChild(modal);
-          window.location.href = "home.html";
-      });
-
-      document.getElementById("cancelButton").addEventListener("click", () => {
-        document.body.removeChild(modal);
+          alert(POP_UP.UPDATE.OK);
+          window.location.href = LOCATION.HOME;
+        } catch (error) {
+          console.error(POP_UP.UPDATE.CONSOLE_ERROR, error);
+          alert(POP_UP.UPDATE.ERROR);
+        }
+      } else {
         window.history.back();
-      });
+      }
     });
 
-    cancelButton.textContent = "취소";
-    cancelButton.addEventListener("click", () => window.location.href = "home.html");
+    cancelButton.textContent = BUTTON.COMMON.CANCEL;
+    cancelButton.addEventListener(EVENT.CLICK, () => window.location.href = LOCATION.HOME);
   }
 
   buttonContainer.appendChild(saveButton);
@@ -80,19 +68,19 @@ export const addButtons = (buttonContainer) => {
 };
 
 const collectFormData = () => {
-  const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
+  const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));
 
-  if (selectedButtonType === "POST") {
-    const name = document.getElementById("name").value.trim();
-    const phoneNumber = document.getElementById("phoneNumber").value.trim();
-    const job = document.getElementById("job").value.trim();
-    const age = parseInt(document.getElementById("age").value, 10);
-    const gender = document.getElementById("gender").value.trim();
-    const residentRegistrationNumber = document.getElementById("residentRegistrationNumber").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const property = parseFloat(document.getElementById("property").value);
-    const bankName = document.getElementById("bankName").value.trim();
-    const bankAccount = document.getElementById("bankAccount").value.trim();
+  if (selectedButtonType === VALUE.POST) {
+    const name = document.getElementById(ELEMENT_ID.NAME).value.trim();
+    const phoneNumber = document.getElementById(ELEMENT_ID.PHONE_NUMBER).value.trim();
+    const job = document.getElementById(ELEMENT_ID.JOB).value.trim();
+    const age = parseInt(document.getElementById(ELEMENT_ID.AGE).value, 10);
+    const gender = document.getElementById(ELEMENT_ID.GENDER).value.trim();
+    const residentRegistrationNumber = document.getElementById(ELEMENT_ID.RESIDENT_REGISTRATION_NUMBER).value.trim();
+    const address = document.getElementById(ELEMENT_ID.ADDRESS).value.trim();
+    const property = parseFloat(document.getElementById(ELEMENT_ID.PROPERTY).value);
+    const bankName = document.getElementById(ELEMENT_ID.BANK_NAME).value.trim();
+    const bankAccount = document.getElementById(ELEMENT_ID.BANK_ACCOUNT).value.trim();
 
     const accidentHistoryList = [];
     document.querySelectorAll(".accident-history-entry").forEach(entry => {
@@ -124,7 +112,7 @@ const collectFormData = () => {
 
     if (!name || !phoneNumber || !job || isNaN(age) || !gender || !residentRegistrationNumber || !address ||
       isNaN(property) || !bankName || !bankAccount){
-      alert("잘못된 정보를 입력하였습니다. 다시 입력해주세요.");
+      alert(POP_UP.POST.VALIDATION_ERROR);
       return null;
     }
     return {
@@ -142,33 +130,33 @@ const collectFormData = () => {
       surgeryHistoryList,
       diseaseHistoryList
     };
-  } else if (selectedButtonType === "UPDATE") {
-    const id = parseInt(sessionStorage.getItem("selectedDataId"), 10);
-    const index = parseInt(document.getElementById("index").value, 10);
-    const input = document.getElementById("input").value.trim();
+  } else if (selectedButtonType === VALUE.UPDATE) {
+    const id = parseInt(sessionStorage.getItem(KEY.SELECTED_DATA_ID), 10);
+    const index = parseInt(document.getElementById(ELEMENT_ID.INDEX).value, 10);
+    const input = document.getElementById(ELEMENT_ID.INPUT).value.trim();
     if (index === 10) {
-      const historyId = parseInt(document.getElementById("historyId").value, 10);
-      const accidentDate = document.getElementById("accidentDate").value.trim();
-      const accidentDetail = document.getElementById("accidentDetail").value.trim();
+      const historyId = parseInt(document.getElementById(ELEMENT_ID.HISTORY_ID).value, 10);
+      const accidentDate = document.getElementById(ELEMENT_ID.ACCIDENT_DATE).value.trim();
+      const accidentDetail = document.getElementById(ELEMENT_ID.ACCIDENT_DETAIL).value.trim();
       return {
         id,
         index,
         accidentHistoryList: [{ id: historyId, date: accidentDate, accidentDetail }]
       };
     } else if (index === 11) {
-      const historyId = parseInt(document.getElementById("historyId").value, 10);
-      const surgeryDate = document.getElementById("surgeryDate").value.trim();
-      const hospitalName = document.getElementById("hospitalName").value.trim();
-      const surgeryName = document.getElementById("surgeryName").value.trim();
+      const historyId = parseInt(document.getElementById(ELEMENT_ID.HISTORY_ID).value, 10);
+      const surgeryDate = document.getElementById(ELEMENT_ID.SURGERY_DATE).value.trim();
+      const hospitalName = document.getElementById(ELEMENT_ID.HOSPITAL_NAME).value.trim();
+      const surgeryName = document.getElementById(ELEMENT_ID.SURGERY_NAME).value.trim();
       return {
         id,
         index,
         surgeryHistoryList: [{ id: historyId, date: surgeryDate, hospitalName, name: surgeryName }]
       };
     } else if (index === 12) {
-      const historyId = parseInt(document.getElementById("historyId").value, 10);
-      const diseaseDate = document.getElementById("diseaseDate").value.trim();
-      const diseaseName = document.getElementById("diseaseName").value.trim();
+      const historyId = parseInt(document.getElementById(ELEMENT_ID.HISTORY_ID).value, 10);
+      const diseaseDate = document.getElementById(ELEMENT_ID.DISEASE_DATE).value.trim();
+      const diseaseName = document.getElementById(ELEMENT_ID.DISEASE_NAME).value.trim();
       return {
         id,
         index,
@@ -176,7 +164,7 @@ const collectFormData = () => {
       };
     } else{
       if (!input) {
-        alert("잘못된 정보를 입력하였습니다. 다시 입력해주세요.");
+        alert(POP_UP.UPDATE.VALIDATION_ERROR);
         return null;
       }
       return { id, index, input };

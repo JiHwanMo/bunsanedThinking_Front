@@ -10,33 +10,20 @@ export const addButtons = (buttonContainer) => {
     const formData = collectFormData(); // 폼 데이터 수집
     if (!formData) return; // 데이터가 유효하지 않으면 종료
 
-    // 커스텀 모달 생성
-    const modal = document.createElement("div");
-    modal.className = "custom-modal";
-    modal.innerHTML = `
-      <div class="modal-content">
-        <p>수정하시겠습니까?</p>
-        <div class="modal-buttons">
-          <button id="confirmButton">확인</button>
-          <button id="cancelButton">취소</button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(modal); // 모달 추가
-
-    // "확인" 버튼 클릭 시 API 호출
-    document.getElementById("confirmButton").addEventListener("click", async () => {
-      await fetchSetDamageAssessmentMoney(formData.accidentId, formData.damageAssessmentMoney);
-      alert("수정이 완료되었습니다.");
-      document.body.removeChild(modal);
-      window.location.href = "home.html";
-    });
-
-    // "취소" 버튼 클릭 시 모달 닫기
-    document.getElementById("cancelButton").addEventListener("click", () => {
-      document.body.removeChild(modal); // 모달 제거
-      window.history.back();
-    });
+    // confirm 대화 상자 표시
+    const userConfirmed = confirm("수정하시겠습니까?");
+    if (userConfirmed) {
+      try {
+        await fetchSetDamageAssessmentMoney(formData.accidentId, formData.damageAssessmentMoney); // API 호출
+        alert("수정이 완료되었습니다.");
+        window.location.href = "home.html"; // 수정 완료 후 홈으로 이동
+      } catch (error) {
+        console.error("수정 중 오류 발생:", error);
+        alert("수정 중 오류가 발생했습니다.");
+      }
+    } else {
+      window.history.back(); // 취소 시 이전 페이지로 이동
+    }
   });
 
   // "취소" 버튼 생성
@@ -51,6 +38,7 @@ export const addButtons = (buttonContainer) => {
   buttonContainer.appendChild(updateButton);
   buttonContainer.appendChild(cancelButton);
 };
+
 
 // 폼 데이터 수집 함수
 const collectFormData = () => {

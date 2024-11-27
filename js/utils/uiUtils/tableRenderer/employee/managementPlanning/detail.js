@@ -76,39 +76,24 @@ const update = () => {
   window.location.href = "input.html"; // 수정 화면으로 이동
 }
 
-const deleteItem = () => {
-  const modal = document.createElement("div");
-  modal.className = "custom-modal";
-  modal.innerHTML = `
-    <div class="modal-content">
-      <p>삭제하시겠습니까?</p>
-      <div class="modal-buttons">
-        <button id="confirmDeleteButton">확인</button>
-        <button id="cancelDeleteButton">취소</button>
-      </div>
-    </div>
-  `;
+const deleteItem = async () => {
+  const id = sessionStorage.getItem("selectedDataId");
 
-  document.body.appendChild(modal);
-
-  document.getElementById("confirmDeleteButton").addEventListener("click", async () => {
-    const id = sessionStorage.getItem("selectedDataId");
+  // confirm 다이얼로그 표시
+  const userConfirmed = confirm("삭제하시겠습니까?");
+  if (userConfirmed) {
     try {
-      await fetchDeleteDepartment(id);
-      alert("삭제가 완료되었습니다.");
-      document.body.removeChild(modal);
-      window.location.href = "home.html";
+      await fetchDeleteDepartment(id); // 삭제 API 호출
+      alert("삭제가 완료되었습니다."); // 성공 메시지
+      window.location.href = "home.html"; // 삭제 완료 후 홈 화면으로 이동
     } catch (error) {
-      console.error("삭제 중 오류 발생:", error);
-      alert("삭제 중 오류가 발생했습니다.");
-      document.body.removeChild(modal);
+      console.error("삭제 중 오류 발생:", error); // 오류 로그 출력
+      alert("삭제 중 오류가 발생했습니다."); // 오류 메시지
     }
-  });
-  document.getElementById("cancelDeleteButton").addEventListener("click", () => {
-    document.body.removeChild(modal); // 모달 닫기
-    window.location.href = "home.html";
-  });
-}
+  } else {
+    window.history.back(); // 취소 시 이전 페이지로 이동
+  }
+};
 
 const managementPlanningTaskMapper  = {
   DEPARTMENT_DETAIL: {
