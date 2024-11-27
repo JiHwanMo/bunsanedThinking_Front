@@ -122,7 +122,6 @@ export const CLASS_REGISTER = {
   ADD_BUTTON: "add-button",
   REMOVE_BUTTON: "remove-button",
   INPUT_FIELD: "input-field",
-  BUTTON_GROUP: "button-group",
   GENDER_BUTTON: "gender-button"
 }
 

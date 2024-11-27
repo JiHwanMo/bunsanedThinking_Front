@@ -30,7 +30,7 @@ import {
   LOCATION,
   MESSAGES,
   STRING_EMPTY,
-  TAG
+  TAG, ZERO
 } from "../../../../../config/common.js";
 
 
@@ -210,7 +210,7 @@ const setInput = () => {
 export const initTableByInput = async (id, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
-  if (id.length > 0) {
+  if (id.length > ZERO) {
     const item = context[type].needCustomerId ?
       await context[type].listFetchById(id, sessionStorage.getItem(KEY.LOGIN_ID)) :
       await context[type].listFetchById(id)
@@ -272,7 +272,6 @@ const setOneRow = (item, type) => {
 
   if (context[type].needDetail) {
     row.addEventListener(EVENT.DOUBLE_CLICK, () => {
-      // 상세 정보를 세션에 저장
       sessionStorage.setItem(KEY.SELECTED_DATA_ID, item.id);
       window.location.href = LOCATION.DETAIL;
     });
