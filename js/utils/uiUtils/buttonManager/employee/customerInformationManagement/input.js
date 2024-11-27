@@ -146,12 +146,41 @@ const collectFormData = () => {
     const id = parseInt(sessionStorage.getItem("selectedDataId"), 10);
     const index = parseInt(document.getElementById("index").value, 10);
     const input = document.getElementById("input").value.trim();
-
-    if (!input) {
-      alert("잘못된 정보를 입력하였습니다. 다시 입력해주세요.");
-      return null;
+    if (index === 10) {
+      const historyId = parseInt(document.getElementById("historyId").value, 10);
+      const accidentDate = document.getElementById("accidentDate").value.trim();
+      const accidentDetail = document.getElementById("accidentDetail").value.trim();
+      return {
+        id,
+        index,
+        accidentHistoryList: [{ id: historyId, date: accidentDate, accidentDetail }]
+      };
+    } else if (index === 11) {
+      const historyId = parseInt(document.getElementById("historyId").value, 10);
+      const surgeryDate = document.getElementById("surgeryDate").value.trim();
+      const hospitalName = document.getElementById("hospitalName").value.trim();
+      const surgeryName = document.getElementById("surgeryName").value.trim();
+      return {
+        id,
+        index,
+        surgeryHistoryList: [{ id: historyId, date: surgeryDate, hospitalName, name: surgeryName }]
+      };
+    } else if (index === 12) {
+      const historyId = parseInt(document.getElementById("historyId").value, 10);
+      const diseaseDate = document.getElementById("diseaseDate").value.trim();
+      const diseaseName = document.getElementById("diseaseName").value.trim();
+      return {
+        id,
+        index,
+        diseaseHistoryList: [{ id: historyId, dateOfDiagnosis: diseaseDate, name: diseaseName }]
+      };
+    } else{
+      if (!input) {
+        alert("잘못된 정보를 입력하였습니다. 다시 입력해주세요.");
+        return null;
+      }
+      return { id, index, input };
     }
-    return { id, index, input };
   }
   return null;
 };

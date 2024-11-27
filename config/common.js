@@ -36,7 +36,8 @@ export const TAG = {
   TD: "td",
   TABLE: "table",
   TBODY: "tbody",
-  BUTTON: "button"
+  BUTTON: "button",
+  TEXT_AREA: "textarea"
 }
 
 export const KEY = {
@@ -55,7 +56,8 @@ export const ELEMENT_ID = {
   POST: "post",
   TABLE: "tableHead",
   INPUT_FIELDS_CONTAINER: "inputFieldsContainer",
-  BUTTON_CONTAINER: "buttonContainer"
+  BUTTON_CONTAINER: "buttonContainer",
+  COMBO_BOX_CONTAINER: "comboBoxContainer"
 }
 
 export const CLASS = {
@@ -65,7 +67,12 @@ export const CLASS = {
   GREETING: "greeting",
   STAR_BUTTONS_CONTAINER: "star-buttons-container",
   STAR_BUTTON: "star-button",
-  SELECTED: "selected"
+  SELECTED: "selected",
+  BUTTON_ITEM: "button-item",
+  BUTTON_GROUP: "button-group",
+  CHECK_BOX_GROUP: "checkbox-group",
+  CHECK_BOX_ITEM: "checkbox-item",
+  CHECKED: "checked"
 }
 
 export const LOCATION = {
@@ -84,7 +91,8 @@ export const INPUT_TYPE = {
 export const EVENT = {
   CLICK: "click",
   DOUBLE_CLICK: "dblclick",
-  SUBMIT: "submit"
+  SUBMIT: "submit",
+  CHANGE: "change"
 }
 
 export const CLASS_SELECTOR = {
@@ -95,3 +103,7 @@ export const CLASS_SELECTOR = {
 
 export const STRING_EMPTY = "";
 export const ZERO = 0;
+
+export const COMBO_LIST_FETCH ={
+ ALL: "all"
+};

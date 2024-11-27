@@ -427,3 +427,168 @@ export const INPUT_FORM = {
     }
   }
 }
+
+export const INSURANCE_TYPE_STR = {
+  Disease: "질병",
+  Automobile: "자동차",
+  Injury: "상해"
+}
+
+export const COMBOLIST_FETCH_ALL = "all";
+
+export const ONE_BLANK = " ";
+
+export const INSURANCE_DETAIL = {
+  DETAIL_LABEL: {
+    NAME: "보험 상품 이름",
+    INSURANCE_TYPE: "보험 상품 종류",
+    ID: "보험 상품 번호",
+    AGE_RANGE: "연령대",
+    COVERAGE: "보장 내용",
+    MONTHLY_PREMIUM: "월 보험료",
+    CONTRACT_PERIOD: "계약기간"
+  },
+  AUTOMOBILE_DETAIL: {
+    TYPE_NAME: "Automobile",
+    DETAIL_LABEL: {
+      SERVICE_LIST: "지원 서비스",
+      VEHICLE_TYPE: "차량 종류",
+      ACCIDENT_LIMIT: "최대 사고 횟수"
+    }
+  },
+  DISEASE_DETAIL: {
+    TYPE_NAME: "Disease",
+    DETAIL_LABEL: {
+      DISEASE_NAME: "병명",
+      DISEASE_LIMIT: "최대 질병 횟수"
+    }
+  },
+  INJURY_DETAIL: {
+    TYPE_NAME: "Injury",
+    DETAIL_LABEL: {
+      INJURY_TYPE: "상해 정도",
+      SURGERIES_LIMIT: "최대 수술 횟수"
+    }
+  }
+}
+
+export const LOAN_DETAIL = {
+  DETAIL_LABEL: {
+    NAME: "대출 상품 이름",
+    LOAN_TYPE: "대출 상품 종류",
+    ID: "대출 상품 번호",
+    INTEREST_RATE: "이자율",
+    MAXIMUM_MONEY: "대출 가능 최대 금액",
+    MINIMUM_ASSET: "최소 자산"
+  },
+  COLLATERAL_DETAIL: {
+    TYPE_NAME: "Collateral",
+    DETAIL_LABEL: {
+      COLLATERAL_TYPE: "담보 종류",
+      MINIMUM_VALUE: "담보 최소 가치"
+    }
+  },
+  FIXEDDEPOSIT_DETAIL: {
+    TYPE_NAME: "FixedDeposit",
+    DETAIL_LABEL: {
+      MINIMUM_AMOUNT: "최소 예치 금액"
+    }
+  },
+  INSURANCE_CONTRACT_DETAIL: {
+    TYPE_NAME: "InsuranceContract",
+    DETAIL_LABEL: {
+      INSURANCE_ID: "보험 번호"
+    }
+  }
+}
+
+export const CONTRACT_DETAIL = {
+  NAME: "보험 상품 이름",
+  INSURANCE_ID: "보험 상품 번호",
+  AGE_RANGE: "연령대",
+  MONTHLY_PREMIUM: "월 보험료",
+  EXPIRATION_DATE: "만기일",
+  DATE: "가입일",
+  PAYMENT_DATE: "납부일",
+  STATUS: "보험 상태"
+}
+
+export const SERVICE_TYPE_STR = {
+  EmergencyTowing: "긴급견인",
+  EmergencyStart: "긴급시동",
+  EmergencyRefueling: "비상급유",
+  BatteryCharging: "배터리충전",
+  EngineOverheatingRepair: "엔진과열 수리",
+  TirepunkRepair: "타이어펑크 수리"
+}
+
+export const VEHICLE_TYPE_STR = {
+  Small: "소형",
+  Medium: "중형",
+  Large: "대형"
+}
+
+export const INJURY_TYPE_STR = {
+  Minor: "경상",
+  Serious: "중상"
+}
+
+export const LOAN_TYPE_STR = {
+  Collateral: "담보",
+  FixedDeposit: "정기 예금",
+  InsuranceContract: "보험 계약"
+}
+
+export const COLLATERAL_TYPE_STR = {
+  RealEstate: "부동산",
+  Car: "자동차"
+}
+
+export const INFORMATION_TYPE = {
+  INSURANCE_LIST: "INSURANCE_LIST",
+  LOAN_LIST: "LOAN_LIST",
+  MANAGEMENT_CONTRACT: "MANAGEMENT_CONTRACT",
+  VIEW_ACCIDENT: "VIEW_ACCIDENT",
+  VIEW_COMPLAINT: "VIEW_COMPLAINT"
+}
+
+export const BUTTON_TYPE = {
+  APPLY_ENDORSEMENT: "APPLY_ENDORSEMENT",
+  PAY_INSURANCE_FEE: "PAY_INSURANCE_FEE",
+  RECEIVE_INSURANCE: "RECEIVE_INSURANCE",
+  ASK_INSURANCE_COUNSEL: "ASK_INSURANCE_COUNSEL",
+  ADD_ACCIDENT: "ADD_ACCIDENT",
+  ADD_COMPLAINT: "ADD_COMPLAINT"
+}
+
+export const ALERT = {
+  CONFIRM: {
+    APPLY_RECONTRACT: "정말 신청하겠습니까?",
+    APPLY_REVIVAL: "정말 신청하겠습니까?",
+    APPLY_TERMINATION: "정말 신청하겠습니까?",
+    APPLY_ENDORSEMENT: "정말 신청하겠습니까?",
+    PAY_INSURANCE_FEE: "정말 신청하겠습니까?",
+    BUY_INSURANCE: "정말 신청하겠습니까?",
+    RECEIVE_INSURANCE: "정말 신청하겠습니까?",
+    LOAN: "정말 신청하겠습니까?",
+    ASK_INSURANCE_COUNSEL: "정말 신청하겠습니까?",
+    ADD_ACCIDENT: "정말 신청하겠습니까?",
+    ADD_COMPLAINT: "정말 신청하겠습니까?"
+  },
+  OK: {
+    APPLY_RECONTRACT  : "재계약 신청이 완료되었습니다",
+    APPLY_REVIVAL: "부활 신청이 완료되었습니다",
+    APPLY_TERMINATION: "해지 신청이 완료되었습니다",
+    APPLY_ENDORSEMENT: "배서 신청이 완료되었습니다",
+    PAY_INSURANCE_FEE: "보험금 납입이 완료되었습니다",
+    BUY_INSURANCE: "보험 계약 신청이 완료되었습니다",
+    RECEIVE_INSURANCE: "보험금 신청이 완료되었습니다",
+    LOAN: "대출 신청이 완료되었습니다",
+    ASK_INSURANCE_COUNSEL: "상담 신청이 완료되었습니다",
+    ADD_ACCIDENT: "사고 신고가 완료되었습니다",
+    ADD_COMPLAINT: "민원 신청이 완료되었습니다"
+  },
+  FAIL: {
+    ADD_ACCIDENT: "신청한 자동차 보험이 없어서 사고 신고를 받을 수 없습니다"
+  }
+}

@@ -1,16 +1,16 @@
 import { fetchGetEmployee } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
-import { MESSAGES } from '../../../../../../config/common.js';
+import {CLASS, CLASS_SELECTOR, KEY, MESSAGES, TAG} from '../../../../../../config/common.js';
 
 export const renderGreeting = async () => {
-  const container = document.querySelector(".container");
-  const employeeId = sessionStorage.getItem("id");
+  const container = document.querySelector(CLASS_SELECTOR.CONTAINER);
+  const employeeId = sessionStorage.getItem(KEY.LOGIN_ID);
   const getEmployee = await fetchGetEmployee(employeeId);
   const greetingConstant = MESSAGES.GREETING;
-  const greeting = document.createElement("div");
-  greeting.className = "greeting";
+  const greeting = document.createElement(TAG.DIV);
+  greeting.className = CLASS.GREETING;
 
   greeting.textContent = `${getEmployee.name} ${greetingConstant} `;
 
-  const headerLine = document.querySelector(".header-line");
+  const headerLine = document.querySelector(CLASS_SELECTOR.HEADER_LINE);
   container.insertBefore(greeting, headerLine.nextSibling);
 };

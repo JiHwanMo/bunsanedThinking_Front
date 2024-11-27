@@ -10,7 +10,8 @@ export const INPUT_FORM = {
     type: "text",
     id: "name",
     name: "name",
-    placeholder: "고객 이름"
+    placeholder: "고객 이름",
+    exception: "이름을 한 글자 이상 입력해주세요"
   },
   AGE: {
     isTextArea: false,
@@ -19,7 +20,8 @@ export const INPUT_FORM = {
     type: "number",
     id: "age",
     name: "age",
-    placeholder: "고객 나이"
+    placeholder: "고객 나이",
+    exception: "나이를 다시 입력해주세요"
   },
   GENDER: {
     isTextArea: false,
@@ -31,7 +33,9 @@ export const INPUT_FORM = {
     options: [
       { value: "Male", text: "남자" },
       { value: "Female", text: "여자" }
-    ]
+    ],
+    placeholder: "성별",
+    exception: "남자 및 여자 중에서 선택해 주세요"
   },
   ADDRESS: {
     isTextArea: false,
@@ -40,7 +44,8 @@ export const INPUT_FORM = {
     type: "text",
     id: "address",
     name: "address",
-    placeholder: "주소"
+    placeholder: "주소",
+    exception: "주소를 한 글자 이상 입력해주세요"
   },
   PHONE_NUMBER: {
     isTextArea: false,
@@ -49,7 +54,8 @@ export const INPUT_FORM = {
     type: "text",
     id: "phoneNumber",
     name: "phoneNumber",
-    placeholder: "전화번호"
+    placeholder: "전화번호",
+    exception: "전화번호를 한 글자 이상 입력해주세요"
   },
   RESIDENT_REGISTRATION_NUMBER: {
     isTextArea: false,
@@ -58,7 +64,8 @@ export const INPUT_FORM = {
     type: "text",
     id: "residentRegistrationNumber",
     name: "residentRegistrationNumber",
-    placeholder: "주민등록번호"
+    placeholder: "주민등록번호",
+    exception: "주민등록번호를 한 글자 이상 입력해주세요"
   },
   JOB: {
     isTextArea: false,
@@ -67,7 +74,8 @@ export const INPUT_FORM = {
     type: "text",
     id: "job",
     name: "job",
-    placeholder: "직업"
+    placeholder: "직업",
+    exception: "직업을 한 글자 이상 입력해주세요"
   },
   BANK_ACCOUNT: {
     isTextArea: false,
@@ -76,7 +84,8 @@ export const INPUT_FORM = {
     type: "text",
     id: "bankAccount",
     name: "bankAccount",
-    placeholder: "은행 계좌"
+    placeholder: "은행 계좌",
+    exception: "계좌번호를 한 글자 이상 입력해주세요"
   },
   BANK_NAME: {
     isTextArea: false,
@@ -85,7 +94,8 @@ export const INPUT_FORM = {
     type: "text",
     id: "bankName",
     name: "bankName",
-    placeholder: "은행 이름"
+    placeholder: "은행 이름",
+    exception: "은행 이름을 한 글자 이상 입력해주세요"
   },
   PROPERTY: {
     isTextArea: false,
@@ -94,25 +104,72 @@ export const INPUT_FORM = {
     type: "number",
     id: "property",
     name: "property",
-    placeholder: "자산"
+    placeholder: "자산",
+    exception: "자산을 다시 이상 입력해주세요"
   }
+}
+
+export const SIGNUP_MESSAGE = {
+  CONFIRM: "회원가입 하시겠습니까?",
+  OK: "회원가입이 완료되었습니다."
+}
+
+export const CONTAINER_KEY = "Container";
+
+export const CLASS_REGISTER = {
+  DYNAMIC_SECTION: "dynamic-section",
+  SECTION_HEADER: "section-header",
+  ADD_BUTTON: "add-button",
+  REMOVE_BUTTON: "remove-button",
+  INPUT_FIELD: "input-field",
+  BUTTON_GROUP: "button-group",
+  GENDER_BUTTON: "gender-button"
+}
+
+export const CLASS_SELECTOR_REGISTER = {
+  GENDER_BUTTON: ".gender-button"
+}
+
+export const TEXT_CONTANT = {
+  PLUS: "+",
+  MINUS: "-"
+}
+
+export const FIELD_NAME_KEY = {
+  DATE: "date",
+  DATE_OF_DIAGNOSIS: "dateOfDiagnosis"
+}
+
+export const PLACE_HOLDER = {
+  DEFAULT: "입력",
+  DATE: "날짜"
 }
 
 export const DYNAMIC_SECTION_FORM = {
   ACCIDENT_HISTORY: {
     sectionTitle: "사고 이력",
     sectionId: "accidentHistory",
-    fieldNames: ["date", "사고 내역"]
+    fieldNames: {
+      date: FIELD_NAME_KEY.DATE,
+      accidentDetail: "사고 내역"
+    }
   },
   SURGERY_HISTORY: {
     sectionTitle: "수술 이력",
     sectionId: "surgeryHistory",
-    fieldNames: ["date", "병원 이름", "수술 이름"]
+    fieldNames: {
+      date: FIELD_NAME_KEY.DATE,
+      hospitalName: "병원 이름",
+      name: "수술 이름"
+    }
   },
   DISEASE_HISTORY: {
     sectionTitle: "질병 이력",
     sectionId: "diseaseHistory",
-    fieldNames: ["date", "질병 이름"]
+    fieldNames: {
+      dateOfDiagnosis: FIELD_NAME_KEY.DATE_OF_DIAGNOSIS,
+      name: "질병 이름"
+    }
   }
 }
 

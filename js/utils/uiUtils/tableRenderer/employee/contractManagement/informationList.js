@@ -17,7 +17,7 @@ import { fetchGetTerminationById } from '../../../../apiUtils/apiDocumentation/e
 import { fetchGetAllUnprocessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import { fetchGetAllProcessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import {
-  BUTTON, CLASS_SELECTOR,
+  BUTTON, CLASS, CLASS_SELECTOR,
   ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
@@ -26,18 +26,13 @@ import {
   STRING_EMPTY,
   TAG, ZERO
 } from '../../../../../../config/common.js';
-import { COMBOBOX } from '../../../../../../config/employee/contractManagement/contractManagement.js';
+import {
+  COMBOBOX,
+  COMBOLIST_FETCH_ALL
+} from '../../../../../../config/employee/contractManagement/contractManagement.js';
 import { TABLE_TITLE } from '../../../../../../config/employee/contractManagement/contractManagement.js';
 import { COLUMN_NAME } from '../../../../../../config/employee/contractManagement/contractManagement.js';
 
-export const informationType = {
-  DEFAULT_CONTRACT: "DEFAULT_CONTRACT",
-  RECONTRACT: "RECONTRACT",
-  ENDORSEMENT: "ENDORSEMENT",
-  REVIVAL: "REVIVAL",
-  TERMINATION: "TERMINATION"
-}
-// 행 만드는 로직은 서버를 수정해야해서 일단 보류
 const contractRow = (dto) => {
   return `
     <td>${dto.id}</td>
@@ -47,7 +42,7 @@ const contractRow = (dto) => {
     <td>${dto.customerInfoResponse.residentRegistrationNumber}</td>
     <td>${dto.customerInfoResponse.address}</td>
     <td>${dto.productId}</td>
-    <td>${dto.lastPaidDate}</td>
+    <td>${dto.lastPaidDate == null ? STRING_EMPTY : dto.lastPaidDate}</td>
   `;
 }
 
@@ -205,14 +200,14 @@ const initTableByInput = async (id, type) => { // 추가
     const item = await context[type].listFetchById(id);
     setOneRow(item, type);
   } else {
-    const list = await context[type].comboListFetch["all"]();
+    const list = await context[type].comboListFetch[COMBOLIST_FETCH_ALL]();
     if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
     setTableBody();
   }
 }
 
 const setButton = () => {
-  const button = document.createElement("button");
+  const button = document.createElement(TAG.BUTTON);
   button.id = ELEMENT_ID.SEARCH_BUTTON;
   button.textContent = BUTTON.COMMON.SEARCH;
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
@@ -225,7 +220,7 @@ const setButton = () => {
   return button;
 }
 
-const initTableBySelect = async (id, type) => { // 추가
+const initTableBySelect = async (id, type) => {
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
   const list = await context[type].comboListFetch[selectedOption.value]();
@@ -240,10 +235,10 @@ const initTableBySelect = async (id, type) => { // 추가
 const setSearchBar = () => {
   const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
-  if (COMBOBOX[type].isCombo) { // 수정
+  if (COMBOBOX[type].isCombo) {
     const select = setComboBox();
-    container.appendChild(select); // 수정
-    select.onchange = () => initTableBySelect(select.id, type); // 추가
+    container.appendChild(select);
+    select.onchange = () => initTableBySelect(select.id, type);
   }
   container.appendChild(setInput());
   container.appendChild(setButton());
@@ -265,18 +260,15 @@ const setOneRow = (item, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   const row = document.createElement(TAG.TR);
   row.innerHTML = context[type].rowGetter(item);
-  // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
-      window.selectedRow.classList.remove("selected");
+      window.selectedRow.classList.remove(CLASS.SELECTED);
     }
-    row.classList.add("selected");
+    row.classList.add(CLASS.SELECTED);
     window.selectedRow = row;
   });
 
-  // 더블 클릭 시 상세 페이지로 이동
   row.addEventListener(EVENT.DOUBLE_CLICK, () => {
-    // 상세 정보를 세션에 저장
     sessionStorage.setItem(KEY.SELECTED_DATA_ID, item.id);
     window.location.href = LOCATION.DETAIL;
   });

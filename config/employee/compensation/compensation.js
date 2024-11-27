@@ -151,3 +151,67 @@ export const INPUT_FORM  = {
     exception: "현금 혹은 계좌이체 중에서 선택해주세요"
   }
 }
+
+export const INFORMATION_TYPE = {
+  REQUEST_COMPENSATION: "REQUEST_COMPENSATION",
+  REQUEST_INSURANCE_MONEY: "REQUEST_INSURANCE_MONEY"
+}
+
+export const SERVICE_TYPE_STR = {
+  EmergencyTowing: "긴급견인",
+  EmergencyStart: "긴급시동",
+  EmergencyRefueling: "비상급유",
+  BatteryCharging: "배터리충전",
+  EngineOverheatingRepair: "엔진과열 수리",
+  TirepunkRepair: "타이어펑크 수리"
+}
+
+export const ACCIDENT_PROCESS_STATUS_STR = {
+  Unprocessed: "미처리",
+  Completed: "처리 완료",
+  Processing: "처리중"
+}
+
+export const REPORT_PROCESS_STATUS_STR = {
+  Unprocessed: "미처리",
+  Completed: "처리 완료",
+}
+
+export const REPORT_DETAIL_LABEL = {
+  ID: "신고 번호",
+  ACCIDENT_ID: "사고 번호",
+  SERVICE_TYPE: "서비스 종류",
+  DATE: "사고 날짜",
+  LOCATION: "사고 위치",
+  CUSTOMER_NAME: "고객 이름",
+  CUSTOMER_PHONE_NUMBER: "고객 전화번호",
+  ACCIDENT_PROCESS_STATUS: "접수 상태",
+  REPORT_PROCESS_STATUS: "처리 상태",
+  DAMAGE_ASSESSMENT_COMPANY_ID: "손해 사정 업체 번호",
+  ROADSIDE_ASSISTANCE_COMPANY_ID: "긴급 서비스 업체 번호",
+  DAMAGE_ASSESSMENT_MONEY: "손해 사정 금액"
+}
+
+export const INSURANCE_MONEY_DETAIL_LABEL = {
+  ID: "신청 번호",
+  PRODUCT_TYPE: "계약 상품 종류",
+  APPLY_DATE: "신청 날짜",
+  CUSTOMER_NAME: "고객 이름",
+  PROCESS_STATUS: "처리 상태",
+  MEDICAL_CERTIFICATE: "진단서 사진",
+  RECEIPT: "영수증 사진",
+  RESIDENT_REGISTRATION_CARD: "주민등록증 사본"
+}
+
+export const COMBOLIST_FETCH_ALL = "all";
+
+export const ALERT = {
+  CONFIRM: {
+    REQUEST_COMPENSATION: "정말로 요청하시겠습니까?",
+    REQUEST_INSURANCE_MONEY: "정말로 요청하시겠습니까?"
+  },
+  OK: {
+    REQUEST_COMPENSATION: "요청이 완료되었습니다",
+    REQUEST_INSURANCE_MONEY: "요청이 완료되었습니다"
+  }
+}

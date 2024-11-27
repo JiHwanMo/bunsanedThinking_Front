@@ -1,13 +1,16 @@
 import {initialButtons} from "../../../common/buttonUtils.js";
-import {BUTTON} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
-import {inputType} from "../../../tableRenderer/employee/compensationPlanning/input.js";
+import {
+  ALERT,
+  BUTTON,
+  INPUT_TYPE
+} from "../../../../../../config/employee/compensationPlanning/compensationPlanning.js";
 import {
   fetchDeletePartnerCompany
 } from "../../../../apiUtils/apiDocumentation/employee/compensationPlanning/compensationPlanning.js";
 import {KEY, LOCATION} from "../../../../../../config/common.js";
 
 const evaluate = () => {
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, inputType.EVALUATE);
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, INPUT_TYPE.EVALUATE);
   window.location.href = LOCATION.INPUT;
 }
 
@@ -16,14 +19,15 @@ const cancel = () => {
 }
 
 const updatePartnerCompany = () => {
-  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, inputType.UPDATE);
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, INPUT_TYPE.UPDATE);
   window.location.href = LOCATION.INPUT;
 }
 
 const deletePartnerCompany = async () => {
+  if (!confirm(ALERT.CONFIRM.DELETE_PARTNER_COMPANY)) return;
   const id = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   await fetchDeletePartnerCompany(id);
-  alert("삭제되었습니다.");
+  alert(ALERT.OK.DELETE_PARTNER_COMPANY);
   window.history.back();
   window.history.back();
 }

@@ -1,7 +1,6 @@
-import { BUTTON } from '../../../../../config/customer/customer.js';
+import {BUTTON, INFORMATION_TYPE} from '../../../../../config/customer/customer.js';
 import { viewInformationListById } from '../../tableRenderer/customer/informationList.js';
 import { viewInformationListAll } from '../../tableRenderer/customer/informationList.js';
-import { informationType } from '../../tableRenderer/customer/informationList.js';
 import {initialButtons} from "../../common/buttonUtils.js";
 import {ELEMENT_ID} from "../../../../../config/common.js";
 
@@ -11,24 +10,24 @@ const showProductListMenu = () => {
   initialButtons(BUTTON.TASK.CUSTOMER.PRODUCT_LIST, customerTaskMapper.PRODUCT_LIST);
 }
 
-const managementContract = () => {
-  viewInformationListById(informationType.MANAGEMENT_CONTRACT);
+const managementContract = async () => {
+  await viewInformationListById(INFORMATION_TYPE.MANAGEMENT_CONTRACT);
 }
 
-const viewAccident = () => {
-  viewInformationListById(informationType.VIEW_ACCIDENT);
+const viewAccident = async () => {
+  await viewInformationListById(INFORMATION_TYPE.VIEW_ACCIDENT);
 }
 
-const viewComplaint = () => {
-  viewInformationListById(informationType.VIEW_COMPLAINT);
+const viewComplaint = async () => {
+  await viewInformationListById(INFORMATION_TYPE.VIEW_COMPLAINT);
 }
 
-const insuranceList = () => {
-  viewInformationListAll(informationType.INSURANCE_LIST);
+const insuranceList = async () => {
+  await viewInformationListAll(INFORMATION_TYPE.INSURANCE_LIST);
 }
 
-const loanList = () => {
-  viewInformationListAll(informationType.LOAN_LIST);
+const loanList = async () => {
+  await viewInformationListAll(INFORMATION_TYPE.LOAN_LIST);
 }
 
 const customerTaskMapper = {

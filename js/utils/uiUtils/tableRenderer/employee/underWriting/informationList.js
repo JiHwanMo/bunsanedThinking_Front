@@ -207,9 +207,9 @@ const setColumn = () => {
   const head = document.getElementById('tableHead');
   const columns = document.createElement('tr');
   columnList.forEach(item => {
-    const oneColoumn = document.createElement('th');
-    oneColoumn.innerHTML = item;
-    columns.appendChild(oneColoumn);
+    const oneColumn = document.createElement('th');
+    oneColumn.innerHTML = item;
+    columns.appendChild(oneColumn);
   })
   head.appendChild(columns);
 }
