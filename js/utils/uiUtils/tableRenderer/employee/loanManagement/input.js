@@ -1,6 +1,6 @@
 import {
   DETAIL_COLUMN_NAME, ELEMENT_ID, KEY, LABEL,
-  LOAN_TYPE,
+  LOAN_TYPE, LOAN_TYPE_RESPONSE,
   MESSAGES
 } from "../../../../../../config/employee/loanManagement/loanManagement.js";
 import {
@@ -203,13 +203,13 @@ const renderAddLoanInputFields = (loanType) => {
   if (loanType === STRING_EMPTY) return;
   let type = getType();
   commonLoanForms.forEach(form => inputFieldsContainer.appendChild(createCommonForm(form, type)));
-  inputFieldsContainer.innerHTML += fields[loanType](type); // 선택된 옵션에 따라 입력란 표시
+  inputFieldsContainer.innerHTML += fields[LOAN_TYPE_RESPONSE[loanType]](type); // 선택된 옵션에 따라 입력란 표시
 }
 
 const fields = {
-  Collateral: createCollateralForm,
-  FixedDeposit: createFixedDepositForm,
-  InsuranceContract: createInsuranceContractForm
+  COLLATERAL: createCollateralForm,
+  FIXED_DEPOSIT: createFixedDepositForm,
+  INSURANCE_CONTRACT: createInsuranceContractForm
 };
 
 const renderLoanRequestInputFields = () => {
@@ -245,7 +245,7 @@ const renderCommonInputFieldsWithValues = (loanType, data) => {
     const input = document.getElementById(form.id);
     input.setAttribute("value", data[form.value]);
   });
-  inputFieldsContainer.innerHTML += fieldsWithDetail[loanType](data, type); // 선택된 옵션에 따라 입력란 표시
+  inputFieldsContainer.innerHTML += fieldsWithDetail[LOAN_TYPE_RESPONSE[loanType]](data, type); // 선택된 옵션에 따라 입력란 표시
 };
 
 const createCollateralFormWithDetail = (data, type) => {
@@ -283,7 +283,7 @@ const createInsuranceContractFormWithDetail = (data, type) => {
 }
 
 const fieldsWithDetail = {
-  Collateral: createCollateralFormWithDetail,
-  FixedDeposit: createFixedDepositFormWithDetail,
-  InsuranceContract: createInsuranceContractFormWithDetail
+  COLLATERAL: createCollateralFormWithDetail,
+  FIXED_DEPOSIT: createFixedDepositFormWithDetail,
+  INSURANCE_CONTRACT: createInsuranceContractFormWithDetail
 }

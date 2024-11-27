@@ -171,6 +171,12 @@ export const LOAN_TYPE= {
   INSURANCE_CONTRACT: "보험 계약"
 }
 
+export const LOAN_TYPE_RESPONSE = {
+  "담보": "COLLATERAL",
+  "정기 예금": "FIXED_DEPOSIT",
+  "보험 계약": "INSURANCE_CONTRACT"
+}
+
 export const KEY= {
   SELECTED_DATA_TYPE: "selectedDataType"
 }
