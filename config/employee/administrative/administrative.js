@@ -45,3 +45,36 @@ export const DETAIL_COLUMN_NAME = {
     DEPARTMENT_ID: "부서ID"
   }
 };
+
+export const POP_UP = {
+  UPDATE: {
+    QUESTION: "수정하시겠습니까?",
+    OK: "수정이 완료되었습니다.",
+    ERROR: "수정 중 오류가 발생했습니다."
+  },
+  DELETE: {
+    QUESTION: "삭제하시겠습니까?",
+    OK: "삭제가 완료되었습니다.",
+    ERROR: "삭제 중 오류가 발생했습니다."
+  },
+  POST: {
+    QUESTION: "등록하시겠습니까?",
+    OK: "등록이 완료되었습니다.",
+    ERROR: "등록 중 오류가 발생했습니다."
+  }
+};
+
+export const VALUE = {
+  POST: "POST",
+  UPDATE: "UPDATE"
+};
+
+export const ELEMENT_ID ={
+  NAME: "name",
+  DESCRIPTION: "description",
+  INVENTORY: "inventory",
+  TOTAL_INVENTORY: "total_inventory",
+  DEPARTMENT_ID: "department_id",
+  INDEX: "index",
+  INPUT: "input"
+};
