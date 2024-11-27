@@ -42,6 +42,7 @@ const createForm = (form, type) => {
   } else {
     formInput = document.createElement(TAG.INPUT);
     formInput.type = form.type;
+    if (form.isImage) formInput.accept = form.accept;
     formInput.id = form.id;
     formInput.name = form.name;
     formInput.placeholder = `${INPUT_LABEL[type][form.placeholder]} ${MESSAGES.PLACE_HOLDER.INPUT}`;

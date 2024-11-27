@@ -32,9 +32,9 @@ const createForm = (form) => {
   formLabel.textContent = form.placeholder;
   formDiv.appendChild(formLabel);
 
-  if (form.type === CLASS_REGISTER.BUTTON_GROUP) {
+  if (form.type === CLASS.BUTTON_GROUP) {
     const buttonGroup = document.createElement(TAG.DIV);
-    buttonGroup.className = CLASS_REGISTER.BUTTON_GROUP;
+    buttonGroup.className = CLASS.BUTTON_GROUP;
     form.options.forEach((option) => {
       const button = document.createElement(TAG.BUTTON);
       button.textContent = option.text;
