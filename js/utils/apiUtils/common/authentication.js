@@ -1,4 +1,4 @@
-import { fetchGetHandler } from './FetchHandler.js';
+import { fetchGetHandler } from './fetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/authentication";
 
