@@ -2,44 +2,49 @@ import {
   fetchDeleteCustomerInformation,
   fetchGetCustomerInformation
 } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
-import { BUTTON } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
+import {
+  ACCIDENT_HISTORY_LIST,
+  BUTTON,
+  DETAIL_COLUMN_NAME, DISEASE_HISTORY_LIST, POP_UP, SURGERY_HISTORY_LIST, VALUE
+} from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
+import {CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
 
 const customerInformationDetail = (data) => {
   return [
-    { label: "고객 이름", value: data.name },
-    { label: "전화번호", value: data.phoneNumber },
-    { label: "직업", value: data.job },
-    { label: "나이", value: data.age },
-    { label: "성별", value: data.gender},
-    { label: "주민등록번호", value: data.residentRegistrationNumber },
-    { label: "주소", value: data.address },
-    { label: "재산", value: data.property },
-    { label: "사고 이력", value: data.accidentHistoryList.map(item => accidentHistory(item)) || "없음" },
-    { label: "수술 이력", value: data.surgeryHistoryList.map(item => surgeryHistory(item)) || "없음" },
-    { label: "질병 이력", value: data.diseaseHistoryList.map(item => diseaseHistory(item)) || "없음" },
-    { label: "은행명", value: data.bankName },
-    { label: "계좌 번호", value: data.bankAccount },
-    { label: "고객 번호", value: data.id },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.NAME, value: data.name },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.PHONE_NUMBER, value: data.phoneNumber },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.JOB, value: data.job },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.AGE, value: data.age },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.GENDER, value: data.gender},
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.RESIDENT_REGISTRATION_NUMBER, value: data.residentRegistrationNumber },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.ADDRESS, value: data.address },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.PROPERTY, value: data.property },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.ACCIDENT_HISTORY, value: data.accidentHistoryList.map(item => accidentHistory(item)) || "없음" },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.SURGERY_HISTORY, value: data.surgeryHistoryList.map(item => surgeryHistory(item)) || "없음" },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.DISEASE_HISTORY, value: data.diseaseHistoryList.map(item => diseaseHistory(item)) || "없음" },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.BANK_NAME, value: data.bankName },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.BANK_ACCOUNT, value: data.bankAccount },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.ID, value: data.id },
   ];
 };
 
 const accidentHistory = (data) => [
-  { label: "사고 이력 번호", value: data.id },
-  { label: "사고 내용", value: data.accidentDetail },
-  { label: "사고 날짜", value: data.date },
+  { label: ACCIDENT_HISTORY_LIST.LABEL_ID, value: data.id },
+  { label: ACCIDENT_HISTORY_LIST.LABEL_ACCIDENT_DETAIL, value: data.accidentDetail },
+  { label: ACCIDENT_HISTORY_LIST.LABEL_DATE, value: data.date },
 ];
 
 const surgeryHistory = (data) => [
-  { label: "수술 이력 번호", value: data.id },
-  { label: "수술명", value: data.name },
-  { label: "병원 이름", value: data.hospitalName },
-  { label: "수술 날짜", value: data.date },
+  { label: SURGERY_HISTORY_LIST.LABEL_ID, value: data.id },
+  { label: SURGERY_HISTORY_LIST.LABEL_NAME, value: data.name },
+  { label: SURGERY_HISTORY_LIST.LABEL_HOSPITAL_NAME, value: data.hospitalName },
+  { label: SURGERY_HISTORY_LIST.LABEL_DATE, value: data.date },
 ];
 
 const diseaseHistory = (data) => [
-  { label: "질병 이력 번호", value: data.id },
-  { label: "질병명", value: data.name },
-  { label: "진단 날짜", value: data.date_of_diagnosis },
+  { label: DISEASE_HISTORY_LIST.LABEL_ID, value: data.id },
+  { label: DISEASE_HISTORY_LIST.LABEL_NAME, value: data.name },
+  { label: DISEASE_HISTORY_LIST.LABEL_DATE_OF_DIAGNOSIS, value: data.date_of_diagnosis },
 ];
 
 const context = {
@@ -52,8 +57,8 @@ const context = {
 }
 
 export const renderDetails = async () => {
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const type = sessionStorage.getItem("currentType");
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
@@ -63,30 +68,30 @@ export const renderDetails = async () => {
 }
 
 const renderDetailsTable = (data) => {
-  const detailsTable = document.getElementById("detailsTable");
-  const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
+  const detailsTable = document.getElementById(ELEMENT_ID.DETAILS_TABLE);
+  const details = context[sessionStorage.getItem(KEY.CURRENT_TYPE)].detailGetter(data);
 
   details.forEach(detail => {
-    const row = document.createElement("tr");
+    const row = document.createElement(TAG.TR);
 
     if (Array.isArray(detail.value)) {
       // 배열인 경우
-      const tableHead = document.createElement("th");
+      const tableHead = document.createElement(TAG.TH);
       tableHead.textContent = detail.label;
 
-      const tableData = document.createElement("td");
+      const tableData = document.createElement(TAG.TD);
       detail.value.forEach(listDetail => {
-        const nestedTable = document.createElement("table");
+        const nestedTable = document.createElement(TAG.TABLE);
 
         // 배열의 각 객체를 순회
         if (Array.isArray(listDetail)) {
           listDetail.forEach(item => {
-            const nestedRow = document.createElement("tr");
+            const nestedRow = document.createElement(TAG.TR);
 
-            const labelCell = document.createElement("th");
+            const labelCell = document.createElement(TAG.TH);
             labelCell.textContent = item.label;
 
-            const valueCell = document.createElement("td");
+            const valueCell = document.createElement(TAG.TD);
             valueCell.textContent = item.value;
 
             nestedRow.appendChild(labelCell);
@@ -97,12 +102,12 @@ const renderDetailsTable = (data) => {
         } else {
           // 객체 형태로 들어올 경우 처리
           Object.entries(listDetail).forEach(([key, value]) => {
-            const nestedRow = document.createElement("tr");
+            const nestedRow = document.createElement(TAG.TR);
 
-            const labelCell = document.createElement("th");
+            const labelCell = document.createElement(TAG.TH);
             labelCell.textContent = key; // 객체의 키
 
-            const valueCell = document.createElement("td");
+            const valueCell = document.createElement(TAG.TD);
             valueCell.textContent = value; // 객체의 값
 
             nestedRow.appendChild(labelCell);
@@ -118,76 +123,60 @@ const renderDetailsTable = (data) => {
       row.appendChild(tableData);
     } else {
       // 배열이 아닌 일반 값 처리
-      const labelCell = document.createElement("th");
+      const labelCell = document.createElement(TAG.TH);
       labelCell.textContent = detail.label;
 
-      const valueCell = document.createElement("td");
+      const valueCell = document.createElement(TAG.TD);
       valueCell.textContent = detail.value;
 
       row.appendChild(labelCell);
       row.appendChild(valueCell);
     }
-    detailsTable.querySelector("tbody").appendChild(row);
+    detailsTable.querySelector(TAG.TBODY).appendChild(row);
   });
 };
 
 
 const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, customerInformationTaskMapper);
+  initialButtons(context[sessionStorage.getItem(KEY.CURRENT_TYPE)].buttons, customerInformationTaskMapper);
 }
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  const type = sessionStorage.getItem("currentType");
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
+    const button = document.createElement(TAG.DIV);
+    button.className = CLASS.BUTTON_ITEM;
     button.textContent = name;
 
-    button.addEventListener("click", buttonActionMapper[type][key]);
+    button.addEventListener(EVENT.CLICK, buttonActionMapper[type][key]);
     buttonContainer.appendChild(button);
   });
 }
 
 const update = () => {
-  sessionStorage.setItem("selectedButtonType", JSON.stringify("UPDATE"));
-  window.location.href = "input.html"; // 수정 화면으로 이동
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, JSON.stringify(VALUE.UPDATE));
+  window.location.href = LOCATION.INPUT;
 }
 
-const deleteItem = () => {
-  const modal = document.createElement("div");
-  modal.className = "custom-modal";
-  modal.innerHTML = `
-    <div class="modal-content">
-      <p>삭제하시겠습니까?</p>
-      <div class="modal-buttons">
-        <button id="confirmDeleteButton">확인</button>
-        <button id="cancelDeleteButton">취소</button>
-      </div>
-    </div>
-  `;
-  // 모달 추가
-  document.body.appendChild(modal);
-  // 버튼 이벤트 핸들링
-  document.getElementById("confirmDeleteButton").addEventListener("click", async () => {
-    const id = sessionStorage.getItem("selectedDataId");
-
+const deleteItem = async () => {
+  const id = sessionStorage.getItem(KEY.SELECTED_DATA_ID)
+  const userConfirmed = confirm(POP_UP.DELETE.QUESTION);
+  if (userConfirmed) {
     try {
       await fetchDeleteCustomerInformation(id);
-      alert("삭제가 완료되었습니다.");
-      document.body.removeChild(modal); // 모달 닫기
-      window.location.href = "home.html"; // 홈 화면으로 이동
+      alert(POP_UP.DELETE.OK);
+      window.location.href = LOCATION.HOME;
     } catch (error) {
-      console.error("삭제 중 오류 발생:", error);
-      document.body.removeChild(modal); // 모달 닫기
+      console.error(POP_UP.DELETE.CONSOLE_ERROR, error);
+      alert(POP_UP.DELETE.ERROR);
     }
-  });
-  document.getElementById("cancelDeleteButton").addEventListener("click", () => {
-    document.body.removeChild(modal); // 모달 닫기
-    window.location.href = "home.html";
-  });
-}
+  } else {
+    window.history.back();
+  }
+};
+
 
 const customerInformationTaskMapper = {
   CUSTOMERINFORMATION_DETAIL: {

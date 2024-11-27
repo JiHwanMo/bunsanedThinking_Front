@@ -1,14 +1,28 @@
 import { fetchGetOfficeSupply } from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
 import { fetchDeleteOfficeSupply } from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
-import { BUTTON } from "../../../../../../config/employee/administrative/administrative.js";
+import {
+  BUTTON,
+  DETAIL_COLUMN_NAME,
+  POP_UP,
+  VALUE
+} from "../../../../../../config/employee/administrative/administrative.js";
+import {
+  BUTTON as COMMON_BUTTON,
+  CLASS,
+  ELEMENT_ID,
+  EVENT,
+  KEY,
+  LOCATION,
+  TAG
+} from "../../../../../../config/common.js";
 
 const administrativeDetail = (data) => {
   return [
-    { label: "비품 번호", value: data.id },
-    { label: "비품 이름", value: data.name },
-    { label: "현재 재고", value: data.inventory },
-    { label: "총 재고", value: data.totalInventory },
-    { label: "설명", value: data.description }
+    { label: DETAIL_COLUMN_NAME.OFFICESUPPLY_LIST.ID, value: data.id },
+    { label: DETAIL_COLUMN_NAME.OFFICESUPPLY_LIST.NAME, value: data.name },
+    { label: DETAIL_COLUMN_NAME.OFFICESUPPLY_LIST.INVENTORY, value: data.inventory },
+    { label: DETAIL_COLUMN_NAME.OFFICESUPPLY_LIST.TOTAL_INVENTORY, value: data.totalInventory },
+    { label: DETAIL_COLUMN_NAME.OFFICESUPPLY_LIST.DESCRIPTION, value: data.description }
   ];
 }
 
@@ -22,8 +36,8 @@ const context = {
 }
 
 export const renderDetails = async () => {
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const type = sessionStorage.getItem("currentType");
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
@@ -33,80 +47,64 @@ export const renderDetails = async () => {
 }
 
 const renderDetailsTable = (data) => {
-  const detailsTable = document.getElementById("detailsTable");
-  const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
+  const detailsTable = document.getElementById(ELEMENT_ID.DETAILS_TABLE);
+  const details = context[sessionStorage.getItem(KEY.CURRENT_TYPE)].detailGetter(data);
 
   details.forEach(detail => {
-    const row = document.createElement("tr");
+    const row = document.createElement(TAG.TR);
 
-    const labelCell = document.createElement("th");
+    const labelCell = document.createElement(TAG.TH);
     labelCell.textContent = detail.label;
 
-    const valueCell = document.createElement("td");
+    const valueCell = document.createElement(TAG.TD);
     valueCell.textContent = detail.value;
 
     row.appendChild(labelCell);
     row.appendChild(valueCell);
 
-    detailsTable.querySelector("tbody").appendChild(row);
+    detailsTable.querySelector(TAG.TBODY).appendChild(row);
   });
 };
 
 const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, administrativeTaskMapper);
+  initialButtons(context[sessionStorage.getItem(KEY.CURRENT_TYPE)].buttons, administrativeTaskMapper);
 }
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  const type = sessionStorage.getItem("currentType");
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
+    const button = document.createElement(TAG.DIV);
+    button.className = CLASS.BUTTON_ITEM;
     button.textContent = name;
 
-    button.addEventListener("click", buttonActionMapper[type][key]);
+    button.addEventListener(EVENT.CLICK, buttonActionMapper[type][key]);
     buttonContainer.appendChild(button);
   });
 }
 
 const update = async () => {
-  sessionStorage.setItem("selectedButtonType", JSON.stringify("UPDATE"));
-  window.location.href = "input.html"; // 수정 화면으로 이동
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, JSON.stringify(VALUE.UPDATE));
+  window.location.href = LOCATION.INPUT; // 수정 화면으로 이동
 }
 
 const deleteItem = async () => {
-  const modal = document.createElement("div");
-  modal.className = "custom-modal";
-  modal.innerHTML = `
-    <div class="modal-content">
-      <p>삭제하시겠습니까?</p>
-      <div class="modal-buttons">
-        <button id="confirmDeleteButton">확인</button>
-        <button id="cancelDeleteButton">취소</button>
-      </div>
-    </div>
-  `;
-  // 모달 추가
-  document.body.appendChild(modal);
-  // 버튼 이벤트 핸들링
-  document.getElementById("confirmDeleteButton").addEventListener("click", async () => {
-    const id = sessionStorage.getItem("selectedDataId");
-
+  const id = sessionStorage.getItem(KEY.SELECTED_DATA_ID); // 직접 관리되는 키 사용
+  // confirm 다이얼로그 표시
+  const userConfirmed = confirm(POP_UP.DELETE.QUESTION);
+  if (userConfirmed) {
     try {
-      await fetchDeleteOfficeSupply(id);
-      alert("삭제가 완료되었습니다.");
-      document.body.removeChild(modal); // 모달 닫기
-      window.location.href = "home.html"; // 홈 화면으로 이동
+      await fetchDeleteOfficeSupply(id); // 삭제 API 호출
+      alert(POP_UP.DELETE.OK); // 성공 메시지
+      window.location.href = LOCATION.HOME; // 홈 화면으로 이동
     } catch (error) {
-      console.error("삭제 중 오류 발생:", error);
-      document.body.removeChild(modal); // 모달 닫기
+      console.error(POP_UP.DELETE.CONSOLE_ERROR, error); // 에러 메시지 로깅
+      alert(POP_UP.DELETE.ERROR); // 사용자에게 에러 메시지 알림
     }
-  });
-  document.getElementById("cancelDeleteButton").addEventListener("click", () => {
-    document.body.removeChild(modal); // 모달 닫기
-    window.location.href = "home.html";
-  });
+  } else {
+    window.history.back(); // 취소 선택 시 이전 페이지로 이동
+  }
 };
 
 const administrativeTaskMapper = {

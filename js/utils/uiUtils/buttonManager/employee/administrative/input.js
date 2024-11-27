@@ -25,7 +25,7 @@ export const addButtons = (buttonContainer) => {
           alert(POP_UP.POST.OK);
           window.location.href = LOCATION.HOME; // 등록 완료 후 페이지 이동
         } catch (error) {
-          console.error("등록 중 오류 발생:", error);
+          console.error(POP_UP.POST.CONSOLE_ERROR, error);
           alert(POP_UP.POST.ERROR);
         }
       } else {
@@ -49,7 +49,7 @@ export const addButtons = (buttonContainer) => {
           alert(POP_UP.UPDATE.OK);
           window.location.href = LOCATION.HOME; // 수정 완료 후 페이지 이동
         } catch (error) {
-          console.error("수정 중 오류 발생:", error);
+          console.error(POP_UP.UPDATE.CONSOLE_ERROR, error);
           alert(POP_UP.UPDATE.ERROR);
         }
       } else {
@@ -65,7 +65,6 @@ export const addButtons = (buttonContainer) => {
   buttonContainer.appendChild(cancelButton);
 };
 
-
 const collectFormData = () => {
   const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));
   if (selectedButtonType === VALUE.POST) {
@@ -76,11 +75,11 @@ const collectFormData = () => {
     const department_id = parseInt(document.getElementById(ELEMENT_ID.DEPARTMENT_ID).value, 10);
     // 입력 값 검증
     if (!name || !description || !inventory || !total_inventory || !department_id) {
-      alert("잘못된 정보를 입력하였습니다. 다시 입력해주세요.");
+      alert(POP_UP.POST.VALIDATION_ERROR);
       return null;
     }
     if (inventory > total_inventory) {
-      alert("현재 재고는 총 재고를 초과할 수 없습니다.");
+      alert(POP_UP.POST.INVENTORY_ERROR);
       return null;
     }
     return {
@@ -96,7 +95,7 @@ const collectFormData = () => {
     const input = document.getElementById(ELEMENT_ID.INPUT).value;
 
     if (!input.trim()) {
-      alert("잘못된 정보를 입력하였습니다. 다시 입력해주세요.");
+      alert(POP_UP.UPDATE.VALIDATION_ERROR);
       return null;
     }
     return { id, index, input };
