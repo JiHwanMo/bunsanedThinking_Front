@@ -10,7 +10,7 @@ import {
 } from "../../../../apiUtils/apiDocumentation/employee/customerSupport/customerSupport.js"
 import {
   BUTTON,
-  CLASS,
+  CLASS, CLASS_SELECTOR,
   ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
@@ -20,28 +20,27 @@ import {
   TAG
 } from "../../../../../../config/common.js";
 import {
-  CLASS_LIST,
   COLUMN_NAME,
   COMBO_LIST,
-  COMBOBOX
+  COMBOBOX, INFORMATION_TYPE
 } from "../../../../../../config/employee/customerSupport/customerSupport.js";
 import {TITLE} from "../../../../../../config/employee/customerSupport/customerSupport.js";
 
 export const informationType = {
-  HANDLE_REPORT: "HANDLE_REPORT",
-  HANDLE_COMPLAINT: "HANDLE_COMPLAINT"
+  HANDLE_REPORT: INFORMATION_TYPE.HANDLE_REPORT,
+  HANDLE_COMPLAINT: INFORMATION_TYPE.HANDLE_COMPLAINT
 }
 const complaintRow = (dto) => {
   return `
-    <td>${dto.complaint.complaintType}</td>
-    <td>${dto.complaint.id}</td>
-    <td>${dto.complaint.title}</td>
-    <td>${dto.complaint.postDate}</td>
-    <td>${dto.complaint.employeeName}</td>
-    <td>${dto.complaint.processingDate}</td>
-    <td>${dto.complaint.processStatus}</td>
-    <td>${dto.customer.name}</td>
-    <td>${dto.customer.phoneNumber}</td>
+    <td>${dto.complaintType}</td>
+    <td>${dto.id}</td>
+    <td>${dto.title}</td>
+    <td>${dto.postDate}</td>
+    <td>${dto.employeeName}</td>
+    <td>${dto.processingDate}</td>
+    <td>${dto.processStatus}</td>
+    <td>${dto.customerName}</td>
+    <td>${dto.customerPhoneNumber}</td>
   `;
 }
 
@@ -62,7 +61,7 @@ const getAccidentId = (data) => {
 }
 
 const getComplaintId = (data) => {
-  return data.complaint.id;
+  return data.id;
 }
 
 const context = {
@@ -196,9 +195,9 @@ const setOneRow = (item, type) => {
   // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
-      window.selectedRow.classList.remove(CLASS_LIST.SELECTED);
+      window.selectedRow.classList.remove(CLASS.SELECTED);
     }
-    row.classList.add(CLASS_LIST.SELECTED);
+    row.classList.add(CLASS.SELECTED);
     window.selectedRow = row;
   });
 
@@ -235,7 +234,7 @@ const initTableBySelect = async (id, type) => { // 추가
 }
 
 const setSearchBar = () => {
-  const container = document.querySelector(".search-container");
+  const container = document.querySelector(CLASS_SELECTOR.SEARCH_CONTAINER);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const select = COMBOBOX[type].isCombo ? setComboBox() : null;
   if (select != null) { // 추가
@@ -247,29 +246,9 @@ const setSearchBar = () => {
 }
 
 const setTableBody = () => {
-  const tableBody = document.getElementById(KEY.LIST);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const data = JSON.parse(sessionStorage.getItem(KEY.LIST));
   data.forEach(item => {
-    const row = document.createElement(TAG.TR);
-    let id = context[type].idGetter(item);
-    row.innerHTML = context[type].rowGetter(item);
-    // 각 행에 클릭 이벤트 추가
-    row.addEventListener(EVENT.CLICK, () => {
-      if (window.selectedRow) {
-        window.selectedRow.classList.remove(CLASS_LIST.SELECTED);
-      }
-      row.classList.add(CLASS_LIST.SELECTED);
-      window.selectedRow = row;
-    });
-
-    // 더블 클릭 시 상세 페이지로 이동
-    row.addEventListener(EVENT.DOUBLE_CLICK, () => {
-      // 상세 정보를 세션에 저장
-      sessionStorage.setItem(KEY.SELECTED_DATA_ID, JSON.stringify(id));
-      window.location.href = LOCATION.DETAIL;
-    });
-
-    tableBody.appendChild(row);
+    setOneRow(item, type);
   });
 }

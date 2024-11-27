@@ -1,27 +1,27 @@
-import {BUTTON as COMMON_BUTTON} from "../../../../../../config/common.js";
+import {BUTTON as COMMON_BUTTON, ELEMENT_ID as COMMON_ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
 import {
   fetchAddEmployee,
   fetchUpdateEmployee
 } from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
+import {ELEMENT_ID, QUESTION} from "../../../../../../config/employee/humanResource/humanResource.js";
 
 export const renderButtons = () => {
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
+  const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
   context[selectedButtonType].createButtons();
 };
 
 const createPostButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
   const oKButton = createButton(COMMON_BUTTON.COMMON.OK);
-  oKButton.addEventListener("click", async () => {
+  oKButton.addEventListener(EVENT.CLICK, async () => {
     const formData = collectEmployeeFormDataForPost();
-    alert("정말 등록하겠습니까?");
+    const check = confirm(QUESTION.CONFIRM_POST_EMPLOYEE);
 
-    alert(JSON.stringify(formData));
-
-    await fetchAddEmployee(formData);
-
-    window.location.href = "home.html"
+    if (check) {
+      await fetchAddEmployee(formData);
+      window.location.href = LOCATION.HOME;
+    }
   });
 
   buttonContainer.appendChild(oKButton);
@@ -29,17 +29,17 @@ const createPostButton = () => {
 }
 
 const createUpdateButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
   const updateButton = createButton(COMMON_BUTTON.COMMON.UPDATE);
-  updateButton.addEventListener("click", async () => {
+  updateButton.addEventListener(EVENT.CLICK, async () => {
     const formData = collectEmployeeFormDataForUpdate();
-    alert("정말 수정하시겠습니까?");
+    const check = confirm(QUESTION.CONFIRM_UPDATE_EMPLOYEE);
 
-    alert(JSON.stringify(formData));
-    await fetchUpdateEmployee(formData);
-
-    window.location.href = "home.html"
+    if (check) {
+      await fetchUpdateEmployee(formData);
+      window.location.href = LOCATION.HOME;
+    }
   });
 
   buttonContainer.appendChild(updateButton);
@@ -56,20 +56,20 @@ const context = {
 }
 
 const createButton = (textContent) => {
-  const okButton = document.createElement("button");
+  const okButton = document.createElement(TAG.BUTTON);
   okButton.className = "button-item";
   okButton.textContent = textContent;
   return okButton;
 }
 
 const createCancelButton = () => {
-  const buttonContainer = document.getElementById("buttonContainer");
+  const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
-  const cancelButton = document.createElement("button");
+  const cancelButton = document.createElement(TAG.BUTTON);
   cancelButton.className = "button-item";
   cancelButton.textContent = COMMON_BUTTON.COMMON.CANCEL;
 
-  cancelButton.addEventListener("click", () => window.history.back());
+  cancelButton.addEventListener(EVENT.CLICK, () => window.history.back());
 
   buttonContainer.appendChild(cancelButton);
 }
@@ -85,16 +85,16 @@ const getCheckedValue = (name) => {
 
 const collectEmployeeFormDataForPost = () => {
   return {
-    departmentId: getValueById("departmentId"),
-    name: getValueById("name"),
-    employeePosition: getValueById("position"),
-    address: getValueById("address"),
-    phoneNumber: getValueById("phoneNumber"),
-    bankName: getValueById("bankName"),
-    bankAccount: getValueById("bankAccount"),
-    residentRegistrationNumber: getValueById("residentRegistrationNumber"),
-    salary: getValueById("salary"),
-    employmentDate: getValueById("employmentDate"),
+    departmentId: getValueById(ELEMENT_ID.DEPARTMENT_ID),
+    name: getValueById(ELEMENT_ID.NAME),
+    employeePosition: getValueById(ELEMENT_ID.EMPLOYEE_POSITION),
+    address: getValueById(ELEMENT_ID.ADDRESS),
+    phoneNumber: getValueById(ELEMENT_ID.PHONE_NUMBER),
+    bankName: getValueById(ELEMENT_ID.BANK_NAME),
+    bankAccount: getValueById(ELEMENT_ID.BANK_ACCOUNT),
+    residentRegistrationNumber: getValueById(ELEMENT_ID.RESIDENT_REGISTRATION_NUMBER),
+    salary: getValueById(ELEMENT_ID.SALARY),
+    employmentDate: getValueById(ELEMENT_ID.EMPLOYMENT_DATE),
     tempFamilyList: collectFamilyFormDataForPost()
   };
 };
@@ -105,10 +105,10 @@ const collectFamilyFormDataForPost = () => {
   const familyForm = [];
   for (let familyNumber = 0; familyNumber < familyLength; familyNumber++) {
     familyForm.push({
-      birthDate: getValueById(`familyBirthDate-${familyNumber}`),
-      name: getValueById(`familyName-${familyNumber}`),
-      relationship: getValueById(`relationship-${familyNumber}`),
-      survival: getCheckedValue(`survival-${familyNumber}`)
+      birthDate: getValueById(`${ELEMENT_ID.FAMILY_DETAIL.BIRTH_DATE}-${familyNumber}`),
+      name: getValueById(`${ELEMENT_ID.FAMILY_DETAIL.NAME}-${familyNumber}`),
+      relationship: getValueById(`${ELEMENT_ID.FAMILY_DETAIL.RELATIONSHIP}-${familyNumber}`),
+      survival: getCheckedValue(`${ELEMENT_ID.FAMILY_DETAIL.SURVIVAL}-${familyNumber}`)
     })
   }
   return familyForm;
@@ -116,16 +116,16 @@ const collectFamilyFormDataForPost = () => {
 
 const collectEmployeeFormDataForUpdate = () => {
   return {
-    id: getValueById("id"),
-    departmentId: getValueById("departmentId"),
-    name: getValueById("name"),
-    employeePosition: getValueById("position"),
-    address: getValueById("address"),
-    phoneNumber: getValueById("phoneNumber"),
-    bankName: getValueById("bankName"),
-    bankAccount: getValueById("bankAccount"),
-    salary: getValueById("salary"),
-    employmentDate: getValueById("employmentDate"),
+    id: getValueById(ELEMENT_ID.ID),
+    departmentId: getValueById(ELEMENT_ID.DEPARTMENT_ID),
+    name: getValueById(ELEMENT_ID.NAME),
+    employeePosition: getValueById(ELEMENT_ID.EMPLOYEE_POSITION),
+    address: getValueById(ELEMENT_ID.ADDRESS),
+    phoneNumber: getValueById(ELEMENT_ID.PHONE_NUMBER),
+    bankName: getValueById(ELEMENT_ID.BANK_NAME),
+    bankAccount: getValueById(ELEMENT_ID.BANK_ACCOUNT),
+    salary: getValueById(ELEMENT_ID.SALARY),
+    employmentDate: getValueById(ELEMENT_ID.EMPLOYMENT_DATE),
     tempFamilyList: collectFamilyFormDataForUpdate()
   };
 };
@@ -134,13 +134,13 @@ const collectFamilyFormDataForUpdate = () => {
   const familyLength = document.querySelectorAll('.radio-group').length;
   const familyForm = [];
   for (let familyNumber = 0; familyNumber < familyLength; familyNumber++) {
-    const element = document.getElementById(`familyId-${familyNumber}`);
+    const element = document.getElementById(`${ELEMENT_ID.FAMILY_DETAIL.ID}-${familyNumber}`);
     familyForm.push({
       id: element ? element.textContent : null,
-      birthDate: getValueById(`familyBirthDate-${familyNumber}`),
-      name: getValueById(`familyName-${familyNumber}`),
-      relationship: getValueById(`relationship-${familyNumber}`),
-      survival: getCheckedValue(`survival-${familyNumber}`)
+      birthDate: getValueById(`${ELEMENT_ID.FAMILY_DETAIL.BIRTH_DATE}-${familyNumber}`),
+      name: getValueById(`${ELEMENT_ID.FAMILY_DETAIL.NAME}-${familyNumber}`),
+      relationship: getValueById(`${ELEMENT_ID.FAMILY_DETAIL.RELATIONSHIP}-${familyNumber}`),
+      survival: getCheckedValue(`${ELEMENT_ID.FAMILY_DETAIL.SURVIVAL}-${familyNumber}`)
     })
   }
   return familyForm;

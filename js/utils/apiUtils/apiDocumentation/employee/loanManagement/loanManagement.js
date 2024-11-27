@@ -15,7 +15,8 @@ import {
   fetchUpdateCollateralProductHandler,
   fetchUpdateFixedDepositProductHandler,
   fetchUpdateInsuranceContractHandler,
-  fetchDeniedLoanRequestHandler
+  fetchDeniedLoanRequestHandler,
+  fetchGetLoanRequestDetailHandler
 } from '../../../apiHandler/employee/loanManagement/loanManagement.js';
 
 export const fetchGetAll = async () => {
@@ -36,6 +37,10 @@ export const fetchGetLoanProductDetail = async (employeeId) => {
 
 export const fetchGetLoanRequest = async (contractId) => {
   return await fetchGetLoanRequestHandler(contractId);
+}
+
+export const fetchGetLoanRequestDetail = async (contractId) => {
+  return await fetchGetLoanRequestDetailHandler(contractId);
 }
 
 export const fetchGetOutcome = async (contractId) => {

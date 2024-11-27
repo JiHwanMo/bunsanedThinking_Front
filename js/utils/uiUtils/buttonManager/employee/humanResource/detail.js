@@ -1,24 +1,27 @@
-import {BUTTON} from "../../../../../../config/employee/humanResource/humanResource.js";
+import {BUTTON, QUESTION, SELECTED_BUTTON_TYPE} from "../../../../../../config/employee/humanResource/humanResource.js";
 import {initialButtons} from "../../../common/buttonUtils.js";
 import {fetchDeleteEmployee} from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
+import {KEY, LOCATION} from "../../../../../../config/common.js";
 
 export const renderButtons = () => {
-  const type = sessionStorage.getItem("currentType");
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   initialButtons(BUTTON.TASK.EMPLOYEE.HUMAN_RESOURCE[type], humanResourceTaskMapper[type]);
 };
 
 const updateEmployee = () => {
-  sessionStorage.setItem("selectedButtonType", "UPDATE");
-  window.location.href = "input.html";
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, SELECTED_BUTTON_TYPE.UPDATE);
+  window.location.href = LOCATION.INPUT;
 }
 
 const deleteEmployee = async () => {
-  const selectedDataId = sessionStorage.getItem("selectedDataId");
+  const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
 
-  alert("정말 삭제하시겠습니까?");
-  await fetchDeleteEmployee(selectedDataId);
+  const check = confirm(QUESTION.CONFIRM_DELETE_EMPLOYEE);
 
-  window.location.href = "home.html";
+  if (check) {
+    await fetchDeleteEmployee(selectedDataId);
+    window.location.href = LOCATION.HOME;
+  }
 }
 
 const humanResourceTaskMapper = {

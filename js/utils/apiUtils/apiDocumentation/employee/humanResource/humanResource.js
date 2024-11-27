@@ -5,7 +5,8 @@ import {
   fetchGetEmployeeHandler,
   fetchAddEmployeeHandler,
   fetchUpdateEmployeeHandler,
-  fetchDeleteEmployeeHandler
+  fetchDeleteEmployeeHandler,
+  fetchGetEmployeeDetailHandler
 } from "../../../apiHandler/employee/humanResource/humanResource.js";
 
 export const fetchGetAllEmployee = async () => {
@@ -23,6 +24,10 @@ export const fetchGetDepartment = async (departmentId) => {
 export const fetchGetEmployee = async (employeeId) => {
   return await fetchGetEmployeeHandler(employeeId); // 6001
 };
+
+export const fetchGetEmployeeDetail = async (employeeId) => {
+  return await fetchGetEmployeeDetailHandler(employeeId);
+}
 
 export const fetchAddEmployee = async (addEmployeeDTO) => {
   await fetchAddEmployeeHandler(addEmployeeDTO);

@@ -1,89 +1,101 @@
 import {
   fetchGetLoanProductDetail,
-  fetchGetLoanRequest
+  fetchGetLoanRequestDetail
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
+import {
+  COLUMN_NAME,
+  DETAIL_COLUMN_NAME,
+  LOAN_TYPE
+} from "../../../../../../config/employee/loanManagement/loanManagement.js";
+import {ELEMENT_ID, KEY, TAG} from "../../../../../../config/common.js";
 
 const loanDetail = (data) => {
   const detail = [
-    { label: "대출 상품 이름", value: data.name },
-    { label: "대출 종류", value: data.loanType },
-    { label: "대출 상품 번호", value: data.id },
-    { label: "이자율", value: data.interestRate },
-    { label: "대출 가능 최대 금액", value: data.maximumMoney },
-    { label: "최소 자산", value: data.minimumAsset }
+    { label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.NAME, value: data.name },
+    { label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.LOAN_TYPE, value: data.loanType },
+    { label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.ID, value: data.id },
+    { label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.INTEREST_RATE, value: data.interestRate },
+    { label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.MAXIMUM_MONEY, value: data.maximumMoney },
+    { label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.MINIMUM_ASSET, value: data.minimumAsset }
   ];
   switch(data.loanType) {
-    case "Collateral": return collateralDetail(detail, data);
-    case "FixedDeposit": return fixedDepositDetail(detail, data);
-    case "InsuranceContract": return insuranceContractDetail(detail, data);
+    case LOAN_TYPE.COLLATERAL: return collateralDetail(detail, data);
+    case LOAN_TYPE.FIXED_DEPOSIT: return fixedDepositDetail(detail, data);
+    case LOAN_TYPE.INSURANCE_CONTRACT: return insuranceContractDetail(detail, data);
     default: return detail;
   }
 }
 
 const collateralDetail = (detail, data) => {
   detail.push(
-    { label: "담보 종류", value: data.collateralType },
-    { label: "최소 가치", value: data.minimumValue }
+    { label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.TYPE.COLLATERAL.COLLATERAL_TYPE, value: data.collateralType },
+    { label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.TYPE.COLLATERAL.MINIMUM_VALUE, value: data.minimumValue }
   );
   return detail;
 }
 
 const fixedDepositDetail = (detail, data) => {
-  detail.push({ label: "최소 예금", value: data.minimumAmount });
+  detail.push({ label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.TYPE.FIXED_DEPOSIT.MINIMUM_AMOUNT, value: data.minimumAmount });
   return detail;
 }
 
 const insuranceContractDetail = (detail, data) => {
-  detail.push({ label: "보험 번호", value: data.insuranceId });
+  detail.push({ label: DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.TYPE.INSURANCE_CONTRACT.INSURANCE_ID, value: data.insuranceId });
   return detail;
 }
 
 const loanRequestDetail = (data) => {
-  return [
-    { label: "고객 이름", value: data.customer.name },
-    { label: "전화번호", value: data.customer.phoneNumber },
-    { label: "직업", value: data.customer.job },
-    { label: "나이", value: data.customer.age },
-    { label: "성별", value: data.customer.gender },
-    { label: "주민등록번호", value: data.customer.residentRegistrationNumber },
-    { label: "재산", value: data.customer.property },
-    { label: "주소", value: data.customer.address },
-    { label: "사고 이력", value: data.customer.accidentHistoryList.map(item => accidentHistory(item)) },
-    { label: "수술 이력", value: data.customer.surgeryHistoryList.map(item => surgeryHistory(item)) },
-    { label: "질병 이력", value: data.customer.diseaseHistoryList.map(item => diseaseHistory(item)) },
-    { label: "계좌 번호", value: data.customer.bankAccount },
-    { label: "대출 상품 이름", value: data.loan.name },
-    { label: "대출 종류", value: data.loan.loanType },
-    { label: "대출 상품 번호", value: data.loan.id },
-    { label: "이자율", value: data.loan.interestRate },
-    { label: "대출가능 최대 금액", value: data.loan.maximumMoney },
-    { label: "최소 자산", value: data.loan.minimumAsset },
-    { label: "처리 상태", value: data.contract.contractStatus }
+  const detail = [
+    { label: COLUMN_NAME.LOAN_REQUEST.CUSTOMER_NAME, value: data.customerName },
+    { label: COLUMN_NAME.LOAN_REQUEST.PHONE_NUMBER, value: data.phoneNumber },
+    { label: COLUMN_NAME.LOAN_REQUEST.JOB, value: data.job },
+    { label: COLUMN_NAME.LOAN_REQUEST.AGE, value: data.age },
+    { label: COLUMN_NAME.LOAN_REQUEST.GENDER, value: data.gender },
+    { label: COLUMN_NAME.LOAN_REQUEST.RESIDENT_REGISTRATION_NUMBER, value: data.residentRegistrationNumber },
+    { label: COLUMN_NAME.LOAN_REQUEST.PROPERTY, value: data.property },
+    { label: COLUMN_NAME.LOAN_REQUEST.ADDRESS, value: data.address },
+    { label: COLUMN_NAME.LOAN_REQUEST.ACCIDENT_HISTORY, value: data.accidentHistoryList.map(item => accidentHistory(item)) },
+    { label: COLUMN_NAME.LOAN_REQUEST.SURGERY_HISTORY, value: data.surgeryHistoryList.map(item => surgeryHistory(item)) },
+    { label: COLUMN_NAME.LOAN_REQUEST.DISEASE_HISTORY, value: data.diseaseHistoryList.map(item => diseaseHistory(item)) },
+    { label: COLUMN_NAME.LOAN_REQUEST.BANK_ACCOUNT, value: data.bankAccount },
+    { label: COLUMN_NAME.LOAN_REQUEST.LOAN_NAME, value: data.loanName },
+    { label: COLUMN_NAME.LOAN_REQUEST.LOAN_TYPE, value: data.loanType },
+    { label: COLUMN_NAME.LOAN_REQUEST.LOAN_ID, value: data.loanId },
+    { label: COLUMN_NAME.LOAN_REQUEST.INTEREST_RATE, value: data.interestRate },
+    { label: COLUMN_NAME.LOAN_REQUEST.MAXIMUM_MONEY, value: data.maximumMoney },
+    { label: COLUMN_NAME.LOAN_REQUEST.MINIMUM_ASSET, value: data.minimumAsset },
+    { label: COLUMN_NAME.LOAN_REQUEST.CONTRACT_STATUS, value: data.contractStatus }
   ];
+  switch(data.loanType) {
+    case LOAN_TYPE.COLLATERAL: return collateralDetail(detail, data);
+    case LOAN_TYPE.FIXED_DEPOSIT: return fixedDepositDetail(detail, data);
+    case LOAN_TYPE.INSURANCE_CONTRACT: return insuranceContractDetail(detail, data);
+    default: return detail;
+  }
 }
 
 const accidentHistory = (data) => {
   return [
-    { label: "사고 이력 번호", value: data.id },
-    { label: "사고 내용", value: data.accidentDetail },
-    { label: "사고 날짜", value: data.date }
+    { label: COLUMN_NAME.LOAN_REQUEST.ACCIDENT_HISTORY_DETAIL.ID, value: data.id },
+    { label: COLUMN_NAME.LOAN_REQUEST.ACCIDENT_HISTORY_DETAIL.ACCIDENT_DETAIL, value: data.accidentDetail },
+    { label: COLUMN_NAME.LOAN_REQUEST.ACCIDENT_HISTORY_DETAIL.DATE, value: data.date }
   ];
 }
 
 const diseaseHistory = (data) => {
   return [
-    { label: "질병 이력 번호", value: data.id },
-    { label: "병명", value: data.name },
-    { label: "진단 날짜", value: data.date_of_diagnosis }
+    { label: COLUMN_NAME.LOAN_REQUEST.DISEASE_HISTORY_DETAIL.ID, value: data.id },
+    { label: COLUMN_NAME.LOAN_REQUEST.DISEASE_HISTORY_DETAIL.NAME, value: data.name },
+    { label: COLUMN_NAME.LOAN_REQUEST.DISEASE_HISTORY_DETAIL.DATE_OF_DIAGNOSIS, value: data.date_of_diagnosis }
   ];
 }
 
 const surgeryHistory = (data) => {
   return [
-    { label: "수술 이력 번호", value: data.id },
-    { label: "수술명", value: data.name },
-    { label: "수술 병원", value: data.hospitalName },
-    { label: "수술 날짜", value: data.date }
+    { label: COLUMN_NAME.LOAN_REQUEST.SURGERY_HISTORY_DETAIL.ID, value: data.id },
+    { label: COLUMN_NAME.LOAN_REQUEST.SURGERY_HISTORY_DETAIL.NAME, value: data.name },
+    { label: COLUMN_NAME.LOAN_REQUEST.SURGERY_HISTORY_DETAIL.HOSPITAL_NAME, value: data.hospitalName },
+    { label: COLUMN_NAME.LOAN_REQUEST.SURGERY_HISTORY_DETAIL.DATE, value: data.date }
   ];
 }
 
@@ -94,14 +106,14 @@ const context = {
   },
   LOAN_REQUEST: {
     detailGetter: loanRequestDetail,
-    fetchGetById: fetchGetLoanRequest
+    fetchGetById: fetchGetLoanRequestDetail
   }
 }
 
 export const renderDetails = async () => {
   // 세션에서 데이터 가져오기
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const type = sessionStorage.getItem("currentType");
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
@@ -112,26 +124,26 @@ export const renderDetails = async () => {
 
 // 상세 정보를 테이블 형식으로 렌더링하는 함수
 const renderDetailsTable = (data) => {
-  const detailsTable = document.getElementById("detailsTable");
+  const detailsTable = document.getElementById(ELEMENT_ID.DETAILS_TABLE);
 
-  const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
+  const details = context[sessionStorage.getItem(KEY.CURRENT_TYPE)].detailGetter(data);
 
   // 테이블에 각 정보를 추가
   details.forEach(detail => {
-    const row = document.createElement("tr");
+    const row = document.createElement(TAG.TR);
     if (Array.isArray(detail.value)) {
-      const tableHead = document.createElement("th");
+      const tableHead = document.createElement(TAG.TH);
       tableHead.textContent = detail.label;
 
-      const tableData = document.createElement("td");
+      const tableData = document.createElement(TAG.TD);
       detail.value.forEach(listDetail => {
-        const nestedTable = document.createElement("table");
+        const nestedTable = document.createElement(TAG.TABLE);
         listDetail.forEach(item => {
-          const nestedRow = document.createElement("tr")
-          const labelCell = document.createElement("th");
+          const nestedRow = document.createElement(TAG.TR)
+          const labelCell = document.createElement(TAG.TH);
           labelCell.textContent = item.label;
 
-          const valueCell = document.createElement("td");
+          const valueCell = document.createElement(TAG.TD);
           valueCell.textContent = item.value;
 
           nestedRow.appendChild(labelCell);
@@ -144,15 +156,15 @@ const renderDetailsTable = (data) => {
       row.appendChild(tableHead);
       row.appendChild(tableData);
     } else {
-      const labelCell = document.createElement("th");
+      const labelCell = document.createElement(TAG.TH);
       labelCell.textContent = detail.label;
 
-      const valueCell = document.createElement("td");
+      const valueCell = document.createElement(TAG.TD);
       valueCell.textContent = detail.value;
 
       row.appendChild(labelCell);
       row.appendChild(valueCell);
     }
-    detailsTable.querySelector("tbody").appendChild(row);
+    detailsTable.querySelector(TAG.TBODY).appendChild(row);
   });
 };

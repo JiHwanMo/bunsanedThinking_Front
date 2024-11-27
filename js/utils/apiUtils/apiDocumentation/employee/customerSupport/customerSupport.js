@@ -15,7 +15,8 @@ import {
   fetchHandleAccidentHandler,
   fetchHandleComplaintHandler,
   fetchGetEmployeeHandler,
-  fetchGetAllProcessingAccidentHandler
+  fetchGetAllProcessingAccidentHandler,
+  fetchGetComplaintDetailHandler
 } from "../../../apiHandler/employee/customerSupport/customerSupport.js";
 
 export const fetchGetAllDamageAssessmentCompany = async () => {
@@ -69,6 +70,10 @@ export const fetchGetAllProcessedComplaint = async () => {
 export const fetchGetComplaint = async (complaintId) => {
   return await fetchGetComplaintHandler(complaintId); // 5101
 };
+
+export const fetchGetComplaintDetail = async (complaintId) => {
+  return await fetchGetComplaintDetailHandler(complaintId);
+}
 
 export const fetchGetCustomer = async (customerId) => {
   return await fetchGetCustomerHandler(customerId); // 2001

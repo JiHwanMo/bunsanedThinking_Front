@@ -1,6 +1,6 @@
 import {
   fetchGetAccident,
-  fetchGetComplaint
+  fetchGetComplaintDetail
 } from "../../../../apiUtils/apiDocumentation/employee/customerSupport/customerSupport.js";
 import {COLUMN_NAME} from "../../../../../../config/employee/customerSupport/customerSupport.js";
 import {ELEMENT_ID as COMMON_ELEMENT_ID, KEY, TAG} from "../../../../../../config/common.js";
@@ -19,12 +19,12 @@ const accidentDetail = (data) => {
 
 const complaintDetail = (data) => {
   return [
-    { label: COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_TYPE, value: data.complaint.complaintType },
-    { label: COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_CONTENT, value: data.complaint.content },
-    { label: COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_TITLE, value: data.complaint.title },
-    { label: COLUMN_NAME.HANDLE_COMPLAINT.PROCESS_STATUS, value: data.complaint.processStatus },
-    { label: COLUMN_NAME.HANDLE_COMPLAINT.CUSTOMER_NAME, value: data.customer.name },
-    { label: COLUMN_NAME.HANDLE_COMPLAINT.CUSTOMER_PHONE_NUMBER, value: data.customer.phoneNumber }
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_TYPE, value: data.complaintType },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_CONTENT, value: data.content },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_TITLE, value: data.title },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.PROCESS_STATUS, value: data.processStatus },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.CUSTOMER_NAME, value: data.customerName },
+    { label: COLUMN_NAME.HANDLE_COMPLAINT.CUSTOMER_PHONE_NUMBER, value: data.customerPhoneNumber }
   ];
 }
 
@@ -35,7 +35,7 @@ const context = {
   },
   HANDLE_COMPLAINT: {
     detailGetter: complaintDetail,
-    fetchGetById: fetchGetComplaint
+    fetchGetById: fetchGetComplaintDetail
   }
 }
 

@@ -1,157 +1,160 @@
-import {DETAIL_COLUMN_NAME} from "../../../../../../config/employee/humanResource/humanResource.js";
+import {
+  DETAIL_COLUMN_NAME, DTO_NAME,
+  ELEMENT_ID, FAMILY_RESPONSE,
+  LABEL,
+  POSITION, POSITION_LABEL
+} from "../../../../../../config/employee/humanResource/humanResource.js";
 import {
   fetchGetAllDepartment,
-  fetchGetEmployee
+  fetchGetEmployeeDetail
 } from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
+import {
+  INPUT_TYPE,
+  KEY,
+  ELEMENT_ID as COMMON_ELEMENT_ID,
+  TAG,
+  CLASS,
+  MESSAGES, EVENT
+} from "../../../../../../config/common.js";
+import {TITLE} from "../../../../../../config/employee/humanResource/humanResource.js";
 
 export const renderInput = () => {
-  const selectedButtonType = sessionStorage.getItem("selectedButtonType");
+  const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
   context[selectedButtonType].renderingInput();
 }
 
 const getType = () => {
-  return sessionStorage.getItem("currentType");
+  return sessionStorage.getItem(KEY.CURRENT_TYPE);
 }
 
 const employeeForms = [
   {
-    for: "name",
-    label: "NAME",
-    type: "text",
-    id: "name",
-    name: "name",
-    value: "name",
-    placeholder: "NAME"
+    for: ELEMENT_ID.NAME,
+    label: LABEL.NAME,
+    type: INPUT_TYPE.TEXT,
+    id: ELEMENT_ID.NAME,
+    name: ELEMENT_ID.NAME,
+    value: ELEMENT_ID.NAME,
+    placeholder: LABEL.NAME
   },
   {
-    for: "address",
-    label: "ADDRESS",
-    type: "text",
-    id: "address",
-    name: "address",
-    value: "address",
-    placeholder: "ADDRESS"
+    for: ELEMENT_ID.ADDRESS,
+    label: LABEL.ADDRESS,
+    type: INPUT_TYPE.TEXT,
+    id: ELEMENT_ID.ADDRESS,
+    name: ELEMENT_ID.ADDRESS,
+    value: ELEMENT_ID.ADDRESS,
+    placeholder: LABEL.ADDRESS
   },
   {
-    for: "phoneNumber",
-    label: "PHONE_NUMBER",
-    type: "text",
-    id: "phoneNumber",
-    name: "phoneNumber",
-    value: "phoneNumber",
-    placeholder: "PHONE_NUMBER"
+    for: ELEMENT_ID.PHONE_NUMBER,
+    label: LABEL.PHONE_NUMBER,
+    type: INPUT_TYPE.TEXT,
+    id: ELEMENT_ID.PHONE_NUMBER,
+    name: ELEMENT_ID.PHONE_NUMBER,
+    value: ELEMENT_ID.PHONE_NUMBER,
+    placeholder: LABEL.PHONE_NUMBER
   },
   {
-    for: "bankName",
-    label: "BANK_NAME",
-    type: "text",
-    id: "bankName",
-    name: "bankName",
-    value: "bankName",
-    placeholder: "BANK_NAME"
+    for: ELEMENT_ID.BANK_NAME,
+    label: LABEL.BANK_NAME,
+    type: INPUT_TYPE.TEXT,
+    id: ELEMENT_ID.BANK_NAME,
+    name: ELEMENT_ID.BANK_NAME,
+    value: ELEMENT_ID.BANK_NAME,
+    placeholder: LABEL.BANK_NAME
   },
   {
-    for: "bankAccount",
-    label: "BANK_ACCOUNT",
-    type: "text",
-    id: "bankAccount",
-    name: "bankAccount",
-    value: "bankAccount",
-    placeholder: "BANK_ACCOUNT"
+    for: ELEMENT_ID.BANK_ACCOUNT,
+    label: LABEL.BANK_ACCOUNT,
+    type: INPUT_TYPE.TEXT,
+    id: ELEMENT_ID.BANK_ACCOUNT,
+    name: ELEMENT_ID.BANK_ACCOUNT,
+    value: ELEMENT_ID.BANK_ACCOUNT,
+    placeholder: LABEL.BANK_ACCOUNT
   },
   {
-    for: "residentRegistrationNumber",
-    label: "RESIDENT_REGISTRATION_NUMBER",
-    type: "text",
-    id: "residentRegistrationNumber",
-    name: "residentRegistrationNumber",
-    value: "residentRegistrationNumber",
-    placeholder: "RESIDENT_REGISTRATION_NUMBER"
+    for: ELEMENT_ID.RESIDENT_REGISTRATION_NUMBER,
+    label: LABEL.RESIDENT_REGISTRATION_NUMBER,
+    type: INPUT_TYPE.TEXT,
+    id: ELEMENT_ID.RESIDENT_REGISTRATION_NUMBER,
+    name: ELEMENT_ID.RESIDENT_REGISTRATION_NUMBER,
+    value: ELEMENT_ID.RESIDENT_REGISTRATION_NUMBER,
+    placeholder: LABEL.RESIDENT_REGISTRATION_NUMBER
   },
   {
-    for: "salary",
-    label: "SALARY",
-    type: "number",
-    id: "salary",
-    name: "salary",
-    value: "salary",
-    placeholder: "SALARY"
+    for: ELEMENT_ID.SALARY,
+    label: LABEL.SALARY,
+    type: INPUT_TYPE.NUMBER,
+    id: ELEMENT_ID.SALARY,
+    name: ELEMENT_ID.SALARY,
+    value: ELEMENT_ID.SALARY,
+    placeholder: LABEL.SALARY
   },
   {
-    for: "employmentDate",
-    label: "EMPLOYMENT_DATE",
-    type: "date",
-    id: "employmentDate",
-    name: "employmentDate",
-    value: "employmentDate",
-    placeholder: "EMPLOYMENT_DATE"
+    for: ELEMENT_ID.EMPLOYMENT_DATE,
+    label: LABEL.EMPLOYMENT_DATE,
+    type: INPUT_TYPE.DATE,
+    id: ELEMENT_ID.EMPLOYMENT_DATE,
+    name: ELEMENT_ID.EMPLOYMENT_DATE,
+    value: ELEMENT_ID.EMPLOYMENT_DATE,
+    placeholder: LABEL.EMPLOYMENT_DATE
   }
 ];
 
 const renderAddEmployeeInputFields = async () => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
+  const inputFieldsContainer = document.getElementById(COMMON_ELEMENT_ID.INPUT_FIELDS_CONTAINER);
   while (inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
   const type = getType();
   await addDepartmentComboBox(inputFieldsContainer, type);
   addPositionComboBox(inputFieldsContainer, type);
   employeeForms.forEach(form => inputFieldsContainer.appendChild(createForm(form, type)));
-  addDynamicSection(inputFieldsContainer, "가족", "family");
+  addDynamicSection(inputFieldsContainer, TITLE.FAMILY, ELEMENT_ID.FAMILY);
 }
 
 const renderUpdateEmployeeInputFields = async () => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
+  const inputFieldsContainer = document.getElementById(COMMON_ELEMENT_ID.INPUT_FIELDS_CONTAINER);
   while (inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
   const type = getType();
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const employeeData = await fetchGetEmployee(selectedDataId);
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
+  const employeeData = await fetchGetEmployeeDetail(selectedDataId);
   await addDepartmentComboBoxWithValue(inputFieldsContainer, type, employeeData);
   addPositionComboBoxWithValue(inputFieldsContainer, type, employeeData);
   addIdLabel(inputFieldsContainer, type, employeeData);
   employeeForms.forEach(form => inputFieldsContainer.appendChild(createFormWithValue(form, type, employeeData)));
-  addDynamicSectionWithValue(inputFieldsContainer, "가족", "family", employeeData);
+  addDynamicSectionWithValue(inputFieldsContainer, TITLE.FAMILY, ELEMENT_ID.FAMILY, employeeData);
 }
 
 const addIdLabel = (inputFieldsContainer, type, employeeData) => {
-  const formDiv = document.createElement("div");
-  formDiv.className = "form-group";
-  const formLabel = document.createElement("label");
-  formLabel.for = "id";
+  const formDiv = document.createElement(TAG.DIV);
+  formDiv.className = CLASS.FORM_GROUP;
+  const formLabel = document.createElement(TAG.LABEL);
+  formLabel.for = ELEMENT_ID.ID;
   formLabel.textContent = DETAIL_COLUMN_NAME[type].ID;
   formDiv.appendChild(formLabel);
-  let formText = document.createElement("label");
+  let formText = document.createElement(TAG.LABEL);
   formText.textContent = employeeData.id;
-  formText.id = "id";
+  formText.id = ELEMENT_ID.ID;
   formText.value = employeeData.id;
-  formText.name = "id";
+  formText.name = ELEMENT_ID.ID;
   formDiv.appendChild(formText);
   inputFieldsContainer.appendChild(formDiv);
 }
 
 const addDepartmentComboBox = async (inputFieldsContainer, type) => {
-  const formDiv = document.createElement("div");
-  formDiv.className = "form-group";
-  const formLabel = document.createElement("label");
-  formLabel.for = "departmentId";
+  const formDiv = document.createElement(TAG.DIV);
+  formDiv.className = CLASS.FORM_GROUP;
+  const formLabel = document.createElement(TAG.LABEL);
+  formLabel.for = ELEMENT_ID.DEPARTMENT_ID;
   formLabel.textContent = DETAIL_COLUMN_NAME[type].DEPARTMENT;
-  const formSelect = document.createElement("select");
-  formSelect.id = "departmentId";
-  formSelect.name = "departmentId";
+  const formSelect = document.createElement(TAG.SELECT);
+  formSelect.id = ELEMENT_ID.DEPARTMENT_ID;
+  formSelect.name = ELEMENT_ID.DEPARTMENT_ID;
 
-  // TODO 테스트용
-  // const departmentList = await fetchGetAllDepartment();
-  const departmentList = [
-    {
-      id: 9101,
-      name: "융자운용팀"
-    },
-    {
-      id: 9108,
-      name: "인사관리팀"
-    }
-  ]
+  const departmentList = await fetchGetAllDepartment();
 
   departmentList.map(department => {
-    const option = document.createElement("option");
+    const option = document.createElement(TAG.OPTION);
     option.value = department.id;
     option.textContent = department.name;
     formSelect.appendChild(option);
@@ -165,45 +168,45 @@ const addDepartmentComboBox = async (inputFieldsContainer, type) => {
 
 const positions = [
   {
-    value: "Intern",
-    label: "인턴"
+    value: POSITION.INTERN,
+    label: POSITION_LABEL.INTERN
   },
   {
-    value: "Staff",
-    label: "사원"
+    value: POSITION.STAFF,
+    label: POSITION_LABEL.STAFF
   },
   {
-    value: "SeniorStaff",
-    label: "주임"
+    value: POSITION.SENIOR_STAFF,
+    label: POSITION_LABEL.SENIOR_STAFF
   },
   {
-    value: "Manager",
-    label: "과장"
+    value: POSITION.MANAGER,
+    label: POSITION_LABEL.MANAGER
   },
   {
-    value: "DeputyGeneralManager",
-    label: "차장"
+    value: POSITION.DEPUTY_GENERAL_MANAGER,
+    label: POSITION_LABEL.DEPUTY_GENERAL_MANAGER
   },
   {
-    value: "GeneralManager",
-    label: "부장"
+    value: POSITION.GENERAL_MANAGER,
+    label: POSITION_LABEL.GENERAL_MANAGER
   }
 ]
 
 const addPositionComboBox = (inputFieldsContainer, type) => {
-  const inputDiv = document.createElement("div");
-  inputDiv.className = "form-group";
+  const inputDiv = document.createElement(TAG.DIV);
+  inputDiv.className = CLASS.FORM_GROUP;
 
-  const formLabel = document.createElement("label");
-  formLabel.for = "position";
+  const formLabel = document.createElement(TAG.LABEL);
+  formLabel.for = ELEMENT_ID.EMPLOYEE_POSITION;
   formLabel.textContent = DETAIL_COLUMN_NAME[type].POSITION;
 
-  const formSelect = document.createElement("select");
-  formSelect.id = "position";
-  formSelect.name = "position";
+  const formSelect = document.createElement(TAG.SELECT);
+  formSelect.id = ELEMENT_ID.EMPLOYEE_POSITION;
+  formSelect.name = ELEMENT_ID.EMPLOYEE_POSITION;
 
   positions.forEach(position => {
-    const option = document.createElement("option");
+    const option = document.createElement(TAG.OPTION);
     option.value = position.value;
     option.textContent = position.label;
     formSelect.appendChild(option);
@@ -217,20 +220,20 @@ const addPositionComboBox = (inputFieldsContainer, type) => {
 
 const familyForm = [
   {
-    id: "familyBirthDate",
-    type: "date",
-    name: "familyBirthDate",
-    data: "birthDate",
-    label: "FAMILY_BIRTH_DATE",
-    placeHolder: "생일을 입력해주세요"
+    id: ELEMENT_ID.FAMILY_DETAIL.BIRTH_DATE,
+    type: INPUT_TYPE.DATE,
+    name: ELEMENT_ID.FAMILY_DETAIL.BIRTH_DATE,
+    data: DTO_NAME.FAMILY_BIRTH_DATE,
+    label: LABEL.FAMILY_BIRTH_DATE,
+    placeHolder: `${DETAIL_COLUMN_NAME.MANAGEMENT_EMPLOYEE.FAMILY_BIRTH_DATE}${MESSAGES.PLACE_HOLDER.INPUT}`
   },
   {
-    id: "familyName",
-    type: "text",
-    name: "familyName",
-    data: "name",
-    label: "FAMILY_NAME",
-    placeHolder: "이름을 입력해주세요"
+    id: ELEMENT_ID.FAMILY_DETAIL.NAME,
+    type: INPUT_TYPE.TEXT,
+    name: ELEMENT_ID.FAMILY_DETAIL.NAME,
+    data: DTO_NAME.FAMILY_NAME,
+    label: LABEL.FAMILY_NAME,
+    placeHolder: `${DETAIL_COLUMN_NAME.MANAGEMENT_EMPLOYEE.NAME}${MESSAGES.PLACE_HOLDER.INPUT}`
   }
 ]
 
@@ -244,37 +247,37 @@ const context = {
 }
 
 const createForm = (form, type) => {
-  const formDiv = document.createElement("div");
-  formDiv.className = "form-group";
-  const formLabel = document.createElement("label");
+  const formDiv = document.createElement(TAG.DIV);
+  formDiv.className = CLASS.FORM_GROUP;
+  const formLabel = document.createElement(TAG.LABEL);
   formLabel.for = form.for;
   formLabel.textContent = DETAIL_COLUMN_NAME[type][form.label];
   formDiv.appendChild(formLabel);
-  let formInput = document.createElement("input");
+  let formInput = document.createElement(TAG.INPUT);
   formInput.type = form.type;
   formInput.id = form.id;
   formInput.name = form.name;
-  formInput.placeholder = `${DETAIL_COLUMN_NAME[type][form.placeholder]}을(를) 입력하세요`;
+  formInput.placeholder = `${DETAIL_COLUMN_NAME[type][form.placeholder]}${MESSAGES.PLACE_HOLDER.INPUT}`;
   formDiv.appendChild(formInput);
   return formDiv;
 }
 
 const addDynamicSection = (container, sectionTitle, sectionId) => {
-  const sectionDiv = document.createElement("div");
-  sectionDiv.id = `${sectionId}Container`;
+  const sectionDiv = document.createElement(TAG.DIV);
+  sectionDiv.id = `${sectionId}${ELEMENT_ID.CONTAINER}`;
   sectionDiv.className = "dynamic-section";
 
-  const headerDiv = document.createElement("div");
+  const headerDiv = document.createElement(TAG.DIV);
   headerDiv.className = "section-header";
 
-  const sectionLabel = document.createElement("label");
+  const sectionLabel = document.createElement(TAG.LABEL);
   sectionLabel.textContent = sectionTitle;
 
-  const addButton = document.createElement("button");
+  const addButton = document.createElement(TAG.BUTTON);
   addButton.textContent = "+";
   addButton.className = "add-button";
 
-  addButton.addEventListener("click", () => addFamilyField(sectionDiv, sectionId));
+  addButton.addEventListener(EVENT.CLICK, () => addFamilyField(sectionDiv, sectionId));
 
   headerDiv.appendChild(sectionLabel);
   headerDiv.appendChild(addButton);
@@ -283,19 +286,21 @@ const addDynamicSection = (container, sectionTitle, sectionId) => {
   container.appendChild(sectionDiv);
 };
 
-const addFamilyField = (sectionDiv) => {
-  const inputDiv = document.createElement("div");
-  inputDiv.className = "form-group";
+const addFamilyField = (sectionDiv, sectionId) => {
+  const inputDiv = document.createElement(TAG.DIV);
+  inputDiv.className = CLASS.FORM_GROUP;
+  inputDiv.id = `${sectionId}${ELEMENT_ID.INPUT}`;
 
   const familyCount = document.querySelectorAll('.radio-group').length;
 
+  const type = getType();
   familyForm.forEach((field) => {
-    const formLabel = document.createElement("label");
+    const formLabel = document.createElement(TAG.LABEL);
     formLabel.for = `${field.name}`;
     formLabel.textContent = DETAIL_COLUMN_NAME[type][field.label];
     inputDiv.appendChild(formLabel);
 
-    const input = document.createElement("input");
+    const input = document.createElement(TAG.INPUT);
     input.id = `${field.id}-${familyCount}`;
     input.type = field.type;
     input.name = `${field.name}-${familyCount}`;
@@ -305,6 +310,16 @@ const addFamilyField = (sectionDiv) => {
   });
 
   inputDiv.innerHTML += createFamilyInputForm(familyCount);
+
+  // 삭제 버튼 추가
+  const removeButton = document.createElement(TAG.BUTTON);
+  removeButton.textContent = "-";
+  removeButton.className = "remove-button";
+  removeButton.addEventListener(EVENT.CLICK, () => {
+    sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
+  });
+
+  inputDiv.appendChild(removeButton);
 
   sectionDiv.appendChild(inputDiv);
 };
@@ -364,7 +379,7 @@ const createFormWithValue = (form, type, employeeData) => {
 
 const addDynamicSectionWithValue = (container, sectionTitle, sectionId, employeeData) => {
   addDynamicSection(container, sectionTitle, sectionId);
-  const sectionDiv = document.getElementById(`${sectionId}Container`);
+  const sectionDiv = document.getElementById(`${sectionId}${ELEMENT_ID.CONTAINER}`);
 
   employeeData.familyList.forEach(family => {
     addFamilyFieldWithValue(sectionDiv, family);
@@ -372,20 +387,28 @@ const addDynamicSectionWithValue = (container, sectionTitle, sectionId, employee
 }
 
 const addFamilyFieldWithValue = (sectionDiv, familyData) => {
-  const inputDiv = document.createElement("div");
-  inputDiv.className = "form-group";
+  const inputDiv = document.createElement(TAG.DIV);
+  inputDiv.className = CLASS.FORM_GROUP;
 
   const type = getType();
   let familyCount = document.querySelectorAll('.radio-group').length;
 
+  // 삭제 버튼 추가
+  const removeButton = document.createElement(TAG.BUTTON);
+  removeButton.textContent = "-";
+  removeButton.className = "remove-button";
+  removeButton.addEventListener(EVENT.CLICK, () => {
+    sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
+  });
+
   addFamilyIdLabel(inputDiv, familyData, familyCount);
   familyForm.forEach((field) => {
-    const formLabel = document.createElement("label");
+    const formLabel = document.createElement(TAG.LABEL);
     formLabel.for = `${field.name}`;
     formLabel.textContent = DETAIL_COLUMN_NAME[type][field.label];
     inputDiv.appendChild(formLabel);
 
-    const input = document.createElement("input");
+    const input = document.createElement(TAG.INPUT);
     input.id = `${field.id}-${familyCount}`;
     input.type = field.type;
     input.name = `${field.name}-${familyCount}`;
@@ -402,15 +425,15 @@ const addFamilyFieldWithValue = (sectionDiv, familyData) => {
 
 const addFamilyIdLabel = (container, familyData, familyNumber) => {
   const type = getType();
-  const formLabel = document.createElement("label");
-  formLabel.for = `familyId-${familyNumber}`;
+  const formLabel = document.createElement(TAG.LABEL);
+  formLabel.for = `${ELEMENT_ID.FAMILY_DETAIL.ID}-${familyNumber}`;
   formLabel.textContent = DETAIL_COLUMN_NAME[type].FAMILY_ID;
   container.appendChild(formLabel);
-  let formText = document.createElement("label");
+  let formText = document.createElement(TAG.LABEL);
   formText.textContent = familyData.id;
-  formText.id = `familyId-${familyNumber}`;
+  formText.id = `${ELEMENT_ID.FAMILY_DETAIL.ID}-${familyNumber}`;
   formText.value = familyData.id;
-  formText.name = `familyId-${familyNumber}`;
+  formText.name = `${ELEMENT_ID.FAMILY_DETAIL.ID}-${familyNumber}`;
   container.appendChild(formText);
 }
 
@@ -420,12 +443,12 @@ const createFamilyInputFormWithValue = (familyCount, familyData) => {
       <div class="form-group">
         <label for="relationship-${familyCount}">${DETAIL_COLUMN_NAME[type].RELATIONSHIP}</label>
         <select id="relationship-${familyCount}" name="relationship-${familyCount}">
-          <option value="Mother" ${familyData.relationship === "Mother" ? "selected" : ""}>엄마</option>
-          <option value="Father" ${familyData.relationship === "Father" ? "selected" : ""}>아빠</option>
-          <option value="Sister" ${familyData.relationship === "Sister" ? "selected" : ""}>여형제</option>
-          <option value="Brother" ${familyData.relationship === "Brother" ? "selected" : ""}>남형제</option>
-          <option value="Son" ${familyData.relationship === "Son" ? "selected" : ""}>아들</option>
-          <option value="Daughter" ${familyData.relationship === "Daughter" ? "selected" : ""}>딸</option>
+          <option value="Mother" ${familyData.relationship === FAMILY_RESPONSE.MOTHER ? "selected" : ""}>엄마</option>
+          <option value="Father" ${familyData.relationship === FAMILY_RESPONSE.FATHER ? "selected" : ""}>아빠</option>
+          <option value="Sister" ${familyData.relationship === FAMILY_RESPONSE.SISTER ? "selected" : ""}>여형제</option>
+          <option value="Brother" ${familyData.relationship === FAMILY_RESPONSE.BROTHER ? "selected" : ""}>남형제</option>
+          <option value="Son" ${familyData.relationship === FAMILY_RESPONSE.SON ? "selected" : ""}>아들</option>
+          <option value="Daughter" ${familyData.relationship === FAMILY_RESPONSE.DAUGHTER ? "selected" : ""}>딸</option>
         </select>
       </div>
       <div class="form-group">
@@ -433,11 +456,11 @@ const createFamilyInputFormWithValue = (familyCount, familyData) => {
         <div class="radio-group">
           <div class="radio-item">
             <label for="true-${familyCount}">생존</label>
-            <input type="radio" id="true-${familyCount}" name=survival-${familyCount} value="true" ${familyData.survival === true ? "checked" : ""}>
+            <input type="radio" id="true-${familyCount}" name=survival-${familyCount} value="true" ${familyData.survival === FAMILY_RESPONSE.SURVIVAL ? "checked" : ""}>
           </div>
           <div class="radio-item">
             <label for="false-${familyCount}">사망</label>
-            <input type="radio" id="false-${familyCount}" name="survival-${familyCount}" value="false" ${familyData.survival === false ? "checked" : ""}>
+            <input type="radio" id="false-${familyCount}" name="survival-${familyCount}" value="false" ${familyData.survival === FAMILY_RESPONSE.DECEASE ? "checked" : ""}>
           </div>
         </div>
       </div>

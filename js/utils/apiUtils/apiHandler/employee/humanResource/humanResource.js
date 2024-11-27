@@ -24,6 +24,10 @@ export const fetchGetEmployeeHandler = async (employeeId) => {
   return await fetchGetHandler(`${defaultURL}/getEmployee?employeeId=${employeeId}`);
 };
 
+export const fetchGetEmployeeDetailHandler = async (employeeId) => {
+  return await fetchGetHandler(`${defaultURL}/getEmployeeDetail?employeeId=${employeeId}`);
+}
+
 export const fetchAddEmployeeHandler = async (addEmployeeDTO) => {
   await fetchPostHandler(`${defaultURL}/addEmployee`, addEmployeeDTO);
 };
