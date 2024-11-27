@@ -31,29 +31,23 @@ const submit = async (event) => {
   event.preventDefault(); // 폼 기본 제출 방지
 
   const id = document.getElementById(KEY.LOGIN_ID).value;
-
   // 간단한 유효성 검사
   if (id.trim() === ZERO) {
     alert("아이디를 입력해주세요.");
     return;
   }
 
-  let user = await fetchloginCustomer(id);
-  if (user != null) {
-    toNextPage(user, id);
-    return;
-  }
-  user = await fetchloginEmployee(id);
-  if (user != null) {
-    toNextPage(user, id);
-    return;
-  }
-  user = await fetchloginPartnerCompany(id);
-  if (user != null) {
-    toNextPage(user, id);
-    return;
-  }
-  if (user == null) alert("입력 아이디에 맞는 사용자가 없습니다.");
+  if (id[0] === "2") {
+    const user = await fetchloginCustomer(id);
+    if (user != null) toNextPage(user, id);
+  } else if (id[0] === "6") {
+    const employee = await fetchloginEmployee(id);
+    if (employee != null) toNextPage(employee, id);
+  } else if (id[0] === "3") {
+    const partnerCompany = await fetchloginPartnerCompany(id);
+    if (partnerCompany != null) toNextPage(partnerCompany, id);
+  } else alert("유효한 아이디가 없습니다");
+
 }
 
 export const renderLogin = () => {

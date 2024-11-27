@@ -1,4 +1,4 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from '../../../common/FetchHandler.js';
+import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from '../../../common/fetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/employee/contractManagement";
 

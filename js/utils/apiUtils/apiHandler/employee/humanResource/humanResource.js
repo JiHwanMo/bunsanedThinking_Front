@@ -4,7 +4,7 @@ import {
   fetchPatchWithParams,
   fetchDeleteHandler,
   fetchPatchWithBody
-} from "../../../common/FetchHandler.js"
+} from "../../../common/fetchHandler.js"
 
 const defaultURL = "http://localhost:8080/employee/humanResource";
 

@@ -1,4 +1,13 @@
-import {BUTTON as COMMON_BUTTON, ELEMENT_ID as COMMON_ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
+import {
+  ATTRIBUTE,
+  BUTTON as COMMON_BUTTON,
+  ELEMENT_ID as COMMON_ELEMENT_ID,
+  EVENT,
+  KEY,
+  LOCATION,
+  QUERY_SELECTOR,
+  TAG
+} from "../../../../../../config/common.js";
 import {
   fetchAddEmployee,
   fetchUpdateEmployee
@@ -80,7 +89,7 @@ const getValueById = (id) => {
 };
 
 const getCheckedValue = (name) => {
-  return document.querySelector(`input[name="${name}"]:checked`).value;
+  return document.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, name, true)).value;
 };
 
 const collectEmployeeFormDataForPost = () => {

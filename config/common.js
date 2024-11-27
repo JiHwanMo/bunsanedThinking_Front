@@ -63,7 +63,7 @@ export const ELEMENT_ID = {
 export const CLASS = {
   FORM_GROUP: "form-group",
   POST_BUTTON: "post-button",
-  COMBO_BOX: "comboBox",
+  COMBO_BOX: "combo-box",
   GREETING: "greeting",
   STAR_BUTTONS_CONTAINER: "star-buttons-container",
   STAR_BUTTON: "star-button",
@@ -72,7 +72,12 @@ export const CLASS = {
   BUTTON_GROUP: "button-group",
   CHECK_BOX_GROUP: "checkbox-group",
   CHECK_BOX_ITEM: "checkbox-item",
-  CHECKED: "checked"
+  CHECKED: "checked",
+  DYNAMIC_SECTION: "dynamic-section",
+  SECTION_HEADER: "section-header",
+  ADD_BUTTON: "add-button",
+  REMOVE_BUTTON: "remove-button",
+  INPUT_FIELD: "input-field"
 }
 
 export const LOCATION = {
@@ -98,12 +103,29 @@ export const EVENT = {
 export const CLASS_SELECTOR = {
   CONTAINER: ".container",
   HEADER_LINE: ".header-line",
-  SEARCH_CONTAINER: ".search-container"
+  SEARCH_CONTAINER: ".search-container",
+  RADIO_GROUP: ".radio-group",
+  BUTTON_GROUP: ".button-group",
+  FORM_GROUP: ".form-group"
 }
 
 export const STRING_EMPTY = "";
 export const ZERO = 0;
+export const PLUS = "+";
+export const MINUS = "-";
 
 export const COMBO_LIST_FETCH ={
  ALL: "all"
-};
+}
+
+export const ATTRIBUTE = {
+  FOR: "for",
+  VALUE: "value",
+  NAME: "name"
+}
+
+export const QUERY_SELECTOR = {
+  SELECTOR: (tag, condition, value, isChecked) => {
+    return `${tag}[${condition}=${value}]${isChecked ? ":checked" : ""}`
+  }
+}
