@@ -1,37 +1,43 @@
-import { fetchGetAllDefaultContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetContractById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetReContractById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllUnprocessedReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllProcessedReContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetEndorsementById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllUnprocessedEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllProcessedEndorsementContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllRevivalContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetRevivalById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllUnprocessedRevival } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllProcessedRevival } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetTerminationById } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllUnprocessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
-import { fetchGetAllProcessedTerminatingContract } from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
 import {
-  BUTTON, CLASS, CLASS_SELECTOR,
+  fetchGetAllDefaultContract,
+  fetchGetAllEndorsementContract,
+  fetchGetAllProcessedEndorsementContract,
+  fetchGetAllProcessedReContract,
+  fetchGetAllProcessedRevival,
+  fetchGetAllProcessedTerminatingContract,
+  fetchGetAllReContract,
+  fetchGetAllRevivalContract,
+  fetchGetAllTerminatingContract,
+  fetchGetAllUnprocessedEndorsementContract,
+  fetchGetAllUnprocessedReContract,
+  fetchGetAllUnprocessedRevival,
+  fetchGetAllUnprocessedTerminatingContract,
+  fetchGetContractById,
+  fetchGetEndorsementById,
+  fetchGetReContractById,
+  fetchGetRevivalById,
+  fetchGetTerminationById
+} from '../../../../apiUtils/apiDocumentation/employee/contractManagement/contractManagement.js';
+import {
+  BUTTON,
+  CLASS,
+  CLASS_SELECTOR,
+  COMBO_LIST_FETCH,
   ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
-  KEY, LOCATION,
+  KEY,
+  LOCATION,
   MESSAGES,
   STRING_EMPTY,
-  TAG, ZERO
+  TAG,
+  ZERO
 } from '../../../../../../config/common.js';
 import {
+  COLUMN_NAME,
   COMBOBOX,
-  COMBOLIST_FETCH_ALL
+  TABLE_TITLE
 } from '../../../../../../config/employee/contractManagement/contractManagement.js';
-import { TABLE_TITLE } from '../../../../../../config/employee/contractManagement/contractManagement.js';
-import { COLUMN_NAME } from '../../../../../../config/employee/contractManagement/contractManagement.js';
 
 const contractRow = (dto) => {
   return `
@@ -109,7 +115,6 @@ const context = {
     comboListFetch: {
       all: fetchGetAllDefaultContract
     }
-    // 얜 없어서 비워둠
   },
   RECONTRACT: {
     listFetch: fetchGetAllReContract,
@@ -174,7 +179,7 @@ const setComboBox = () => {
   const select = document.createElement(TAG.SELECT);
   const boxContext = COMBOBOX[sessionStorage.getItem(KEY.CURRENT_TYPE)];
   select.id = boxContext.id;
-  select.className = "combo-Box";
+  select.className = CLASS.COMBO_BOX;
   const optionTypes = boxContext.optionTypes;
   optionTypes.forEach(optionType => {
     const option = document.createElement(TAG.OPTION);
@@ -200,7 +205,7 @@ const initTableByInput = async (id, type) => { // 추가
     const item = await context[type].listFetchById(id);
     setOneRow(item, type);
   } else {
-    const list = await context[type].comboListFetch[COMBOLIST_FETCH_ALL]();
+    const list = await context[type].comboListFetch[COMBO_LIST_FETCH.ALL]();
     if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
     setTableBody();
   }

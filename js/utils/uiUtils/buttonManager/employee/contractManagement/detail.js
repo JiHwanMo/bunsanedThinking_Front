@@ -9,7 +9,6 @@ import {KEY} from "../../../../../../config/common.js";
 
 const sendNotice = () => {
   if (!confirm(ALERT.CONFIRM.SEND_NOTICE)) return;
-  // const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
   alert(ALERT.OK.SEND_NOTICE);
   window.history.back();
   window.history.back();

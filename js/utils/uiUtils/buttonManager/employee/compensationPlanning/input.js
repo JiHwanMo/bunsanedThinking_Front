@@ -114,9 +114,9 @@ const initialButtonsEvaluate = (buttonMessages, buttonActionMapper) => {
   Object.entries(buttonMessages).forEach(([key, name]) => {
     const button = document.createElement(TAG.DIV);
     button.className = CLASS.STAR_BUTTON;
-    button.textContent = name; // 버튼에 표시할 텍스트 설정
+    button.textContent = name;
 
     button.addEventListener(EVENT.CLICK, buttonActionMapper[key]);
-    buttonContainer.appendChild(button); // 버튼을 buttonContainer에 추가
+    buttonContainer.appendChild(button);
   });
 }

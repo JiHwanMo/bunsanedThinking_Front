@@ -450,8 +450,6 @@ export const INSURANCE_TYPE_STR = {
   Injury: "상해"
 }
 
-export const COMBOLIST_FETCH_ALL = "all";
-
 export const ONE_BLANK = " ";
 
 export const INSURANCE_DETAIL = {

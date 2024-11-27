@@ -1,25 +1,29 @@
-import { fetchGetAllReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetReportRowById } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllUnprocessedReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllCompletedReport } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetInsuranceMoneyRowById } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllUnprocessedInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
-import { fetchGetAllProcessedInsuranceMoney } from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
 import {
-  BUTTON, CLASS, CLASS_SELECTOR,
+  fetchGetAllCompletedReport,
+  fetchGetAllInsuranceMoney,
+  fetchGetAllProcessedInsuranceMoney,
+  fetchGetAllReport,
+  fetchGetAllUnprocessedInsuranceMoney,
+  fetchGetAllUnprocessedReport,
+  fetchGetInsuranceMoneyRowById,
+  fetchGetReportRowById
+} from '../../../../apiUtils/apiDocumentation/employee/compensation/compensation.js';
+import {
+  BUTTON,
+  CLASS,
+  CLASS_SELECTOR,
+  COMBO_LIST_FETCH,
   ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
   KEY,
-  LOCATION, MESSAGES,
+  LOCATION,
+  MESSAGES,
   STRING_EMPTY,
   TAG,
   ZERO
 } from '../../../../../../config/common.js';
-import {COMBOBOX, COMBOLIST_FETCH_ALL} from '../../../../../../config/employee/compensation/compensation.js';
-import { TABLE_TITLE } from '../../../../../../config/employee/compensation/compensation.js';
-import { COLUMN_NAME } from '../../../../../../config/employee/compensation/compensation.js';
+import {COLUMN_NAME, COMBOBOX, TABLE_TITLE} from '../../../../../../config/employee/compensation/compensation.js';
 
 const accidentRow = (dto) => {
   return `
@@ -89,7 +93,7 @@ const setComboBox = () => {
   const select = document.createElement(TAG.SELECT);
   const boxContext = COMBOBOX[sessionStorage.getItem(KEY.CURRENT_TYPE)];
   select.id = boxContext.id;
-  select.className = "combo-Box";
+  select.className = CLASS.COMBO_BOX;
   const optionTypes = boxContext.optionTypes;
   optionTypes.forEach(optionType => {
     const option = document.createElement(TAG.OPTION);
@@ -115,7 +119,7 @@ const initTableByInput = async (id, type) => { // 추가
     const item = await context[type].listFetchById(id);
     setOneRow(item, type);
   } else {
-    const list = await context[type].comboListFetch[COMBOLIST_FETCH_ALL]();
+    const list = await context[type].comboListFetch[COMBO_LIST_FETCH.ALL]();
     if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
     setTableBody();
   }

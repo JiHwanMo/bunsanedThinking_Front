@@ -31,11 +31,9 @@ const context = {
 }
 
 export const renderDetails = async () => {
-  // 세션에서 데이터 가져오기
   const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
-  // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
     renderDetailsTable(selectedData);
@@ -48,7 +46,6 @@ const renderDetailsTable = (data) => {
 
   const details = context[sessionStorage.getItem(KEY.CURRENT_TYPE)].detailGetter(data);
 
-  // 테이블에 각 정보를 추가
   details.forEach(detail => {
     const row = document.createElement(TAG.TR);
     if (Array.isArray(detail.value)) {
