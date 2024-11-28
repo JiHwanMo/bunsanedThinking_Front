@@ -8,7 +8,7 @@ import {
 } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
 import { fetchGetCustomerInformation } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
 import { addButtons } from "../../../buttonManager/employee/customerInformationManagement/input.js";
-import {BUTTON, ELEMENT_ID, EVENT, KEY, TAG} from "../../../../../../config/common.js";
+import {BUTTON, ELEMENT_ID, EVENT, KEY, STRING_EMPTY, TAG} from "../../../../../../config/common.js";
 
 export const renderInput = async () => {
   const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
@@ -99,7 +99,7 @@ const renderInputFields = (data) => {
     addDiseaseHistory();
   } else if(selectedButtonType === VALUE.UPDATE) {
   let selectedIndex = 1; // 기본 선택 항목은 고객 이름
-  let placeholderValue = data.name || "";
+  let placeholderValue = data.name || STRING_EMPTY;
 
     inputFieldsContainer.innerHTML = `
     <div class="form-group">
@@ -206,34 +206,34 @@ const renderInputFields = (data) => {
 
         switch (selectedIndex) {
           case 1:
-            placeholderValue = data.name || "";
+            placeholderValue = data.name || STRING_EMPTY;
             break;
           case 2:
-            placeholderValue = data.phoneNumber || "";
+            placeholderValue = data.phoneNumber || STRING_EMPTY;
             break;
           case 3:
-            placeholderValue = data.job || "";
+            placeholderValue = data.job || STRING_EMPTY;
             break;
           case 4:
-            placeholderValue = data.age || "";
+            placeholderValue = data.age || STRING_EMPTY;
             break;
           case 5:
-            placeholderValue = data.gender || "";
+            placeholderValue = data.gender || STRING_EMPTY;
             break;
           case 6:
-            placeholderValue = data.address || "";
+            placeholderValue = data.address || STRING_EMPTY;
             break;
           case 7:
-            placeholderValue = data.property || "";
+            placeholderValue = data.property || STRING_EMPTY;
             break;
           case 8:
-            placeholderValue = data.bankName || "";
+            placeholderValue = data.bankName || STRING_EMPTY;
             break;
           case 9:
-            placeholderValue = data.bankAccount || "";
+            placeholderValue = data.bankAccount || STRING_EMPTY;
             break;
           default:
-            placeholderValue = "";
+            placeholderValue = STRING_EMPTY;
         }
         inputElement.value = placeholderValue;
       }
@@ -251,7 +251,7 @@ const addAccidentHistory = () => {
   `;
   container.appendChild(newEntry);
 
-  newEntry.querySelector(".remove-button").addEventListener(EVENT.CLICK, () => {
+  newEntry.querySelector(CLASS_SELECTOR.REMOVE_BUTTON).addEventListener(EVENT.CLICK, () => {
     container.removeChild(newEntry);
   });
 };
@@ -268,7 +268,7 @@ const addSurgeryHistory = () => {
   `;
   container.appendChild(newEntry);
 
-  newEntry.querySelector(".remove-button").addEventListener(EVENT.CLICK, () => {
+  newEntry.querySelector(CLASS_SELECTOR.REMOVE_BUTTON).addEventListener(EVENT.CLICK, () => {
     container.removeChild(newEntry);
   });
 };
@@ -284,7 +284,7 @@ const addDiseaseHistory = () => {
   `;
   container.appendChild(newEntry);
 
-  newEntry.querySelector(".remove-button").addEventListener(EVENT.CLICK, () => {
+  newEntry.querySelector(CLASS_SELECTOR.REMOVE_BUTTON).addEventListener(EVENT.CLICK, () => {
     container.removeChild(newEntry);
   });
 };

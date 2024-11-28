@@ -1,5 +1,5 @@
-import { fetchGetAllOfficeSupplies } from '../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js';
-import { fetchGetOfficeSupply } from '../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js';
+import { fetchGetAllOfficeSupplies } from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
+import { fetchGetOfficeSupply } from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
 import {
   BUTTON, CLASS_SELECTOR,
   ELEMENT_ID,
@@ -7,12 +7,12 @@ import {
   INPUT_TYPE,
   KEY,
   LOCATION,
-  MESSAGES,
+  MESSAGES, STRING_EMPTY,
   TAG
-} from '../../../../../../config/common.js';
-import {CLASS, COMBOBOX, TYPE, VALUE} from '../../../../../../config/employee/administrative/administrative.js';
-import { TABLE_TITLE } from '../../../../../../config/employee/administrative/administrative.js';
-import { COLUMN_NAME } from '../../../../../../config/employee/administrative/administrative.js';
+} from "../../../../../../config/common.js";
+import {CLASS, COMBOBOX, TYPE, VALUE} from "../../../../../../config/employee/administrative/administrative.js";
+import { TABLE_TITLE } from "../../../../../../config/employee/administrative/administrative.js";
+import { COLUMN_NAME } from "../../../../../../config/employee/administrative/administrative.js";
 
 const officeSupplyRow = (dto) => {
   return `
@@ -25,7 +25,6 @@ const officeSupplyRow = (dto) => {
 
 const context = {
   OFFICESUPPLY_LIST: {
-    // title: "집기 비품 재고 정보 리스트",
     needDetail: true,
     listFetch: fetchGetAllOfficeSupplies,
     listFetchById: fetchGetOfficeSupply,
@@ -118,7 +117,6 @@ const setPostButton = () => {
   button.id = CLASS.POST_BUTTON;
   button.textContent = BUTTON.COMMON.POST;
   button.addEventListener(EVENT.CLICK, () => {
-    // alert("등록 버튼 클릭!");
     sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, JSON.stringify(VALUE.POST)); // 등록 타입 설정
     window.location.href = LOCATION.INPUT; // 등록 화면으로 이동
   });
@@ -182,7 +180,7 @@ const setOneRow = (item, type) => {
 
 const setTableBody = () => {
   const tableBody = document.getElementById(KEY.LIST);
-  tableBody.innerHTML= "";
+  tableBody.innerHTML= STRING_EMPTY;
 
   const data = JSON.parse(sessionStorage.getItem(KEY.LIST)) || [];
   data.forEach(item => {

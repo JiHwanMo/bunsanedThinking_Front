@@ -1,5 +1,5 @@
-import { fetchGetReport } from '../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js';
-import {ACTION, BUTTON, DETAIL_COLUMN_NAME, POP_UP, TYPE} from '../../../../../config/partnerCompany/partnerCompany.js';
+import { fetchGetReport } from "../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js";
+import {ACTION, BUTTON, DETAIL_COLUMN_NAME, POP_UP, TYPE} from "../../../../../config/partnerCompany/partnerCompany.js";
 import {CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../config/common.js";
 
 const reportDetail = (data) => {

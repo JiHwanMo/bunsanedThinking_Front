@@ -1,5 +1,5 @@
-import { fetchGetAllReportByDamageAssessmentCompanyID } from '../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js';
-import { fetchGetReport } from '../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js';
+import { fetchGetAllReportByDamageAssessmentCompanyID } from "../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js";
+import { fetchGetReport } from "../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js";
 import {
   BUTTON,
   CLASS, CLASS_SELECTOR,
@@ -8,12 +8,12 @@ import {
   INPUT_TYPE,
   KEY,
   LOCATION,
-  MESSAGES,
+  MESSAGES, STRING_EMPTY,
   TAG
-} from '../../../../../config/common.js';
-import {COMBOBOX, TYPE} from '../../../../../config/partnerCompany/partnerCompany.js';
-import { TABLE_TITLE } from '../../../../../config/partnerCompany/partnerCompany.js';
-import { COLUMN_NAME } from '../../../../../config/partnerCompany/partnerCompany.js';
+} from "../../../../../config/common.js";
+import {COMBOBOX, TYPE} from "../../../../../config/partnerCompany/partnerCompany.js";
+import { TABLE_TITLE } from "../../../../../config/partnerCompany/partnerCompany.js";
+import { COLUMN_NAME } from "../../../../../config/partnerCompany/partnerCompany.js";
 
 const reportRow = (dto) => {
   return `
@@ -23,7 +23,6 @@ const reportRow = (dto) => {
 
 const context = {
   REPORT_LIST: {
-    // title: "사고 번호 리스트",
     needDetail: true,
     listFetch: fetchGetAllReportByDamageAssessmentCompanyID,
     listFetchById: fetchGetReport,
@@ -78,7 +77,6 @@ const setButton = () => {
   const button = document.createElement(TAG.BUTTON);
   button.id = ELEMENT_ID.SEARCH_BUTTON;
   button.textContent = BUTTON.COMMON.SEARCH; // 버튼 텍스트 설정
-  // const type = "REPORT_LIST"; // 고정된 타입
   button.addEventListener(EVENT.CLICK, async () => {
     const value = document.getElementById(ELEMENT_ID.SEARCH_INPUT).value;
     await initTableByInput(value); // 검색 실행
@@ -167,7 +165,7 @@ const setOneRow = (item) => {
 
 const setTableBody = () => {
   const tableBody = document.getElementById(KEY.LIST);
-  tableBody.innerHTML= "";
+  tableBody.innerHTML= STRING_EMPTY;
 
   const data = JSON.parse(sessionStorage.getItem(KEY.LIST)) || [];
   data.forEach(item => {

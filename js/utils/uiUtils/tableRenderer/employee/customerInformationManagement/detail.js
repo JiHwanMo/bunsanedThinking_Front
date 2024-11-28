@@ -5,7 +5,7 @@ import {
 import {
   ACCIDENT_HISTORY_LIST,
   BUTTON,
-  DETAIL_COLUMN_NAME, DISEASE_HISTORY_LIST, POP_UP, SURGERY_HISTORY_LIST, VALUE
+  DETAIL_COLUMN_NAME, DISEASE_HISTORY_LIST, MESSAGES, POP_UP, SURGERY_HISTORY_LIST, VALUE
 } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
 import {CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
 
@@ -19,9 +19,9 @@ const customerInformationDetail = (data) => {
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.RESIDENT_REGISTRATION_NUMBER, value: data.residentRegistrationNumber },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.ADDRESS, value: data.address },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.PROPERTY, value: data.property },
-    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.ACCIDENT_HISTORY, value: data.accidentHistoryList.map(item => accidentHistory(item)) || "없음" },
-    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.SURGERY_HISTORY, value: data.surgeryHistoryList.map(item => surgeryHistory(item)) || "없음" },
-    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.DISEASE_HISTORY, value: data.diseaseHistoryList.map(item => diseaseHistory(item)) || "없음" },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.ACCIDENT_HISTORY, value: data.accidentHistoryList.map(item => accidentHistory(item)) || MESSAGES.NONE },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.SURGERY_HISTORY, value: data.surgeryHistoryList.map(item => surgeryHistory(item)) || MESSAGES.NONE },
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.DISEASE_HISTORY, value: data.diseaseHistoryList.map(item => diseaseHistory(item)) || MESSAGES.NONE },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.BANK_NAME, value: data.bankName },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.BANK_ACCOUNT, value: data.bankAccount },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.ID, value: data.id },

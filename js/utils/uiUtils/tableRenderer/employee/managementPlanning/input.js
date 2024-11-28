@@ -1,7 +1,7 @@
 import { fetchGetDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
 import { addButtons } from "../../../buttonManager/employee/managementPlanning/input.js";
 import {DETAIL_COLUMN_NAME, VALUE, ELEMENT_ID as MANAGEMENTPLANNING_ELEMENT_ID} from "../../../../../../config/employee/managementPlanning/managementPlanning.js";
-import {ELEMENT_ID, EVENT, KEY, TAG} from "../../../../../../config/common.js";
+import {ELEMENT_ID, EVENT, KEY, STRING_EMPTY, TAG} from "../../../../../../config/common.js";
 
 export const renderInput = async () => {
   const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
@@ -34,13 +34,14 @@ const renderInputFields = (data) => {
         <input type="text" id="name" name="name" value="${data.name || ""}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.NAME}을 입력하세요" required>
       </div>
       <div class="form-group">
-        <label for="purpose">${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.PURPOSE}</label>
-        <textarea id="purpose" name="purpose" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.PURPOSE}을 입력하세요" required>${data.purpose || ""}</textarea>
-      </div>
-      <div class="form-group">
         <label for="task">${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.TASK}</label>
         <input type="text" id="task" name="task" value="${data.task || ""}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.TASK}를 입력하세요" required>
       </div>
+      <div class="form-group">
+        <label for="purpose">${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.PURPOSE}</label>
+        <textarea id="purpose" name="purpose" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.PURPOSE}을 입력하세요" required>${data.purpose || ""}</textarea>
+      </div>
+
       <div class="form-group">
         <label for="head_name">${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.HEAD_NAME}</label>
         <input type="text" id="head_name" name="head_name" value="${data.headName || ""}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.HEAD_NAME}을 입력하세요" required>
@@ -48,15 +49,15 @@ const renderInputFields = (data) => {
     `;
   } else if (selectedButtonType === VALUE.UPDATE) {
     let selectedIndex = 1;
-    let placeholderValue = data.name || "";
+    let placeholderValue = data.name || STRING_EMPTY;
 
     inputFieldsContainer.innerHTML = `
       <div class="form-group">
         <label for="index">수정할 항목</label>
         <select id="index" name="index">
           <option value="1" selected>부서 이름</option>
-          <option value="2">부서 목적</option>
-          <option value="3">주 업무</option>
+          <option value="2">주 업무</option>
+          <option value="3">부서 목적</option>
           <option value="4">부서장 이름</option>
         </select>
       </div>
@@ -75,13 +76,13 @@ const renderInputFields = (data) => {
 
       // 선택된 항목에 따라 입력 필드 값 변경
       if (selectedIndex === 1) {
-        placeholderValue = data.name || "";
+        placeholderValue = data.name || STRING_EMPTY;
       } else if (selectedIndex === 2) {
-        placeholderValue = data.purpose || "";
+        placeholderValue = data.task || STRING_EMPTY;
       } else if (selectedIndex === 3) {
-        placeholderValue = data.task || "";
+        placeholderValue = data.purpose || STRING_EMPTY;
       } else if (selectedIndex === 4) {
-        placeholderValue = data.headName || "";
+        placeholderValue = data.headName || STRING_EMPTY;
       }
 
       inputElement.value = placeholderValue;
