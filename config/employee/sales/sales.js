@@ -39,7 +39,9 @@ export const BUTTON = {
 export const POP_UP = {
   RESERVATION: "예약이 완료되었습니다.",
   SENDING_NOTICE: "안내장이 발송되었습니다.",
-  EVALUATION: "평가가 완료되었습니다."
+  EVALUATION: "평가가 완료되었습니다.",
+  INSURANCE_ENROLLMENT_REQUEST: "보험 가입 요청이 완료되었습니다.",
+  LOAN_REQUEST: "대출 신청이 완료되었습니다."
 };
 export const COMBOBOX = {
   HANDLE_INSURANCE_CONSULTATION: {
@@ -232,4 +234,142 @@ export const LOAN_TYPE= {
   COLLATERAL: "Collateral",
   FIXED_DEPOSIT: "FixedDeposit",
   INSURANCE_CONTRACT: "InsuranceContract"
+}
+
+export const CUSTOMER_FORM = {
+  NAME:{
+    IS_TEXT_AREA: false,
+    FOR: "name",
+    LABEL: "NAME",
+    TYPE: "text",
+    ID: "name",
+    NAME: "name",
+    PLACE_HOLDER: "고객 이름"
+  },
+  AGE:{
+    IS_TEXT_AREA: false,
+    FOR: "age",
+    LABEL: "AGE",
+    TYPE: "number",
+    ID: "age",
+    NAME: "age",
+    PLACE_HOLDER: "고객 나이"
+  },
+  GENDER:{
+    IS_TEXT_AREA: false,
+    FOR: "gender",
+    LABEL: "GENDER",
+    TYPE: "button-group",
+    ID: "gender",
+    NAME: "gender",
+    OPTION: {
+      MALE:{
+        VALUE: "Male", TEXT: "남자"
+      },
+      FEMALE:{
+        VALUE: "Female", TEXT: "여자"
+      }
+    }
+  },
+  ADDRESS:{
+    IS_TEXT_AREA: false,
+    FOR: "address",
+    LABEL: "ADDRESS",
+    TYPE: "text",
+    ID: "address",
+    NAME: "address",
+    PLACE_HOLDER: "주소"
+  },
+  PHONE_NUMBER: {
+    IS_TEXT_AREA: false,
+    FOR: "phoneNumber",
+    LABEL: "PHONE_NUMBER",
+    TYPE: "text",
+    ID: "phoneNumber",
+    NAME: "phoneNumber",
+    PLACE_HOLDER: "전화번호"
+  },
+  RESIDENT_REGISTRATION_NUMBER:{
+    IS_TEXT_AREA: false,
+    FOR: "residentRegistrationNumber",
+    LABEL: "RESIDENT_REGISTRATION_NUMBER",
+    TYPE: "text",
+    ID: "residentRegistrationNumber",
+    NAME: "residentRegistrationNumber",
+    PLACE_HOLDER: "주민등록번호"
+  },
+  JOB:{
+    IS_TEXT_AREA: false,
+    FOR: "job",
+    LABEL: "JOB",
+    TYPE: "text",
+    ID: "job",
+    NAME: "job",
+    PLACE_HOLDER: "직업"
+  },
+  BANK_ACCOUNT:{
+    IS_TEXT_AREA: false,
+    FOR: "bankAccount",
+    LABEL: "BANK_ACCOUNT",
+    TYPE: "text",
+    ID: "bankAccount",
+    NAME: "bankAccount",
+    PLACE_HOLDER: "은행 계좌"
+  },
+  BANK_NAME:{
+    IS_TEXT_AREA: false,
+    FOR: "bankName",
+    LABEL: "BANK_NAME",
+    TYPE: "text",
+    ID: "bankName",
+    NAME: "bankName",
+    PLACE_HOLDER: "은행 이름"
+  },
+  PROPERTY:{
+    IS_TEXT_AREA: false,
+    FOR: "property",
+    LABEL: "PROPERTY",
+    TYPE: "number",
+    ID: "property",
+    NAME: "property",
+    PLACE_HOLDER: "자산"
+  },
+  ACCIDENT_HISTORY:{
+    TITLE:"사고 이력",
+    ID:"accidentHistory",
+    FIELD_NAME:{
+      ACCIDENT_DATE:"date",
+      ACCIDENT_DETAIL: "사고 내역",
+      ACCIDENT_DETAIL_ID:"accidentDetail"
+    }
+  },
+  DISEASE_HISTORY:{
+    TITLE: "질병 이력",
+    ID: "diseaseHistory",
+    FIELD_NAME:{
+      DATE_OF_DIAGNOSIS:{
+        DATE:"date",
+        ID:"dateOfDiagnosis"
+      },
+      NAME: "질병 이름",
+      NAME_ID: "name"
+    }
+  },
+  SURGERY_HISTORY:{
+    TITLE: "수술 이력",
+    ID: "surgeryHistory",
+    FIELD_NAME:{
+      DATE:"date",
+      HOSPITAL_NAME: "병원 이름",
+      HOSPITAL_NAME_ID: "hospitalName",
+      NAME: "수술 이름",
+      NAME_ID: "name"
+    }
+  }
+}
+
+export const INPUT = "입력";
+export const DATE= "날짜";
+export const ID ={
+  CONTAINER: "Container"
 }
