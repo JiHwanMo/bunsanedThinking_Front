@@ -29,10 +29,10 @@ export const fetchDeleteDepartment = async(id)  => {
 export const fetchGetDepartment = async(id)  => {
   return await fetchGetDepartmentHandler(id);
 }
-// (async () => {
-//   const data = await fetchGetDepartment(91010);
-//   console.log(data);
-// })();
+(async () => {
+  const data = await fetchGetDepartment(91012);
+  console.log(data);
+})();
 
 export const fetchUpdateDepartment = async(updateDepartmentDTO)  => {
   return await fetchUpdateDepartmentHandler(updateDepartmentDTO);

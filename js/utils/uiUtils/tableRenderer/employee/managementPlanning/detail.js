@@ -1,15 +1,20 @@
 import { fetchGetDepartment } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
-import { BUTTON } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
+import {
+  BUTTON, DETAIL_COLUMN_NAME, MESSAGES,
+  POP_UP,
+  VALUE
+} from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
 import { fetchDeleteDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
+import {CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
 
 const departmentDetail = (data) => {
   return [
-    { label: "부서 번호", value: data.id },
-    { label: "부서 이름", value: data.name },
-    { label: "주 업무", value: data.task },
-    { label: "부서 목적", value: data.purpose },
-    { label: "소속 인원", value: data.employeeList.length || "없음" },
-    { label: "부서장 이름", value: data.headName }
+    { label: DETAIL_COLUMN_NAME.DEPARTMENT_LIST.ID, value: data.id },
+    { label: DETAIL_COLUMN_NAME.DEPARTMENT_LIST.NAME, value: data.name },
+    { label: DETAIL_COLUMN_NAME.DEPARTMENT_LIST.TASK, value: data.task },
+    { label: DETAIL_COLUMN_NAME.DEPARTMENT_LIST.PURPOSE, value: data.purpose },
+    { label: DETAIL_COLUMN_NAME.DEPARTMENT_LIST.EMPLOYEE_COUNT, value: data.employeeList.length || MESSAGES.NONE },
+    { label: DETAIL_COLUMN_NAME.DEPARTMENT_LIST.HEAD_NAME, value: data.headName }
   ];
 }
 
@@ -23,8 +28,8 @@ const context = {
 }
 
 export const renderDetails = async () => {
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
-  const type = sessionStorage.getItem("currentType");
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
@@ -34,61 +39,61 @@ export const renderDetails = async () => {
 }
 
 const renderDetailsTable = (data) => {
-  const detailsTable = document.getElementById("detailsTable");
-  const details = context[sessionStorage.getItem("currentType")].detailGetter(data);
+  const detailsTable = document.getElementById(ELEMENT_ID.DETAILS_TABLE);
+  const details = context[sessionStorage.getItem(KEY.CURRENT_TYPE)].detailGetter(data);
 
   details.forEach(detail => {
-    const row = document.createElement("tr");
+    const row = document.createElement(TAG.TR);
 
-    const labelCell = document.createElement("th");
+    const labelCell = document.createElement(TAG.TH);
     labelCell.textContent = detail.label;
 
-    const valueCell = document.createElement("td");
+    const valueCell = document.createElement(TAG.TD);
     valueCell.textContent = detail.value;
 
     row.appendChild(labelCell);
     row.appendChild(valueCell);
 
-    detailsTable.querySelector("tbody").appendChild(row);
+    detailsTable.querySelector(TAG.TBODY).appendChild(row);
   });
 };
 
 const renderButtons = () => {
-  initialButtons(context[sessionStorage.getItem("currentType")].buttons, managementPlanningTaskMapper);
+  initialButtons(context[sessionStorage.getItem(KEY.CURRENT_TYPE)].buttons, managementPlanningTaskMapper);
 };
 
 const initialButtons = (buttonMessages, buttonActionMapper) => {
-  const buttonContainer = document.getElementById("buttonContainer");
-  const type = sessionStorage.getItem("currentType");
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
+  const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
 
   Object.entries(buttonMessages).forEach(([key, name]) => {
-    const button = document.createElement("div");
-    button.className = "button-item";
+    const button = document.createElement(TAG.DIV);
+    button.className = CLASS.BUTTON_ITEM;
     button.textContent = name;
 
-    button.addEventListener("click", buttonActionMapper[type][key]);
+    button.addEventListener(EVENT.CLICK, buttonActionMapper[type][key]);
     buttonContainer.appendChild(button);
   });
 }
 
 const update = () => {
-  sessionStorage.setItem("selectedButtonType", JSON.stringify("UPDATE"));
-  window.location.href = "input.html"; // 수정 화면으로 이동
+  sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, JSON.stringify(VALUE.UPDATE));
+  window.location.href = LOCATION.INPUT; // 수정 화면으로 이동
 }
 
 const deleteItem = async () => {
-  const id = sessionStorage.getItem("selectedDataId");
+  const id = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
 
   // confirm 다이얼로그 표시
-  const userConfirmed = confirm("삭제하시겠습니까?");
+  const userConfirmed = confirm(POP_UP.DELETE.QUESTION);
   if (userConfirmed) {
     try {
       await fetchDeleteDepartment(id); // 삭제 API 호출
-      alert("삭제가 완료되었습니다."); // 성공 메시지
-      window.location.href = "home.html"; // 삭제 완료 후 홈 화면으로 이동
+      alert(POP_UP.DELETE.OK); // 성공 메시지
+      window.location.href = LOCATION.HOME; // 삭제 완료 후 홈 화면으로 이동
     } catch (error) {
-      console.error("삭제 중 오류 발생:", error); // 오류 로그 출력
-      alert("삭제 중 오류가 발생했습니다."); // 오류 메시지
+      console.error(POP_UP.DELETE.CONSOLE_ERROR, error); // 오류 로그 출력
+      alert(POP_UP.DELETE.ERROR); // 오류 메시지
     }
   } else {
     window.history.back(); // 취소 시 이전 페이지로 이동
