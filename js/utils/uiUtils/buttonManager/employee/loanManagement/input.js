@@ -7,7 +7,7 @@ import {
   fetchUpdateInsuranceContractProduct,
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
 import {
-  BUTTON as COMMON_BUTTON,
+  BUTTON as COMMON_BUTTON, CLASS,
   ELEMENT_ID as COMMON_ELEMENT_ID,
   EVENT,
   KEY as COMMON_KEY,
@@ -106,7 +106,7 @@ const functions= {
 
 const createButton = (textContent) => {
   const okButton = document.createElement(TAG.BUTTON);
-  okButton.className = "button-item";
+  okButton.className = CLASS.BUTTON_ITEM;
   okButton.textContent = textContent;
   return okButton;
 }
@@ -115,7 +115,7 @@ const createCancelButton = () => {
   const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
   const cancelButton = document.createElement(TAG.BUTTON);
-  cancelButton.className = "button-item";
+  cancelButton.className = CLASS.BUTTON_ITEM;
   cancelButton.textContent = COMMON_BUTTON.COMMON.CANCEL;
 
   cancelButton.addEventListener(EVENT.CLICK, () => window.history.back());

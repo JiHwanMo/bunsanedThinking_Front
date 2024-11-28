@@ -46,7 +46,8 @@ export const DETAIL_COLUMN_NAME = {
 
     FAMILY: "가족",
     FAMILY_ID: "가족 번호",
-    RELATIONSHIP: "가족 관계",
+    FAMILY_RELATIONSHIP: "가족 관계",
+    RELATIONSHIP: "관계",
     SURVIVAL: "생존 여부",
     FAMILY_BIRTH_DATE: "가족 생일",
     FAMILY_NAME: "가족 이름"

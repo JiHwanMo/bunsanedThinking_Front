@@ -7,7 +7,8 @@ import {
   fetchGetLoanProductDetail
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js";
 import {
-  CLASS, ELEMENT_ID as COMMON_ELEMENT_ID,
+  ATTRIBUTE,
+  CLASS, ELEMENT_ID as COMMON_ELEMENT_ID, EVENT,
   INPUT_TYPE,
   KEY as COMMON_KEY,
   MESSAGES as COMMON_MESSAGES,
@@ -26,7 +27,7 @@ const getType = () => {
 
 const renderAddLoanInput = () => {
   const loanType = renderComboBox();
-  loanType.addEventListener("change", () => {
+  loanType.addEventListener(EVENT.CHANGE, () => {
     renderAddLoanInputFields(loanType.value);
   });
 }
@@ -73,7 +74,7 @@ const options = [
 ];
 
 const renderComboBox = () => {
-  const comboBoxContainer = document.getElementById("comboBoxContainer");
+  const comboBoxContainer = document.getElementById(COMMON_ELEMENT_ID.COMBO_BOX_CONTAINER);
   // 콤보박스 컨테이너 초기화
   let loanTypeContainer = document.getElementById(ELEMENT_ID.LOAN_TYPE_CONTAINER);
 
@@ -85,7 +86,7 @@ const renderComboBox = () => {
   loanTypeContainer.id = ELEMENT_ID.LOAN_TYPE_CONTAINER;
 
   const label = document.createElement(TAG.LABEL);
-  label.setAttribute("for", ELEMENT_ID.LOAN_TYPE);
+  label.setAttribute(ATTRIBUTE.FOR, ELEMENT_ID.LOAN_TYPE);
   label.textContent = DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.LOAN_TYPE;
 
   const select = document.createElement(TAG.SELECT);
@@ -243,7 +244,7 @@ const renderCommonInputFieldsWithValues = (loanType, data) => {
   commonLoanForms.forEach(form => {
     inputFieldsContainer.appendChild(createCommonForm(form, type))
     const input = document.getElementById(form.id);
-    input.setAttribute("value", data[form.value]);
+    input.setAttribute(ATTRIBUTE.VALUE, data[form.value]);
   });
   inputFieldsContainer.innerHTML += fieldsWithDetail[LOAN_TYPE_RESPONSE[loanType]](data, type); // 선택된 옵션에 따라 입력란 표시
 };

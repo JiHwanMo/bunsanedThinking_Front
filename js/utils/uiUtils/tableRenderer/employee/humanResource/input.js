@@ -14,7 +14,7 @@ import {
   ELEMENT_ID as COMMON_ELEMENT_ID,
   TAG,
   CLASS,
-  MESSAGES, EVENT
+  MESSAGES, EVENT, PLUS, CLASS_SELECTOR, MINUS, QUERY_SELECTOR, ATTRIBUTE
 } from "../../../../../../config/common.js";
 import {TITLE} from "../../../../../../config/employee/humanResource/humanResource.js";
 
@@ -265,17 +265,17 @@ const createForm = (form, type) => {
 const addDynamicSection = (container, sectionTitle, sectionId) => {
   const sectionDiv = document.createElement(TAG.DIV);
   sectionDiv.id = `${sectionId}${ELEMENT_ID.CONTAINER}`;
-  sectionDiv.className = "dynamic-section";
+  sectionDiv.className = CLASS.DYNAMIC_SECTION;
 
   const headerDiv = document.createElement(TAG.DIV);
-  headerDiv.className = "section-header";
+  headerDiv.className = CLASS.SECTION_HEADER;
 
   const sectionLabel = document.createElement(TAG.LABEL);
   sectionLabel.textContent = sectionTitle;
 
   const addButton = document.createElement(TAG.BUTTON);
-  addButton.textContent = "+";
-  addButton.className = "add-button";
+  addButton.textContent = PLUS;
+  addButton.className = CLASS.ADD_BUTTON;
 
   addButton.addEventListener(EVENT.CLICK, () => addFamilyField(sectionDiv, sectionId));
 
@@ -291,7 +291,7 @@ const addFamilyField = (sectionDiv, sectionId) => {
   inputDiv.className = CLASS.FORM_GROUP;
   inputDiv.id = `${sectionId}${ELEMENT_ID.INPUT}`;
 
-  const familyCount = document.querySelectorAll('.radio-group').length;
+  const familyCount = document.querySelectorAll(CLASS_SELECTOR.RADIO_GROUP).length;
 
   const type = getType();
   familyForm.forEach((field) => {
@@ -305,7 +305,7 @@ const addFamilyField = (sectionDiv, sectionId) => {
     input.type = field.type;
     input.name = `${field.name}-${familyCount}`;
     input.placeholder = field.placeHolder;
-    input.className = "input-field";
+    input.className = CLASS.INPUT_FIELD;
     inputDiv.appendChild(input);
   });
 
@@ -313,8 +313,8 @@ const addFamilyField = (sectionDiv, sectionId) => {
 
   // 삭제 버튼 추가
   const removeButton = document.createElement(TAG.BUTTON);
-  removeButton.textContent = "-";
-  removeButton.className = "remove-button";
+  removeButton.textContent = MINUS;
+  removeButton.className = CLASS.REMOVE_BUTTON;
   removeButton.addEventListener(EVENT.CLICK, () => {
     sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
   });
@@ -356,14 +356,16 @@ const createFamilyInputForm = (familyCount) => {
 
 const addDepartmentComboBoxWithValue = (inputFieldsContainer, type, employeeData) => {
   addDepartmentComboBox(inputFieldsContainer, type);
-  const option = document.querySelector(`option[value="${employeeData.departmentId}"]`);
+  const option = document.querySelector(
+    QUERY_SELECTOR.SELECTOR(TAG.OPTION, ATTRIBUTE.VALUE, employeeData.departmentId, false));
   if (option)
     option.selected = true;
 }
 
 const addPositionComboBoxWithValue = (inputFieldsContainer, type, employeeData) => {
   addPositionComboBox(inputFieldsContainer, type);
-  const option = document.querySelector(`option[value="${employeeData.position}"]`);
+  const option = document.querySelector(
+    QUERY_SELECTOR.SELECTOR(TAG.OPTION, ATTRIBUTE.VALUE, employeeData.position, false));
   if (option)
     option.selected = true;
 }
@@ -391,12 +393,12 @@ const addFamilyFieldWithValue = (sectionDiv, familyData) => {
   inputDiv.className = CLASS.FORM_GROUP;
 
   const type = getType();
-  let familyCount = document.querySelectorAll('.radio-group').length;
+  let familyCount = document.querySelectorAll(CLASS_SELECTOR.RADIO_GROUP).length;
 
   // 삭제 버튼 추가
   const removeButton = document.createElement(TAG.BUTTON);
-  removeButton.textContent = "-";
-  removeButton.className = "remove-button";
+  removeButton.textContent = MINUS;
+  removeButton.className = CLASS.REMOVE_BUTTON;
   removeButton.addEventListener(EVENT.CLICK, () => {
     sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
   });
@@ -412,9 +414,9 @@ const addFamilyFieldWithValue = (sectionDiv, familyData) => {
     input.id = `${field.id}-${familyCount}`;
     input.type = field.type;
     input.name = `${field.name}-${familyCount}`;
-    input.setAttribute("value", familyData[field.data]);
+    input.setAttribute(ATTRIBUTE.VALUE, familyData[field.data]);
     input.placeholder = field.placeHolder;
-    input.className = "input-field";
+    input.className = CLASS.INPUT_FIELD;
     inputDiv.appendChild(input);
   });
 
