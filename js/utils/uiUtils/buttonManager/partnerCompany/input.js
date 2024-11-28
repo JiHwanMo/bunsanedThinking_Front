@@ -1,25 +1,27 @@
 import { fetchSetDamageAssessmentMoney } from "../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js";
+import {CLASS, BUTTON, EVENT, TAG, LOCATION} from "../../../../../config/common.js";
+import {ELEMENT_ID, POP_UP} from "../../../../../config/partnerCompany/partnerCompany.js";
 
 export const addButtons = (buttonContainer) => {
   // "수정" 버튼 생성
-  const updateButton = document.createElement("button");
-  updateButton.className = "button-item";
-  updateButton.textContent = "수정";
+  const updateButton = document.createElement(TAG.BUTTON);
+  updateButton.className = CLASS.BUTTON_ITEM;
+  updateButton.textContent = BUTTON.COMMON.UPDATE;
 
-  updateButton.addEventListener("click", async () => {
+  updateButton.addEventListener(EVENT.CLICK, async () => {
     const formData = collectFormData(); // 폼 데이터 수집
     if (!formData) return; // 데이터가 유효하지 않으면 종료
 
     // confirm 대화 상자 표시
-    const userConfirmed = confirm("수정하시겠습니까?");
+    const userConfirmed = confirm(POP_UP.UPDATE.QUESTION);
     if (userConfirmed) {
       try {
         await fetchSetDamageAssessmentMoney(formData.accidentId, formData.damageAssessmentMoney); // API 호출
-        alert("수정이 완료되었습니다.");
-        window.location.href = "home.html"; // 수정 완료 후 홈으로 이동
+        alert(POP_UP.UPDATE.OK);
+        window.location.href = LOCATION.HOME; // 수정 완료 후 홈으로 이동
       } catch (error) {
-        console.error("수정 중 오류 발생:", error);
-        alert("수정 중 오류가 발생했습니다.");
+        console.error(POP_UP.UPDATE.CONSOLE_ERROR, error);
+        alert(POP_UP.UPDATE.ERROR);
       }
     } else {
       window.history.back(); // 취소 시 이전 페이지로 이동
@@ -27,11 +29,11 @@ export const addButtons = (buttonContainer) => {
   });
 
   // "취소" 버튼 생성
-  const cancelButton = document.createElement("button");
-  cancelButton.className = "button-item";
-  cancelButton.textContent = "취소";
-  cancelButton.addEventListener("click", () => {
-    window.location.href = "home.html";
+  const cancelButton = document.createElement(TAG.BUTTON);
+  cancelButton.className = CLASS.BUTTON_ITEM;
+  cancelButton.textContent = BUTTON.COMMON.CANCEL;
+  cancelButton.addEventListener(EVENT.CLICK, () => {
+    window.location.href = LOCATION.HOME;
   });
 
   // 버튼 컨테이너에 버튼 추가
@@ -42,12 +44,12 @@ export const addButtons = (buttonContainer) => {
 
 // 폼 데이터 수집 함수
 const collectFormData = () => {
-  const accidentId = parseInt(document.getElementById("accidentId").value, 10); // 사고 ID
-  const damageAssessmentMoney = parseInt(document.getElementById("damageAssessmentMoney").value, 10); // 손해 사정 금액
+  const accidentId = parseInt(document.getElementById(ELEMENT_ID.ACCIDENT_ID).value, 10); // 사고 ID
+  const damageAssessmentMoney = parseInt(document.getElementById(ELEMENT_ID.DAMAGE_ASSESSMENT_MONEY).value, 10); // 손해 사정 금액
 
   // 데이터 유효성 검증
   if (!damageAssessmentMoney || isNaN(damageAssessmentMoney) || damageAssessmentMoney <= 0) {
-    alert("잘못된 정보를 입력하였습니다. 다시 입력해주세요.");
+    alert(POP_UP.UPDATE.VALIDATION_ERROR);
     return null;
   }
 

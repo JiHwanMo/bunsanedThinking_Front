@@ -36,3 +36,30 @@ export const DETAIL_COLUMN_NAME = {
   }
 }
 
+export const ELEMENT_ID = {
+  ACCIDENT_ID: "accidentId",
+  DAMAGE_ASSESSMENT_MONEY: "damageAssessmentMoney"
+}
+
+export const POP_UP = {
+  UPDATE: {
+    QUESTION: "수정하시겠습니까?",
+    OK: "수정이 완료되었습니다.",
+    ERROR: "수정 중 오류가 발생했습니다.",
+    VALIDATION_ERROR: "잘못된 정보를 입력하였습니다. 다시 입력해주세요.",
+    CONSOLE_ERROR: "수정 중 오류 발생 :"
+  },
+  CONSOLE_ERROR: {
+    SELECTED_DATA_ID: "No selected data ID found.",
+    SELECTED_DATA: "No data fetched for the selected ID."
+  }
+}
+
+export const TYPE = {
+  REPORT_DETAIL: "REPORT_DETAIL",
+  REPORT_LIST: "REPORT_LIST"
+}
+
+export const ACTION = {
+  FUNCTION: "function"
+}

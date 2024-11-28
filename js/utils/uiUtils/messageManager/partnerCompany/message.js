@@ -4,7 +4,7 @@ import {CLASS, CLASS_SELECTOR, KEY, MESSAGES, TAG} from '../../../../../config/c
 export const renderGreeting = async () => {
   const container = document.querySelector(CLASS_SELECTOR.CONTAINER);
   const id = sessionStorage.getItem(KEY.LOGIN_ID);
-  const getPartnerCompany = await fetchGetPartnerCompanyById(id); // Employee 데이터 가져오기
+  const getPartnerCompany = await fetchGetPartnerCompanyById(id);
   const greetingConstant = MESSAGES.GREETING;
   const greeting = document.createElement(TAG.DIV);
   greeting.className = CLASS.GREETING;

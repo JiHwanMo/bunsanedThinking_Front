@@ -1,19 +1,20 @@
-import { DETAIL_COLUMN_NAME } from "../../../../../../config/employee/managementPlanning/managementPlanning.js";
 import { fetchGetDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
 import { addButtons } from "../../../buttonManager/employee/managementPlanning/input.js";
+import {DETAIL_COLUMN_NAME, VALUE, ELEMENT_ID as MANAGEMENTPLANNING_ELEMENT_ID} from "../../../../../../config/employee/managementPlanning/managementPlanning.js";
+import {ELEMENT_ID, EVENT, KEY, TAG} from "../../../../../../config/common.js";
 
 export const renderInput = async () => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
-  const buttonContainer = document.getElementById("buttonContainer");
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
 
-  const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
+  const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));
 
-  if (selectedButtonType === "POST") {
+  if (selectedButtonType === VALUE.POST) {
     // 등록 화면: 빈 입력 필드 생성
     renderInputFields({});
-  } else if (selectedButtonType === "UPDATE") {
+  } else if (selectedButtonType === VALUE.UPDATE) {
     // 수정 화면: 기존 데이터 불러오기
-    const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
+    const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
     const departmentData = await fetchGetDepartment(selectedDataId);
 
     renderInputFields(departmentData);
@@ -23,10 +24,10 @@ export const renderInput = async () => {
 };
 
 const renderInputFields = (data) => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
-  const selectedButtonType = JSON.parse(sessionStorage.getItem("selectedButtonType"));
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
+  const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));
 
-  if (selectedButtonType === "POST") {
+  if (selectedButtonType === VALUE.POST) {
     inputFieldsContainer.innerHTML = `
       <div class="form-group">
         <label for="name">${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.NAME}</label>
@@ -45,8 +46,7 @@ const renderInputFields = (data) => {
         <input type="text" id="head_name" name="head_name" value="${data.headName || ""}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.HEAD_NAME}을 입력하세요" required>
       </div>
     `;
-  } else if (selectedButtonType === "UPDATE") {
-    // 기본 선택은 "부서 이름"
+  } else if (selectedButtonType === VALUE.UPDATE) {
     let selectedIndex = 1;
     let placeholderValue = data.name || "";
 
@@ -67,10 +67,10 @@ const renderInputFields = (data) => {
     `;
 
     // `<select>` 요소의 `onchange` 이벤트 추가
-    const selectElement = document.getElementById("index");
-    const inputElement = document.getElementById("input");
+    const selectElement = document.getElementById(MANAGEMENTPLANNING_ELEMENT_ID.INDEX);
+    const inputElement = document.getElementById(TAG.INPUT);
 
-    selectElement.addEventListener("change", (event) => {
+    selectElement.addEventListener(EVENT.CHANGE, (event) => {
       selectedIndex = parseInt(event.target.value, 10);
 
       // 선택된 항목에 따라 입력 필드 값 변경

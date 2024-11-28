@@ -7,7 +7,6 @@ import {
   VALUE
 } from "../../../../../../config/employee/administrative/administrative.js";
 import {
-  BUTTON as COMMON_BUTTON,
   CLASS,
   ELEMENT_ID,
   EVENT,
