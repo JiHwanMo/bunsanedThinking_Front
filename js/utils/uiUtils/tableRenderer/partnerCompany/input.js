@@ -1,7 +1,7 @@
-import { DETAIL_COLUMN_NAME } from '../../../../../config/partnerCompany/partnerCompany.js';
-import { fetchGetReport } from '../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js';
-import { addButtons } from '../../buttonManager/partnerCompany/input.js';
-import {ELEMENT_ID, KEY} from "../../../../../config/common.js";
+import { fetchGetReport } from "../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js";
+import { addButtons } from "../../buttonManager/partnerCompany/input.js";
+import { DETAIL_COLUMN_NAME } from "../../../../../config/partnerCompany/partnerCompany.js";
+import {ELEMENT_ID, KEY, STRING_EMPTY} from "../../../../../config/common.js";
 
 export const renderInput = async () => {
   const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
@@ -17,7 +17,7 @@ export const renderInput = async () => {
 
 const renderInputFields = (data) => {
   const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
-  let placeholderValue = data.damageAssessmentMoney || "";
+  let placeholderValue = data.damageAssessmentMoney || STRING_EMPTY;
 
   inputFieldsContainer.innerHTML = `
     <div class="form-group">

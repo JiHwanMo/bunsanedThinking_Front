@@ -1,4 +1,4 @@
-import { BUTTON } from '../../../../../config/partnerCompany/partnerCompany.js';
+import { BUTTON } from "../../../../../config/partnerCompany/partnerCompany.js";
 import { viewSetDamageAssessmentMoney } from "../../tableRenderer/partnerCompany/informationList.js";
 import {initialButtons} from "../../common/buttonUtils.js";
 

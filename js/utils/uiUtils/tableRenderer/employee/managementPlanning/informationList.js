@@ -1,5 +1,5 @@
-import { fetchGetAllDepartment } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
-import { fetchGetDepartment } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
+import { fetchGetAllDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
+import { fetchGetDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
 import {
   BUTTON,
   CLASS, CLASS_SELECTOR,
@@ -8,7 +8,7 @@ import {
   INPUT_TYPE,
   KEY,
   LOCATION,
-  MESSAGES,
+  MESSAGES, STRING_EMPTY,
   TAG
 } from '../../../../../../config/common.js';
 import {COMBOBOX, TYPE, VALUE, CLASS as MANAGEMENT_PLANNING_CLASS} from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
@@ -18,7 +18,6 @@ import { COLUMN_NAME } from '../../../../../../config/employee/managementPlannin
 
 
 const departmentRow = (dto) => {
-  console.log("DTO Object:", dto);
   return `
     <td>${dto.id}</td>
     <td>${dto.name}</td>
@@ -182,10 +181,11 @@ const setOneRow = (item, type) => {
 
 const setTableBody = () => {
   const tableBody = document.getElementById(KEY.LIST);
-  tableBody.innerHTML= "";
+  tableBody.innerHTML= STRING_EMPTY;
 
   const data = JSON.parse(sessionStorage.getItem(KEY.LIST)) || [];
   data.forEach(item => {
+    console.log(JSON.stringify(item));
     const row = document.createElement(TAG.TR);
     row.innerHTML = context[TYPE.DEPARTMENT_LIST].rowGetter(item);
 

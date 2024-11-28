@@ -1,6 +1,7 @@
 import { fetchAddCustomerInformation, fetchUpdateCustomerInformation } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
 import {BUTTON, CLASS, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
 import {
+  CLASS_SELECTOR,
   ELEMENT_ID,
   POP_UP,
   VALUE
@@ -83,7 +84,7 @@ const collectFormData = () => {
     const bankAccount = document.getElementById(ELEMENT_ID.BANK_ACCOUNT).value.trim();
 
     const accidentHistoryList = [];
-    document.querySelectorAll(".accident-history-entry").forEach(entry => {
+    document.querySelectorAll(CLASS_SELECTOR.ACCIDENT_HISTORY_ENTRY).forEach(entry => {
       const date = entry.querySelector('input[name="date"]').value.trim();
       const accidentDetail = entry.querySelector('input[name="accidentDetail"]').value.trim();
       if (date && accidentDetail) {
@@ -92,7 +93,7 @@ const collectFormData = () => {
     });
 
     const surgeryHistoryList = [];
-    document.querySelectorAll(".surgery-history-entry").forEach(entry => {
+    document.querySelectorAll(CLASS_SELECTOR.SURGERY_HISTORY_ENTRY).forEach(entry => {
       const date = entry.querySelector('input[name="date"]').value.trim();
       const hospitalName = entry.querySelector('input[name="hospitalName"]').value.trim();
       const name = entry.querySelector('input[name="name"]').value.trim();
@@ -102,7 +103,7 @@ const collectFormData = () => {
     });
 
     const diseaseHistoryList = [];
-    document.querySelectorAll(".disease-history-entry").forEach(entry => {
+    document.querySelectorAll(CLASS_SELECTOR.DISEASE_HISTORY_ENTRY).forEach(entry => {
       const dateOfDiagnosis = entry.querySelector('input[name="dateOfDiagnosis"]').value.trim();
       const name = entry.querySelector('input[name="name"]').value.trim();
       if (dateOfDiagnosis && name) {

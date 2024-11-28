@@ -1,6 +1,6 @@
-import { BUTTON } from '../../../../../../config/employee/administrative/administrative.js';
-import { viewOfficeSupplyListAll } from '../../../tableRenderer/employee/administrative/informationList.js';
+import { viewOfficeSupplyListAll } from "../../../tableRenderer/employee/administrative/informationList.js";
 import { initialButtons } from "../../../common/buttonUtils.js";
+import { BUTTON } from "../../../../../../config/employee/administrative/administrative.js";
 
 const viewOfficeSupply = async () => {
   await viewOfficeSupplyListAll();

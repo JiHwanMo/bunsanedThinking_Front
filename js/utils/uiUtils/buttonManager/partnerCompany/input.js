@@ -3,7 +3,6 @@ import {CLASS, BUTTON, EVENT, TAG, LOCATION} from "../../../../../config/common.
 import {ELEMENT_ID, POP_UP} from "../../../../../config/partnerCompany/partnerCompany.js";
 
 export const addButtons = (buttonContainer) => {
-  // "수정" 버튼 생성
   const updateButton = document.createElement(TAG.BUTTON);
   updateButton.className = CLASS.BUTTON_ITEM;
   updateButton.textContent = BUTTON.COMMON.UPDATE;
@@ -28,7 +27,6 @@ export const addButtons = (buttonContainer) => {
     }
   });
 
-  // "취소" 버튼 생성
   const cancelButton = document.createElement(TAG.BUTTON);
   cancelButton.className = CLASS.BUTTON_ITEM;
   cancelButton.textContent = BUTTON.COMMON.CANCEL;

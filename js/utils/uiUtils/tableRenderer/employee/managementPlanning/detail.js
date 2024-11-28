@@ -1,10 +1,10 @@
-import { fetchGetDepartment } from '../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js';
+import { fetchGetDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
+import { fetchDeleteDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
 import {
   BUTTON, DETAIL_COLUMN_NAME, MESSAGES,
   POP_UP,
   VALUE
 } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
-import { fetchDeleteDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
 import {CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
 
 const departmentDetail = (data) => {

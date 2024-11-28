@@ -17,3 +17,7 @@ export const fetchGetDepartmentHandler = async (id) => {
 export const fetchUpdateDepartmentHandler = async (updateDepartmentDTO) => {
   return await fetchPatchWithBody(`${defaultUrl}/updateDepartment`, updateDepartmentDTO);
 };
+
+export const fetchGetAllDepartmentHandler = async () => {
+  return await fetchGetHandler(`${defaultUrl}/getAllDepartment`);
+};
