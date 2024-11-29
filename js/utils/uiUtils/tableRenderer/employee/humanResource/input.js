@@ -198,12 +198,12 @@ const addPositionComboBox = (inputFieldsContainer, type) => {
   inputDiv.className = CLASS.FORM_GROUP;
 
   const formLabel = document.createElement(TAG.LABEL);
-  formLabel.for = ELEMENT_ID.EMPLOYEE_POSITION;
+  formLabel.for = ELEMENT_ID.POSITION;
   formLabel.textContent = DETAIL_COLUMN_NAME[type].POSITION;
 
   const formSelect = document.createElement(TAG.SELECT);
-  formSelect.id = ELEMENT_ID.EMPLOYEE_POSITION;
-  formSelect.name = ELEMENT_ID.EMPLOYEE_POSITION;
+  formSelect.id = ELEMENT_ID.POSITION;
+  formSelect.name = ELEMENT_ID.POSITION;
 
   positions.forEach(position => {
     const option = document.createElement(TAG.OPTION);

@@ -66,7 +66,17 @@ export const COLUMN_NAME = {
 };
 
 export const ELEMENT_ID= {
-  EMPLOYEE_ID: "id"
+  ID: "id",
+  MONEY: "money",
+  BANK: "bank",
+  ACCOUNT_HOLDER: "accountHolder",
+  BANK_ACCOUNT: "bankAccount",
+  PAYMENT_TYPE: "paymentType",
+  PROCESS_STATUS: "processStatus",
+
+  DEPOSITOR_NAME: "depositorName",
+  DATE: "date",
+  PATH: "path"
 }
 
 export const TITLE= {

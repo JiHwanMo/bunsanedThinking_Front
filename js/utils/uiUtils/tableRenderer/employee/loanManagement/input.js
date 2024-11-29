@@ -111,12 +111,12 @@ const renderComboBox = () => {
 
 const commonLoanForms = [
   {
-    for: ELEMENT_ID.LOAN_NAME,
+    for: ELEMENT_ID.NAME,
     label: LABEL.LOAN_NAME,
     type: INPUT_TYPE.TEXT,
-    id: ELEMENT_ID.LOAN_NAME,
-    name: ELEMENT_ID.LOAN_NAME,
-    value: ELEMENT_ID.LOAN_NAME,
+    id: ELEMENT_ID.NAME,
+    name: ELEMENT_ID.NAME,
+    value: ELEMENT_ID.NAME,
     placeholder: LABEL.LOAN_NAME
   },
   {

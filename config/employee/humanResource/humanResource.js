@@ -63,7 +63,7 @@ export const ELEMENT_ID= {
   ID: "id",
   DEPARTMENT_ID: "departmentId",
   NAME: "name",
-  EMPLOYEE_POSITION: "position",
+  POSITION: "position",
   ADDRESS: "address",
   PHONE_NUMBER: "phoneNumber",
   BANK_NAME: "bankName",

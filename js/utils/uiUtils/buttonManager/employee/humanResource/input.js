@@ -96,7 +96,7 @@ const collectEmployeeFormDataForPost = () => {
   return {
     departmentId: getValueById(ELEMENT_ID.DEPARTMENT_ID),
     name: getValueById(ELEMENT_ID.NAME),
-    employeePosition: getValueById(ELEMENT_ID.EMPLOYEE_POSITION),
+    employeePosition: getValueById(ELEMENT_ID.POSITION),
     address: getValueById(ELEMENT_ID.ADDRESS),
     phoneNumber: getValueById(ELEMENT_ID.PHONE_NUMBER),
     bankName: getValueById(ELEMENT_ID.BANK_NAME),
@@ -128,7 +128,7 @@ const collectEmployeeFormDataForUpdate = () => {
     id: getValueById(ELEMENT_ID.ID),
     departmentId: getValueById(ELEMENT_ID.DEPARTMENT_ID),
     name: getValueById(ELEMENT_ID.NAME),
-    employeePosition: getValueById(ELEMENT_ID.EMPLOYEE_POSITION),
+    employeePosition: getValueById(ELEMENT_ID.POSITION),
     address: getValueById(ELEMENT_ID.ADDRESS),
     phoneNumber: getValueById(ELEMENT_ID.PHONE_NUMBER),
     bankName: getValueById(ELEMENT_ID.BANK_NAME),

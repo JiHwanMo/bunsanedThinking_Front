@@ -109,7 +109,20 @@ export const ELEMENT_ID = {
   RESULT: "result",
   EMPLOYEE_NAME: "employeeName",
   DAMAGE_ASSESSMENT_COMPANY_ID: "damageAssessmentCompanyId",
-  ROADSIDE_ASSISTANCE_COMPANY_ID: "roadsideAssistanceCompanyId"
+  ROADSIDE_ASSISTANCE_COMPANY_ID: "roadsideAssistanceCompanyId",
+
+  COMPLAINT_TYPE: "complaintType",
+  ID: "id",
+  TITLE: "title",
+  POST_DATE: "postDate",
+  PROCESSING_DATE: "processingDate",
+  PROCESS_STATUS: "processStatus",
+  CUSTOMER_NAME: "customerName",
+  CUSTOMER_PHONE_NUMBER: "customerPhoneNumber",
+
+  SERVICE_TYPE: "serviceType",
+  DATE: "date",
+  LOCATION: "location",
 }
 
 export const LABEL= {

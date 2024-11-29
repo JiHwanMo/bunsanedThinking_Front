@@ -11,7 +11,7 @@ import {
 import {
   BUTTON,
   CLASS, CLASS_SELECTOR,
-  ELEMENT_ID,
+  ELEMENT_ID as COMMON_ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
   KEY,
@@ -22,7 +22,9 @@ import {
 import {
   COLUMN_NAME,
   COMBO_LIST,
-  COMBOBOX, INFORMATION_TYPE
+  COMBOBOX,
+  INFORMATION_TYPE,
+  ELEMENT_ID
 } from "../../../../../../config/employee/customerSupport/customerSupport.js";
 import {TITLE} from "../../../../../../config/employee/customerSupport/customerSupport.js";
 
@@ -30,30 +32,38 @@ export const informationType = {
   HANDLE_REPORT: INFORMATION_TYPE.HANDLE_REPORT,
   HANDLE_COMPLAINT: INFORMATION_TYPE.HANDLE_COMPLAINT
 }
-const complaintRow = (dto) => {
-  return `
-    <td>${dto.complaintType}</td>
-    <td>${dto.id}</td>
-    <td>${dto.title}</td>
-    <td>${dto.postDate}</td>
-    <td>${dto.employeeName}</td>
-    <td>${dto.processingDate}</td>
-    <td>${dto.processStatus}</td>
-    <td>${dto.customerName}</td>
-    <td>${dto.customerPhoneNumber}</td>
-  `;
+
+const rowLabel = {
+  HANDLE_COMPLAINT: [
+    ELEMENT_ID.COMPLAINT_TYPE,
+    ELEMENT_ID.ID,
+    ELEMENT_ID.TITLE,
+    ELEMENT_ID.POST_DATE,
+    ELEMENT_ID.EMPLOYEE_NAME,
+    ELEMENT_ID.PROCESSING_DATE,
+    ELEMENT_ID.PROCESS_STATUS,
+    ELEMENT_ID.CUSTOMER_NAME,
+    ELEMENT_ID.CUSTOMER_PHONE_NUMBER
+  ],
+  HANDLE_REPORT: [
+    ELEMENT_ID.ID,
+    ELEMENT_ID.SERVICE_TYPE,
+    ELEMENT_ID.DATE,
+    ELEMENT_ID.LOCATION,
+    ELEMENT_ID.CUSTOMER_NAME,
+    ELEMENT_ID.CUSTOMER_PHONE_NUMBER,
+    ELEMENT_ID.PROCESS_STATUS
+  ]
 }
 
-const accidentRow = (accident) => {
-  return `
-    <td>${accident.id}</td>
-    <td>${accident.serviceType}</td>
-    <td>${accident.date}</td>
-    <td>${accident.location}</td>
-    <td>${accident.customerName}</td>
-    <td>${accident.customerPhoneNumber}</td>
-    <td>${accident.processStatus}</td>
-  `;
+const rows = (dto, labels) => {
+  const items = [];
+  labels.forEach(label => {
+    const td = document.createElement(TAG.TD);
+    td.textContent = dto[label];
+    items.push(td);
+  });
+  return items;
 }
 
 const getAccidentId = (data) => {
@@ -66,7 +76,7 @@ const getComplaintId = (data) => {
 
 const context = {
   HANDLE_REPORT: {
-    title : TITLE.HANDLE_REPORT,
+    title: TITLE.HANDLE_REPORT,
     listFetch: fetchGetAllAccident,
     listFetchById: fetchGetAccident,
     comboListFetch: {
@@ -76,7 +86,6 @@ const context = {
       processing: fetchGetAllProcessingAccident
     },
     idGetter: getAccidentId,
-    rowGetter: accidentRow,
     columnList: [
       COLUMN_NAME.HANDLE_REPORT.ACCIDENT_ID,
       COLUMN_NAME.HANDLE_REPORT.SERVICE_TYPE,
@@ -88,7 +97,7 @@ const context = {
     ]
   },
   HANDLE_COMPLAINT: {
-    title : TITLE.HANDLE_COMPLAINT,
+    title: TITLE.HANDLE_COMPLAINT,
     listFetch: fetchGetAllComplaint,
     listFetchById: fetchGetComplaint,
     comboListFetch: {
@@ -97,7 +106,6 @@ const context = {
       unprocessed: fetchGetAllUnprocessedComplaint
     },
     idGetter: getComplaintId,
-    rowGetter: complaintRow,
     columnList: [
       COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_TYPE,
       COLUMN_NAME.HANDLE_COMPLAINT.COMPLAINT_ID,
@@ -132,13 +140,13 @@ const initialTable = () => {
 
 const setTitle = () => {
   const currentContext = context[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const contextTitle = document.getElementById(ELEMENT_ID.TITLE);
+  const contextTitle = document.getElementById(COMMON_ELEMENT_ID.TITLE);
   contextTitle.innerText = currentContext.title;
 }
 
 const setColumn = () => {
   const currentContext = context[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const head = document.getElementById(ELEMENT_ID.TABLE);
+  const head = document.getElementById(COMMON_ELEMENT_ID.TABLE);
   const columns = document.createElement(TAG.TR);
   currentContext.columnList.forEach(item => {
     const oneColumn = document.createElement(TAG.TH);
@@ -169,14 +177,14 @@ const setComboBox = () => {
 const setInput = () => {
   const input = document.createElement(TAG.INPUT);
   input.type = INPUT_TYPE.TEXT;
-  input.id = ELEMENT_ID.SEARCH_INPUT;
+  input.id = COMMON_ELEMENT_ID.SEARCH_INPUT;
   input.placeholder = MESSAGES.PLACE_HOLDER.SEARCH;
   return input;
 }
 
 const initTableByInput = async (id, type) => { // 추가
   const tableBody = document.getElementById(KEY.LIST);
-  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  while (tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   if (id.length > 0) {
     const item = await context[type].listFetchById(id);
     setOneRow(item, type);
@@ -191,7 +199,7 @@ const setOneRow = (item, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   const row = document.createElement(TAG.TR);
   let id = context[type].idGetter(item);
-  row.innerHTML = context[type].rowGetter(item);
+  rows(item, rowLabel[type]).forEach(rowItem => row.appendChild(rowItem));
   // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
@@ -212,12 +220,12 @@ const setOneRow = (item, type) => {
 }
 
 const setButton = () => {
-  const button = document.createElement("button");
-  button.id = ELEMENT_ID.SEARCH_BUTTON;
+  const button = document.createElement(TAG.BUTTON);
+  button.id = COMMON_ELEMENT_ID.SEARCH_BUTTON;
   button.textContent = BUTTON.COMMON.SEARCH;
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   button.addEventListener(EVENT.CLICK, () => {
-    const value = document.getElementById(ELEMENT_ID.SEARCH_INPUT).value;
+    const value = document.getElementById(COMMON_ELEMENT_ID.SEARCH_INPUT).value;
     initTableByInput(value, type);
   })
   return button;
@@ -227,9 +235,9 @@ const initTableBySelect = async (id, type) => { // 추가
   const select = document.getElementById(id);
   const selectedOption = select.options[select.selectedIndex];
   const list = await context[type].comboListFetch[selectedOption.value]();
-  if (list != null)  sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
+  if (list != null) sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
   const tableBody = document.getElementById(KEY.LIST);
-  while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
+  while (tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   setTableBody();
 }
 

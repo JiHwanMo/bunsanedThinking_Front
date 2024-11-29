@@ -9,7 +9,7 @@ import {
 import {
   BUTTON,
   CLASS, CLASS_SELECTOR,
-  ELEMENT_ID,
+  ELEMENT_ID as COMMON_ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
   KEY,
@@ -18,10 +18,12 @@ import {
   TAG
 } from "../../../../../../config/common.js";
 import {
-  COLUMN_NAME, COMBO_BOX,
+  COLUMN_NAME,
+  COMBO_BOX,
   COMBOBOX,
   INFORMATION_TYPE,
-  TITLE
+  TITLE,
+  ELEMENT_ID
 } from "../../../../../../config/employee/financialAccountant/financialAccountant.js";
 
 export const informationType = {
@@ -29,26 +31,33 @@ export const informationType = {
   VIEW_DEPOSIT_DETAIL: INFORMATION_TYPE.VIEW_DEPOSIT_DETAIL
 }
 
-const paymentDetailRow = (paymentDetail) => {
-  return `
-    <td>${paymentDetail.id}</td>
-    <td>${paymentDetail.money}</td>
-    <td>${paymentDetail.bank}</td>
-    <td>${paymentDetail.accountHolder}</td>
-    <td>${paymentDetail.bankAccount}</td>
-    <td>${paymentDetail.paymentType}</td>
-    <td>${paymentDetail.processStatus}</td>
-  `;
+const rowLabel = {
+  HANDLE_PAYMENT_DETAIL: [
+    ELEMENT_ID.ID,
+    ELEMENT_ID.MONEY,
+    ELEMENT_ID.BANK,
+    ELEMENT_ID.ACCOUNT_HOLDER,
+    ELEMENT_ID.BANK_ACCOUNT,
+    ELEMENT_ID.PAYMENT_TYPE,
+    ELEMENT_ID.PROCESS_STATUS
+  ],
+  VIEW_DEPOSIT_DETAIL: [
+    ELEMENT_ID.ID,
+    ELEMENT_ID.DEPOSITOR_NAME,
+    ELEMENT_ID.DATE,
+    ELEMENT_ID.MONEY,
+    ELEMENT_ID.PATH
+  ]
 }
 
-const depositDetailRow = (depositDetail) => {
-  return `
-    <td>${depositDetail.id}</td>
-    <td>${depositDetail.depositorName}</td>
-    <td>${depositDetail.date}</td>
-    <td>${depositDetail.money}</td>
-    <td>${depositDetail.path}</td>
-  `;
+const rows = (dto, labels) => {
+  const items = [];
+  labels.forEach(label => {
+    const td = document.createElement(TAG.TD);
+    td.textContent = dto[label];
+    items.push(td);
+  });
+  return items;
 }
 
 const getPaymentDetailId = (data) => {
@@ -62,7 +71,6 @@ const context = {
     listFetchById: fetchGetDepositDetail,
     comboListFetch: {},
     needDetail: false,
-    rowGetter: depositDetailRow,
     columnList: [
       COLUMN_NAME.VIEW_DEPOSIT_DETAIL.DEPOSIT_DETAIL_ID,
       COLUMN_NAME.VIEW_DEPOSIT_DETAIL.DEPOSITOR_NAME,
@@ -82,7 +90,6 @@ const context = {
     },
     needDetail: true,
     idGetter: getPaymentDetailId,
-    rowGetter: paymentDetailRow,
     columnList: [
       COLUMN_NAME.HANDLE_PAYMENT_DETAIL.PAYMENT_DETAIL_ID,
       COLUMN_NAME.HANDLE_PAYMENT_DETAIL.PAYMENT_DETAIL_MONEY,
@@ -115,13 +122,13 @@ const initialTable = () => {
 
 const setTitle = () => {
   const currentContext = context[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const contextTitle = document.getElementById(ELEMENT_ID.TITLE);
+  const contextTitle = document.getElementById(COMMON_ELEMENT_ID.TITLE);
   contextTitle.innerText = currentContext.title;
 }
 
 const setColumn = () => {
   const currentContext = context[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const head = document.getElementById(ELEMENT_ID.TABLE);
+  const head = document.getElementById(COMMON_ELEMENT_ID.TABLE);
   const columns = document.createElement(TAG.TR);
   currentContext.columnList.forEach(item => {
     const oneColumn = document.createElement(TAG.TH);
@@ -152,7 +159,7 @@ const setComboBox = () => {
 const setInput = () => {
   const input = document.createElement(TAG.INPUT);
   input.type = INPUT_TYPE.TEXT;
-  input.id = ELEMENT_ID.SEARCH_INPUT;
+  input.id = COMMON_ELEMENT_ID.SEARCH_INPUT;
   input.placeholder = MESSAGES.PLACE_HOLDER.SEARCH;
   return input;
 }
@@ -173,7 +180,7 @@ const initTableByInput = async (id, type) => { // 추가
 const setOneRow = (item, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   const row = document.createElement(TAG.TR);
-  row.innerHTML = context[type].rowGetter(item);
+  rows(item, rowLabel[type]).forEach(rowItem => row.appendChild(rowItem));
   // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
@@ -198,11 +205,11 @@ const setOneRow = (item, type) => {
 
 const setButton = () => {
   const button = document.createElement(TAG.BUTTON);
-  button.id = ELEMENT_ID.SEARCH_BUTTON;
+  button.id = COMMON_ELEMENT_ID.SEARCH_BUTTON;
   button.textContent = BUTTON.COMMON.SEARCH;
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   button.addEventListener(EVENT.CLICK, () => {
-    const value = document.getElementById(ELEMENT_ID.SEARCH_INPUT).value;
+    const value = document.getElementById(COMMON_ELEMENT_ID.SEARCH_INPUT).value;
     initTableByInput(value, type);
   })
   return button;

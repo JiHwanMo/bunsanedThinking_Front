@@ -132,7 +132,7 @@ const collectFormDataForPost = () => {
   const loanType = getValueById(ELEMENT_ID.LOAN_TYPE);
   const commonData = {
     loanType: loanType,
-    name: getValueById(ELEMENT_ID.LOAN_NAME),
+    name: getValueById(ELEMENT_ID.NAME),
     interestRate: getValueById(ELEMENT_ID.INTEREST_RATE),
     maximumMoney: getValueById(ELEMENT_ID.MAXIMUM_MONEY),
     minimumAsset: getValueById(ELEMENT_ID.MINIMUM_ASSET)
@@ -167,7 +167,7 @@ const collectFormDataForUpdate = () => {
   const commonData = {
     id: JSON.parse(sessionStorage.getItem(COMMON_KEY.SELECTED_DATA_ID)),
     loanType: loanType,
-    name: getValueById(ELEMENT_ID.LOAN_NAME),
+    name: getValueById(ELEMENT_ID.NAME),
     interestRate: getValueById(ELEMENT_ID.INTEREST_RATE),
     maximumMoney: getValueById(ELEMENT_ID.MAXIMUM_MONEY),
     minimumAsset: getValueById(ELEMENT_ID.MINIMUM_ASSET)
