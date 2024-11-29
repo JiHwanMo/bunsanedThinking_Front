@@ -73,7 +73,6 @@ const changeUpdateOption = (select, data, selectedButtonType) => {
   const index = select.selectedIndex;
   const input = document.getElementById(INPUT_FORM[selectedButtonType].INPUT.id);
   input.placeholder = UPDATE_OPTION_PLACEHOLDER+MESSAGES.PLACE_HOLDER.INPUT;
-  // 인덱스에 맞춰서 input 라벨 및 입력창 변경
   switch (index) {
     case 0:
       input.value = STRING_EMPTY;

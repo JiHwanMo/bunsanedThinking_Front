@@ -65,7 +65,7 @@ const setInput = () => {
   return input;
 }
 
-const initTableByInput = async (id, type) => { // 추가
+const initTableByInput = async (id, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   while(tableBody.firstChild) tableBody.removeChild(tableBody.firstChild);
   if (id.length > ZERO) {

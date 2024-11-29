@@ -37,7 +37,8 @@ export const TAG = {
   TABLE: "table",
   TBODY: "tbody",
   BUTTON: "button",
-  TEXT_AREA: "textarea"
+  TEXT_AREA: "textarea",
+  IMAGE: "img"
 }
 
 export const KEY = {
