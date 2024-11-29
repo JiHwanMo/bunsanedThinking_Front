@@ -5,38 +5,38 @@ import {
 import {renderButtons} from "../../../buttonManager/employee/compensation/detail.js";
 import {ELEMENT_ID, KEY, TAG} from "../../../../../../config/common.js";
 import {
-  ACCIDENT_PROCESS_STATUS_STR, INSURANCE_MONEY_DETAIL_LABEL, REPORT_DETAIL_LABEL, REPORT_PROCESS_STATUS_STR,
+  ACCIDENT_PROCESS_STATUS_STR, IMAGE_SRC, INSURANCE_MONEY_DETAIL_LABEL, REPORT_DETAIL_LABEL, REPORT_PROCESS_STATUS_STR,
   SERVICE_TYPE_STR
 } from "../../../../../../config/employee/compensation/compensation.js";
 
 const reportDetail = (data) => {
   const accident = data.accident;
   return [
-    { label: REPORT_DETAIL_LABEL.ID,                                  value: data.id },
-    { label: REPORT_DETAIL_LABEL.ACCIDENT_ID,                         value: accident.id },
-    { label: REPORT_DETAIL_LABEL.SERVICE_TYPE,                        value: SERVICE_TYPE_STR[accident.serviceType] },
-    { label: REPORT_DETAIL_LABEL.DATE,                                value: accident.date },
-    { label: REPORT_DETAIL_LABEL.LOCATION,                            value: accident.location },
-    { label: REPORT_DETAIL_LABEL.CUSTOMER_NAME,                       value: accident.customerName },
-    { label: REPORT_DETAIL_LABEL.CUSTOMER_PHONE_NUMBER,               value: accident.customerPhoneNumber },
-    { label: REPORT_DETAIL_LABEL.ACCIDENT_PROCESS_STATUS,             value: ACCIDENT_PROCESS_STATUS_STR[accident.processStatus] },
-    { label: REPORT_DETAIL_LABEL.REPORT_PROCESS_STATUS,               value: REPORT_PROCESS_STATUS_STR[data.processStatus] },
-    { label: REPORT_DETAIL_LABEL.DAMAGE_ASSESSMENT_COMPANY_ID,        value: data.damageAssessmentCompanyID },
-    { label: REPORT_DETAIL_LABEL.ROADSIDE_ASSISTANCE_COMPANY_ID,      value: data.roadsideAssistanceCompanyID },
-    { label: REPORT_DETAIL_LABEL.DAMAGE_ASSESSMENT_MONEY,             value: data.damageAssessmentMoney }
+    { label: REPORT_DETAIL_LABEL.ID,                                  value: data.id,                                               isImage: false },
+    { label: REPORT_DETAIL_LABEL.ACCIDENT_ID,                         value: accident.id,                                           isImage: false },
+    { label: REPORT_DETAIL_LABEL.SERVICE_TYPE,                        value: SERVICE_TYPE_STR[accident.serviceType],                isImage: false },
+    { label: REPORT_DETAIL_LABEL.DATE,                                value: accident.date,                                         isImage: false },
+    { label: REPORT_DETAIL_LABEL.LOCATION,                            value: accident.location,                                     isImage: false },
+    { label: REPORT_DETAIL_LABEL.CUSTOMER_NAME,                       value: accident.customerName,                                 isImage: false },
+    { label: REPORT_DETAIL_LABEL.CUSTOMER_PHONE_NUMBER,               value: accident.customerPhoneNumber,                          isImage: false },
+    { label: REPORT_DETAIL_LABEL.ACCIDENT_PROCESS_STATUS,             value: ACCIDENT_PROCESS_STATUS_STR[accident.processStatus],   isImage: false },
+    { label: REPORT_DETAIL_LABEL.REPORT_PROCESS_STATUS,               value: REPORT_PROCESS_STATUS_STR[data.processStatus],         isImage: false },
+    { label: REPORT_DETAIL_LABEL.DAMAGE_ASSESSMENT_COMPANY_ID,        value: data.damageAssessmentCompanyID,                        isImage: false },
+    { label: REPORT_DETAIL_LABEL.ROADSIDE_ASSISTANCE_COMPANY_ID,      value: data.roadsideAssistanceCompanyID,                      isImage: false },
+    { label: REPORT_DETAIL_LABEL.DAMAGE_ASSESSMENT_MONEY,             value: data.damageAssessmentMoney,                            isImage: false }
   ];
 }
 
 const insuranceMoneyDetail = (data) => {
   return [
-    { label: INSURANCE_MONEY_DETAIL_LABEL.ID,                         value: data.id },
-    { label: INSURANCE_MONEY_DETAIL_LABEL.PRODUCT_TYPE,               value: data.productType },
-    { label: INSURANCE_MONEY_DETAIL_LABEL.APPLY_DATE,                 value: data.applyDate },
-    { label: INSURANCE_MONEY_DETAIL_LABEL.CUSTOMER_NAME,              value: data.customerName },
-    { label: INSURANCE_MONEY_DETAIL_LABEL.PROCESS_STATUS,             value: data.processStatus },
-    { label: INSURANCE_MONEY_DETAIL_LABEL.MEDICAL_CERTIFICATE,        value: data.medicalCertificate },
-    { label: INSURANCE_MONEY_DETAIL_LABEL.RECEIPT,                    value: data.receipt },
-    { label: INSURANCE_MONEY_DETAIL_LABEL.RESIDENT_REGISTRATION_CARD, value: data.residentRegistrationCard }
+    { label: INSURANCE_MONEY_DETAIL_LABEL.ID,                         value: data.id,                                               isImage: false },
+    { label: INSURANCE_MONEY_DETAIL_LABEL.PRODUCT_TYPE,               value: data.productType,                                      isImage: false },
+    { label: INSURANCE_MONEY_DETAIL_LABEL.APPLY_DATE,                 value: data.applyDate,                                        isImage: false },
+    { label: INSURANCE_MONEY_DETAIL_LABEL.CUSTOMER_NAME,              value: data.customerName,                                     isImage: false },
+    { label: INSURANCE_MONEY_DETAIL_LABEL.PROCESS_STATUS,             value: data.processStatus,                                    isImage: false },
+    { label: INSURANCE_MONEY_DETAIL_LABEL.MEDICAL_CERTIFICATE,        value: data.medicalCertificate,                               isImage: true },
+    { label: INSURANCE_MONEY_DETAIL_LABEL.RECEIPT,                    value: data.receipt,                                          isImage: true },
+    { label: INSURANCE_MONEY_DETAIL_LABEL.RESIDENT_REGISTRATION_CARD, value: data.residentRegistrationCard,                         isImage: true }
   ];
 }
 
@@ -98,8 +98,12 @@ const renderDetailsTable = (data) => {
       const labelCell = document.createElement(TAG.TH);
       labelCell.textContent = detail.label;
 
-      const valueCell = document.createElement(TAG.TD);
-      valueCell.textContent = detail.value;
+      const valueCell =  document.createElement(TAG.TD);
+      if (detail.isImage) {
+        const valueImage = document.createElement(TAG.IMAGE);
+        valueImage.src = IMAGE_SRC(detail.value);
+        valueCell.appendChild(valueImage);
+      } else valueCell.textContent = detail.value;
 
       row.appendChild(labelCell);
       row.appendChild(valueCell);
