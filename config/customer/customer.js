@@ -444,6 +444,13 @@ export const INPUT_FORM = {
   }
 }
 
+export const RECEIVE_INSURANCE_DTO = {
+  CONTRACT_ID: "contractId",
+  MEDICAL_CERTIFICATE: "medicalCertificate",
+  RECEIPT: "receipt",
+  RESIDENT_REGISTRATION_CARD: "residentRegistrationCard"
+}
+
 export const INSURANCE_TYPE_STR = {
   Disease: "질병",
   Automobile: "자동차",

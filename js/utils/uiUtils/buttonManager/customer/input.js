@@ -1,5 +1,5 @@
 import {initialButtons} from "../../common/buttonUtils.js";
-import {ALERT, BUTTON, INPUT_FORM} from "../../../../../config/customer/customer.js";
+import {ALERT, BUTTON, INPUT_FORM, RECEIVE_INSURANCE_DTO} from "../../../../../config/customer/customer.js";
 import {
   fetchApplyEndorsementById, fetchAskInsuranceCounsel, fetchComplain, fetchGetAllAutomobileContractByCustomerId,
   fetchPayInsurancefee,
@@ -57,12 +57,12 @@ const payInsuranceFee = async () => {
 
 const getReceiveInsuranceDTO = (contractId, medicalCertificate,
                                 receipt, residentRegistrationCard) => {
-  return {
-    contractId: contractId,
-    medicalCertificate: medicalCertificate,
-    receipt: receipt,
-    residentRegistrationCard: residentRegistrationCard
-  }
+  const formData = new FormData();
+  formData.append(RECEIVE_INSURANCE_DTO.CONTRACT_ID, contractId);
+  formData.append(RECEIVE_INSURANCE_DTO.MEDICAL_CERTIFICATE, medicalCertificate);
+  formData.append(RECEIVE_INSURANCE_DTO.RECEIPT, receipt);
+  formData.append(RECEIVE_INSURANCE_DTO.RESIDENT_REGISTRATION_CARD, residentRegistrationCard);
+  return formData;
 }
 
 const receiveInsurance = async () => {
@@ -70,15 +70,18 @@ const receiveInsurance = async () => {
   if (!confirm(ALERT.CONFIRM.RECEIVE_INSURANCE)) return;
   const inputForm = getInputForm();
   const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  const medicalCertificate = document.getElementById(inputForm.MEDICAL_CERTIFICATE.id).value;
-  const receipt = document.getElementById(inputForm.RECEIPT.id).value;
-  const residentRegistrationCard = document.getElementById(inputForm.RESIDENT_REGISTRATION_CARD.id).value;
-  if (medicalCertificate === STRING_EMPTY) alert(inputForm.MEDICAL_CERTIFICATE.exception);
-  else if (receipt === STRING_EMPTY) alert(inputForm.RECEIPT.exception);
-  else if (residentRegistrationCard === STRING_EMPTY) alert(inputForm.RESIDENT_REGISTRATION_CARD.exception);
+  const medicalCertificate = document.getElementById(inputForm.MEDICAL_CERTIFICATE.id).files;
+  const receipt = document.getElementById(inputForm.RECEIPT.id).files;
+  const residentRegistrationCard = document.getElementById(inputForm.RESIDENT_REGISTRATION_CARD.id).files;
+  if (medicalCertificate.length === ZERO) alert(inputForm.MEDICAL_CERTIFICATE.exception);
+  else if (receipt.length === ZERO) alert(inputForm.RECEIPT.exception);
+  else if (residentRegistrationCard.length === ZERO) alert(inputForm.RESIDENT_REGISTRATION_CARD.exception);
   else {
+    console.log(medicalCertificate);
+    console.log(receipt);
+    console.log(residentRegistrationCard);
     const receiveInsuranceDTO = getReceiveInsuranceDTO(contractId,
-      medicalCertificate, receipt, residentRegistrationCard);
+      medicalCertificate[ZERO], receipt[ZERO], residentRegistrationCard[ZERO]);
     const result = await fetchReceiveInsurance(receiveInsuranceDTO);
     if (result == null) return;
     alert(ALERT.OK.RECEIVE_INSURANCE);
