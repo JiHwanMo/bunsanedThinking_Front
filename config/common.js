@@ -57,7 +57,8 @@ export const ELEMENT_ID = {
   TABLE: "tableHead",
   INPUT_FIELDS_CONTAINER: "inputFieldsContainer",
   BUTTON_CONTAINER: "buttonContainer",
-  COMBO_BOX_CONTAINER: "comboBoxContainer"
+  COMBO_BOX_CONTAINER: "comboBoxContainer",
+  STAR_BUTTONS_CONTAINER: "starButtonsContainer"
 }
 
 export const CLASS = {

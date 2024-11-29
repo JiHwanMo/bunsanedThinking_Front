@@ -12,7 +12,7 @@ import {
 import {
   BUTTON,
   CLASS,
-  CLASS_SELECTOR,
+  CLASS_SELECTOR, ELEMENT_ID,
   EVENT,
   KEY,
   LOCATION,
@@ -33,7 +33,7 @@ const context= {
 }
 
 export const addStarButtons = () => {
-  const starButtonsContainer = document.getElementById(CLASS.STAR_BUTTONS_CONTAINER);
+  const starButtonsContainer = document.getElementById(ELEMENT_ID.STAR_BUTTONS_CONTAINER);
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   const employeeId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
 
@@ -41,10 +41,12 @@ export const addStarButtons = () => {
     const button = document.createElement(TAG.DIV);
     button.className = CLASS.STAR_BUTTON;
     button.innerHTML =  SALES_BUTTON.TASK.EMPLOYEE.SALES.EVALUATE_SALES_PERFORMANCE.INPUT.STAR.repeat(i);
-    button.addEventListener(EVENT.CLICK, () => {
-      context[type].fetchGetById(i, employeeId);
-      alert(POP_UP.EVALUATION);
-      window.location.href=LOCATION.HOME;
+    button.addEventListener(EVENT.CLICK, async () => {
+      const result = await context[type].fetchGetById(i, employeeId);
+      if(result !== null) {
+        alert(POP_UP.EVALUATION);
+        window.location.href = LOCATION.HOME;
+      }
     });
     starButtonsContainer.appendChild(button);
   }
@@ -59,12 +61,13 @@ export const renderBottomButtons = (container) => {
     const requestButton = document.createElement(TAG.BUTTON);
     requestButton.textContent = SALES_BUTTON.TASK.EMPLOYEE.SALES.INDUCE_INSURANCE_PRODUCT.INSURANCE_ENROLLMENT_REQUEST;
     requestButton.className = CLASS.ACTION_BUTTON;
-    requestButton.addEventListener(EVENT.CLICK, () => {
-      alert(POP_UP.INSURANCE_ENROLLMENT_REQUEST);
+    requestButton.addEventListener(EVENT.CLICK, async () => {
       const formData = collectFormData();
-      console.log(formData);
-      context[type].fetchInduce(formData);
-      window.location.href=LOCATION.HOME;
+      const result = await context[type].fetchInduce(formData);
+      if(result !== null){
+        alert(POP_UP.INSURANCE_ENROLLMENT_REQUEST);
+        window.location.href = LOCATION.HOME;
+      }
     });
 
     const cancelButton = document.createElement(TAG.BUTTON);
@@ -80,12 +83,13 @@ export const renderBottomButtons = (container) => {
     const loanButton = document.createElement(TAG.BUTTON);
     loanButton.textContent = SALES_BUTTON.TASK.EMPLOYEE.SALES.INDUCE_LOAN_PRODUCT.LOAN_REQUEST;
     loanButton.className = CLASS.ACTION_BUTTON;
-    loanButton.addEventListener(EVENT.CLICK, () => {
-      alert(POP_UP.LOAN_REQUEST);
+    loanButton.addEventListener(EVENT.CLICK, async () => {
       const formData = collectFormData();
-      console.log(formData);
-      context[type].fetchInduce(formData);
-      window.location.href=LOCATION.HOME;
+      const result = await context[type].fetchInduce(formData);
+      if(result !== null){
+        alert(POP_UP.LOAN_REQUEST);
+        window.location.href = LOCATION.HOME;
+      }
     });
 
     const cancelButton = document.createElement(TAG.BUTTON);

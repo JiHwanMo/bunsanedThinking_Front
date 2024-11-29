@@ -50,9 +50,11 @@ export const addButtons = (buttonContainer) => {
         const userConfirmed = confirm(POP_UP.POST.QUESTION);
         if (userConfirmed) {
         const formData = collectFormDataForPost();
-        await context[type].fetchAddInsurance[formData.insuranceType](formData);
-        alert(POP_UP.POST.OK);
-        window.location.href = LOCATION.HOME
+        const result = await context[type].fetchAddInsurance[formData.insuranceType](formData);
+          if(result !== null){
+            alert(POP_UP.POST.OK);
+            window.location.href = LOCATION.HOME
+          }
         } else {
           window.history.back();
         }
@@ -65,9 +67,11 @@ export const addButtons = (buttonContainer) => {
         const userConfirmed = confirm(POP_UP.UPDATE.QUESTION);
         if (userConfirmed) {
         const formData = collectFormDataForUpdate();
-        await context[type].fetchUpdateInsurance[formData.insuranceType](formData);
-        alert(POP_UP.UPDATE.OK);
-        window.location.href = LOCATION.HOME
+        const result = await context[type].fetchUpdateInsurance[formData.insuranceType](formData);
+          if(result !== null){
+            alert(POP_UP.UPDATE.OK);
+            window.location.href = LOCATION.HOME
+          }
         } else {
           window.history.back();
         }
@@ -140,7 +144,7 @@ const collectFormDataForUpdate = () => {
     );
   };
 
-  const insuranceType = JSON.parse(sessionStorage.getItem(PRODUCT_MANAGEMENT_KEY.SELECTED_DATA_INSURANCE_TYPE)); // UPDATE는 세션 데이터 사용
+  const insuranceType = sessionStorage.getItem(PRODUCT_MANAGEMENT_KEY.SELECTED_DATA_INSURANCE_TYPE); // UPDATE는 세션 데이터 사용
   const commonData = {
     id: JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID)), // UPDATE는 id 포함
     insuranceType,
