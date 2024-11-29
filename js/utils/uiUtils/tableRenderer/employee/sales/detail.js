@@ -154,9 +154,11 @@ export const renderDetails = async () => {
   // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
-    console.log(selectedData)
-    renderDetailsTable(selectedData);
-    renderButtons(selectedDataId);
+    if(selectedData !== null){
+      renderDetailsTable(selectedData);
+      renderButtons(selectedDataId);
+    } else
+      window.history.back();
   }
 };
 
@@ -213,9 +215,11 @@ const renderButtons = (selectedDataId) => {
 };
 
 const reservationInsuranceCounsel = async (selectedDataId) => {
-  alert(POP_UP.RESERVATION);
-  await context.HANDLE_INSURANCE_CONSULTATION.fetchHandleInsuranceConsultation(selectedDataId)
-  window.location.href = LOCATION.HOME;
+  const result = await context.HANDLE_INSURANCE_CONSULTATION.fetchHandleInsuranceConsultation(selectedDataId)
+  if(result !== null){
+    alert(POP_UP.RESERVATION);
+    window.location.href = LOCATION.HOME;
+  }
 }
 
 const evaluationSales = (selectedDataId) => {

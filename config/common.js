@@ -57,7 +57,8 @@ export const ELEMENT_ID = {
   TABLE: "tableHead",
   INPUT_FIELDS_CONTAINER: "inputFieldsContainer",
   BUTTON_CONTAINER: "buttonContainer",
-  COMBO_BOX_CONTAINER: "comboBoxContainer"
+  COMBO_BOX_CONTAINER: "comboBoxContainer",
+  STAR_BUTTONS_CONTAINER: "starButtonsContainer"
 }
 
 export const CLASS = {
@@ -77,7 +78,10 @@ export const CLASS = {
   SECTION_HEADER: "section-header",
   ADD_BUTTON: "add-button",
   REMOVE_BUTTON: "remove-button",
-  INPUT_FIELD: "input-field"
+  INPUT_FIELD: "input-field",
+  GENDER_BUTTON: "gender-button",
+  BUTTON_CONTAINER: "button-container",
+  ACTION_BUTTON: "action-button"
 }
 
 export const LOCATION = {
@@ -106,7 +110,8 @@ export const CLASS_SELECTOR = {
   SEARCH_CONTAINER: ".search-container",
   RADIO_GROUP: ".radio-group",
   BUTTON_GROUP: ".button-group",
-  FORM_GROUP: ".form-group"
+  FORM_GROUP: ".form-group",
+  GENDER_BUTTON: ".gender-button"
 }
 
 export const STRING_EMPTY = "";

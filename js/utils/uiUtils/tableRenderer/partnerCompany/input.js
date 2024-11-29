@@ -1,12 +1,13 @@
-import { DETAIL_COLUMN_NAME } from '../../../../../config/partnerCompany/partnerCompany.js';
-import { fetchGetReport } from '../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js';
-import { addButtons } from '../../buttonManager/partnerCompany/input.js';
+import { fetchGetReport } from "../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js";
+import { addButtons } from "../../buttonManager/partnerCompany/input.js";
+import { DETAIL_COLUMN_NAME } from "../../../../../config/partnerCompany/partnerCompany.js";
+import {ELEMENT_ID, KEY, STRING_EMPTY} from "../../../../../config/common.js";
 
 export const renderInput = async () => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
-  const buttonContainer = document.getElementById("buttonContainer");
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
+  const buttonContainer = document.getElementById(ELEMENT_ID.BUTTON_CONTAINER);
 
-  const selectedDataId = JSON.parse(sessionStorage.getItem("selectedDataId"));
+  const selectedDataId = JSON.parse(sessionStorage.getItem(KEY.SELECTED_DATA_ID));
   const reportData = await fetchGetReport(selectedDataId);
   renderInputFields(reportData);
 
@@ -15,8 +16,8 @@ export const renderInput = async () => {
 };
 
 const renderInputFields = (data) => {
-  const inputFieldsContainer = document.getElementById("inputFieldsContainer");
-  let placeholderValue = data.damageAssessmentMoney || "";
+  const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
+  let placeholderValue = data.damageAssessmentMoney || STRING_EMPTY;
 
   inputFieldsContainer.innerHTML = `
     <div class="form-group">

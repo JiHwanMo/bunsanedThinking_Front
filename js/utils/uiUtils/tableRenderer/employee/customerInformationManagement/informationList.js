@@ -8,16 +8,15 @@ import {
   INPUT_TYPE,
   KEY,
   LOCATION,
-  MESSAGES,
+  MESSAGES, STRING_EMPTY,
   TAG
-} from '../../../../../../config/common.js';
+} from "../../../../../../config/common.js";
 import {
   CLASS,
   COMBOBOX,
   TYPE, VALUE
-} from '../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js';
-import { TABLE_TITLE } from '../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js';
-import { COLUMN_NAME } from '../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js';
+} from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
+import { TABLE_TITLE, COLUMN_NAME  } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
 
 const customerInformationRow = (dto) => {
   return `
@@ -36,7 +35,6 @@ const customerInformationRow = (dto) => {
 
 const context = {
   CUSTOMERINFORMATION_LIST: {
-    // title: "고객 정보 리스트",
     needDetail: true,
     listFetch: fetchGetAllCustomerInformation,
     listFetchById: fetchGetCustomerInformation,
@@ -190,7 +188,7 @@ const setOneRow = (item, type) => {
 
 const setTableBody = () => {
   const tableBody = document.getElementById(KEY.LIST);
-  tableBody.innerHTML= "";
+  tableBody.innerHTML= STRING_EMPTY;
 
   const data = JSON.parse(sessionStorage.getItem(KEY.LIST)) || [];
   data.forEach(item => {

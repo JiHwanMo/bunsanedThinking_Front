@@ -114,15 +114,21 @@ const renderButtons = (selectedDataId) => {
 };
 
 const acceptanceInsurance = async (selectedDataId) => {
-  await context.REVIEW_ACQUISITION.fetchReviewAcquisition(selectedDataId, true);
-  alert(POP_UP.ACCEPTANCE);
-  window.location.href = LOCATION.HOME;
+  const result = await context.REVIEW_ACQUISITION.fetchReviewAcquisition(selectedDataId, true);
+  if(result !== null){
+    alert(POP_UP.ACCEPTANCE);
+    window.location.href = LOCATION.HOME;
+  } else
+    window.history.back()
 };
 
 const deniedInsurance = async (selectedDataId) => {
-  await context.REVIEW_ACQUISITION.fetchReviewAcquisition(selectedDataId, false);
-  alert(POP_UP.DENIED);
-  window.location.href = LOCATION.HOME;
+  const result = await context.REVIEW_ACQUISITION.fetchReviewAcquisition(selectedDataId, false);
+  if(result !== null) {
+    alert(POP_UP.DENIED);
+    window.location.href = LOCATION.HOME;
+  } else
+    window.history.back()
 };
 
 const underwritingTaskMapper = (selectedDataId) => ({

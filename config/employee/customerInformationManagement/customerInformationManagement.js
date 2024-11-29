@@ -162,9 +162,17 @@ export const CLASS = {
 }
 
 export const CLASS_SELECTOR = {
-  BASIC_INPUT_CONTAINER: ".basic-input-container"
+  BASIC_INPUT_CONTAINER: ".basic-input-container",
+  ACCIDENT_HISTORY_ENTRY: ".accident-history-entry",
+  SURGERY_HISTORY_ENTRY: ".surgery-history-entry",
+  DISEASE_HISTORY_ENTRY: ".disease-history-entry",
+  REMOVE_BUTTON: ".remove-button"
 }
 
 export const token = {
   HIDDEN: "hidden"
+}
+
+export const MESSAGES = {
+  NONE: "없음"
 }

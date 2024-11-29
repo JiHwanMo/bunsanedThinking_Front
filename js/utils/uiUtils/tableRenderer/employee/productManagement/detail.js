@@ -1,7 +1,7 @@
 import {
   BUTTON,
   DETAIL_COLUMN_NAME,
-  INSURANCE_TYPE,
+  INSURANCE_TYPE, KEY as PRODUCT_MANAGEMENT_KEY,
   POP_UP, VALUE
 } from "../../../../../../config/employee/productManagement/productManagement.js";
 import {
@@ -77,6 +77,7 @@ export const renderDetails = async () => {
   // 세션에 데이터가 있으면 렌더링
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
+    sessionStorage.setItem(PRODUCT_MANAGEMENT_KEY.SELECTED_DATA_INSURANCE_TYPE, selectedData.insuranceType);
     renderDetailsTable(selectedData);
     renderButtons();
   }

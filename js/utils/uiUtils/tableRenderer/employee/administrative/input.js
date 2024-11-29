@@ -1,7 +1,7 @@
-import {DETAIL_COLUMN_NAME, VALUE, ELEMENT_ID as ADMINISTRATIVE_ELEMENT_ID} from "../../../../../../config/employee/administrative/administrative.js";
 import { fetchGetOfficeSupply } from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
 import { addButtons } from "../../../buttonManager/employee/administrative/input.js";
-import {ELEMENT_ID, EVENT, KEY} from "../../../../../../config/common.js";
+import {ELEMENT_ID, EVENT, KEY, STRING_EMPTY} from "../../../../../../config/common.js";
+import {DETAIL_COLUMN_NAME, VALUE, ELEMENT_ID as ADMINISTRATIVE_ELEMENT_ID} from "../../../../../../config/employee/administrative/administrative.js";
 
 export const renderInput = async () => {
   const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
@@ -51,9 +51,8 @@ const renderInputFields = (data) => {
       </div>
     `;
   } else if (selectedButtonType === VALUE.UPDATE) {
-    // 기본 선택은 "비품 이름"
     let selectedIndex = 1;
-    let placeholderValue = data.name || "";
+    let placeholderValue = data.name || STRING_EMPTY;
 
     inputFieldsContainer.innerHTML = `
       <div class="form-group">
@@ -79,11 +78,11 @@ const renderInputFields = (data) => {
 
       // 선택된 항목에 따라 입력 필드 값 변경
       if (selectedIndex === 1) {
-        placeholderValue = data.name || "";
+        placeholderValue = data.name || STRING_EMPTY;
       } else if (selectedIndex === 2) {
-        placeholderValue = data.description || "";
+        placeholderValue = data.description || STRING_EMPTY;
       } else if (selectedIndex === 3) {
-        placeholderValue = data.inventory || "";
+        placeholderValue = data.inventory || STRING_EMPTY;
       }
 
       inputElement.value = placeholderValue;

@@ -2,6 +2,7 @@ import { fetchAddDepartmentHandler} from '../../../apiHandler/employee/managemen
 import { fetchDeleteDepartmentHandler } from '../../../apiHandler/employee/managementPlanning/managementPlanning.js';
 import { fetchGetDepartmentHandler } from '../../../apiHandler/employee/managementPlanning/managementPlanning.js';
 import { fetchUpdateDepartmentHandler } from '../../../apiHandler/employee/managementPlanning/managementPlanning.js';
+import { fetchGetAllDepartmentHandler } from '../../../apiHandler/employee/managementPlanning/managementPlanning.js';
 
 // 일단 테스트 했습니다.
 export const fetchAddDepartment = async(addDepartmentDTO)  => {
@@ -29,10 +30,10 @@ export const fetchDeleteDepartment = async(id)  => {
 export const fetchGetDepartment = async(id)  => {
   return await fetchGetDepartmentHandler(id);
 }
-// (async () => {
-//   const data = await fetchGetDepartment(91010);
-//   console.log(data);
-// })();
+(async () => {
+  const data = await fetchGetDepartment(91012);
+  console.log(data);
+})();
 
 export const fetchUpdateDepartment = async(updateDepartmentDTO)  => {
   return await fetchUpdateDepartmentHandler(updateDepartmentDTO);
@@ -76,3 +77,7 @@ export const fetchUpdateDepartment = async(updateDepartmentDTO)  => {
 //   const data = await fetchUpdateDepartment(updateDepartmentDTO);
 //   console.log(data);
 // })();
+
+export const fetchGetAllDepartment = async()  => {
+  return await fetchGetAllDepartmentHandler();
+}

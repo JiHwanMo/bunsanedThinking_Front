@@ -122,8 +122,11 @@ const context = {
 export const viewInformationListAll = async (fetchType) => {
   sessionStorage.setItem(KEY.CURRENT_TYPE, fetchType);
   let list = await context[fetchType].listFetch();
-  sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
-  window.location.href = LOCATION.INFORMATION;
+  if(list !== null){
+    sessionStorage.setItem(KEY.LIST, JSON.stringify(list));
+    window.location.href = LOCATION.INFORMATION;
+  } else
+    window.history.back();
 };
 
 export const renderTable = () => {

@@ -1,6 +1,16 @@
 import {addStarButtons, renderBottomButtons} from "../../../buttonManager/employee/sales/input.js";
-import { NAME_MAPPER } from "../../../../../../config/employee/sales/sales.js";
-import {CLASS, ELEMENT_ID, EVENT, KEY, TAG} from "../../../../../../config/common.js";
+import {CUSTOMER_FORM, DATE, ID, INPUT, NAME_MAPPER} from "../../../../../../config/employee/sales/sales.js";
+import {
+  CLASS,
+  CLASS_SELECTOR,
+  ELEMENT_ID,
+  EVENT,
+  INPUT_TYPE,
+  KEY,
+  MINUS,
+  PLUS,
+  TAG
+} from "../../../../../../config/common.js";
 
 export function renderInput() {
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
@@ -13,97 +23,97 @@ export function renderInput() {
 
 const customerForms = [
   {
-    isTextArea: false,
-    for: "name",
-    label: "NAME",
-    type: "text",
-    id: "name",
-    name: "name",
-    placeholder: "고객 이름"
+    isTextArea: CUSTOMER_FORM.NAME.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.NAME.FOR,
+    label: CUSTOMER_FORM.NAME.LABEL,
+    type: CUSTOMER_FORM.NAME.TYPE,
+    id: CUSTOMER_FORM.NAME.ID,
+    name: CUSTOMER_FORM.NAME.NAME,
+    placeholder: CUSTOMER_FORM.NAME.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "age",
-    label: "AGE",
-    type: "number",
-    id: "age",
-    name: "age",
-    placeholder: "고객 나이"
+    isTextArea: CUSTOMER_FORM.AGE.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.AGE.FOR,
+    label: CUSTOMER_FORM.AGE.LABEL,
+    type: CUSTOMER_FORM.AGE.TYPE,
+    id: CUSTOMER_FORM.AGE.ID,
+    name: CUSTOMER_FORM.AGE.NAME,
+    placeholder: CUSTOMER_FORM.AGE.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "gender",
-    label: "GENDER",
-    type: "button-group", // 버튼 그룹으로 표시
-    id: "gender",
-    name: "gender",
+    isTextArea: CUSTOMER_FORM.GENDER.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.GENDER.FOR,
+    label: CUSTOMER_FORM.GENDER.LABEL,
+    type: CUSTOMER_FORM.GENDER.TYPE,
+    id: CUSTOMER_FORM.GENDER.ID,
+    name: CUSTOMER_FORM.GENDER.NAME,
     options: [
-      { value: "Male", text: "남자" },
-      { value: "Female", text: "여자" }
+      {value: CUSTOMER_FORM.GENDER.OPTION.MALE.VALUE, text: CUSTOMER_FORM.GENDER.OPTION.MALE.TEXT},
+      {value: CUSTOMER_FORM.GENDER.OPTION.FEMALE.VALUE, text: CUSTOMER_FORM.GENDER.OPTION.FEMALE.TEXT}
     ]
   },
   {
-    isTextArea: false,
-    for: "address",
-    label: "ADDRESS",
-    type: "text",
-    id: "address",
-    name: "address",
-    placeholder: "주소"
+    isTextArea: CUSTOMER_FORM.ADDRESS.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.ADDRESS.FOR,
+    label: CUSTOMER_FORM.ADDRESS.LABEL,
+    type: CUSTOMER_FORM.ADDRESS.TYPE,
+    id: CUSTOMER_FORM.ADDRESS.ID,
+    name: CUSTOMER_FORM.ADDRESS.NAME,
+    placeholder: CUSTOMER_FORM.ADDRESS.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "phoneNumber",
-    label: "PHONE_NUMBER",
-    type: "text",
-    id: "phoneNumber",
-    name: "phoneNumber",
-    placeholder: "전화번호"
+    isTextArea: CUSTOMER_FORM.PHONE_NUMBER.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.PHONE_NUMBER.FOR,
+    label: CUSTOMER_FORM.PHONE_NUMBER.LABEL,
+    type: CUSTOMER_FORM.PHONE_NUMBER.TYPE,
+    id: CUSTOMER_FORM.PHONE_NUMBER.ID,
+    name: CUSTOMER_FORM.PHONE_NUMBER.NAME,
+    placeholder: CUSTOMER_FORM.PHONE_NUMBER.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "residentRegistrationNumber",
-    label: "RESIDENT_REGISTRATION_NUMBER",
-    type: "text",
-    id: "residentRegistrationNumber",
-    name: "residentRegistrationNumber",
-    placeholder: "주민등록번호"
+    isTextArea: CUSTOMER_FORM.RESIDENT_REGISTRATION_NUMBER.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.RESIDENT_REGISTRATION_NUMBER.FOR,
+    label: CUSTOMER_FORM.RESIDENT_REGISTRATION_NUMBER.LABEL,
+    type: CUSTOMER_FORM.RESIDENT_REGISTRATION_NUMBER.TYPE,
+    id: CUSTOMER_FORM.RESIDENT_REGISTRATION_NUMBER.ID,
+    name: CUSTOMER_FORM.RESIDENT_REGISTRATION_NUMBER.NAME,
+    placeholder: CUSTOMER_FORM.RESIDENT_REGISTRATION_NUMBER.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "job",
-    label: "JOB",
-    type: "text",
-    id: "job",
-    name: "job",
-    placeholder: "직업"
+    isTextArea: CUSTOMER_FORM.JOB.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.JOB.FOR,
+    label: CUSTOMER_FORM.JOB.LABEL,
+    type: CUSTOMER_FORM.JOB.TYPE,
+    id: CUSTOMER_FORM.JOB.ID,
+    name: CUSTOMER_FORM.JOB.NAME,
+    placeholder: CUSTOMER_FORM.JOB.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "bankAccount",
-    label: "BANK_ACCOUNT",
-    type: "text",
-    id: "bankAccount",
-    name: "bankAccount",
-    placeholder: "은행 계좌"
+    isTextArea: CUSTOMER_FORM.BANK_ACCOUNT.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.BANK_ACCOUNT.FOR,
+    label: CUSTOMER_FORM.BANK_ACCOUNT.LABEL,
+    type: CUSTOMER_FORM.BANK_ACCOUNT.TYPE,
+    id: CUSTOMER_FORM.BANK_ACCOUNT.ID,
+    name: CUSTOMER_FORM.BANK_ACCOUNT.NAME,
+    placeholder: CUSTOMER_FORM.BANK_ACCOUNT.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "bankName",
-    label: "BANK_NAME",
-    type: "text",
-    id: "bankName",
-    name: "bankName",
-    placeholder: "은행 이름"
+    isTextArea: CUSTOMER_FORM.BANK_NAME.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.BANK_NAME.FOR,
+    label: CUSTOMER_FORM.BANK_NAME.LABEL,
+    type: CUSTOMER_FORM.BANK_NAME.TYPE,
+    id: CUSTOMER_FORM.BANK_NAME.ID,
+    name: CUSTOMER_FORM.BANK_NAME.NAME,
+    placeholder: CUSTOMER_FORM.BANK_NAME.PLACE_HOLDER
   },
   {
-    isTextArea: false,
-    for: "property",
-    label: "PROPERTY",
-    type: "number",
-    id: "property",
-    name: "property",
-    placeholder: "자산"
+    isTextArea: CUSTOMER_FORM.PROPERTY.IS_TEXT_AREA,
+    for: CUSTOMER_FORM.PROPERTY.FOR,
+    label: CUSTOMER_FORM.PROPERTY.LABEL,
+    type: CUSTOMER_FORM.PROPERTY.TYPE,
+    id: CUSTOMER_FORM.PROPERTY.ID,
+    name: CUSTOMER_FORM.PROPERTY.NAME,
+    placeholder: CUSTOMER_FORM.PROPERTY.PLACE_HOLDER
   }
 ];
 
@@ -122,9 +132,9 @@ const createCustomerForm = (form) => {
     form.options.forEach((option) => {
       const button = document.createElement(TAG.BUTTON);
       button.textContent = option.text; // 버튼에 표시할 텍스트
-      button.className = "gender-button";
+      button.className = CLASS.GENDER_BUTTON;
       button.addEventListener(EVENT.CLICK, () => {
-        document.querySelectorAll(".gender-button").forEach((btn) => btn.classList.remove(CLASS.SELECTED));
+        document.querySelectorAll(CLASS_SELECTOR.GENDER_BUTTON).forEach((btn) => btn.classList.remove(CLASS.SELECTED));
         button.classList.add(CLASS.SELECTED);
         buttonGroup.dataset.selectedValue = option.value; // 선택된 값으로 설정
       });
@@ -133,7 +143,7 @@ const createCustomerForm = (form) => {
     formDiv.appendChild(buttonGroup);
   } else {
     const formInput = form.isTextArea
-      ? document.createElement("textarea")
+      ? document.createElement(TAG.TEXT_AREA)
       : document.createElement(TAG.INPUT);
     formInput.type = form.type;
     formInput.id = form.id;
@@ -153,27 +163,27 @@ const renderCustomerInputFields = () => {
     container.appendChild(createCustomerForm(form));
   });
 
-  addDynamicSection(container, "사고 이력", "accidentHistory", ["date", "사고 내역"]);
-  addDynamicSection(container, "수술 이력", "surgeryHistory", ["date", "병원 이름", "수술 이름"]);
-  addDynamicSection(container, "질병 이력", "diseaseHistory", ["date", "질병 이름"]);
+  addDynamicSection(container, CUSTOMER_FORM.ACCIDENT_HISTORY.TITLE, CUSTOMER_FORM.ACCIDENT_HISTORY.ID, [CUSTOMER_FORM.ACCIDENT_HISTORY.FIELD_NAME.ACCIDENT_DATE, CUSTOMER_FORM.ACCIDENT_HISTORY.FIELD_NAME.ACCIDENT_DETAIL]);
+  addDynamicSection(container, CUSTOMER_FORM.SURGERY_HISTORY.TITLE, CUSTOMER_FORM.SURGERY_HISTORY.ID, [CUSTOMER_FORM.SURGERY_HISTORY.FIELD_NAME.DATE, CUSTOMER_FORM.SURGERY_HISTORY.FIELD_NAME.HOSPITAL_NAME, CUSTOMER_FORM.SURGERY_HISTORY.FIELD_NAME.NAME]);
+  addDynamicSection(container, CUSTOMER_FORM.DISEASE_HISTORY.TITLE, CUSTOMER_FORM.DISEASE_HISTORY.ID, [CUSTOMER_FORM.DISEASE_HISTORY.FIELD_NAME.DATE_OF_DIAGNOSIS.DATE, CUSTOMER_FORM.DISEASE_HISTORY.FIELD_NAME.NAME]);
 
   renderBottomButtons(container);
 };
 
 const addDynamicSection = (container, sectionTitle, sectionId, fieldNames) => {
   const sectionDiv = document.createElement(TAG.DIV);
-  sectionDiv.id = `${sectionId}Container`;
-  sectionDiv.className = "dynamic-section";
+  sectionDiv.id = `${sectionId}${ID.CONTAINER}`;
+  sectionDiv.className = CLASS.DYNAMIC_SECTION;
 
   const headerDiv = document.createElement(TAG.DIV);
-  headerDiv.className = "section-header";
+  headerDiv.className = CLASS.SECTION_HEADER;
 
   const sectionLabel = document.createElement(TAG.LABEL);
   sectionLabel.textContent = sectionTitle;
 
   const addButton = document.createElement(TAG.BUTTON);
-  addButton.textContent = "+";
-  addButton.className = "add-button";
+  addButton.textContent = PLUS;
+  addButton.className = CLASS.ADD_BUTTON;
   addButton.addEventListener(EVENT.CLICK, () => addInputField(sectionDiv, sectionId, fieldNames));
 
   headerDiv.appendChild(sectionLabel);
@@ -189,18 +199,18 @@ const addInputField = (sectionDiv, sectionId, fieldNames) => {
 
   // 삭제 버튼 추가
   const removeButton = document.createElement(TAG.BUTTON);
-  removeButton.textContent = "-";
-  removeButton.className = "remove-button";
+  removeButton.textContent = MINUS;
+  removeButton.className = CLASS.REMOVE_BUTTON;
   removeButton.addEventListener(EVENT.CLICK, () => {
     sectionDiv.removeChild(inputDiv); // 이력 항목 삭제
   });
 
   fieldNames.forEach((field) => {
     const input = document.createElement(TAG.INPUT);
-    input.type = field === "date" || field === "dateOfDiagnosis" ? "date" : "text";
+    input.type = field === INPUT_TYPE.DATE || field === CUSTOMER_FORM.DISEASE_HISTORY.FIELD_NAME.DATE_OF_DIAGNOSIS.ID ? INPUT_TYPE.DATE : INPUT_TYPE.TEXT;
     input.name = `${sectionId}${field}`;
-    input.placeholder = field === "date" || field === "dateOfDiagnosis" ? "날짜 입력" : `${field} 입력`;
-    input.className = "input-field";
+    input.placeholder = field === INPUT_TYPE.DATE || field === CUSTOMER_FORM.DISEASE_HISTORY.FIELD_NAME.DATE_OF_DIAGNOSIS.ID ? DATE+INPUT : `${field} ${INPUT}`;
+    input.className = CLASS.INPUT_FIELD;
     inputDiv.appendChild(input);
   });
 
