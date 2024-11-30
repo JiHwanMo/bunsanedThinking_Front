@@ -63,6 +63,7 @@ export const renderBottomButtons = (container) => {
     requestButton.className = CLASS.ACTION_BUTTON;
     requestButton.addEventListener(EVENT.CLICK, async () => {
       const formData = collectFormData();
+      console.log(formData)
       const result = await context[type].fetchInduce(formData);
       if(result !== null){
         alert(POP_UP.INSURANCE_ENROLLMENT_REQUEST);
@@ -121,7 +122,7 @@ export const collectFormData = () => {
     const section = document.getElementById(`${sectionId}${ID.CONTAINER}`);
     if (!section) return [];
 
-    const inputGroups = Array.from(section.querySelectorAll(CLASS_SELECTOR.BUTTON_GROUP));
+    const inputGroups = Array.from(section.querySelectorAll(CLASS_SELECTOR.FORM_GROUP));
     return inputGroups.map((group) => {
       const inputs = Array.from(group.querySelectorAll(TAG.INPUT));
       const values = {};
@@ -148,16 +149,16 @@ export const collectFormData = () => {
     property: getValueById(CUSTOMER_FORM.PROPERTY.ID),
     accidentHistories: mapDynamicFields(CUSTOMER_FORM.ACCIDENT_HISTORY.ID, {
       date: CUSTOMER_FORM.ACCIDENT_HISTORY.FIELD_NAME.ACCIDENT_DATE,
-      사고내역: CUSTOMER_FORM.ACCIDENT_HISTORY.FIELD_NAME.ACCIDENT_DETAIL_ID
+      accidentDetail: CUSTOMER_FORM.ACCIDENT_HISTORY.FIELD_NAME.ACCIDENT_DETAIL_ID
     }),
     surgeryHistories: mapDynamicFields(CUSTOMER_FORM.SURGERY_HISTORY.ID, {
       date: CUSTOMER_FORM.SURGERY_HISTORY.FIELD_NAME.DATE,
-      병원이름: CUSTOMER_FORM.SURGERY_HISTORY.FIELD_NAME.HOSPITAL_NAME_ID,
-      수술이름: CUSTOMER_FORM.SURGERY_HISTORY.FIELD_NAME.NAME_ID
+      hospitalName: CUSTOMER_FORM.SURGERY_HISTORY.FIELD_NAME.HOSPITAL_NAME_ID,
+      name: CUSTOMER_FORM.SURGERY_HISTORY.FIELD_NAME.NAME_ID
     }),
     diseaseHistories: mapDynamicFields(CUSTOMER_FORM.DISEASE_HISTORY.ID, {
       date: CUSTOMER_FORM.DISEASE_HISTORY.FIELD_NAME.DATE_OF_DIAGNOSIS.ID,
-      질병이름: CUSTOMER_FORM.DISEASE_HISTORY.FIELD_NAME.NAME_ID
+      name: CUSTOMER_FORM.DISEASE_HISTORY.FIELD_NAME.NAME_ID
     }),
     productId: sessionStorage.getItem(KEY.SELECTED_DATA_ID),
     employeeId: sessionStorage.getItem(KEY.LOGIN_ID)
