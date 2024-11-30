@@ -162,6 +162,7 @@ export const ELEMENT_ID= {
   BANK_NAME: "bankName",
   BANK_ACCOUNT: "bankAccount",
   LOAN_NAME: "loanName",
+  LOAN_ID: "loanId",
   CONTRACT_STATUS: "contractStatus",
 
   COLLATERAL: {
@@ -177,7 +178,7 @@ export const ELEMENT_ID= {
     INSURANCE_ID: "insuranceId"
   },
 
-  LOAN_TYPE_CONTAINER: "loanTypeContainer"
+  LOAN_TYPE_CONTAINER: "loanTypeContainer",
 }
 
 export const LOAN_TYPE= {
@@ -210,9 +211,19 @@ export const COMBO_BOX= {
   ALL: "all"
 }
 
+export const PAYMENT_TYPE_LABEL = {
+  Cash: "현금",
+  AccountTransfer: "계좌이체"
+}
+
 export const LABEL= {
   LOAN_NAME: "NAME",
   INTEREST_RATE: "INTEREST_RATE",
   MAXIMUM_MONEY: "MAXIMUM_MONEY",
   MINIMUM_ASSET: "MINIMUM_ASSET"
+}
+
+export const COLLATERAL_TYPE_LABEL = {
+  RealEstate: "부동산",
+  Car: "자동차"
 }
