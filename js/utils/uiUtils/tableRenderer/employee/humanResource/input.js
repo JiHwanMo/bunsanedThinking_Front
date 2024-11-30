@@ -233,7 +233,7 @@ const familyForm = [
     name: ELEMENT_ID.FAMILY_DETAIL.NAME,
     data: DTO_NAME.FAMILY_NAME,
     label: LABEL.FAMILY_NAME,
-    placeHolder: `${DETAIL_COLUMN_NAME.MANAGEMENT_EMPLOYEE.NAME}${MESSAGES.PLACE_HOLDER.INPUT}`
+    placeHolder: `${DETAIL_COLUMN_NAME.MANAGEMENT_EMPLOYEE.FAMILY_NAME}${MESSAGES.PLACE_HOLDER.INPUT}`
   }
 ]
 
@@ -309,7 +309,7 @@ const addFamilyField = (sectionDiv, sectionId) => {
     inputDiv.appendChild(input);
   });
 
-  inputDiv.innerHTML += createFamilyInputForm(familyCount);
+  createFamilyInputForm(familyCount).forEach(familyInputForm => inputDiv.appendChild(familyInputForm));
 
   // 삭제 버튼 추가
   const removeButton = document.createElement(TAG.BUTTON);
@@ -324,38 +324,91 @@ const addFamilyField = (sectionDiv, sectionId) => {
   sectionDiv.appendChild(inputDiv);
 };
 
-const createFamilyInputForm = (familyCount) => {
-  let type = getType();
-  return `
-      <div class="form-group">
-        <label for="relationship-${familyCount}">${DETAIL_COLUMN_NAME[type].RELATIONSHIP}</label>
-        <select id="relationship-${familyCount}" name="relationship-${familyCount}">
-          <option value="Mother" selected>엄마</option>
-          <option value="Father">아빠</option>
-          <option value="Sister">여형제</option>
-          <option value="Brother">남형제</option>
-          <option value="Son">아들</option>
-          <option value="Daughter">딸</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>${DETAIL_COLUMN_NAME[type].SURVIVAL}</label>
-        <div class="radio-group">
-          <div class="radio-item">
-            <label for="true-${familyCount}">생존</label>
-            <input type="radio" id="true-${familyCount}" name=survival-${familyCount} value="true" checked>
-          </div>
-          <div class="radio-item">
-            <label for="false-${familyCount}">사망</label>
-            <input type="radio" id="false-${familyCount}" name="survival-${familyCount}" value="false">
-          </div>
-        </div>
-      </div>
-    `;
+const familyRelationship = {
+  Mother: FAMILY_RESPONSE.MOTHER,
+  Father: FAMILY_RESPONSE.FATHER,
+  Sister: FAMILY_RESPONSE.SISTER,
+  Brother: FAMILY_RESPONSE.BROTHER,
+  Son: FAMILY_RESPONSE.SON,
+  Daughter: FAMILY_RESPONSE.DAUGHTER
 }
 
-const addDepartmentComboBoxWithValue = (inputFieldsContainer, type, employeeData) => {
-  addDepartmentComboBox(inputFieldsContainer, type);
+const createRelationInputForm = (familyCount) => {
+  let type = getType();
+  const relationshipDiv = document.createElement(TAG.DIV);
+  relationshipDiv.className = CLASS.FORM_GROUP;
+  const relationshipLabel = document.createElement(TAG.LABEL);
+  // relationshipLabel.for = `relationship-${familyCount}`;
+  relationshipLabel.for = ELEMENT_ID.FAMILY_DETAIL.RELATIONSHIP + MINUS + familyCount;
+  relationshipLabel.textContent = `${DETAIL_COLUMN_NAME[type].RELATIONSHIP}`;
+  relationshipDiv.appendChild(relationshipLabel);
+  const relationshipSelect = document.createElement(TAG.SELECT);
+  relationshipSelect.id = ELEMENT_ID.FAMILY_DETAIL.RELATIONSHIP + MINUS + familyCount;
+  relationshipSelect.name = ELEMENT_ID.FAMILY_DETAIL.RELATIONSHIP + MINUS + familyCount;
+  Object.entries(familyRelationship).forEach(([key, value]) => {
+    const option = document.createElement(TAG.OPTION);
+    option.value = key;
+    option.textContent = value;
+    relationshipSelect.appendChild(option);
+  })
+  relationshipDiv.appendChild(relationshipSelect);
+
+  return relationshipDiv;
+}
+
+const createSurvivalInputForm = (familyCount) => {
+  const type = getType();
+  const survivalDiv = document.createElement(TAG.DIV);
+  survivalDiv.className = CLASS.FORM_GROUP;
+  const survivalLabel = document.createElement(TAG.LABEL);
+  survivalLabel.textContent = DETAIL_COLUMN_NAME[type].SURVIVAL;
+  survivalDiv.appendChild(survivalLabel);
+
+  const radioGroupDiv = document.createElement(TAG.DIV);
+  radioGroupDiv.className = CLASS.RADIO_GROUP;
+
+  const trueRadioItem = document.createElement(TAG.DIV);
+  trueRadioItem.className = CLASS.RADIO_ITEM;
+  const trueRadioLabel = document.createElement(TAG.LABEL);
+  trueRadioLabel.for = true + MINUS + familyCount;
+  trueRadioLabel.textContent = FAMILY_RESPONSE.SURVIVAL;
+  trueRadioItem.appendChild(trueRadioLabel);
+  const trueRadioInput = document.createElement(TAG.INPUT);
+  trueRadioInput.id = true + MINUS + familyCount;
+  trueRadioInput.type = INPUT_TYPE.RADIO;
+  trueRadioInput.name = ELEMENT_ID.FAMILY_DETAIL.SURVIVAL + MINUS + familyCount;
+  trueRadioInput.value = true.toString();
+  trueRadioInput.checked = true;
+  trueRadioItem.appendChild(trueRadioInput);
+
+  const falseRadioItem = document.createElement(TAG.DIV);
+  falseRadioItem.className = CLASS.RADIO_ITEM;
+  const falseRadioLabel = document.createElement(TAG.LABEL);
+  falseRadioLabel.for = false + MINUS + familyCount;
+  falseRadioLabel.textContent = FAMILY_RESPONSE.SURVIVAL;
+  falseRadioItem.appendChild(falseRadioLabel);
+  const falseRadioInput = document.createElement(TAG.INPUT);
+  falseRadioInput.id = false + MINUS + familyCount;
+  falseRadioInput.type = INPUT_TYPE.RADIO;
+  falseRadioInput.name = ELEMENT_ID.FAMILY_DETAIL.SURVIVAL + MINUS + familyCount;
+  falseRadioInput.value = false.toString();
+  falseRadioInput.checked = false;
+  falseRadioItem.appendChild(falseRadioInput);
+
+  radioGroupDiv.appendChild(trueRadioItem);
+  radioGroupDiv.appendChild(falseRadioItem);
+
+  survivalDiv.appendChild(radioGroupDiv);
+
+  return survivalDiv;
+}
+
+const createFamilyInputForm = (familyCount) => {
+  return [createRelationInputForm(familyCount), createSurvivalInputForm(familyCount)];
+}
+
+const addDepartmentComboBoxWithValue = async (inputFieldsContainer, type, employeeData) => {
+  await addDepartmentComboBox(inputFieldsContainer, type);
   const option = document.querySelector(
     QUERY_SELECTOR.SELECTOR(TAG.OPTION, ATTRIBUTE.VALUE, employeeData.departmentId, false));
   if (option)

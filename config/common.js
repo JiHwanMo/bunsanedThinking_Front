@@ -81,7 +81,9 @@ export const CLASS = {
   INPUT_FIELD: "input-field",
   GENDER_BUTTON: "gender-button",
   BUTTON_CONTAINER: "button-container",
-  ACTION_BUTTON: "action-button"
+  ACTION_BUTTON: "action-button",
+  RADIO_ITEM: "radio-item",
+  RADIO_GROUP: "radio-group"
 }
 
 export const LOCATION = {
@@ -94,7 +96,8 @@ export const LOCATION = {
 export const INPUT_TYPE = {
   TEXT: "text",
   NUMBER: "number",
-  DATE: "date"
+  DATE: "date",
+  RADIO: "RADIO"
 }
 
 export const EVENT = {
@@ -131,6 +134,6 @@ export const ATTRIBUTE = {
 
 export const QUERY_SELECTOR = {
   SELECTOR: (tag, condition, value, isChecked) => {
-    return `${tag}[${condition}=${value}]${isChecked ? ":checked" : ""}`
+    return `${tag}[${condition}="${value}"]${isChecked ? ":checked" : ""}`
   }
 }
