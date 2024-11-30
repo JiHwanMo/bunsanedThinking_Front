@@ -568,31 +568,4 @@ const createFamilyInputFormWithValue = (familyCount, familyData) => {
   survivalDiv.appendChild(survivalRadioGroup);
 
   return [relationshipDiv, survivalDiv];
-
-  // return `
-  //     <div class="form-group">
-  //       <label for="relationship-${familyCount}">${DETAIL_COLUMN_NAME[type].RELATIONSHIP}</label>
-  //       <select id="relationship-${familyCount}" name="relationship-${familyCount}">
-  //         <option value="Mother" ${familyData.relationship === FAMILY_RESPONSE.MOTHER ? "selected" : ""}>엄마</option>
-  //         <option value="Father" ${familyData.relationship === FAMILY_RESPONSE.FATHER ? "selected" : ""}>아빠</option>
-  //         <option value="Sister" ${familyData.relationship === FAMILY_RESPONSE.SISTER ? "selected" : ""}>여형제</option>
-  //         <option value="Brother" ${familyData.relationship === FAMILY_RESPONSE.BROTHER ? "selected" : ""}>남형제</option>
-  //         <option value="Son" ${familyData.relationship === FAMILY_RESPONSE.SON ? "selected" : ""}>아들</option>
-  //         <option value="Daughter" ${familyData.relationship === FAMILY_RESPONSE.DAUGHTER ? "selected" : ""}>딸</option>
-  //       </select>
-  //     </div>
-  //     <div class="form-group">
-  //       <label>${DETAIL_COLUMN_NAME[type].SURVIVAL}</label>
-  //       <div class="radio-group">
-  //         <div class="radio-item">
-  //           <label for="true-${familyCount}">생존</label>
-  //           <input type="radio" id="true-${familyCount}" name=survival-${familyCount} value="true" ${familyData.survival === FAMILY_RESPONSE.SURVIVAL ? "checked" : ""}>
-  //         </div>
-  //         <div class="radio-item">
-  //           <label for="false-${familyCount}">사망</label>
-  //           <input type="radio" id="false-${familyCount}" name="survival-${familyCount}" value="false" ${familyData.survival === FAMILY_RESPONSE.DECEASE ? "checked" : ""}>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   `;
 }
