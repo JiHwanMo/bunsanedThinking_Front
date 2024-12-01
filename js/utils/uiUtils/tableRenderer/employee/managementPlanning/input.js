@@ -1,7 +1,12 @@
 import { fetchGetDepartment } from "../../../../apiUtils/apiDocumentation/employee/managementPlanning/managementPlanning.js";
 import { addButtons } from "../../../buttonManager/employee/managementPlanning/input.js";
-import {DETAIL_COLUMN_NAME, VALUE, ELEMENT_ID as MANAGEMENTPLANNING_ELEMENT_ID} from "../../../../../../config/employee/managementPlanning/managementPlanning.js";
-import {ELEMENT_ID, EVENT, KEY, STRING_EMPTY, TAG} from "../../../../../../config/common.js";
+import {
+  DETAIL_COLUMN_NAME,
+  VALUE,
+  ELEMENT_ID as MANAGEMENTPLANNING_ELEMENT_ID,
+  POST_FORM, UPDATE_FORM, MESSAGES
+} from "../../../../../../config/employee/managementPlanning/managementPlanning.js";
+import { CLASS, ELEMENT_ID, EVENT, KEY, STRING_EMPTY, TAG } from "../../../../../../config/common.js";
 
 export const renderInput = async () => {
   const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
@@ -29,22 +34,21 @@ const renderInputFields = (data) => {
 
   if (selectedButtonType === VALUE.POST) {
     inputFieldsContainer.innerHTML = `
-      <div class="form-group">
-        <label for="name">${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.NAME}</label>
-        <input type="text" id="name" name="name" value="${data.name || ""}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.NAME}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${POST_FORM.NAME_FORM.FOR}>${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.NAME}</label>
+        <input type=${POST_FORM.NAME_FORM.TYPE} id=${POST_FORM.NAME_FORM.ID} name=${POST_FORM.NAME_FORM.NAME} value="${data.name || STRING_EMPTY}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.NAME}${MESSAGES.PLACE_HOLDER.POST_INPUT}" required>
       </div>
-      <div class="form-group">
-        <label for="task">${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.TASK}</label>
-        <input type="text" id="task" name="task" value="${data.task || ""}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.TASK}를 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${POST_FORM.TASK_FORM.FOR}>${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.TASK}</label>
+        <input type=${POST_FORM.TASK_FORM.TYPE} id=${POST_FORM.TASK_FORM.ID} name=${POST_FORM.TASK_FORM.NAME} value="${data.task || STRING_EMPTY}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.TASK}${MESSAGES.PLACE_HOLDER.POST_INPUT}" required>
       </div>
-      <div class="form-group">
-        <label for="purpose">${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.PURPOSE}</label>
-        <textarea id="purpose" name="purpose" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.PURPOSE}을 입력하세요" required>${data.purpose || ""}</textarea>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${POST_FORM.PURPOSE_FORM.FOR}>${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.PURPOSE}</label>
+        <textarea id=${POST_FORM.PURPOSE_FORM.ID} name=${POST_FORM.PURPOSE_FORM.NAME} placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.PURPOSE}${MESSAGES.PLACE_HOLDER.POST_INPUT}" required>${data.purpose || STRING_EMPTY}</textarea>
       </div>
-
-      <div class="form-group">
-        <label for="head_name">${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.HEAD_NAME}</label>
-        <input type="text" id="head_name" name="head_name" value="${data.headName || ""}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.HEAD_NAME}을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${POST_FORM.HEAD_NAME_FORM.FOR}>${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.HEAD_NAME}</label>
+        <input type=${POST_FORM.HEAD_NAME_FORM.TYPE} id=${POST_FORM.HEAD_NAME_FORM.ID} name=${POST_FORM.HEAD_NAME_FORM.NAME} value="${data.headName || STRING_EMPTY}" placeholder="${DETAIL_COLUMN_NAME.DEPARTMENT_LIST.HEAD_NAME}${MESSAGES.PLACE_HOLDER.POST_INPUT}" required>
       </div>
     `;
   } else if (selectedButtonType === VALUE.UPDATE) {
@@ -52,18 +56,18 @@ const renderInputFields = (data) => {
     let placeholderValue = data.name || STRING_EMPTY;
 
     inputFieldsContainer.innerHTML = `
-      <div class="form-group">
-        <label for="index">수정할 항목</label>
-        <select id="index" name="index">
-          <option value="1" selected>부서 이름</option>
-          <option value="2">주 업무</option>
-          <option value="3">부서 목적</option>
-          <option value="4">부서장 이름</option>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${UPDATE_FORM.FOR}>수정할 항목</label>
+        <select id=${UPDATE_FORM.ID} name=${UPDATE_FORM.NAME}>
+          <option value=${UPDATE_FORM.OPTION_VALUE.ONE} selected>부서 이름</option>
+          <option value=${UPDATE_FORM.OPTION_VALUE.TWO}>주 업무</option>
+          <option value=${UPDATE_FORM.OPTION_VALUE.THREE}>부서 목적</option>
+          <option value=${UPDATE_FORM.OPTION_VALUE.FOUR}>부서장 이름</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="input">수정할 값</label>
-        <input type="text" id="input" name="input" value="${placeholderValue}" placeholder="수정할 값을 입력하세요" required>
+      <div class=${CLASS.FORM_GROUP}>
+        <label for=${UPDATE_FORM.UPDATE_INPUT.FOR}>수정할 값</label>
+        <input type=${UPDATE_FORM.UPDATE_INPUT.TYPE} id=${UPDATE_FORM.UPDATE_INPUT.ID} name=${UPDATE_FORM.UPDATE_INPUT.NAME} value="${placeholderValue}" placeholder="${MESSAGES.PLACE_HOLDER.UPDATE_INPUT}" required>
       </div>
     `;
 

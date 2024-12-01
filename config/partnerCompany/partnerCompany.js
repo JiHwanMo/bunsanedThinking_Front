@@ -63,3 +63,24 @@ export const TYPE = {
 export const ACTION = {
   FUNCTION: "function"
 }
+
+export const REPORT_FORM = {
+  ACCIDENT_FORM: {
+    FOR: "accidentId",
+    TYPE: "text",
+    ID: "accidentId",
+    NAME: "accidentId"
+  },
+  DAMAGE_ASSESSMENT_MONEY_FORM: {
+    FOR: "damageAssessmentMoney",
+    TYPE: "text",
+    ID: "damageAssessmentMoney",
+    NAME: "damageAssessmentMoney"
+  }
+}
+
+export const MESSAGES = {
+  PLACE_HOLDER: {
+    UPDATE: "수정할 값을 입력하세요"
+  }
+}

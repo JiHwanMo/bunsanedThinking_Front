@@ -96,3 +96,60 @@ export const CLASS = {
   POST_BUTTON: "postButton",
   SELECTED: "selected"
 }
+
+export const POST_FORM = {
+  NAME_FORM: {
+    FOR: "name",
+    TYPE: "text",
+    ID: "name",
+    NAME: "name"
+  },
+  DESCRIPTION_FORM: {
+    FOR: "description",
+    ID: "description",
+    NAME: "description"
+  },
+  INVENTORY_FORM: {
+    FOR: "inventory",
+    TYPE: "number",
+    ID: "inventory",
+    NAME: "inventory"
+  },
+  TOTAL_INVENTORY_FORM: {
+    FOR: "total_inventory",
+    TYPE: "number",
+    ID: "total_inventory",
+    NAME: "total_inventory"
+  },
+  DEPARTMENT_ID_FORM: {
+    FOR: "department_id",
+    TYPE: "number",
+    ID: "department_id",
+    NAME: "department_id"
+  }
+
+}
+
+export const UPDATE_FORM = {
+  FOR: "index",
+  ID: "index",
+  NAME: "index",
+  OPTION_VALUE: {
+    ONE: "1",
+    TWO: "2",
+    THREE: "3"
+  },
+  UPDATE_INPUT: {
+    FOR: "input",
+    TYPE: "text",
+    ID: "input",
+    NAME: "input"
+  }
+}
+
+export const MESSAGES = {
+  PLACE_HOLDER: {
+    UPDATE_INPUT : "수정할 값을 입력하세요",
+    POST_INPUT: "을(를) 입력하세요"
+  }
+}

@@ -1,7 +1,7 @@
 import { fetchGetReport } from "../../../apiUtils/apiDocumentation/partnerCompany/partnerCompany.js";
 import { addButtons } from "../../buttonManager/partnerCompany/input.js";
-import { DETAIL_COLUMN_NAME } from "../../../../../config/partnerCompany/partnerCompany.js";
-import {ELEMENT_ID, KEY, STRING_EMPTY} from "../../../../../config/common.js";
+import {DETAIL_COLUMN_NAME, MESSAGES, REPORT_FORM} from "../../../../../config/partnerCompany/partnerCompany.js";
+import {CLASS, ELEMENT_ID, KEY, STRING_EMPTY} from "../../../../../config/common.js";
 
 export const renderInput = async () => {
   const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
@@ -20,13 +20,13 @@ const renderInputFields = (data) => {
   let placeholderValue = data.damageAssessmentMoney || STRING_EMPTY;
 
   inputFieldsContainer.innerHTML = `
-    <div class="form-group">
-      <label for="accidentId">${DETAIL_COLUMN_NAME.REPORT_LIST.ACCIDENT_ID}</label>
-      <input type="text" id="accidentId" name="accidentId" value="${data.id}" readonly>
+    <div class=${CLASS.FORM_GROUP}>
+      <label for=${REPORT_FORM.ACCIDENT_FORM.FOR}>${DETAIL_COLUMN_NAME.REPORT_LIST.ACCIDENT_ID}</label>
+      <input type=${REPORT_FORM.ACCIDENT_FORM.TYPE} id=${REPORT_FORM.ACCIDENT_FORM.ID} name=${REPORT_FORM.ACCIDENT_FORM.NAME} value="${data.id}" readonly>
     </div>
-    <div class="form-group">
-      <label for="damageAssessmentMoney">${DETAIL_COLUMN_NAME.REPORT_LIST.DAMAGE_ASSESSMENT_MONEY}</label>
-      <input type="text" id="damageAssessmentMoney" name="damageAssessmentMoney" value="${placeholderValue}" placeholder="수정할 값을 입력하세요" required>
+    <div class=${CLASS.FORM_GROUP}>
+      <label for=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.FOR}>${DETAIL_COLUMN_NAME.REPORT_LIST.DAMAGE_ASSESSMENT_MONEY}</label>
+      <input type=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.TYPE} id=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.ID} name=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.NAME} value="${placeholderValue}" placeholder="${MESSAGES.PLACE_HOLDER.UPDATE}" required>
     </div>
   `;
 };

@@ -7,7 +7,7 @@ import {
   BUTTON,
   DETAIL_COLUMN_NAME, DISEASE_HISTORY_LIST, MESSAGES, POP_UP, SURGERY_HISTORY_LIST, VALUE
 } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
-import {CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
+import { CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG } from "../../../../../../config/common.js";
 
 const customerInformationDetail = (data) => {
   return [

@@ -1,5 +1,5 @@
 import { fetchAddCustomerInformation, fetchUpdateCustomerInformation } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
-import {BUTTON, CLASS, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
+import { BUTTON, CLASS, EVENT, KEY, LOCATION, TAG } from "../../../../../../config/common.js";
 import {
   CLASS_SELECTOR,
   ELEMENT_ID,
