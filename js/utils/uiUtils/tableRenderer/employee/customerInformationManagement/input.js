@@ -219,7 +219,7 @@ const renderInputFields = (data) => {
             placeholderValue = data.age || STRING_EMPTY;
             break;
           case 5:
-            placeholderValue = data.gender || STRING_EMPTY;
+            placeholderValue = convertGenderToKorean(data.gender) || STRING_EMPTY;
             break;
           case 6:
             placeholderValue = data.address || STRING_EMPTY;
@@ -290,5 +290,10 @@ const addDiseaseHistory = () => {
   });
 };
 
-
+// 성별 한글 변환 함수
+const convertGenderToKorean = (gender) => {
+  if (gender === "Male") return "남성";
+  if (gender === "Female") return "여성";
+  return gender; // 알 수 없는 값은 그대로 반환
+};
 
