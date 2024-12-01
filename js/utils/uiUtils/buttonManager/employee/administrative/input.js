@@ -78,6 +78,10 @@ const collectFormData = () => {
       alert(POP_UP.POST.VALIDATION_ERROR);
       return null;
     }
+    if (inventory < 0 || total_inventory < 0) {
+      alert(POP_UP.POST.INVENTORY_NEGATIVE_NUMBER_ERROR);
+      return null;
+    }
     if (inventory > total_inventory) {
       alert(POP_UP.POST.INVENTORY_ERROR);
       return null;

@@ -65,6 +65,7 @@ export const POP_UP = {
     OK: "등록이 완료되었습니다.",
     ERROR: "등록 중 오류가 발생했습니다.",
     VALIDATION_ERROR: "잘못된 정보를 입력하였습니다. 다시 입력해주세요.",
+    INVENTORY_NEGATIVE_NUMBER_ERROR: "재고 수량은 0 이상이어야 합니다.",
     INVENTORY_ERROR: "현재 재고는 총 재고를 초과할 수 없습니다.",
     CONSOLE_ERROR: "등록 중 오류 발생 :"
   }
