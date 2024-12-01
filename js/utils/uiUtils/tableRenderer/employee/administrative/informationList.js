@@ -10,7 +10,7 @@ import {
   MESSAGES, STRING_EMPTY,
   TAG
 } from "../../../../../../config/common.js";
-import {CLASS, COMBOBOX, TYPE, VALUE} from "../../../../../../config/employee/administrative/administrative.js";
+import { CLASS, COMBOBOX, TYPE, VALUE } from "../../../../../../config/employee/administrative/administrative.js";
 import { TABLE_TITLE } from "../../../../../../config/employee/administrative/administrative.js";
 import { COLUMN_NAME } from "../../../../../../config/employee/administrative/administrative.js";
 

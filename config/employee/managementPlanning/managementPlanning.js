@@ -93,5 +93,54 @@ export const CLASS = {
 }
 
 export const MESSAGES = {
-  NONE: "없음"
+  NONE: "없음",
+  PLACE_HOLDER: {
+    UPDATE_INPUT : "수정할 값을 입력하세요",
+    POST_INPUT: "을(를) 입력하세요"
+  }
 }
+
+export const POST_FORM = {
+  NAME_FORM: {
+    FOR: "name",
+    TYPE: "text",
+    ID: "name",
+    NAME: "name"
+  },
+  TASK_FORM: {
+    FOR: "task",
+    TYPE: "text",
+    ID: "task",
+    NAME: "task"
+  },
+  PURPOSE_FORM: {
+    FOR: "purpose",
+    ID: "purpose",
+    NAME: "purpose"
+  },
+  HEAD_NAME_FORM: {
+    FOR: "head_name",
+    TYPE: "text",
+    ID: "head_name",
+    NAME: "head_name"
+  }
+}
+
+export const UPDATE_FORM = {
+  FOR: "index",
+  ID: "index",
+  NAME: "index",
+  OPTION_VALUE: {
+    ONE: "1",
+    TWO: "2",
+    THREE: "3",
+    FOUR: "4"
+  },
+  UPDATE_INPUT: {
+    FOR: "input",
+    TYPE: "text",
+    ID: "input",
+    NAME: "input"
+  }
+}
+

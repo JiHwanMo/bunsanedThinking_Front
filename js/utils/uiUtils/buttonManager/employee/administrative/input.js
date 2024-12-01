@@ -1,6 +1,6 @@
 import { fetchAddOfficeSupply, fetchUpdateOfficeSupply } from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
-import {BUTTON as COMMON_BUTTON, CLASS, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
-import {ELEMENT_ID, POP_UP, VALUE} from "../../../../../../config/employee/administrative/administrative.js";
+import { BUTTON as COMMON_BUTTON, CLASS, EVENT, KEY, LOCATION, TAG } from "../../../../../../config/common.js";
+import { ELEMENT_ID, POP_UP, VALUE } from "../../../../../../config/employee/administrative/administrative.js";
 
 export const addButtons = (buttonContainer) => {
   const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));

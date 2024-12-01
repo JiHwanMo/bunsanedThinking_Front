@@ -5,7 +5,7 @@ import {
   POP_UP,
   VALUE
 } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
-import {CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
+import { CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG } from "../../../../../../config/common.js";
 
 const departmentDetail = (data) => {
   return [

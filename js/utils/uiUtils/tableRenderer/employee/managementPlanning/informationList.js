@@ -10,10 +10,10 @@ import {
   LOCATION,
   MESSAGES, STRING_EMPTY,
   TAG
-} from '../../../../../../config/common.js';
-import {COMBOBOX, TYPE, VALUE, CLASS as MANAGEMENT_PLANNING_CLASS} from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
-import { TABLE_TITLE } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
-import { COLUMN_NAME } from '../../../../../../config/employee/managementPlanning/managementPlanning.js';
+} from "../../../../../../config/common.js";
+import { COMBOBOX, TYPE, VALUE, CLASS as MANAGEMENT_PLANNING_CLASS } from "../../../../../../config/employee/managementPlanning/managementPlanning.js";
+import { TABLE_TITLE } from "../../../../../../config/employee/managementPlanning/managementPlanning.js";
+import { COLUMN_NAME } from "../../../../../../config/employee/managementPlanning/managementPlanning.js";
 
 
 
