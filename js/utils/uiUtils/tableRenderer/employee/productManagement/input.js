@@ -269,7 +269,7 @@ const renderInputFields = (insuranceType) => {
   while(inputFieldsContainer.firstChild) inputFieldsContainer.removeChild(inputFieldsContainer.firstChild);
   if (insuranceType === STRING_EMPTY) return;
   commonForms.forEach(form => inputFieldsContainer.appendChild(createCommonForm(form)));
-  inputFieldsContainer.innerHTML += fields[INSURANCE_TYPE_RESPONSE[insuranceType]](); // 선택된 옵션에 따라 입력란 표시
+  inputFieldsContainer.innerHTML += fields[insuranceType](); // 선택된 옵션에 따라 입력란 표시
 };
 
 const renderCommonInputFieldsWithValues = (insuranceType, data) => {
@@ -284,7 +284,7 @@ const renderCommonInputFieldsWithValues = (insuranceType, data) => {
     else
       input.setAttribute(RENDER_COMMON_INPUT_FIELDS_WITH_VALUES.VALUE, data[form.value]);
   });
-  inputFieldsContainer.innerHTML += fieldsWithDetail[INSURANCE_TYPE_RESPONSE[insuranceType]](data); // 선택된 옵션에 따라 입력란 표시
+  inputFieldsContainer.innerHTML += fieldsWithDetail[INSURANCE_TYPE_RESPONSE[insuranceType]](data);// 선택된 옵션에 따라 입력란 표시
 };
 
 const createInjuryFormWithDetail = (data) => {
@@ -371,7 +371,7 @@ const createAutomobileFormWithDetail = (data) => {
     `;
 }
 
-const fieldsWithDetail = {
+const fieldsWithDetail =  {
   INJURY: createInjuryFormWithDetail,
   DISEASE: createDiseaseFormWithDetail,
   AUTOMOBILE: createAutomobileFormWithDetail

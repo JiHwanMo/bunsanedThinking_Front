@@ -12,7 +12,7 @@ import {
   VALUE,
   ELEMENT_ID as PRODUCT_MANAGEMENT_ELEMENT_ID,
   KEY as PRODUCT_MANAGEMENT_KEY,
-  COMMON_FORM, INSURANCE_TYPE, INJURY_FORM, DISEASE_FORM, AUTOMOBILE_FORM
+  COMMON_FORM, INSURANCE_TYPE, INJURY_FORM, DISEASE_FORM, AUTOMOBILE_FORM, OPTION
 } from "../../../../../../config/employee/productManagement/productManagement.js";
 import {BUTTON as COMMON_BUTTON, CLASS, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js"
 
@@ -67,6 +67,7 @@ export const addButtons = (buttonContainer) => {
         const userConfirmed = confirm(POP_UP.UPDATE.QUESTION);
         if (userConfirmed) {
         const formData = collectFormDataForUpdate();
+        console.log(formData);
         const result = await context[type].fetchUpdateInsurance[formData.insuranceType](formData);
           if(result !== null){
             alert(POP_UP.UPDATE.OK);
@@ -107,20 +108,20 @@ const collectFormDataForPost = () => {
 
   // 보험 유형별로 데이터 추가
   switch (insuranceType) {
-    case INSURANCE_TYPE.INJURY:
+    case OPTION.INJURY.VALUE:
       return {
         ...commonData,
         injuryType: getValueById(INJURY_FORM.INJURY_TYPE.ID),
         surgeriesLimit: getValueById(INJURY_FORM.SURGERY_LIMIT.ID)
       };
-    case INSURANCE_TYPE.DISEASE:
+    case OPTION.DISEASE.VALUE:
       return {
         ...commonData,
         diseaseLimit: getValueById(DISEASE_FORM.DISEASE_LIMIT.ID),
         diseaseName: getValueById(DISEASE_FORM.DISEASE_NAME.ID),
         surgeriesLimit: getValueById(DISEASE_FORM.SURGERY_LIMIT.ID),
       };
-    case INSURANCE_TYPE.AUTOMOBILE:
+    case OPTION.AUTOMOBILE.VALUE:
       return {
         ...commonData,
         accidentLimit: getValueById(AUTOMOBILE_FORM.ACCIDENT_LIMIT.ID),
@@ -161,12 +162,14 @@ const collectFormDataForUpdate = () => {
     case INSURANCE_TYPE.INJURY:
       return {
         ...commonData,
+        insuranceType: OPTION.INJURY.VALUE,
         injuryType: getValueById(INJURY_FORM.INJURY_TYPE.ID),
         surgeriesLimit: getValueById(INJURY_FORM.SURGERY_LIMIT.ID)
       };
     case INSURANCE_TYPE.DISEASE:
       return {
         ...commonData,
+        insuranceType: OPTION.DISEASE.VALUE,
         diseaseLimit: getValueById(DISEASE_FORM.DISEASE_LIMIT.ID),
         diseaseName: getValueById(DISEASE_FORM.DISEASE_NAME.ID),
         surgeriesLimit: getValueById(DISEASE_FORM.SURGERY_LIMIT.ID),
@@ -174,6 +177,7 @@ const collectFormDataForUpdate = () => {
     case INSURANCE_TYPE.AUTOMOBILE:
       return {
         ...commonData,
+        insuranceType: OPTION.AUTOMOBILE.VALUE,
         accidentLimit: getValueById(AUTOMOBILE_FORM.ACCIDENT_LIMIT.ID),
         vehicleType: getValueById(AUTOMOBILE_FORM.VEHICLE_TYPE.ID),
         serviceTypes: getCheckedValues(AUTOMOBILE_FORM.SERVICE.NAME),
