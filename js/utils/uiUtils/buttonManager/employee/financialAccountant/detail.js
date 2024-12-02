@@ -16,7 +16,7 @@ export const renderButtons = () => {
 
 const handlePaymentDetail = async () => {
   const selectedDataId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
-  const employeeId = sessionStorage.getItem(ELEMENT_ID.ID);
+  const employeeId = sessionStorage.getItem(KEY.LOGIN_ID);
 
   const check = confirm(QUESTION.CONFIRM_HANDLE_PAYMENT_DETAIL);
 

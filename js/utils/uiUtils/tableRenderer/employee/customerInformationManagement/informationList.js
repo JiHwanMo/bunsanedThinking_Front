@@ -152,7 +152,7 @@ const setSearchBar = () => {
 
 const setColumn = () => {
   const columnList = COLUMN_NAME[TYPE.CUSTOMERINFORMATION_LIST];
-  const head = document.getElementById(ELEMENT_ID.TABLE);
+  const head = document.getElementById(ELEMENT_ID.TABLE_HEAD);
   const columns = document.createElement(TAG.TR);
 
   columnList.forEach(item => {

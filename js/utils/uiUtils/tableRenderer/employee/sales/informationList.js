@@ -261,7 +261,7 @@ const setOneRow = (item, type) => {
 
 const setColumn = () => {
   const columnList = COLUMN_NAME[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const head = document.getElementById(ELEMENT_ID.TABLE);
+  const head = document.getElementById(ELEMENT_ID.TABLE_HEAD);
   const columns = document.createElement(TAG.TR);
   columnList.forEach(item => {
     const oneColumn = document.createElement(TAG.TH);

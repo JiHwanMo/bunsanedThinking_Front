@@ -159,8 +159,9 @@ export const CLASS = {
   ACCIDENT_HISTORY_ENTRY: "accident-history-entry",
   SURGERY_HISTORY_ENTRY: "surgery-history-entry",
   DISEASE_HISTORY_ENTRY: "disease-history-entry",
-  FORM_GROUP_BASIC_INPUT_CONTAINER: "form-group basic-input-container",
-  HIDDEN: "hidden"
+  FORM_GROUP_BASIC_INPUT_CONTAINER: "\"form-group basic-input-container\"",
+  HIDDEN: "hidden",
+  BASIC_INPUT_CONTAINER: "basic-input-container"
 }
 
 export const CLASS_SELECTOR = {
@@ -178,7 +179,7 @@ export const token = {
 export const MESSAGES = {
   NONE: "없음",
   PLACE_HOLDER: {
-    UPDATE_INPUT: "수정할 값을 입력하세요",
+    UPDATE_INPUT: "\"수정할 값을 입력하세요\"",
     POST_INPUT: "을(를) 입력하세요",
     ACCIDENT_DATE: "날짜를 입력하세요",
     ACCIDENT_DETAIL: "사고 내용을 입력하세요",
