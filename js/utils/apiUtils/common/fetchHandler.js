@@ -31,6 +31,19 @@ export const fetchPostHandler = async (url, bodyObj) => {
   return response.status;
 }
 
+export const fetchPostFormHandler = async (url, form) => {
+  const response = await fetch(url, {
+    method: "POST",
+    body: form
+  });
+
+  if (!response.ok) {
+    alert(await response.text());
+    return null;
+  }
+  return response.status;
+}
+
 export const fetchPatchWithBody = async (url, bodyObj) => {
   const response = await fetch(url, {
     method: "PATCH",

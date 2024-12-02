@@ -8,7 +8,7 @@ import {
   INJURY_FORM,
   DISEASE_FORM,
   AUTOMOBILE_FORM,
-  RENDER_COMMON_INPUT_FIELDS_WITH_VALUES
+  RENDER_COMMON_INPUT_FIELDS_WITH_VALUES, INSURANCE_TYPE_RESPONSE
 } from "../../../../../../config/employee/productManagement/productManagement.js";
 import { addButtons } from "../../../buttonManager/employee/productManagement/input.js";
 import { fetchGetInsuranceProductDetail } from "../../../../apiUtils/apiDocumentation/employee/productManagement/productManagement.js";
@@ -284,7 +284,7 @@ const renderCommonInputFieldsWithValues = (insuranceType, data) => {
     else
       input.setAttribute(RENDER_COMMON_INPUT_FIELDS_WITH_VALUES.VALUE, data[form.value]);
   });
-  inputFieldsContainer.innerHTML += fieldsWithDetail[insuranceType](data); // 선택된 옵션에 따라 입력란 표시
+  inputFieldsContainer.innerHTML += fieldsWithDetail[INSURANCE_TYPE_RESPONSE[insuranceType]](data);// 선택된 옵션에 따라 입력란 표시
 };
 
 const createInjuryFormWithDetail = (data) => {
@@ -341,7 +341,7 @@ const createAutomobileFormWithDetail = (data) => {
             id="${AUTOMOBILE_FORM.SERVICE.ID}${service.value}"
             name=${AUTOMOBILE_FORM.SERVICE.NAME}
             value="${service.value}"
-            ${selectedServices.includes(service.value) ? CLASS.CHECKED : STRING_EMPTY}
+            ${selectedServices.includes(service.label) ? CLASS.CHECKED : STRING_EMPTY}
           />
         </div>
       `
@@ -371,8 +371,8 @@ const createAutomobileFormWithDetail = (data) => {
     `;
 }
 
-const fieldsWithDetail = {
-  Injury: createInjuryFormWithDetail,
-  Disease: createDiseaseFormWithDetail,
-  Automobile: createAutomobileFormWithDetail
+const fieldsWithDetail =  {
+  INJURY: createInjuryFormWithDetail,
+  DISEASE: createDiseaseFormWithDetail,
+  AUTOMOBILE: createAutomobileFormWithDetail
 }

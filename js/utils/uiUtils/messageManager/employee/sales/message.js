@@ -5,12 +5,15 @@ export const renderGreeting = async () => {
   const container = document.querySelector(CLASS_SELECTOR.CONTAINER);
   const employeeId = sessionStorage.getItem(KEY.LOGIN_ID);
   const getEmployee = await fetchGetEmployee(employeeId);
-  const greetingConstant = MESSAGES.GREETING;
-  const greeting = document.createElement(TAG.DIV);
-  greeting.className = CLASS.GREETING;
+  if(getEmployee !==null){
+    const greetingConstant = MESSAGES.GREETING;
+    const greeting = document.createElement(TAG.DIV);
+    greeting.className = CLASS.GREETING;
 
-  greeting.textContent = `${getEmployee.name} ${greetingConstant} `;
+    greeting.textContent = `${getEmployee.name} ${greetingConstant} `;
 
-  const headerLine = document.querySelector(CLASS_SELECTOR.HEADER_LINE);
-  container.insertBefore(greeting, headerLine.nextSibling);
+    const headerLine = document.querySelector(CLASS_SELECTOR.HEADER_LINE);
+    container.insertBefore(greeting, headerLine.nextSibling);
+  } else
+    window.history.back();
 };

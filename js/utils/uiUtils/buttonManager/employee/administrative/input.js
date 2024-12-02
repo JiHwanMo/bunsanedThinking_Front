@@ -1,6 +1,6 @@
 import { fetchAddOfficeSupply, fetchUpdateOfficeSupply } from "../../../../apiUtils/apiDocumentation/employee/administrative/administrative.js";
-import {BUTTON as COMMON_BUTTON, CLASS, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
-import {ELEMENT_ID, POP_UP, VALUE} from "../../../../../../config/employee/administrative/administrative.js";
+import { BUTTON as COMMON_BUTTON, CLASS, EVENT, KEY, LOCATION, TAG } from "../../../../../../config/common.js";
+import { ELEMENT_ID, POP_UP, VALUE } from "../../../../../../config/employee/administrative/administrative.js";
 
 export const addButtons = (buttonContainer) => {
   const selectedButtonType = JSON.parse(sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE));
@@ -76,6 +76,10 @@ const collectFormData = () => {
     // 입력 값 검증
     if (!name || !description || !inventory || !total_inventory || !department_id) {
       alert(POP_UP.POST.VALIDATION_ERROR);
+      return null;
+    }
+    if (inventory < 0 || total_inventory < 0) {
+      alert(POP_UP.POST.INVENTORY_NEGATIVE_NUMBER_ERROR);
       return null;
     }
     if (inventory > total_inventory) {

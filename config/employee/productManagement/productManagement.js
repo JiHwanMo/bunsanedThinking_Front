@@ -91,9 +91,15 @@ export const NAME_MAPPER= {
 }
 
 export const INSURANCE_TYPE={
-  DISEASE : "Disease",
-  INJURY : "Injury",
-  AUTOMOBILE: "Automobile",
+  DISEASE : "질병",
+  INJURY : "상해",
+  AUTOMOBILE: "자동차"
+}
+
+export const INSURANCE_TYPE_RESPONSE = {
+  "질병": "DISEASE",
+  "상해": "INJURY",
+  "자동차": "AUTOMOBILE"
 }
 
 export const VALUE ={

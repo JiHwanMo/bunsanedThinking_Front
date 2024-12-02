@@ -22,6 +22,7 @@ const contractDetail = (dto) => {
     { label: DETAIL_COLUMN_NAME.REVIEW_ACQUISITION.PROPERTY, value: dto.property },
     { label: DETAIL_COLUMN_NAME.REVIEW_ACQUISITION.ACCIDENT_HISTORIES, value: dto.accidentHistories.map(item => accidentHistory(item)) },
     { label: DETAIL_COLUMN_NAME.REVIEW_ACQUISITION.SURGERY_HISTORIES, value: dto.surgeryHistories.map(item => surgeryHistory(item)) },
+    { label: DETAIL_COLUMN_NAME.REVIEW_ACQUISITION.DISEASE_HISTORIES, value: dto.diseaseHistories.map(item => diseaseHistory(item)) }
   ];
 };
 
@@ -42,6 +43,14 @@ const surgeryHistory = (dto) => {
   ];
 };
 
+const diseaseHistory = (dto) => {
+  return [
+    { label: DETAIL_COLUMN_NAME.REVIEW_ACQUISITION.LIST.DISEASE_HISTORY.ID, value: dto.id },
+    { label: DETAIL_COLUMN_NAME.REVIEW_ACQUISITION.LIST.DISEASE_HISTORY.NAME, value: dto.name },
+    { label: DETAIL_COLUMN_NAME.REVIEW_ACQUISITION.LIST.DISEASE_HISTORY.DATE_OF_DIAGNOSIS, value: dto.date_of_diagnosis }
+  ];
+};
+
 const context = {
   REVIEW_ACQUISITION: {
     detailGetter: contractDetail,
@@ -59,6 +68,7 @@ export const renderDetails = async () => {
 
   if (selectedDataId) {
     const selectedData = await context[type].fetchGetById(selectedDataId);
+    console.log(selectedData);
     renderDetailsTable(selectedData);
     renderButtons(selectedDataId);
   }

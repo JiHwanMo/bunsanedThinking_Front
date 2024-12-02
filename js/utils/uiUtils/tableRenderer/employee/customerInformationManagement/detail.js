@@ -7,7 +7,7 @@ import {
   BUTTON,
   DETAIL_COLUMN_NAME, DISEASE_HISTORY_LIST, MESSAGES, POP_UP, SURGERY_HISTORY_LIST, VALUE
 } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
-import {CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
+import { CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG } from "../../../../../../config/common.js";
 
 const customerInformationDetail = (data) => {
   return [
@@ -15,7 +15,7 @@ const customerInformationDetail = (data) => {
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.PHONE_NUMBER, value: data.phoneNumber },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.JOB, value: data.job },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.AGE, value: data.age },
-    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.GENDER, value: data.gender},
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.GENDER, value: convertGenderToKorean(data.gender)},
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.RESIDENT_REGISTRATION_NUMBER, value: data.residentRegistrationNumber },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.ADDRESS, value: data.address },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.PROPERTY, value: data.property },
@@ -184,6 +184,12 @@ const customerInformationTaskMapper = {
     DELETE: deleteItem
   }
 }
+
+const convertGenderToKorean = (gender) => {
+  if (gender === "Male") return "남자";
+  if (gender === "Female") return "여자";
+  return gender; // 알 수 없는 값은 그대로 반환
+};
 
 
 

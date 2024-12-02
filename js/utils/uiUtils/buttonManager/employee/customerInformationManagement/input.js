@@ -1,9 +1,10 @@
 import { fetchAddCustomerInformation, fetchUpdateCustomerInformation } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
-import {BUTTON, CLASS, EVENT, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
+import { ATTRIBUTE, BUTTON, CLASS, EVENT, KEY, LOCATION, QUERY_SELECTOR, TAG } from "../../../../../../config/common.js";
 import {
-  CLASS_SELECTOR,
+  ACCIDENT_HISTORY_LIST,
+  CLASS_SELECTOR, DISEASE_HISTORY_LIST,
   ELEMENT_ID,
-  POP_UP,
+  POP_UP, SURGERY_HISTORY_LIST,
   VALUE
 } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
 
@@ -85,8 +86,10 @@ const collectFormData = () => {
 
     const accidentHistoryList = [];
     document.querySelectorAll(CLASS_SELECTOR.ACCIDENT_HISTORY_ENTRY).forEach(entry => {
-      const date = entry.querySelector('input[name="date"]').value.trim();
-      const accidentDetail = entry.querySelector('input[name="accidentDetail"]').value.trim();
+      // const date = entry.querySelector('input[name="date"]').value.trim();
+      const date = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, ACCIDENT_HISTORY_LIST.DATE, false));
+      // const accidentDetail = entry.querySelector('input[name="accidentDetail"]').value.trim();
+      const accidentDetail = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, ACCIDENT_HISTORY_LIST.ACCIDENT_DETAIL, false));
       if (date && accidentDetail) {
         accidentHistoryList.push({ date, accidentDetail });
       }
@@ -94,9 +97,12 @@ const collectFormData = () => {
 
     const surgeryHistoryList = [];
     document.querySelectorAll(CLASS_SELECTOR.SURGERY_HISTORY_ENTRY).forEach(entry => {
-      const date = entry.querySelector('input[name="date"]').value.trim();
-      const hospitalName = entry.querySelector('input[name="hospitalName"]').value.trim();
-      const name = entry.querySelector('input[name="name"]').value.trim();
+      // const date = entry.querySelector('input[name="date"]').value.trim();
+      const date = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, SURGERY_HISTORY_LIST.DATE, false));
+      // const hospitalName = entry.querySelector('input[name="hospitalName"]').value.trim();
+      const hospitalName = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, SURGERY_HISTORY_LIST.HOSPITAL_NAME, false));
+      // const name = entry.querySelector('input[name="name"]').value.trim();
+      const name = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, SURGERY_HISTORY_LIST.NAME, false));
       if (date && hospitalName && name) {
         surgeryHistoryList.push({ date, hospitalName, name });
       }
@@ -104,8 +110,10 @@ const collectFormData = () => {
 
     const diseaseHistoryList = [];
     document.querySelectorAll(CLASS_SELECTOR.DISEASE_HISTORY_ENTRY).forEach(entry => {
-      const dateOfDiagnosis = entry.querySelector('input[name="dateOfDiagnosis"]').value.trim();
-      const name = entry.querySelector('input[name="name"]').value.trim();
+      // const dateOfDiagnosis = entry.querySelector('input[name="dateOfDiagnosis"]').value.trim();
+      const dateOfDiagnosis = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, DISEASE_HISTORY_LIST.DATE_OF_DIAGNOSIS, false));
+      // const name = entry.querySelector('input[name="name"]').value.trim();
+      const name = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, DISEASE_HISTORY_LIST.NAME, false));
       if (dateOfDiagnosis && name) {
         diseaseHistoryList.push({ dateOfDiagnosis, name });
       }

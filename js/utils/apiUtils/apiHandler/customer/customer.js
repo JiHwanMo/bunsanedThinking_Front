@@ -1,4 +1,10 @@
-import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from '../../common/fetchHandler.js';
+import {
+  fetchGetHandler,
+  fetchPostHandler,
+  fetchPatchWithParams,
+  fetchDeleteHandler,
+  fetchPostFormHandler
+} from '../../common/fetchHandler.js';
 
 const defaultUrl = "http://localhost:8080/customer";
 
@@ -155,7 +161,7 @@ export const fetchLoanHandler = async (loanDTO) => {
 }
 
 export const fetchReceiveInsuranceHandler = async (receiveInsuranceDTO) => {
-  return await fetchPostHandler(`${defaultUrl}/receiveInsurance`, receiveInsuranceDTO);
+  return await fetchPostFormHandler(`${defaultUrl}/receiveInsurance`, receiveInsuranceDTO);
 }
 
 export const fetchReportAccidentHandler = async (reportAccidentDTO) => {

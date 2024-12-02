@@ -158,7 +158,9 @@ export const CLASS = {
   SELECTED: "selected",
   ACCIDENT_HISTORY_ENTRY: "accident-history-entry",
   SURGERY_HISTORY_ENTRY: "surgery-history-entry",
-  DISEASE_HISTORY_ENTRY: "disease-history-entry"
+  DISEASE_HISTORY_ENTRY: "disease-history-entry",
+  FORM_GROUP_BASIC_INPUT_CONTAINER: "form-group basic-input-container",
+  HIDDEN: "hidden"
 }
 
 export const CLASS_SELECTOR = {
@@ -174,5 +176,257 @@ export const token = {
 }
 
 export const MESSAGES = {
-  NONE: "없음"
+  NONE: "없음",
+  PLACE_HOLDER: {
+    UPDATE_INPUT: "수정할 값을 입력하세요",
+    POST_INPUT: "을(를) 입력하세요",
+    ACCIDENT_DATE: "날짜를 입력하세요",
+    ACCIDENT_DETAIL: "사고 내용을 입력하세요",
+    SURGERY_DATE: "날짜를 입력하세요",
+    HOSPITAL_NAME: "병원 이름을 입력하세요",
+    SURGERY_NAME: "수술명을 입력하세요",
+    DISEASE_DATE: "진단 날짜를 입력하세요",
+    DISEASE_NAME: "질병명을 입력하세요"
+  }
 }
+
+export const POST_FORM = {
+  NAME_FORM: {
+    FOR: "name",
+    TYPE: "text",
+    ID: "name",
+    NAME: "name"
+  },
+  PHONE_NUMBER_FORM: {
+    FOR: "phoneNumber",
+    TYPE: "text",
+    ID: "phoneNumber",
+    NAME: "phoneNumber"
+  },
+  JOB_FORM: {
+    FOR: "job",
+    TYPE: "text",
+    ID: "job",
+    NAME: "job"
+  },
+  AGE_FORM: {
+    FOR: "age",
+    TYPE: "number",
+    ID: "age",
+    NAME: "age"
+  },
+  GENDER_FORM: {
+    FOR: "gender",
+    TYPE: "text",
+    ID: "gender",
+    NAME: "gender"
+  },
+  RESIDENT_REGISTRATION_NUMBER_FORM: {
+    FOR: "residentRegistrationNumber",
+    TYPE: "text",
+    ID: "residentRegistrationNumber",
+    NAME: "residentRegistrationNumber"
+  },
+  ADDRESS_FORM: {
+    FOR: "address",
+    TYPE: "text",
+    ID: "address",
+    NAME: "address"
+  },
+  PROPERTY_FORM: {
+    FOR: "property",
+    TYPE: "number",
+    ID: "property",
+    NAME: "property"
+  },
+  BANK_NAME_FORM: {
+    FOR: "bankName",
+    TYPE: "text",
+    ID: "bankName",
+    NAME: "bankName"
+  },
+  BANK_ACCOUNT_FORM: {
+    FOR: "bankAccount",
+    TYPE: "text",
+    ID: "bankAccount",
+    NAME: "bankAccount"
+  },
+  ACCIDEN_HISTORY_FORM: {
+    ID: "accidentHistoryContainer",
+    BUTTON : {
+      TYPE: "button",
+      ID: "addAccidentHistoryButton"
+    }
+  },
+  SURGERY_HISTORY_FORM: {
+    ID: "surgeryHistoryContainer",
+    BUTTON: {
+      TYPE: "button",
+      ID: "addSurgeryHistoryButton"
+    }
+  },
+  DISEASE_HISTORY_FORM: {
+    ID: "diseaseHistoryContainer",
+    BUTTON: {
+      TYPE: "button",
+      ID: "addDiseaseHistoryButton"
+    }
+  }
+}
+
+export const UPDATE_FORM = {
+  ID_FORM: {
+    FOR: "id",
+    TYPE: "text",
+    ID: "id",
+    NAME: "id"
+  },
+  RESIDENT_REGISTRATION_NUMBER_FORM: {
+    FOR: "resident_registration_number",
+    TYPE: "text",
+    ID: "resident_registration_number",
+    NAME: "resident_registration_number"
+  },
+  INDEX_CONTAINER: {
+    FOR: "index",
+    ID: "index",
+    NAME: "index",
+    OPTION_VALUE: {
+      ONE: "1",
+      TWO: "2",
+      THREE: "3",
+      FOUR: "4",
+      FIVE: "5",
+      SIX: "6",
+      SEVEN: "7",
+      EIGHT: "8",
+      NINE: "9",
+      TEN: "10",
+      ELEVEN: "11",
+      TWELVE: "12"
+    }
+  },
+  INPUT_CONTAINER: {
+    FOR: "input",
+    TYPE: "text",
+    ID: "input",
+    NAME: "input"
+  },
+  FIELDS: {
+    HISTORY_FIELDS_ID: "historyFields",
+    ACCIDENT_FIELDS_ID: "accidentFields",
+    SURGERY_FIELDS_ID: "surgeryFields",
+    DISEASE_FIELDS_ID: "diseaseFields"
+  },
+  HISTORY_FIELDS: {
+    FOR: "historyId",
+    TYPE: "number",
+    ID: "historyId",
+    NAME: "historyId",
+    MESSAGES: {
+      PLACE_HOLDER: "이력 ID를 입력하세요"
+    }
+  },
+  ACCIDENT_FIELDS: {
+    ACCIDENT_DATE:{
+      FOR: "accidentDate",
+      TYPE: "date",
+      ID: "accidentDate",
+      NAME: "accidentDate"
+    },
+    ACCIDENT_DETAIL:{
+      FOR: "accidentDetail",
+      TYPE: "text",
+      ID: "accidentDetail",
+      NAME: "accidentDetail",
+      MESSAGES:{
+        PLACE_HOLDER: "사고 내용을 입력하세요"
+      }
+    }
+  },
+  SURGERY_FIELDS: {
+    SURGERY_DATE: {
+      FOR: "surgeryDate",
+      TYPE: "date",
+      ID: "surgeryDate",
+      NAME: "surgeryDate"
+    },
+    HOSPITAL_NAME: {
+      FOR: "hospitalName",
+      TYPE: "text",
+      ID: "hospitalName",
+      NAME: "hospitalName",
+      MESSAGES: {
+        PLACE_HOLDER: "병원 이름을 입력하세요"
+      }
+    },
+    SURGERY_NAME: {
+      FOR: "surgeryName",
+      TYPE: "text",
+      ID: "surgeryName",
+      NAME: "surgeryName",
+      MESSAGES: {
+        PLACE_HOLDER: "수술명을 입력하세요"
+      }
+    }
+  },
+  DISEASE_FIELDS: {
+    DISEASE_DATE: {
+      FOR: "diseaseDate",
+      TYPE: "date",
+      ID: "diseaseDate",
+      NAME: "diseaseDate"
+    },
+    DISEASE_NAME: {
+      FOR: "diseaseName",
+      TYPE: "text",
+      ID: "diseaseName",
+      NAME: "diseaseName",
+      MESSAGES: {
+        PLACE_HOLDER: "질병명을 입력하세요"
+      }
+    }
+  }
+}
+
+export const ADD_ACCIDENT_HISTORY = {
+  ACCIDENT_DATE: {
+    TYPE: "date",
+    NAME: "date",
+  },
+  ACCIDENT_DETAIL: {
+    TYPE: "text",
+    NAME: "accidentDetail"
+  },
+  TYPE: "button"
+}
+
+export const ADD_SURGERY_HISTORY = {
+  SURGERY_DATE: {
+    TYPE: "date",
+    NAME: "date"
+  },
+  HOSPITAL_NAME: {
+    TYPE: "text",
+    NAME: "hospitalName"
+  },
+  SURGERY_NAME: {
+    TYPE: "text",
+    NAME: "name"
+  },
+  TYPE: "button"
+}
+
+export const ADD_DISEASE_HISTORY = {
+  DISEASE_DATE: {
+    TYPE: "date",
+    NAME: "dateOfDiagnosis"
+  },
+  DISEASE_NAME: {
+    TYPE: "text",
+    NAME: "name"
+  },
+  TYPE: "button"
+}
+
+

@@ -203,6 +203,10 @@ export const INSURANCE_MONEY_DETAIL_LABEL = {
   RESIDENT_REGISTRATION_CARD: "주민등록증 사본"
 }
 
+export const IMAGE_SRC = (value) => {
+  return `data:image/jpeg;base64,${value}`;
+}
+
 export const ALERT = {
   CONFIRM: {
     REQUEST_COMPENSATION: "정말로 요청하시겠습니까?",

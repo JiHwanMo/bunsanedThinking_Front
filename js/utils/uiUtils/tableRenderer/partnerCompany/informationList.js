@@ -11,7 +11,7 @@ import {
   MESSAGES, STRING_EMPTY,
   TAG
 } from "../../../../../config/common.js";
-import {COMBOBOX, TYPE} from "../../../../../config/partnerCompany/partnerCompany.js";
+import { COMBOBOX, TYPE } from "../../../../../config/partnerCompany/partnerCompany.js";
 import { TABLE_TITLE } from "../../../../../config/partnerCompany/partnerCompany.js";
 import { COLUMN_NAME } from "../../../../../config/partnerCompany/partnerCompany.js";
 

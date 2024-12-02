@@ -102,6 +102,7 @@ export const DETAIL_COLUMN_NAME = {
     PROPERTY: "재산",
     ACCIDENT_HISTORIES: "사고 이력",
     SURGERY_HISTORIES: "수술 이력",
+    DISEASE_HISTORIES:"질병 이력",
 
     LIST:{
       ACCIDENT_HISTORY:{
@@ -114,6 +115,11 @@ export const DETAIL_COLUMN_NAME = {
         NAME: "수술명",
         HOSPITAL_NAME: "수술 병원",
         DATE: "수술 날짜"
+      },
+      DISEASE_HISTORY:{
+        ID: "질병 이력 번호",
+        NAME: "질병명",
+        DATE_OF_DIAGNOSIS: "진단일"
       }
     }
   }

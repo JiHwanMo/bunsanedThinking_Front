@@ -225,15 +225,15 @@ export const NAME_MAPPER= {
 }
 
 export const INSURANCE_TYPE={
-  DISEASE : "Disease",
-  INJURY : "Injury",
-  AUTOMOBILE: "Automobile",
+  DISEASE : "질병",
+  INJURY : "상해",
+  AUTOMOBILE: "자동차",
 }
 
 export const LOAN_TYPE= {
-  COLLATERAL: "Collateral",
-  FIXED_DEPOSIT: "FixedDeposit",
-  INSURANCE_CONTRACT: "InsuranceContract"
+  COLLATERAL: "담보",
+  FIXED_DEPOSIT: "정기 예금",
+  INSURANCE_CONTRACT: "보험 계약"
 }
 
 export const CUSTOMER_FORM = {
