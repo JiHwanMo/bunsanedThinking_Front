@@ -4,7 +4,7 @@ import {
 import {
   BUTTON,
   CLASS, CLASS_SELECTOR,
-  ELEMENT_ID,
+  ELEMENT_ID as COMMON_ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
   KEY,
@@ -16,7 +16,9 @@ import {
   COMBO_BOX,
   COMBOBOX,
   DETAIL_COLUMN_NAME,
-  INFORMATION_TYPE, SELECTED_BUTTON_TYPE
+  INFORMATION_TYPE,
+  SELECTED_BUTTON_TYPE,
+  ELEMENT_ID
 } from "../../../../../../config/employee/humanResource/humanResource.js";
 import {TITLE} from "../../../../../../config/employee/humanResource/humanResource.js";
 
@@ -24,14 +26,24 @@ export const informationType = {
   MANAGEMENT_EMPLOYEE: INFORMATION_TYPE.MANAGEMENT_EMPLOYEE
 }
 
-const employeeRow = (employee) => {
-  return `
-    <td>${employee.id}</td>
-    <td>${employee.name}</td>
-    <td>${employee.position}</td>
-    <td>${employee.departmentId}</td>
-    <td>${employee.salary}</td>
-  `;
+const rowLabel = {
+  MANAGEMENT_EMPLOYEE: [
+    ELEMENT_ID.ID,
+    ELEMENT_ID.NAME,
+    ELEMENT_ID.POSITION,
+    ELEMENT_ID.DEPARTMENT_ID,
+    ELEMENT_ID.SALARY
+  ]
+}
+
+const rows = (dto, labels) => {
+  const items = [];
+  labels.forEach(label => {
+    const td = document.createElement(TAG.TD);
+    td.textContent = dto[label];
+    items.push(td);
+  });
+  return items;
 }
 
 const getEmployeeId = (data) => {
@@ -44,7 +56,6 @@ const context = {
     idGetter: getEmployeeId,
     listFetch: fetchGetAllEmployee,
     listFetchById: fetchGetEmployee,
-    rowGetter: employeeRow,
     columnList: [
       DETAIL_COLUMN_NAME.MANAGEMENT_EMPLOYEE.ID,
       DETAIL_COLUMN_NAME.MANAGEMENT_EMPLOYEE.NAME,
@@ -75,13 +86,13 @@ const initialTable = () => {
 
 const setTitle = () => {
   const currentContext = context[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const contextTitle = document.getElementById(ELEMENT_ID.TITLE);
+  const contextTitle = document.getElementById(COMMON_ELEMENT_ID.TITLE);
   contextTitle.innerText = currentContext.title;
 }
 
 const setColumn = () => {
   const currentContext = context[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const head = document.getElementById(ELEMENT_ID.TABLE);
+  const head = document.getElementById(COMMON_ELEMENT_ID.TABLE);
   const columns = document.createElement(TAG.TR);
   currentContext.columnList.forEach(item => {
     const oneColumn = document.createElement(TAG.TH);
@@ -93,7 +104,7 @@ const setColumn = () => {
 
 const setPost = () => {
   const post = document.createElement(TAG.DIV);
-  post.id = ELEMENT_ID.POST;
+  post.id = COMMON_ELEMENT_ID.POST;
   post.className = CLASS.POST_BUTTON;
   post.textContent = BUTTON.COMMON.POST;
   return post;
@@ -120,7 +131,7 @@ const setComboBox = () => {
 const setInput = () => {
   const input = document.createElement(TAG.INPUT);
   input.type = INPUT_TYPE.TEXT;
-  input.id = ELEMENT_ID.SEARCH_INPUT;
+  input.id = COMMON_ELEMENT_ID.SEARCH_INPUT;
   input.placeholder = MESSAGES.PLACE_HOLDER.SEARCH;
   return input;
 }
@@ -142,7 +153,7 @@ const setOneRow = (item, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   const row = document.createElement(TAG.TR);
   let id = context[type].idGetter(item);
-  row.innerHTML = context[type].rowGetter(item);
+  rows(item, rowLabel[type]).forEach(rowItem => row.appendChild(rowItem));
   // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
@@ -164,11 +175,11 @@ const setOneRow = (item, type) => {
 
 const setButton = () => {
   const button = document.createElement(TAG.BUTTON);
-  button.id = ELEMENT_ID.SEARCH_BUTTON;
+  button.id = COMMON_ELEMENT_ID.SEARCH_BUTTON;
   button.textContent = BUTTON.COMMON.SEARCH;
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   button.addEventListener(EVENT.CLICK, () => {
-    const value = document.getElementById(ELEMENT_ID.SEARCH_INPUT).value;
+    const value = document.getElementById(COMMON_ELEMENT_ID.SEARCH_INPUT).value;
     initTableByInput(value, type);
   })
   return button;
@@ -190,7 +201,7 @@ const setSearchBar = () => {
   const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
   if (select != null) { // 추가
     container.appendChild(select);
-    if (select.id === ELEMENT_ID.POST)
+    if (select.id === COMMON_ELEMENT_ID.POST)
       select.addEventListener(EVENT.CLICK, () => {
         sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, SELECTED_BUTTON_TYPE.POST);
         window.location.href = LOCATION.INPUT;

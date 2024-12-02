@@ -24,23 +24,23 @@ const forms = {
   HANDLE_COMPLAINT: [
     {
       isTextArea: false,
-      for: "employeeName",
-      label: "EMPLOYEE_NAME",
-      type: "text",
-      id: "employeeName",
-      name: "employeeName",
-      value: "employeeName",
-      placeholder: "EMPLOYEE_NAME"
+      for: ELEMENT_ID.EMPLOYEE_NAME,
+      label: LABEL.EMPLOYEE_NAME,
+      type: INPUT_TYPE.TEXT,
+      id: ELEMENT_ID.EMPLOYEE_NAME,
+      name: ELEMENT_ID.EMPLOYEE_NAME,
+      value: ELEMENT_ID.EMPLOYEE_NAME,
+      placeholder: LABEL.EMPLOYEE_NAME
     },
     {
       isTextArea: true,
-      for: "result",
-      label: "RESULT",
-      rows: "4",
-      id: "result",
-      name: "result",
-      value: "result",
-      placeholder: "RESULT"
+      for: ELEMENT_ID.RESULT,
+      label: LABEL.RESULT,
+      rows: 4,
+      id: ELEMENT_ID.RESULT,
+      name: ELEMENT_ID.RESULT,
+      value: ELEMENT_ID.RESULT,
+      placeholder: LABEL.RESULT
     }
   ],
   HANDLE_REPORT: [
@@ -93,7 +93,7 @@ const createForm = (form, type) => {
   formDiv.appendChild(formLabel);
   let formInput;
   if (form.isTextArea) {
-    formInput = document.createElement("textarea");
+    formInput = document.createElement(TAG.TEXT_AREA);
     formInput.rows = form.rows;
   } else {
     formInput = document.createElement(TAG.INPUT);

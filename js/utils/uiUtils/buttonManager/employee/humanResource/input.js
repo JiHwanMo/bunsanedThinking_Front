@@ -1,6 +1,6 @@
 import {
   ATTRIBUTE,
-  BUTTON as COMMON_BUTTON,
+  BUTTON as COMMON_BUTTON, CLASS, CLASS_SELECTOR,
   ELEMENT_ID as COMMON_ELEMENT_ID,
   EVENT,
   KEY,
@@ -66,7 +66,7 @@ const context = {
 
 const createButton = (textContent) => {
   const okButton = document.createElement(TAG.BUTTON);
-  okButton.className = "button-item";
+  okButton.className = CLASS.BUTTON_ITEM;
   okButton.textContent = textContent;
   return okButton;
 }
@@ -75,7 +75,7 @@ const createCancelButton = () => {
   const buttonContainer = document.getElementById(COMMON_ELEMENT_ID.BUTTON_CONTAINER);
 
   const cancelButton = document.createElement(TAG.BUTTON);
-  cancelButton.className = "button-item";
+  cancelButton.className = CLASS.BUTTON_ITEM;
   cancelButton.textContent = COMMON_BUTTON.COMMON.CANCEL;
 
   cancelButton.addEventListener(EVENT.CLICK, () => window.history.back());
@@ -96,7 +96,7 @@ const collectEmployeeFormDataForPost = () => {
   return {
     departmentId: getValueById(ELEMENT_ID.DEPARTMENT_ID),
     name: getValueById(ELEMENT_ID.NAME),
-    employeePosition: getValueById(ELEMENT_ID.EMPLOYEE_POSITION),
+    employeePosition: getValueById(ELEMENT_ID.POSITION),
     address: getValueById(ELEMENT_ID.ADDRESS),
     phoneNumber: getValueById(ELEMENT_ID.PHONE_NUMBER),
     bankName: getValueById(ELEMENT_ID.BANK_NAME),
@@ -109,7 +109,7 @@ const collectEmployeeFormDataForPost = () => {
 };
 
 const collectFamilyFormDataForPost = () => {
-  const familyLength = document.querySelectorAll('.radio-group').length;
+  const familyLength = document.querySelectorAll(CLASS_SELECTOR.RADIO_GROUP).length;
 
   const familyForm = [];
   for (let familyNumber = 0; familyNumber < familyLength; familyNumber++) {
@@ -128,7 +128,7 @@ const collectEmployeeFormDataForUpdate = () => {
     id: getValueById(ELEMENT_ID.ID),
     departmentId: getValueById(ELEMENT_ID.DEPARTMENT_ID),
     name: getValueById(ELEMENT_ID.NAME),
-    employeePosition: getValueById(ELEMENT_ID.EMPLOYEE_POSITION),
+    employeePosition: getValueById(ELEMENT_ID.POSITION),
     address: getValueById(ELEMENT_ID.ADDRESS),
     phoneNumber: getValueById(ELEMENT_ID.PHONE_NUMBER),
     bankName: getValueById(ELEMENT_ID.BANK_NAME),
@@ -140,7 +140,7 @@ const collectEmployeeFormDataForUpdate = () => {
 };
 
 const collectFamilyFormDataForUpdate = () => {
-  const familyLength = document.querySelectorAll('.radio-group').length;
+  const familyLength = document.querySelectorAll(CLASS_SELECTOR.RADIO_GROUP).length;
   const familyForm = [];
   for (let familyNumber = 0; familyNumber < familyLength; familyNumber++) {
     const element = document.getElementById(`${ELEMENT_ID.FAMILY_DETAIL.ID}-${familyNumber}`);

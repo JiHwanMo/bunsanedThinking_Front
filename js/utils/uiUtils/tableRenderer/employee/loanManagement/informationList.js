@@ -3,16 +3,19 @@ import {
   fetchGetAllLoanRequest, fetchGetAllCompletedLoanRequest, fetchGetAllUnprocessedLoanRequest
 } from "../../../../apiUtils/apiDocumentation/employee/loanManagement/loanManagement.js"
 import {
-  COLUMN_NAME, COMBO_BOX,
+  COLUMN_NAME,
+  COMBO_BOX,
   COMBOBOX,
   DETAIL_COLUMN_NAME,
-  INFORMATION_TYPE, SELECTED_BUTTON_TYPE,
-  TITLE
+  INFORMATION_TYPE,
+  SELECTED_BUTTON_TYPE,
+  TITLE,
+  ELEMENT_ID
 } from "../../../../../../config/employee/loanManagement/loanManagement.js";
 import {
   BUTTON,
   CLASS, CLASS_SELECTOR,
-  ELEMENT_ID,
+  ELEMENT_ID as COMMON_ELEMENT_ID,
   EVENT,
   INPUT_TYPE,
   KEY,
@@ -26,36 +29,43 @@ export const informationType = {
   LOAN_REQUEST: INFORMATION_TYPE.LOAN_REQUEST
 }
 
-const loanRow = (loan) => {
-  return `
-    <td>${loan.name}</td>
-    <td>${loan.loanType}</td>
-    <td>${loan.id}</td>
-    <td>${loan.interestRate}</td>
-    <td>${loan.maximumMoney}</td>
-  `;
+const rowLabel = {
+  MANAGEMENT_LOAN_PRODUCT: [
+    ELEMENT_ID.ID,
+    ELEMENT_ID.LOAN_TYPE,
+    ELEMENT_ID.NAME,
+    ELEMENT_ID.INTEREST_RATE,
+    ELEMENT_ID.MAXIMUM_MONEY
+  ],
+  LOAN_REQUEST: [
+    ELEMENT_ID.CONTRACT_ID,
+    ELEMENT_ID.CUSTOMER_NAME,
+    ELEMENT_ID.PHONE_NUMBER,
+    ELEMENT_ID.JOB,
+    ELEMENT_ID.AGE,
+    ELEMENT_ID.GENDER,
+    ELEMENT_ID.RESIDENT_REGISTRATION_NUMBER,
+    ELEMENT_ID.PROPERTY,
+    ELEMENT_ID.ADDRESS,
+    ELEMENT_ID.BANK_NAME,
+    ELEMENT_ID.BANK_ACCOUNT,
+    ELEMENT_ID.LOAN_NAME,
+    ELEMENT_ID.LOAN_TYPE,
+    ELEMENT_ID.LOAN_ID,
+    ELEMENT_ID.INTEREST_RATE,
+    ELEMENT_ID.MAXIMUM_MONEY,
+    ELEMENT_ID.CONTRACT_STATUS
+  ]
 }
 
-const loanRequestRow = (dto) => {
-  return `
-    <td>${dto.contractId}</td>
-    <td>${dto.customerName}</td>
-    <td>${dto.phoneNumber}</td>
-    <td>${dto.job}</td>
-    <td>${dto.age}</td>
-    <td>${dto.gender}</td>
-    <td>${dto.residentRegistrationNumber}</td>
-    <td>${dto.property}</td>
-    <td>${dto.address}</td>
-    <td>${dto.bankName}</td>
-    <td>${dto.bankAccount}</td>
-    <td>${dto.loanName}</td>
-    <td>${dto.loanType}</td>
-    <td>${dto.loanId}</td>
-    <td>${dto.interestRate}</td>
-    <td>${dto.maximumMoney}</td>
-    <td>${dto.contractStatus}</td>
-  `;
+const rows = (dto, labels) => {
+  const items = [];
+  labels.forEach(label => {
+    const td = document.createElement(TAG.TD);
+    td.textContent = dto[label];
+    items.push(td);
+  });
+  return items;
 }
 
 const getLoanProductId = (data) => {
@@ -73,7 +83,6 @@ const context = {
     listFetch: fetchGetAll,
     listFetchById: fetchGetLoanProduct,
     comboListFetch: {all: fetchGetAll},
-    rowGetter: loanRow,
     columnList: [
       DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.NAME,
       DETAIL_COLUMN_NAME.MANAGEMENT_LOAN_PRODUCT.LOAN_TYPE,
@@ -92,7 +101,6 @@ const context = {
       completed: fetchGetAllCompletedLoanRequest,
       unprocessed: fetchGetAllUnprocessedLoanRequest
     },
-    rowGetter: loanRequestRow,
     columnList: [
       COLUMN_NAME.LOAN_REQUEST.CONTRACT_ID,
       COLUMN_NAME.LOAN_REQUEST.CUSTOMER_NAME,
@@ -135,13 +143,13 @@ const initialTable = () => {
 
 const setTitle = () => {
   const currentContext = context[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const contextTitle = document.getElementById(ELEMENT_ID.TITLE);
+  const contextTitle = document.getElementById(COMMON_ELEMENT_ID.TITLE);
   contextTitle.innerText = currentContext.title;
 }
 
 const setColumn = () => {
   const currentContext = context[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const head = document.getElementById(ELEMENT_ID.TABLE);
+  const head = document.getElementById(COMMON_ELEMENT_ID.TABLE);
   const columns = document.createElement(TAG.TR);
   currentContext.columnList.forEach(item => {
     const oneColumn = document.createElement(TAG.TH);
@@ -153,7 +161,7 @@ const setColumn = () => {
 
 const setPost = () => {
   const post = document.createElement(TAG.DIV);
-  post.id = ELEMENT_ID.POST;
+  post.id = COMMON_ELEMENT_ID.POST;
   post.className = CLASS.POST_BUTTON;
   post.textContent = BUTTON.COMMON.POST;
   return post;
@@ -180,7 +188,7 @@ const setComboBox = () => {
 const setInput = () => {
   const input = document.createElement(TAG.INPUT);
   input.type = INPUT_TYPE.TEXT;
-  input.id = ELEMENT_ID.SEARCH_INPUT;
+  input.id = COMMON_ELEMENT_ID.SEARCH_INPUT;
   input.placeholder = MESSAGES.PLACE_HOLDER.SEARCH;
   return input;
 }
@@ -202,7 +210,7 @@ const setOneRow = (item, type) => {
   const tableBody = document.getElementById(KEY.LIST);
   const row = document.createElement(TAG.TR);
   let id = context[type].idGetter(item);
-  row.innerHTML = context[type].rowGetter(item);
+  rows(item, rowLabel[type]).forEach(rowItem => row.appendChild(rowItem));
   // 각 행에 클릭 이벤트 추가
   row.addEventListener(EVENT.CLICK, () => {
     if (window.selectedRow) {
@@ -224,11 +232,11 @@ const setOneRow = (item, type) => {
 
 const setButton = () => {
   const button = document.createElement(TAG.BUTTON);
-  button.id = ELEMENT_ID.SEARCH_BUTTON;
+  button.id = COMMON_ELEMENT_ID.SEARCH_BUTTON;
   button.textContent = BUTTON.COMMON.SEARCH;
   const type = sessionStorage.getItem(KEY.CURRENT_TYPE);
   button.addEventListener(EVENT.CLICK, () => {
-    const value = document.getElementById(ELEMENT_ID.SEARCH_INPUT).value;
+    const value = document.getElementById(COMMON_ELEMENT_ID.SEARCH_INPUT).value;
     initTableByInput(value, type);
   })
   return button;
@@ -250,7 +258,7 @@ const setSearchBar = () => {
   const select = COMBOBOX[type].isCombo ? setComboBox() : setPost();
   if (select != null) { // 추가
     container.appendChild(select);
-    if (select.id === ELEMENT_ID.POST)
+    if (select.id === COMMON_ELEMENT_ID.POST)
       select.addEventListener(EVENT.CLICK, addLoan); // 수정
     else select.onchange = () => initTableBySelect(select.id, type); // 추가
   }

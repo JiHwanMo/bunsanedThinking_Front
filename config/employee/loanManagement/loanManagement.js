@@ -141,13 +141,29 @@ export const SELECTED_BUTTON_TYPE= {
 }
 
 export const ELEMENT_ID= {
+  ID: "id",
   MONEY: "money",
   PAYMENT_TYPE: "paymentType",
   LOAN_TYPE: "loanType",
-  LOAN_NAME: "name",
+  NAME: "name",
   INTEREST_RATE: "interestRate",
   MAXIMUM_MONEY: "maximumMoney",
   MINIMUM_ASSET: "minimumAsset",
+
+  CONTRACT_ID: "contractId",
+  CUSTOMER_NAME: "customerName",
+  PHONE_NUMBER: "phoneNumber",
+  JOB: "job",
+  AGE: "age",
+  GENDER: "gender",
+  RESIDENT_REGISTRATION_NUMBER: "residentRegistrationNumber",
+  PROPERTY: "property",
+  ADDRESS: "address",
+  BANK_NAME: "bankName",
+  BANK_ACCOUNT: "bankAccount",
+  LOAN_NAME: "loanName",
+  LOAN_ID: "loanId",
+  CONTRACT_STATUS: "contractStatus",
 
   COLLATERAL: {
     COLLATERAL_TYPE: "collateralType",
@@ -162,7 +178,7 @@ export const ELEMENT_ID= {
     INSURANCE_ID: "insuranceId"
   },
 
-  LOAN_TYPE_CONTAINER: "loanTypeContainer"
+  LOAN_TYPE_CONTAINER: "loanTypeContainer",
 }
 
 export const LOAN_TYPE= {
@@ -195,9 +211,19 @@ export const COMBO_BOX= {
   ALL: "all"
 }
 
+export const PAYMENT_TYPE_LABEL = {
+  Cash: "현금",
+  AccountTransfer: "계좌이체"
+}
+
 export const LABEL= {
   LOAN_NAME: "NAME",
   INTEREST_RATE: "INTEREST_RATE",
   MAXIMUM_MONEY: "MAXIMUM_MONEY",
   MINIMUM_ASSET: "MINIMUM_ASSET"
+}
+
+export const COLLATERAL_TYPE_LABEL = {
+  RealEstate: "부동산",
+  Car: "자동차"
 }
