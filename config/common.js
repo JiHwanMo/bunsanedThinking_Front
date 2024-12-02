@@ -55,7 +55,7 @@ export const ELEMENT_ID = {
   SEARCH_INPUT: "searchInput",
   SEARCH_BUTTON: "searchButton",
   POST: "post",
-  TABLE: "tableHead",
+  TABLE_HEAD: "tableHead",
   INPUT_FIELDS_CONTAINER: "inputFieldsContainer",
   BUTTON_CONTAINER: "buttonContainer",
   COMBO_BOX_CONTAINER: "comboBoxContainer",

@@ -146,7 +146,7 @@ const setTitle = () => {
 
 const setColumn = () => {
   const currentContext = context[sessionStorage.getItem(KEY.CURRENT_TYPE)];
-  const head = document.getElementById(COMMON_ELEMENT_ID.TABLE);
+  const head = document.getElementById(COMMON_ELEMENT_ID.TABLE_HEAD);
   const columns = document.createElement(TAG.TR);
   currentContext.columnList.forEach(item => {
     const oneColumn = document.createElement(TAG.TH);
