@@ -1,4 +1,9 @@
-import {BUTTON, QUESTION, SELECTED_BUTTON_TYPE} from "../../../../../../config/employee/humanResource/humanResource.js";
+import {
+  BUTTON,
+  QUESTION,
+  RESULT_MESSAGE,
+  SELECTED_BUTTON_TYPE
+} from "../../../../../../config/employee/humanResource/humanResource.js";
 import {initialButtons} from "../../../common/buttonUtils.js";
 import {fetchDeleteEmployee} from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
 import {KEY, LOCATION} from "../../../../../../config/common.js";
@@ -18,10 +23,14 @@ const deleteEmployee = async () => {
 
   const check = confirm(QUESTION.CONFIRM_DELETE_EMPLOYEE);
 
-  if (check) {
-    await fetchDeleteEmployee(selectedDataId);
-    window.location.href = LOCATION.HOME;
-  }
+  if (!check)
+    return;
+
+  const response = await fetchDeleteEmployee(selectedDataId);
+  if (response == null)
+    return;
+  alert(RESULT_MESSAGE.COMPLETE_DELETE_EMPLOYEE);
+  window.location.href = LOCATION.HOME;
 }
 
 const humanResourceTaskMapper = {

@@ -1,4 +1,4 @@
-import {BUTTON} from "../../../../../../config/employee/loanManagement/loanManagement.js";
+import {BUTTON, RESULT_MESSAGE} from "../../../../../../config/employee/loanManagement/loanManagement.js";
 import {initialButtons} from "../../../common/buttonUtils.js";
 import {
   fetchDeleteLoanProduct,
@@ -22,10 +22,13 @@ const deleteLoan = async () => {
 
   const check = confirm(QUESTION.CONFIRM_DELETE);
 
-  if (check) {
-    await fetchDeleteLoanProduct(selectedDataId);
-    window.location.href = LOCATION.HOME;
-  }
+  if (!check)
+    return;
+  const response = await fetchDeleteLoanProduct(selectedDataId);
+  if (response == null)
+    return;
+  alert(RESULT_MESSAGE.COMPLETE_DELETE_LOAN);
+  window.location.href = LOCATION.HOME;
 }
 
 const requestLoan = () => {
@@ -38,10 +41,13 @@ const deniedLoanRequest = async () => {
 
   const check = confirm(QUESTION.CONFIRM_DENIED_LOAN_REQUEST);
 
-  if (check) {
-    await fetchDeniedLoanRequest(selectedDataId, false);
-    window.location.href = LOCATION.HOME;
-  }
+  if (!check)
+    return;
+  const response = await fetchDeniedLoanRequest(selectedDataId, false);
+  if (response == null)
+    return;
+  alert(RESULT_MESSAGE.COMPLETE_DENY_LOAN_REQUEST);
+  window.location.href = LOCATION.HOME;
 }
 
 const cancel = () => {

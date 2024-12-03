@@ -12,6 +12,14 @@ export const QUESTION= {
   CONFIRM_DENIED_LOAN_REQUEST: "정말 거절하시겠습니까?"
 }
 
+export const RESULT_MESSAGE = {
+  COMPLETE_DELETE_LOAN: "삭제가 완료되었습니다.",
+  COMPLETE_CREATE_LOAN: "등록이 완료되었습니다.",
+  COMPLETE_UPDATE_LOAN: "업데이트가 완료되었습니다.",
+  COMPLETE_DENY_LOAN_REQUEST: "대출금 요청이 거절되었습니다.",
+  COMPLETE_HANDLE_LOAN_REQUEST: "대출금 요청이 처리되었습니다."
+}
+
 export const BUTTON = {
   TASK: {
     EMPLOYEE: {

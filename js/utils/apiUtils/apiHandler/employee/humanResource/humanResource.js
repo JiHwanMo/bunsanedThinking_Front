@@ -29,14 +29,14 @@ export const fetchGetEmployeeDetailHandler = async (employeeId) => {
 }
 
 export const fetchAddEmployeeHandler = async (addEmployeeDTO) => {
-  await fetchPostHandler(`${defaultURL}/addEmployee`, addEmployeeDTO);
+  return await fetchPostHandler(`${defaultURL}/addEmployee`, addEmployeeDTO);
 };
 
 export const fetchUpdateEmployeeHandler = async (updateEmployeeDto) => {
-  await fetchPatchWithBody(`${defaultURL}/updateEmployee`, updateEmployeeDto);
+  return await fetchPatchWithBody(`${defaultURL}/updateEmployee`, updateEmployeeDto);
 };
 
 export const fetchDeleteEmployeeHandler = async (employeeId) => {
-  await fetchDeleteHandler(`${defaultURL}/deleteEmployee?employeeId=${employeeId}`);
+  return await fetchDeleteHandler(`${defaultURL}/deleteEmployee?employeeId=${employeeId}`);
 };
 

@@ -394,7 +394,7 @@ const createSurvivalInputForm = (familyCount) => {
   falseRadioItem.className = CLASS.RADIO_ITEM;
   const falseRadioLabel = document.createElement(TAG.LABEL);
   falseRadioLabel.for = false + MINUS + familyCount;
-  falseRadioLabel.textContent = FAMILY_RESPONSE.SURVIVAL;
+  falseRadioLabel.textContent = FAMILY_RESPONSE.DECEASE;
   falseRadioItem.appendChild(falseRadioLabel);
   const falseRadioInput = document.createElement(TAG.INPUT);
   falseRadioInput.id = false + MINUS + familyCount;

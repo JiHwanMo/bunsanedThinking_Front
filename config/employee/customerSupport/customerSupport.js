@@ -5,6 +5,11 @@ export const QUESTION = {
   CONFIRM_HANDLE_COMPLAINT: "정말 접수하시겠습니까?"
 }
 
+export const RESULT_MESSAGE = {
+  HANDLE_COMPLETE_COMPLAINT: "민원 접수가 완료되었습니다.",
+  HANDLE_COMPLETE_REPORT: "신고 접수가 완료되었습니다."
+}
+
 export const BUTTON = {
   TASK: {
     EMPLOYEE: {

@@ -39,5 +39,5 @@ export const fetchGetDepositDetailHandler = async (depositDetailId) => {
 };
 
 export const fetchHandlePaymentHandler = async (paymentDetailId, employeeId) => {
-  await fetchPatchWithParams(`${defaultURL}/handlePayment?paymentDetailId=${paymentDetailId}&employeeId=${employeeId}`);
+  return await fetchPatchWithParams(`${defaultURL}/handlePayment?paymentDetailId=${paymentDetailId}&employeeId=${employeeId}`);
 };

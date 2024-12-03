@@ -12,7 +12,7 @@ import {
   fetchAddEmployee,
   fetchUpdateEmployee
 } from "../../../../apiUtils/apiDocumentation/employee/humanResource/humanResource.js";
-import {ELEMENT_ID, QUESTION} from "../../../../../../config/employee/humanResource/humanResource.js";
+import {ELEMENT_ID, QUESTION, RESULT_MESSAGE} from "../../../../../../config/employee/humanResource/humanResource.js";
 
 export const renderButtons = () => {
   const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
@@ -27,10 +27,14 @@ const createPostButton = () => {
     const formData = collectEmployeeFormDataForPost();
     const check = confirm(QUESTION.CONFIRM_POST_EMPLOYEE);
 
-    if (check) {
-      await fetchAddEmployee(formData);
-      window.location.href = LOCATION.HOME;
-    }
+    if (!check)
+      return;
+
+    const response = await fetchAddEmployee(formData);
+    if (response == null)
+      return;
+    alert(RESULT_MESSAGE.COMPLETE_CREATE_EMPLOYEE);
+    window.location.href = LOCATION.HOME;
   });
 
   buttonContainer.appendChild(oKButton);
@@ -45,10 +49,14 @@ const createUpdateButton = () => {
     const formData = collectEmployeeFormDataForUpdate();
     const check = confirm(QUESTION.CONFIRM_UPDATE_EMPLOYEE);
 
-    if (check) {
-      await fetchUpdateEmployee(formData);
-      window.location.href = LOCATION.HOME;
-    }
+    if (!check)
+      return;
+
+    const response = await fetchUpdateEmployee(formData);
+    if (response == null)
+      return;
+    alert(RESULT_MESSAGE.COMPLETE_UPDATE_EMPLOYEE);
+    window.location.href = LOCATION.HOME;
   });
 
   buttonContainer.appendChild(updateButton);

@@ -1,7 +1,7 @@
 import {
   BUTTON,
   ELEMENT_ID,
-  QUESTION
+  QUESTION, RESULT_MESSAGE as RESPONSE_MESSAGE
 } from "../../../../../../config/employee/financialAccountant/financialAccountant.js";
 import {initialButtons} from "../../../common/buttonUtils.js";
 import {
@@ -20,10 +20,13 @@ const handlePaymentDetail = async () => {
 
   const check = confirm(QUESTION.CONFIRM_HANDLE_PAYMENT_DETAIL);
 
-  if (check) {
-    await fetchHandlePayment(selectedDataId, employeeId);
-    window.location.href = LOCATION.HOME;
-  }
+  if (!check)
+    return;
+  const response = await fetchHandlePayment(selectedDataId, employeeId);
+  if (response == null)
+    return;
+  alert(RESPONSE_MESSAGE.HANDLE_COMPLETE_PAYMENT_DETAIL);
+  window.location.href = LOCATION.HOME;
 }
 
 const cancel = () => {
