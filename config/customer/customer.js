@@ -456,7 +456,7 @@ export const INSURANCE_TYPE_STR = {
   Automobile: "자동차",
   Injury: "상해"
 }
-
+export const NOT_RECEIVE_INSURANCE_EXCEPTION = "자동차 보험은 보험금 신청을 할 수 없습니다";
 export const ONE_BLANK = " ";
 
 export const INSURANCE_DETAIL = {
