@@ -87,9 +87,13 @@ const collectFormData = () => {
     const accidentHistoryList = [];
     document.querySelectorAll(CLASS_SELECTOR.ACCIDENT_HISTORY_ENTRY).forEach(entry => {
       // const date = entry.querySelector('input[name="date"]').value.trim();
-      const date = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, ACCIDENT_HISTORY_LIST.DATE, false));
+      const dateElement = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, ACCIDENT_HISTORY_LIST.DATE, false));
       // const accidentDetail = entry.querySelector('input[name="accidentDetail"]').value.trim();
-      const accidentDetail = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, ACCIDENT_HISTORY_LIST.ACCIDENT_DETAIL, false));
+      const accidentDetailElement = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, ACCIDENT_HISTORY_LIST.ACCIDENT_DETAIL, false));
+
+      const date = dateElement?.value.trim();
+      const accidentDetail = accidentDetailElement?.value.trim();
+
       if (date && accidentDetail) {
         accidentHistoryList.push({ date, accidentDetail });
       }
@@ -98,11 +102,17 @@ const collectFormData = () => {
     const surgeryHistoryList = [];
     document.querySelectorAll(CLASS_SELECTOR.SURGERY_HISTORY_ENTRY).forEach(entry => {
       // const date = entry.querySelector('input[name="date"]').value.trim();
-      const date = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, SURGERY_HISTORY_LIST.DATE, false));
+      const dateElement = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, SURGERY_HISTORY_LIST.DATE, false));
       // const hospitalName = entry.querySelector('input[name="hospitalName"]').value.trim();
-      const hospitalName = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, SURGERY_HISTORY_LIST.HOSPITAL_NAME, false));
+      const hospitalNameElement = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, SURGERY_HISTORY_LIST.HOSPITAL_NAME, false));
       // const name = entry.querySelector('input[name="name"]').value.trim();
-      const name = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, SURGERY_HISTORY_LIST.NAME, false));
+      const nameElement = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, SURGERY_HISTORY_LIST.NAME, false));
+
+      // .value.trim()으로 값을 추출
+      const date = dateElement?.value.trim();
+      const hospitalName = hospitalNameElement?.value.trim();
+      const name = nameElement?.value.trim();
+
       if (date && hospitalName && name) {
         surgeryHistoryList.push({ date, hospitalName, name });
       }
@@ -111,9 +121,14 @@ const collectFormData = () => {
     const diseaseHistoryList = [];
     document.querySelectorAll(CLASS_SELECTOR.DISEASE_HISTORY_ENTRY).forEach(entry => {
       // const dateOfDiagnosis = entry.querySelector('input[name="dateOfDiagnosis"]').value.trim();
-      const dateOfDiagnosis = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, DISEASE_HISTORY_LIST.DATE_OF_DIAGNOSIS, false));
+      const dateOfDiagnosisElement = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, DISEASE_HISTORY_LIST.DATE_OF_DIAGNOSIS, false));
       // const name = entry.querySelector('input[name="name"]').value.trim();
-      const name = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, DISEASE_HISTORY_LIST.NAME, false));
+      const nameElement = entry.querySelector(QUERY_SELECTOR.SELECTOR(TAG.INPUT, ATTRIBUTE.NAME, DISEASE_HISTORY_LIST.NAME, false));
+
+      // .value.trim()으로 값을 추출
+      const dateOfDiagnosis = dateOfDiagnosisElement?.value.trim();
+      const name = nameElement?.value.trim();
+
       if (dateOfDiagnosis && name) {
         diseaseHistoryList.push({ dateOfDiagnosis, name });
       }

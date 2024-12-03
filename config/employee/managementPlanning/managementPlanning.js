@@ -44,6 +44,14 @@ export const DETAIL_COLUMN_NAME = {
     EMPLOYEE_COUNT: "소속 인원",
     HEAD_NAME: "부서장 이름",
   },
+  UPDATE_COLUMN_NAME: {
+    UPDATE_ITEM: "수정할 항목",
+    UPDATE_VALUE: "수정할 값",
+    UPDATE_NAME: "부서 이름",
+    UPDATE_TASK: "주 업무",
+    UPDATE_PURPOSE: "부서 목적",
+    UPDATE_HEAD_NAME: "부서장 이름"
+  }
 };
 
 export const POP_UP = {
