@@ -14,7 +14,13 @@ import {
   LOCATION,
   TAG
 } from "../../../../../../config/common.js";
-import {ELEMENT_ID, KEY, LOAN_TYPE, QUESTION} from "../../../../../../config/employee/loanManagement/loanManagement.js";
+import {
+  ELEMENT_ID,
+  KEY,
+  LOAN_TYPE, LOAN_TYPE_REQUEST,
+  LOAN_TYPE_RESPONSE,
+  QUESTION, RESULT_MESSAGE
+} from "../../../../../../config/employee/loanManagement/loanManagement.js";
 
 export const renderButtons = () => {
   const selectedButtonType = sessionStorage.getItem(COMMON_KEY.SELECTED_BUTTON_TYPE);
@@ -29,10 +35,13 @@ const createPostButton = () => {
     const formData = collectFormDataForPost();
     const check = confirm(QUESTION.CONFIRM_POST);
 
-    if (check) {
-      await functions[formData.loanType].postFunction(formData);
-      window.location.href = LOCATION.HOME;
-    }
+    if (!check)
+      return;
+    const response = await functions[formData.loanType].postFunction(formData);
+    if (response == null)
+      return;
+    alert(RESULT_MESSAGE.COMPLETE_CREATE_LOAN);
+    window.location.href = LOCATION.HOME;
   });
 
   buttonContainer.appendChild(oKButton);
@@ -47,10 +56,14 @@ const createUpdateButton = () => {
     const formData = collectFormDataForUpdate();
     const check = confirm(QUESTION.CONFIRM_UPDATE);
 
-    if (check) {
-      await functions[formData.loanType].updateFunction(formData);
-      window.location.href = LOCATION.HOME;
-    }
+    if (!check)
+      return;
+
+    const response = await functions[formData.loanType].updateFunction(formData);
+    if (response == null)
+      return;
+    alert(RESULT_MESSAGE.COMPLETE_UPDATE_LOAN);
+    window.location.href = LOCATION.HOME;
   });
 
   buttonContainer.appendChild(updateButton);
@@ -67,10 +80,13 @@ const createLoanRequestButton = () => {
     let paymentType = getValueById(ELEMENT_ID.PAYMENT_TYPE);
     const check = confirm(QUESTION.CONFIRM_REQUEST_LOAN);
 
-    if (check) {
-      await fetchRequestLoan(id, money, paymentType, true);
-      window.location.href = LOCATION.HOME;
-    }
+    if (!check)
+      return;
+    const response = await fetchRequestLoan(id, money, paymentType, true);
+    if (response == null)
+      return;
+    alert(RESULT_MESSAGE.COMPLETE_HANDLE_LOAN_REQUEST);
+    window.location.href = LOCATION.HOME;
   });
 
   buttonContainer.appendChild(oKButton);
@@ -131,7 +147,7 @@ const getValueById = (id) => {
 const collectFormDataForPost = () => {
   const loanType = getValueById(ELEMENT_ID.LOAN_TYPE);
   const commonData = {
-    loanType: loanType,
+    loanType: LOAN_TYPE_REQUEST[loanType],
     name: getValueById(ELEMENT_ID.NAME),
     interestRate: getValueById(ELEMENT_ID.INTEREST_RATE),
     maximumMoney: getValueById(ELEMENT_ID.MAXIMUM_MONEY),

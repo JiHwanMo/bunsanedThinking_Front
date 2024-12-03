@@ -12,6 +12,14 @@ export const QUESTION= {
   CONFIRM_DENIED_LOAN_REQUEST: "정말 거절하시겠습니까?"
 }
 
+export const RESULT_MESSAGE = {
+  COMPLETE_DELETE_LOAN: "삭제가 완료되었습니다.",
+  COMPLETE_CREATE_LOAN: "등록이 완료되었습니다.",
+  COMPLETE_UPDATE_LOAN: "업데이트가 완료되었습니다.",
+  COMPLETE_DENY_LOAN_REQUEST: "대출금 요청이 거절되었습니다.",
+  COMPLETE_HANDLE_LOAN_REQUEST: "대출금 요청이 처리되었습니다."
+}
+
 export const BUTTON = {
   TASK: {
     EMPLOYEE: {
@@ -193,6 +201,12 @@ export const LOAN_TYPE_RESPONSE = {
   "보험 계약": "INSURANCE_CONTRACT"
 }
 
+export const LOAN_TYPE_REQUEST = {
+  "담보": "Collateral",
+  "정기 예금": "FixedDeposit",
+  "보험 계약": "InsuranceContract"
+}
+
 export const KEY= {
   SELECTED_DATA_TYPE: "selectedDataType"
 }
@@ -227,3 +241,4 @@ export const COLLATERAL_TYPE_LABEL = {
   RealEstate: "부동산",
   Car: "자동차"
 }
+

@@ -4,6 +4,10 @@ export const QUESTION= {
   CONFIRM_HANDLE_PAYMENT_DETAIL: "지급 처리하시겠습니까?"
 }
 
+export const RESULT_MESSAGE = {
+  HANDLE_COMPLETE_PAYMENT_DETAIL: "지급사항 처리가 완료되었습니다."
+}
+
 export const BUTTON = {
   TASK: {
     EMPLOYEE: {

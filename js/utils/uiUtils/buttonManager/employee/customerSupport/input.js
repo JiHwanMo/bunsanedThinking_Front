@@ -10,7 +10,12 @@ import {
   fetchHandleAccident,
   fetchHandleComplaint
 } from "../../../../apiUtils/apiDocumentation/employee/customerSupport/customerSupport.js";
-import {BUTTON, ELEMENT_ID, QUESTION} from "../../../../../../config/employee/customerSupport/customerSupport.js";
+import {
+  BUTTON,
+  ELEMENT_ID,
+  QUESTION,
+  RESULT_MESSAGE
+} from "../../../../../../config/employee/customerSupport/customerSupport.js";
 
 export const renderButtons = () => {
   const selectedButtonType = sessionStorage.getItem(KEY.SELECTED_BUTTON_TYPE);
@@ -27,10 +32,16 @@ const createHandleComplaintButton = () => {
     let employeeName = getValueById(ELEMENT_ID.EMPLOYEE_NAME);
     const check = confirm(QUESTION.CONFIRM_HANDLE_COMPLAINT);
 
-    if (check) {
-      await fetchHandleComplaint(id, result, employeeName);
-      window.location.href = LOCATION.HOME;
+    if (!check) {
+      return;
     }
+
+    const response = await fetchHandleComplaint(id, result, employeeName);
+    if (response == null) {
+      return;
+    }
+    alert(RESULT_MESSAGE.HANDLE_COMPLETE_COMPLAINT);
+    window.location.href = LOCATION.HOME;
   });
 
   buttonContainer.appendChild(handleButton);
@@ -47,10 +58,13 @@ const createHandleReportButton = () => {
     let roadsideAssistanceCompanyId = getValueById(ELEMENT_ID.ROADSIDE_ASSISTANCE_COMPANY_ID);
     const check = confirm(QUESTION.CONFIRM_HANDLE_REPORT);
 
-    if (check) {
-      await fetchHandleAccident(id, damageAssessmentCompanyId, roadsideAssistanceCompanyId);
-      window.location.href = LOCATION.HOME;
-    }
+    if (!check)
+      return;
+    const response = await fetchHandleAccident(id, damageAssessmentCompanyId, roadsideAssistanceCompanyId);
+    if (response == null)
+      return;
+    alert(RESULT_MESSAGE.HANDLE_COMPLETE_REPORT);
+    window.location.href = LOCATION.HOME;
   });
 
   buttonContainer.appendChild(handleButton);

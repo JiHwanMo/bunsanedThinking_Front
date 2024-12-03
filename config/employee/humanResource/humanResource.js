@@ -6,6 +6,12 @@ export const QUESTION= {
   CONFIRM_UPDATE_EMPLOYEE: "정말 수정하시겠습니까?"
 }
 
+export const RESULT_MESSAGE = {
+  COMPLETE_DELETE_EMPLOYEE: "삭제가 완료되었습니다.",
+  COMPLETE_CREATE_EMPLOYEE: "등록이 완료되었습니다.",
+  COMPLETE_UPDATE_EMPLOYEE: "수정이 완료되었습니다."
+}
+
 export const BUTTON = {
   TASK: {
     EMPLOYEE: {
