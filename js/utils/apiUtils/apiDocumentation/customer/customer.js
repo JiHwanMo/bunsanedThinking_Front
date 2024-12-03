@@ -1,4 +1,4 @@
-import { fetchApplyEndorsementHandler } from '../../apiHandler/customer/customer.js';
+import {fetchApplyEndorsementHandler, fetchIsAutomobileContractHandler} from '../../apiHandler/customer/customer.js';
 import { fetchApplyInsuranceRevivalByIdHandler } from '../../apiHandler/customer/customer.js';
 import { fetchApplyInsuranceTerminationHandler } from '../../apiHandler/customer/customer.js';
 import { fetchApplyInsuranceRecontractHandler } from '../../apiHandler/customer/customer.js';
@@ -304,3 +304,7 @@ export const fetchReportAccident = async (reportAccidentDTO) => {
 //   const data = await fetchReportAccident(reportAccidentDTO);
 //   console.log(data); // 받아온 데이터를 콘솔에 출력
 // })();
+
+export const fetchIsAutomobileContract = async (contractId) => {
+  return await fetchIsAutomobileContractHandler(contractId);
+}

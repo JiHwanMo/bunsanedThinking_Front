@@ -1,8 +1,12 @@
 import {initialButtons} from "../../common/buttonUtils.js";
-import {ALERT, BUTTON, BUTTON_TYPE} from "../../../../../config/customer/customer.js";
+import {ALERT, BUTTON, BUTTON_TYPE, NOT_RECEIVE_INSURANCE_EXCEPTION} from "../../../../../config/customer/customer.js";
 import {
   fetchApplyInsuranceRecontractById,
-  fetchApplyInsuranceRevivalById, fetchApplyInsuranceTerminationById, fetchBuyInsurance, fetchLoan
+  fetchApplyInsuranceRevivalById,
+  fetchApplyInsuranceTerminationById,
+  fetchBuyInsurance,
+  fetchIsAutomobileContract,
+  fetchLoan
 } from "../../../apiUtils/apiDocumentation/customer/customer.js";
 import {KEY, LOCATION} from "../../../../../config/common.js";
 
@@ -47,7 +51,13 @@ const payInsuranceFee = () => {
   window.location.href = LOCATION.INPUT;
 }
 
-const receiveInsurance = () => { // 얜 모르것다
+const receiveInsurance = async () => {
+  const contractId = sessionStorage.getItem(KEY.SELECTED_DATA_ID);
+  const isAutomobile = await fetchIsAutomobileContract(contractId);
+  if (isAutomobile) {
+    alert(NOT_RECEIVE_INSURANCE_EXCEPTION);
+    return;
+  }
   sessionStorage.setItem(KEY.SELECTED_BUTTON_TYPE, BUTTON_TYPE.RECEIVE_INSURANCE);
   window.location.href = LOCATION.INPUT;
 }
