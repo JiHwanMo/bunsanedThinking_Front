@@ -81,6 +81,6 @@ export const REPORT_FORM = {
 
 export const MESSAGES = {
   PLACE_HOLDER: {
-    UPDATE: "수정할 값을 입력하세요"
+    UPDATE: "\"수정할 값을 입력하세요\""
   }
 }

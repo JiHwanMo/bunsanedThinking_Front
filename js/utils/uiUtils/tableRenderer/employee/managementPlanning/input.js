@@ -53,7 +53,7 @@ const renderInputFields = (data) => {
     `;
   } else if (selectedButtonType === VALUE.UPDATE) {
     let selectedIndex = 1;
-    let placeholderValue = data.name || STRING_EMPTY;
+    let placeholderValue = `\"${data.name || STRING_EMPTY}\"`;
 
     inputFieldsContainer.innerHTML = `
       <div class=${CLASS.FORM_GROUP}>
@@ -67,7 +67,7 @@ const renderInputFields = (data) => {
       </div>
       <div class=${CLASS.FORM_GROUP}>
         <label for=${UPDATE_FORM.UPDATE_INPUT.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_VALUE}</label>
-        <input type=${UPDATE_FORM.UPDATE_INPUT.TYPE} id=${UPDATE_FORM.UPDATE_INPUT.ID} name=${UPDATE_FORM.UPDATE_INPUT.NAME} value="${placeholderValue}" placeholder="${MESSAGES.PLACE_HOLDER.UPDATE_INPUT}" required>
+        <input type=${UPDATE_FORM.UPDATE_INPUT.TYPE} id=${UPDATE_FORM.UPDATE_INPUT.ID} name=${UPDATE_FORM.UPDATE_INPUT.NAME} value=${placeholderValue} placeholder=${MESSAGES.PLACE_HOLDER.UPDATE_INPUT} required>
       </div>
     `;
 
