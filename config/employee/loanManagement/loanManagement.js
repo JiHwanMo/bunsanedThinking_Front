@@ -193,6 +193,12 @@ export const LOAN_TYPE_RESPONSE = {
   "보험 계약": "INSURANCE_CONTRACT"
 }
 
+export const LOAN_TYPE_REQUEST = {
+  "담보": "Collateral",
+  "정기 예금": "FixedDeposit",
+  "보험 계약": "InsuranceContract"
+}
+
 export const KEY= {
   SELECTED_DATA_TYPE: "selectedDataType"
 }
@@ -227,3 +233,4 @@ export const COLLATERAL_TYPE_LABEL = {
   RealEstate: "부동산",
   Car: "자동차"
 }
+

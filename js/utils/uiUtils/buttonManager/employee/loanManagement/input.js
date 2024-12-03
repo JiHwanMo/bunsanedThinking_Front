@@ -14,7 +14,13 @@ import {
   LOCATION,
   TAG
 } from "../../../../../../config/common.js";
-import {ELEMENT_ID, KEY, LOAN_TYPE, QUESTION} from "../../../../../../config/employee/loanManagement/loanManagement.js";
+import {
+  ELEMENT_ID,
+  KEY,
+  LOAN_TYPE, LOAN_TYPE_REQUEST,
+  LOAN_TYPE_RESPONSE,
+  QUESTION
+} from "../../../../../../config/employee/loanManagement/loanManagement.js";
 
 export const renderButtons = () => {
   const selectedButtonType = sessionStorage.getItem(COMMON_KEY.SELECTED_BUTTON_TYPE);
@@ -131,7 +137,7 @@ const getValueById = (id) => {
 const collectFormDataForPost = () => {
   const loanType = getValueById(ELEMENT_ID.LOAN_TYPE);
   const commonData = {
-    loanType: loanType,
+    loanType: LOAN_TYPE_REQUEST[loanType],
     name: getValueById(ELEMENT_ID.NAME),
     interestRate: getValueById(ELEMENT_ID.INTEREST_RATE),
     maximumMoney: getValueById(ELEMENT_ID.MAXIMUM_MONEY),
