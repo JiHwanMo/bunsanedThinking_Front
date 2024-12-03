@@ -128,15 +128,9 @@ const renderInputFields = (data) => {
         <option value=${UPDATE_FORM.INDEX_CONTAINER.OPTION_VALUE.TWELVE}>${DETAIL_COLUMN_NAME.CUSTOMER_LIST.DISEASE_HISTORY}</option>
       </select>
     </div>
-<<<<<<< Updated upstream
     <div class=${CLASS.FORM_GROUP_BASIC_INPUT_CONTAINER}>
-      <label for=${UPDATE_FORM.INPUT_CONTAINER.FOR}>수정할 값</label>
-      <input type=${UPDATE_FORM.INPUT_CONTAINER.TYPE} id=${UPDATE_FORM.INPUT_CONTAINER.ID} name=${UPDATE_FORM.INPUT_CONTAINER.NAME} value=${placeholderValue} placeholder=${MESSAGES.PLACE_HOLDER.UPDATE_INPUT} required>
-=======
-    <div class="form-group basic-input-container">
       <label for=${UPDATE_FORM.INPUT_CONTAINER.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_VALUE}</label>
-      <input type=${UPDATE_FORM.INPUT_CONTAINER.TYPE} id=${UPDATE_FORM.INPUT_CONTAINER.ID} name=${UPDATE_FORM.INPUT_CONTAINER.NAME} value="${placeholderValue}" placeholder="${MESSAGES.PLACE_HOLDER.UPDATE_INPUT}" required>
->>>>>>> Stashed changes
+      <input type=${UPDATE_FORM.INPUT_CONTAINER.TYPE} id=${UPDATE_FORM.INPUT_CONTAINER.ID} name=${UPDATE_FORM.INPUT_CONTAINER.NAME} value=${placeholderValue} placeholder=${MESSAGES.PLACE_HOLDER.UPDATE_INPUT} required>
     </div>
     <!-- 이력 업데이트 전용 필드 -->
     <div id=${UPDATE_FORM.FIELDS.HISTORY_FIELDS_ID} class=${CLASS.HIDDEN}>
