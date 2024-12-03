@@ -1,7 +1,7 @@
 import {
-  ADD_ACCIDENT_HISTORY, ADD_DISEASE_HISTORY, ADD_SURGERY_HISTORY,
+  ADD_ACCIDENT_HISTORY, ADD_DISEASE_HISTORY, ADD_SURGERY_HISTORY, BUTTON,
   CLASS,
-  CLASS_SELECTOR,
+  CLASS_SELECTOR, CONVERT_GENDER_TO_KOREAN,
   DETAIL_COLUMN_NAME,
   ELEMENT_ID as CUSTOMERINFORMATIONMANAGEMENT_ELEMENT_ID, MESSAGES, POST_FORM,
   token, UPDATE_FORM,
@@ -9,7 +9,7 @@ import {
 } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
 import { fetchGetCustomerInformation } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
 import { addButtons } from "../../../buttonManager/employee/customerInformationManagement/input.js";
-import { BUTTON, ELEMENT_ID, EVENT, KEY, STRING_EMPTY, TAG, CLASS as COMMON_CLASS } from "../../../../../../config/common.js";
+import { ELEMENT_ID, EVENT, KEY, STRING_EMPTY, TAG, CLASS as COMMON_CLASS } from "../../../../../../config/common.js";
 
 export const renderInput = async () => {
   const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
@@ -83,15 +83,15 @@ const renderInputFields = (data) => {
       </div>
       <div class=${COMMON_CLASS.FORM_GROUP} id=${POST_FORM.ACCIDEN_HISTORY_FORM.ID}>
         <label>${DETAIL_COLUMN_NAME.CUSTOMER_LIST.ACCIDENT_HISTORY}</label>
-        <button type=${POST_FORM.ACCIDEN_HISTORY_FORM.BUTTON.TYPE} id=${POST_FORM.ACCIDEN_HISTORY_FORM.BUTTON.ID}>추가</button>
+        <button type=${POST_FORM.ACCIDEN_HISTORY_FORM.BUTTON.TYPE} id=${POST_FORM.ACCIDEN_HISTORY_FORM.BUTTON.ID}>${BUTTON.ADDITION}</button>
       </div>
       <div class=${COMMON_CLASS.FORM_GROUP} id=${POST_FORM.SURGERY_HISTORY_FORM.ID}>
         <label>${DETAIL_COLUMN_NAME.CUSTOMER_LIST.SURGERY_HISTORY}</label>
-        <button type=${POST_FORM.SURGERY_HISTORY_FORM.BUTTON.TYPE} id=${POST_FORM.SURGERY_HISTORY_FORM.BUTTON.ID}>추가</button>
+        <button type=${POST_FORM.SURGERY_HISTORY_FORM.BUTTON.TYPE} id=${POST_FORM.SURGERY_HISTORY_FORM.BUTTON.ID}>${BUTTON.ADDITION}</button>
       </div>
       <div class=${COMMON_CLASS.FORM_GROUP} id=${POST_FORM.DISEASE_HISTORY_FORM.ID}>
         <label>${DETAIL_COLUMN_NAME.CUSTOMER_LIST.DISEASE_HISTORY}</label>
-        <button type=${POST_FORM.DISEASE_HISTORY_FORM.BUTTON.TYPE} id=${POST_FORM.DISEASE_HISTORY_FORM.BUTTON.ID}>추가</button>
+        <button type=${POST_FORM.DISEASE_HISTORY_FORM.BUTTON.TYPE} id=${POST_FORM.DISEASE_HISTORY_FORM.BUTTON.ID}>${BUTTON.ADDITION}</button>
       </div>
     `;
     // 초기 사고 이력, 수술 이력, 병력 필드 1개씩 생성
@@ -112,7 +112,7 @@ const renderInputFields = (data) => {
       <input type=${UPDATE_FORM.RESIDENT_REGISTRATION_NUMBER_FORM.TYPE} id=${UPDATE_FORM.RESIDENT_REGISTRATION_NUMBER_FORM.ID} name=${UPDATE_FORM.RESIDENT_REGISTRATION_NUMBER_FORM.NAME} value="${data.residentRegistrationNumber}" readonly>
     </div>
     <div class=${COMMON_CLASS.FORM_GROUP}>
-      <label for=${UPDATE_FORM.INDEX_CONTAINER.FOR}>수정할 항목</label>
+      <label for=${UPDATE_FORM.INDEX_CONTAINER.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_ITEM}</label>
       <select id=${UPDATE_FORM.INDEX_CONTAINER.ID} name=${UPDATE_FORM.INDEX_CONTAINER.NAME}>
         <option value=${UPDATE_FORM.INDEX_CONTAINER.OPTION_VALUE.ONE} selected>${DETAIL_COLUMN_NAME.CUSTOMER_LIST.NAME}</option>
         <option value=${UPDATE_FORM.INDEX_CONTAINER.OPTION_VALUE.TWO}>${DETAIL_COLUMN_NAME.CUSTOMER_LIST.PHONE_NUMBER}</option>
@@ -128,47 +128,53 @@ const renderInputFields = (data) => {
         <option value=${UPDATE_FORM.INDEX_CONTAINER.OPTION_VALUE.TWELVE}>${DETAIL_COLUMN_NAME.CUSTOMER_LIST.DISEASE_HISTORY}</option>
       </select>
     </div>
+<<<<<<< Updated upstream
     <div class=${CLASS.FORM_GROUP_BASIC_INPUT_CONTAINER}>
       <label for=${UPDATE_FORM.INPUT_CONTAINER.FOR}>수정할 값</label>
       <input type=${UPDATE_FORM.INPUT_CONTAINER.TYPE} id=${UPDATE_FORM.INPUT_CONTAINER.ID} name=${UPDATE_FORM.INPUT_CONTAINER.NAME} value=${placeholderValue} placeholder=${MESSAGES.PLACE_HOLDER.UPDATE_INPUT} required>
+=======
+    <div class="form-group basic-input-container">
+      <label for=${UPDATE_FORM.INPUT_CONTAINER.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_VALUE}</label>
+      <input type=${UPDATE_FORM.INPUT_CONTAINER.TYPE} id=${UPDATE_FORM.INPUT_CONTAINER.ID} name=${UPDATE_FORM.INPUT_CONTAINER.NAME} value="${placeholderValue}" placeholder="${MESSAGES.PLACE_HOLDER.UPDATE_INPUT}" required>
+>>>>>>> Stashed changes
     </div>
     <!-- 이력 업데이트 전용 필드 -->
     <div id=${UPDATE_FORM.FIELDS.HISTORY_FIELDS_ID} class=${CLASS.HIDDEN}>
       <div class=${COMMON_CLASS.FORM_GROUP}>
-        <label for=${UPDATE_FORM.HISTORY_FIELDS.FOR}>이력 ID</label>
+        <label for=${UPDATE_FORM.HISTORY_FIELDS.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_HISTORY_ID}</label>
         <input type=${UPDATE_FORM.HISTORY_FIELDS.TYPE} id=${UPDATE_FORM.HISTORY_FIELDS.ID} name=${UPDATE_FORM.HISTORY_FIELDS.NAME} placeholder="${UPDATE_FORM.HISTORY_FIELDS.MESSAGES.PLACE_HOLDER}">
       </div>
       <div id=${UPDATE_FORM.FIELDS.ACCIDENT_FIELDS_ID} class=${CLASS.HIDDEN}>
         <div class=${COMMON_CLASS.FORM_GROUP}>
-          <label for=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DATE.FOR}>사고 날짜</label>
+          <label for=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DATE.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_ACCIDENT_DATE}</label>
           <input type=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DATE.TYPE} id=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DATE.ID} name=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DATE.NAME}>
         </div>
         <div class=${COMMON_CLASS.FORM_GROUP}>
-          <label for=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DETAIL.FOR}>사고 내용</label>
+          <label for=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DETAIL.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_ACCIDENT_DETAIL}</label>
           <input type=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DETAIL.TYPE} id=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DETAIL.ID} name=${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DETAIL.NAME} placeholder="${UPDATE_FORM.ACCIDENT_FIELDS.ACCIDENT_DETAIL.MESSAGES.PLACE_HOLDER}">
         </div>
       </div>
       <div id=${UPDATE_FORM.FIELDS.SURGERY_FIELDS_ID} class=${CLASS.HIDDEN}>
         <div class=${COMMON_CLASS.FORM_GROUP}>
-          <label for=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_DATE.FOR}>수술 날짜</label>
+          <label for=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_DATE.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.SURGERY_DATE}</label>
           <input type=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_DATE.TYPE} id=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_DATE.ID} name=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_DATE.NAME}>
         </div>
         <div class=${COMMON_CLASS.FORM_GROUP}>
-          <label for=${UPDATE_FORM.SURGERY_FIELDS.HOSPITAL_NAME.FOR}>병원 이름</label>
+          <label for=${UPDATE_FORM.SURGERY_FIELDS.HOSPITAL_NAME.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.HOSPITAL_NAME}</label>
           <input type=${UPDATE_FORM.SURGERY_FIELDS.HOSPITAL_NAME.TYPE} id=${UPDATE_FORM.SURGERY_FIELDS.HOSPITAL_NAME.ID} name=${UPDATE_FORM.SURGERY_FIELDS.HOSPITAL_NAME.NAME} placeholder="${UPDATE_FORM.SURGERY_FIELDS.HOSPITAL_NAME.MESSAGES.PLACE_HOLDER}">
         </div>
         <div class=${COMMON_CLASS.FORM_GROUP}>
-          <label for=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_NAME.FOR}>수술명</label>
+          <label for=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_NAME.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.SURGERY_NAME}</label>
           <input type=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_NAME.TYPE} id=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_NAME.ID} name=${UPDATE_FORM.SURGERY_FIELDS.SURGERY_NAME.NAME} placeholder="${UPDATE_FORM.SURGERY_FIELDS.SURGERY_NAME.MESSAGES.PLACE_HOLDER}">
         </div>
       </div>
       <div id=${UPDATE_FORM.FIELDS.DISEASE_FIELDS_ID} class=${CLASS.HIDDEN}>
         <div class=${COMMON_CLASS.FORM_GROUP}>
-          <label for=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_DATE.FOR}>진단 날짜</label>
+          <label for=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_DATE.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.DISEASE_DATE}</label>
           <input type=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_DATE.TYPE} id=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_DATE.ID} name=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_DATE.NAME}>
         </div>
         <div class=${COMMON_CLASS.FORM_GROUP}>
-          <label for=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_NAME.FOR}>질병명</label>
+          <label for=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_NAME.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.DISEASE_NAME}</label>
           <input type=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_NAME.TYPE} id=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_NAME.ID} name=${UPDATE_FORM.DISEASE_FIELDS.DISEASE_NAME.NAME} placeholder="${UPDATE_FORM.DISEASE_FIELDS.DISEASE_NAME.MESSAGES.PLACE_HOLDER}">
         </div>
       </div>
@@ -248,7 +254,7 @@ const addAccidentHistory = () => {
   newEntry.innerHTML = `
     <input type=${ADD_ACCIDENT_HISTORY.ACCIDENT_DATE.TYPE} name=${ADD_ACCIDENT_HISTORY.ACCIDENT_DATE.NAME} placeholder="${MESSAGES.PLACE_HOLDER.ACCIDENT_DATE}" required>
     <input type=${ADD_ACCIDENT_HISTORY.ACCIDENT_DETAIL.TYPE} name=${ADD_ACCIDENT_HISTORY.ACCIDENT_DETAIL.NAME} placeholder="${MESSAGES.PLACE_HOLDER.ACCIDENT_DETAIL}" required>
-    <button type=${ADD_ACCIDENT_HISTORY.TYPE} class=${COMMON_CLASS.REMOVE_BUTTON}>삭제</button>
+    <button type=${ADD_ACCIDENT_HISTORY.TYPE} class=${COMMON_CLASS.REMOVE_BUTTON}>${BUTTON.DELETE}</button>
   `;
   container.appendChild(newEntry);
 
@@ -265,7 +271,7 @@ const addSurgeryHistory = () => {
     <input type=${ADD_SURGERY_HISTORY.SURGERY_DATE.TYPE} name=${ADD_SURGERY_HISTORY.SURGERY_DATE.NAME} placeholder="${MESSAGES.PLACE_HOLDER.SURGERY_DATE}" required>
     <input type=${ADD_SURGERY_HISTORY.HOSPITAL_NAME.TYPE} name=${ADD_SURGERY_HISTORY.HOSPITAL_NAME.NAME} placeholder="${MESSAGES.PLACE_HOLDER.HOSPITAL_NAME}" required>
     <input type=${ADD_SURGERY_HISTORY.SURGERY_NAME.TYPE} name=${ADD_SURGERY_HISTORY.SURGERY_NAME.NAME} placeholder="${MESSAGES.PLACE_HOLDER.SURGERY_NAME}" required>
-    <button type=${ADD_SURGERY_HISTORY.TYPE} class=${COMMON_CLASS.REMOVE_BUTTON}>삭제</button>
+    <button type=${ADD_SURGERY_HISTORY.TYPE} class=${COMMON_CLASS.REMOVE_BUTTON}>${BUTTON.DELETE}</button>
   `;
   container.appendChild(newEntry);
 
@@ -281,7 +287,7 @@ const addDiseaseHistory = () => {
   newEntry.innerHTML = `
     <input type=${ADD_DISEASE_HISTORY.DISEASE_DATE.TYPE} name=${ADD_DISEASE_HISTORY.DISEASE_DATE.NAME} placeholder="${MESSAGES.PLACE_HOLDER.DISEASE_DATE}" required>
     <input type=${ADD_DISEASE_HISTORY.DISEASE_NAME.TYPE} name=${ADD_DISEASE_HISTORY.DISEASE_NAME.NAME} placeholder="${MESSAGES.PLACE_HOLDER.DISEASE_NAME}" required>
-    <button type=${ADD_DISEASE_HISTORY.TYPE} class=${COMMON_CLASS.REMOVE_BUTTON}>삭제</button>
+    <button type=${ADD_DISEASE_HISTORY.TYPE} class=${COMMON_CLASS.REMOVE_BUTTON}>${BUTTON.DELETE}</button>
   `;
   container.appendChild(newEntry);
 
@@ -292,8 +298,8 @@ const addDiseaseHistory = () => {
 
 // 성별 한글 변환 함수
 const convertGenderToKorean = (gender) => {
-  if (gender === "Male") return "남성";
-  if (gender === "Female") return "여성";
+  if (gender === CONVERT_GENDER_TO_KOREAN.MALE) return CONVERT_GENDER_TO_KOREAN.GENDER_MALE;
+  if (gender === CONVERT_GENDER_TO_KOREAN.FEMALE) return CONVERT_GENDER_TO_KOREAN.GENDER_FEMALE;
   return gender; // 알 수 없는 값은 그대로 반환
 };
 

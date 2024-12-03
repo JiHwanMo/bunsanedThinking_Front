@@ -4,7 +4,7 @@ import {
 } from "../../../../apiUtils/apiDocumentation/employee/customerInformationManagement/customerInformationManagement.js";
 import {
   ACCIDENT_HISTORY_LIST,
-  BUTTON,
+  BUTTON, CONVERT_GENDER_TO_KOREAN,
   DETAIL_COLUMN_NAME, DISEASE_HISTORY_LIST, MESSAGES, POP_UP, SURGERY_HISTORY_LIST, VALUE
 } from "../../../../../../config/employee/customerInformationManagement/customerInformationManagement.js";
 import { CLASS, ELEMENT_ID, EVENT, KEY, LOCATION, TAG } from "../../../../../../config/common.js";
@@ -186,8 +186,8 @@ const customerInformationTaskMapper = {
 }
 
 const convertGenderToKorean = (gender) => {
-  if (gender === "Male") return "남자";
-  if (gender === "Female") return "여자";
+  if (gender === CONVERT_GENDER_TO_KOREAN.MALE) return CONVERT_GENDER_TO_KOREAN.GENDER_MALE;
+  if (gender === CONVERT_GENDER_TO_KOREAN.FEMALE) return CONVERT_GENDER_TO_KOREAN.GENDER_FEMALE;
   return gender; // 알 수 없는 값은 그대로 반환
 };
 

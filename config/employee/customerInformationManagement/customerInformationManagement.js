@@ -13,7 +13,9 @@ export const BUTTON = {
         }
       }
     }
-  }
+  },
+  ADDITION: "추가",
+  DELETE: "삭제"
 };
 
 export const COMBOBOX = {
@@ -56,7 +58,19 @@ export const DETAIL_COLUMN_NAME = {
     SURGERY_HISTORY: "수술 이력",
     DISEASE_HISTORY: "병력",
     BANK_NAME: "은행명",
-    BANK_ACCOUNT: "계좌 번호"
+    BANK_ACCOUNT: "계좌 번호",
+  },
+  UPDATE_COLUMN_NAME: {
+    UPDATE_ITEM: "수정할 항목",
+    UPDATE_VALUE: "수정할 값",
+    UPDATE_HISTORY_ID: "이력 ID",
+    UPDATE_ACCIDENT_DATE: "사고 날짜",
+    UPDATE_ACCIDENT_DETAIL: "사고 내용",
+    SURGERY_DATE: "수술 날짜",
+    HOSPITAL_NAME: "병원 이름",
+    SURGERY_NAME: "수술명",
+    DISEASE_DATE: "진단 날짜",
+    DISEASE_NAME: "질병명"
   }
 };
 
@@ -429,5 +443,13 @@ export const ADD_DISEASE_HISTORY = {
   },
   TYPE: "button"
 }
+
+export const CONVERT_GENDER_TO_KOREAN = {
+  MALE: "Male",
+  FEMALE: "Female",
+  GENDER_MALE: "남자",
+  GENDER_FEMALE: "여자"
+}
+
 
 

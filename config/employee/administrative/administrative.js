@@ -43,6 +43,13 @@ export const DETAIL_COLUMN_NAME = {
     TOTAL_INVENTORY: "총 재고",
     DESCRIPTION: "설명",
     DEPARTMENT_ID: "부서ID"
+  },
+  UPDATE_COLUMN_NAME: {
+    UPDATE_ITEM: "수정할 항목",
+    UPDATE_VALUE: "수정할 값",
+    UPDATE_NAME: "비품 이름",
+    UPDATE_DESCRIPTION: "비품 설명",
+    UPDATE_INVENTORY: "현재 재고"
   }
 };
 

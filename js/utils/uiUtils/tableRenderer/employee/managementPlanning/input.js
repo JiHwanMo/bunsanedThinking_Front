@@ -57,16 +57,16 @@ const renderInputFields = (data) => {
 
     inputFieldsContainer.innerHTML = `
       <div class=${CLASS.FORM_GROUP}>
-        <label for=${UPDATE_FORM.FOR}>수정할 항목</label>
+        <label for=${UPDATE_FORM.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_ITEM}</label>
         <select id=${UPDATE_FORM.ID} name=${UPDATE_FORM.NAME}>
-          <option value=${UPDATE_FORM.OPTION_VALUE.ONE} selected>부서 이름</option>
-          <option value=${UPDATE_FORM.OPTION_VALUE.TWO}>주 업무</option>
-          <option value=${UPDATE_FORM.OPTION_VALUE.THREE}>부서 목적</option>
-          <option value=${UPDATE_FORM.OPTION_VALUE.FOUR}>부서장 이름</option>
+          <option value=${UPDATE_FORM.OPTION_VALUE.ONE} selected>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_NAME}</option>
+          <option value=${UPDATE_FORM.OPTION_VALUE.TWO}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_TASK}</option>
+          <option value=${UPDATE_FORM.OPTION_VALUE.THREE}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_PURPOSE}</option>
+          <option value=${UPDATE_FORM.OPTION_VALUE.FOUR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_HEAD_NAME}</option>
         </select>
       </div>
       <div class=${CLASS.FORM_GROUP}>
-        <label for=${UPDATE_FORM.UPDATE_INPUT.FOR}>수정할 값</label>
+        <label for=${UPDATE_FORM.UPDATE_INPUT.FOR}>${DETAIL_COLUMN_NAME.UPDATE_COLUMN_NAME.UPDATE_VALUE}</label>
         <input type=${UPDATE_FORM.UPDATE_INPUT.TYPE} id=${UPDATE_FORM.UPDATE_INPUT.ID} name=${UPDATE_FORM.UPDATE_INPUT.NAME} value="${placeholderValue}" placeholder="${MESSAGES.PLACE_HOLDER.UPDATE_INPUT}" required>
       </div>
     `;
