@@ -157,7 +157,7 @@ export const UPDATE_FORM = {
 
 export const MESSAGES = {
   PLACE_HOLDER: {
-    UPDATE_INPUT : "수정할 값을 입력하세요",
+    UPDATE_INPUT : "\"수정할 값을 입력하세요\"",
     POST_INPUT: "을(를) 입력하세요"
   }
 }

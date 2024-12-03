@@ -58,7 +58,7 @@ export const DETAIL_COLUMN_NAME = {
     SURGERY_HISTORY: "수술 이력",
     DISEASE_HISTORY: "병력",
     BANK_NAME: "은행명",
-    BANK_ACCOUNT: "계좌 번호",
+    BANK_ACCOUNT: "계좌 번호"
   },
   UPDATE_COLUMN_NAME: {
     UPDATE_ITEM: "수정할 항목",
@@ -195,13 +195,13 @@ export const MESSAGES = {
   PLACE_HOLDER: {
     UPDATE_INPUT: "\"수정할 값을 입력하세요\"",
     POST_INPUT: "을(를) 입력하세요",
-    ACCIDENT_DATE: "날짜를 입력하세요",
-    ACCIDENT_DETAIL: "사고 내용을 입력하세요",
-    SURGERY_DATE: "날짜를 입력하세요",
-    HOSPITAL_NAME: "병원 이름을 입력하세요",
-    SURGERY_NAME: "수술명을 입력하세요",
-    DISEASE_DATE: "진단 날짜를 입력하세요",
-    DISEASE_NAME: "질병명을 입력하세요"
+    ACCIDENT_DATE: "\"날짜를 입력하세요\"",
+    ACCIDENT_DETAIL: "\"사고 내용을 입력하세요\"",
+    SURGERY_DATE: "\"날짜를 입력하세요\"",
+    HOSPITAL_NAME: "\"병원 이름을 입력하세요\"",
+    SURGERY_NAME: "\"수술명을 입력하세요\"",
+    DISEASE_DATE: "\"진단 날짜를 입력하세요\"",
+    DISEASE_NAME: "\"질병명을 입력하세요\""
   }
 }
 
@@ -339,7 +339,7 @@ export const UPDATE_FORM = {
     ID: "historyId",
     NAME: "historyId",
     MESSAGES: {
-      PLACE_HOLDER: "이력 ID를 입력하세요"
+      PLACE_HOLDER: "\"이력 ID를 입력하세요\""
     }
   },
   ACCIDENT_FIELDS: {
@@ -355,7 +355,7 @@ export const UPDATE_FORM = {
       ID: "accidentDetail",
       NAME: "accidentDetail",
       MESSAGES:{
-        PLACE_HOLDER: "사고 내용을 입력하세요"
+        PLACE_HOLDER: "\"사고 내용을 입력하세요\""
       }
     }
   },
@@ -372,7 +372,7 @@ export const UPDATE_FORM = {
       ID: "hospitalName",
       NAME: "hospitalName",
       MESSAGES: {
-        PLACE_HOLDER: "병원 이름을 입력하세요"
+        PLACE_HOLDER: "\"병원 이름을 입력하세요\""
       }
     },
     SURGERY_NAME: {
@@ -381,7 +381,7 @@ export const UPDATE_FORM = {
       ID: "surgeryName",
       NAME: "surgeryName",
       MESSAGES: {
-        PLACE_HOLDER: "수술명을 입력하세요"
+        PLACE_HOLDER: "\"수술명을 입력하세요\""
       }
     }
   },
@@ -398,7 +398,7 @@ export const UPDATE_FORM = {
       ID: "diseaseName",
       NAME: "diseaseName",
       MESSAGES: {
-        PLACE_HOLDER: "질병명을 입력하세요"
+        PLACE_HOLDER: "\"질병명을 입력하세요\""
       }
     }
   }

@@ -17,7 +17,7 @@ export const renderInput = async () => {
 
 const renderInputFields = (data) => {
   const inputFieldsContainer = document.getElementById(ELEMENT_ID.INPUT_FIELDS_CONTAINER);
-  let placeholderValue = data.damageAssessmentMoney || STRING_EMPTY;
+  let placeholderValue = `\"${data.damageAssessmentMoney || STRING_EMPTY}\"`;
 
   inputFieldsContainer.innerHTML = `
     <div class=${CLASS.FORM_GROUP}>
@@ -26,7 +26,7 @@ const renderInputFields = (data) => {
     </div>
     <div class=${CLASS.FORM_GROUP}>
       <label for=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.FOR}>${DETAIL_COLUMN_NAME.REPORT_LIST.DAMAGE_ASSESSMENT_MONEY}</label>
-      <input type=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.TYPE} id=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.ID} name=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.NAME} value="${placeholderValue}" placeholder="${MESSAGES.PLACE_HOLDER.UPDATE}" required>
+      <input type=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.TYPE} id=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.ID} name=${REPORT_FORM.DAMAGE_ASSESSMENT_MONEY_FORM.NAME} value=${placeholderValue} placeholder=${MESSAGES.PLACE_HOLDER.UPDATE} required>
     </div>
   `;
 };
