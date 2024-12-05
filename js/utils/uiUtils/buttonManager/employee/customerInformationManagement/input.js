@@ -26,7 +26,8 @@ export const addButtons = (buttonContainer) => {
       const userConfirmed = confirm(POP_UP.POST.QUESTION);
       if (userConfirmed) {
         try {
-          await fetchAddCustomerInformation(formData);
+          const result = await fetchAddCustomerInformation(formData);
+          if (result == null) return;
           alert(POP_UP.POST.OK);
           window.location.href = LOCATION.HOME;
         } catch (error) {
@@ -49,7 +50,8 @@ export const addButtons = (buttonContainer) => {
       const userConfirmed = confirm(POP_UP.UPDATE.QUESTION); // confirm 다이얼로그 표시
       if (userConfirmed) {
         try {
-          await fetchUpdateCustomerInformation(formData);
+          const result = await fetchUpdateCustomerInformation(formData);
+          if (result == null) return;
           alert(POP_UP.UPDATE.OK);
           window.location.href = LOCATION.HOME;
         } catch (error) {

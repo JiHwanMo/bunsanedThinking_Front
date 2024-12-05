@@ -21,7 +21,8 @@ export const addButtons = (buttonContainer) => {
       const userConfirmed = confirm(POP_UP.POST.QUESTION); // confirm 다이얼로그 표시
       if (userConfirmed) {
         try {
-          await fetchAddOfficeSupply(formData); // 등록 API 호출
+          const result = await fetchAddOfficeSupply(formData); // 등록 API 호출
+          if (result == null) return; // 여기 참고
           alert(POP_UP.POST.OK);
           window.location.href = LOCATION.HOME; // 등록 완료 후 페이지 이동
         } catch (error) {
@@ -45,7 +46,8 @@ export const addButtons = (buttonContainer) => {
       const userConfirmed = confirm(POP_UP.UPDATE.QUESTION); // confirm 다이얼로그 표시
       if (userConfirmed) {
         try {
-          await fetchUpdateOfficeSupply(formData); // 수정 API 호출
+          const result = await fetchUpdateOfficeSupply(formData); // 수정 API 호출
+          if (result == null) return;
           alert(POP_UP.UPDATE.OK);
           window.location.href = LOCATION.HOME; // 수정 완료 후 페이지 이동
         } catch (error) {
