@@ -21,7 +21,8 @@ export const addButtons = (buttonContainer) => {
       const userConfirmed = confirm(POP_UP.POST.QUESTION); // confirm 대화 상자 표시
       if (userConfirmed) {
         try {
-          await fetchAddDepartment(formData); // 등록 API 호출
+          const result = await fetchAddDepartment(formData); // 등록 API 호출
+          if (result == null) return;
           alert(POP_UP.POST.OK);
           window.location.href = LOCATION.HOME; // 성공적으로 저장 후 이동
         } catch (error) {
@@ -45,7 +46,8 @@ export const addButtons = (buttonContainer) => {
       const userConfirmed = confirm(POP_UP.UPDATE.QUESTION); // confirm 대화 상자 표시
       if (userConfirmed) {
         try {
-          await fetchUpdateDepartment(formData); // 수정 API 호출
+          const result = await fetchUpdateDepartment(formData); // 수정 API 호출
+          if (result == null) return;
           alert(POP_UP.UPDATE.OK);
           window.location.href = LOCATION.HOME; // 성공적으로 수정 후 이동
         } catch (error) {

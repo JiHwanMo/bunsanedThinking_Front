@@ -15,7 +15,8 @@ export const addButtons = (buttonContainer) => {
     const userConfirmed = confirm(POP_UP.UPDATE.QUESTION);
     if (userConfirmed) {
       try {
-        await fetchSetDamageAssessmentMoney(formData.accidentId, formData.damageAssessmentMoney); // API 호출
+        const result = await fetchSetDamageAssessmentMoney(formData.accidentId, formData.damageAssessmentMoney); // API 호출
+        if (result == null) return;
         alert(POP_UP.UPDATE.OK);
         window.location.href = LOCATION.HOME; // 수정 완료 후 홈으로 이동
       } catch (error) {
