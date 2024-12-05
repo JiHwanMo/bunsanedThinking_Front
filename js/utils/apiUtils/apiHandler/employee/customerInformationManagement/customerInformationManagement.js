@@ -1,6 +1,7 @@
 import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchDeleteHandler } from '../../../common/fetchHandler.js';
+import {hostUrl} from "../../common/common.js";
 
-const defaultUrl = "http://localhost:8080/employee/customerInformationManagement";
+const defaultUrl = hostUrl+"/employee/customerInformationManagement";
 
 export const fetchAddCustomerInformationHandler = async (addCustomerInformationDTO) => {
   return await fetchPostHandler(`${defaultUrl}/addCustomerInformation`, addCustomerInformationDTO);

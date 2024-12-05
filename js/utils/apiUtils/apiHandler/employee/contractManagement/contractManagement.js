@@ -1,6 +1,7 @@
 import { fetchGetHandler, fetchPostHandler, fetchPatchWithParams, fetchDeleteHandler } from '../../../common/fetchHandler.js';
+import {hostUrl} from "../../common/common.js";
 
-const defaultUrl = "http://localhost:8080/employee/contractManagement";
+const defaultUrl = hostUrl+"/employee/contractManagement";
 
 export const fetchRequestTerminationFeeHandler = async (tercontractId) => {
   return await fetchPatchWithParams(`${defaultUrl}/requestTerminationFee?tercontractId=${tercontractId}`);

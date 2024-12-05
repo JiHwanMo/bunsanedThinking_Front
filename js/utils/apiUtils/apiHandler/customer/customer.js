@@ -5,8 +5,9 @@ import {
   fetchDeleteHandler,
   fetchPostFormHandler
 } from '../../common/fetchHandler.js';
+import {hostUrl} from "../common/common.js";
 
-const defaultUrl = "http://localhost:8080/customer";
+const defaultUrl = hostUrl+"/customer";
 
 export const fetchApplyEndorsementHandler = async (index, id) => {
   return await fetchPatchWithParams(`${defaultUrl}/applyEndorsement?index=${index}&contractId=${id}`);

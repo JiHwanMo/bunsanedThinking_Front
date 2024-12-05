@@ -1,6 +1,7 @@
 import { fetchGetHandler, fetchPatchWithParams } from "../../../common/fetchHandler.js"
+import {hostUrl} from "../../common/common.js";
 
-const defaultURL = "http://localhost:8080/employee/financialAccountant";
+const defaultURL = hostUrl+"/employee/financialAccountant";
 
 export const fetchGetContractHandler = async (contractId) => {
   return await fetchGetHandler(`${defaultURL}/getContract?contractId=${contractId}`);
