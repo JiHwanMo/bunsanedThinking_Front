@@ -1,7 +1,8 @@
 import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchPatchWithParams, fetchDeleteHandler } from '../../../common/fetchHandler.js';
 import {fetchGetContractDetail} from "../../../apiDocumentation/employee/underWriting/underWriting.js";
+import {hostUrl} from "../../common/common.js";
 
-const defaultUrl = "http://localhost:8080/employee/underWriting";
+const defaultUrl = hostUrl+"/employee/underWriting";
 
 export const fetchApplyCoperationHandler = async () => {
   return await fetchPostHandler(`${defaultUrl}/applyCoperation`);

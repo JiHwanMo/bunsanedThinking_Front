@@ -1,6 +1,7 @@
 import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchDeleteHandler } from '../../../common/fetchHandler.js';
+import {hostUrl} from "../../common/common.js";
 
-const defaultUrl = "http://localhost:8080/employee/compensation";
+const defaultUrl = hostUrl+"/employee/compensation";
 
 export const fetchRequestCompensationHandler = async (requestCompensationDTO) => {
   return await fetchPatchWithBody(`${defaultUrl}/requestCompensation`, requestCompensationDTO);

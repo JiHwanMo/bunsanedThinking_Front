@@ -5,8 +5,9 @@ import {
   fetchDeleteHandler,
   fetchPatchWithBody
 } from "../../../common/fetchHandler.js"
+import {hostUrl} from "../../common/common.js";
 
-const defaultURL = "http://localhost:8080/employee/loanManagement"
+const defaultURL = hostUrl+"/employee/loanManagement"
 
 export const fetchGetAllHandler = async () => {
   return await fetchGetHandler(`${defaultURL}/getAll`);

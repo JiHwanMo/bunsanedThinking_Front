@@ -1,6 +1,7 @@
 import { fetchGetHandler, fetchPostHandler, fetchPatchWithBody, fetchPatchWithParams, fetchDeleteHandler } from '../../../common/fetchHandler.js';
+import {hostUrl} from "../../common/common.js";
 
-const defaultUrl = "http://localhost:8080/employee/sales";
+const defaultUrl = hostUrl+"/employee/sales";
 
 export const fetchEvaluateSalesPerformanceHandler = async (evaluate, id) => {
   return await fetchPatchWithParams(`${defaultUrl}/evaluateSalesPerformance?evaluate=${evaluate}&id=${id}`);
