@@ -15,7 +15,7 @@ const customerInformationDetail = (data) => {
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.PHONE_NUMBER, value: data.phoneNumber },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.JOB, value: data.job },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.AGE, value: data.age },
-    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.GENDER, value: convertGenderToKorean(data.gender)},
+    { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.GENDER, value: data.gender},
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.RESIDENT_REGISTRATION_NUMBER, value: data.residentRegistrationNumber },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.ADDRESS, value: data.address },
     { label: DETAIL_COLUMN_NAME.CUSTOMER_LIST.PROPERTY, value: data.property },
@@ -44,7 +44,7 @@ const surgeryHistory = (data) => [
 const diseaseHistory = (data) => [
   { label: DISEASE_HISTORY_LIST.LABEL_ID, value: data.id },
   { label: DISEASE_HISTORY_LIST.LABEL_NAME, value: data.name },
-  { label: DISEASE_HISTORY_LIST.LABEL_DATE_OF_DIAGNOSIS, value: data.date_of_diagnosis },
+  { label: DISEASE_HISTORY_LIST.LABEL_DATE_OF_DIAGNOSIS, value: data.dateOfDiagnosis },
 ];
 
 const context = {
@@ -184,12 +184,6 @@ const customerInformationTaskMapper = {
     DELETE: deleteItem
   }
 }
-
-const convertGenderToKorean = (gender) => {
-  if (gender === CONVERT_GENDER_TO_KOREAN.MALE) return CONVERT_GENDER_TO_KOREAN.GENDER_MALE;
-  if (gender === CONVERT_GENDER_TO_KOREAN.FEMALE) return CONVERT_GENDER_TO_KOREAN.GENDER_FEMALE;
-  return gender; // 알 수 없는 값은 그대로 반환
-};
 
 
 
