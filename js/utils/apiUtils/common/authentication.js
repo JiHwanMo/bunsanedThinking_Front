@@ -1,6 +1,8 @@
 import { fetchGetHandler } from './fetchHandler.js';
 
-const defaultUrl = "http://localhost:8080/authentication";
+import {hostUrl} from "../apiHandler/common/common.js";
+
+const defaultUrl = hostUrl+"/authentication";
 
 export const fetchLoginCustomerHandler = async (id) => {
   return await fetchGetHandler(`${defaultUrl}/loginCustomer?id=${id}`);
