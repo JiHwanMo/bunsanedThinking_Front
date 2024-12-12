@@ -101,7 +101,7 @@ const renderDetailsTable = (data) => {
       const valueCell =  document.createElement(TAG.TD);
       if (detail.isImage) {
         const valueImage = document.createElement(TAG.IMAGE);
-        valueImage.src = IMAGE_SRC(detail.value);
+        valueImage.src = detail.value;
         valueCell.appendChild(valueImage);
       } else valueCell.textContent = detail.value;
 
