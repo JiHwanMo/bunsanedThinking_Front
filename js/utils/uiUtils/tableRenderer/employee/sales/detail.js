@@ -11,7 +11,7 @@ import {
   fetchGetSalesDetail,
   fetchGetCounselDetail,
   fetchHandleInsuranceConsultation
-} from "../../../../apiUtils/apiDocumentation/employee/Sales/sales.js";
+} from "../../../../apiUtils/apiDocumentation/employee/sales/sales.js";
 import {ELEMENT_ID, KEY, LOCATION, TAG} from "../../../../../../config/common.js";
 import {initialButtons} from "../../../common/buttonUtils.js";
 
